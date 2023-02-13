@@ -21,7 +21,8 @@ module.exports = {
     'plugin:@next/next/recommended',
   ],
   plugins: [
-    // set your plugins
+    'simple-import-sort',
+    'unused-imports',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -79,6 +80,28 @@ module.exports = {
     },
   ],
   rules: {
-    // set your rules
+    'simple-import-sort/imports': ['error', {
+      groups: [
+        // Node.js builtins. You could also generate this regex if you use a `.js` config.
+        // For example: `^(${require("module").builtinModules.join("|")})(/|$)`
+        ['^(assert|buffer|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib|freelist|v8|process|async_hooks|http2|perf_hooks)(/.*|$)'], // Packages. `react` related packages come first.
+        ['^react'],
+        ['^next'],
+        ['^@?\\w'], // Internal packages.
+        ['^(@|@company|@ui|components|utils|config|vendored-lib)(/.*|$)'], // Side effect imports.
+        ['^\\u0000'], // Parent imports. Put `..` last.
+        ['^\\.\\.(?!/?$)', '^\\.\\./?$'], // Other relative imports. Put same-folder imports and `.` last.
+        ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'], // Style imports.
+        ['^.+\\.s?css$'],
+      ],
+    }],
+    'simple-import-sort/exports': 'error',
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': ['warn', {
+      vars: 'all',
+      varsIgnorePattern: '^_',
+      args: 'after-used',
+      argsIgnorePattern: '^_',
+    }],
   },
 };

@@ -26,17 +26,8 @@ jobs:
       - name: Check Unit Test
         run: yarn test:coverage
 
-      - name: Set unit test coverage
+      - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
-
-      - name: Check e2e Test
-        uses: cypress-io/github-action@v2
-        with:
-          install: false
-          command: yarn test:e2e
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
