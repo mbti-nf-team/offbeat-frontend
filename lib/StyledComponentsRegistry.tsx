@@ -1,15 +1,13 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactElement, ReactNode, useState } from 'react';
 
 import { useServerInsertedHTML } from 'next/navigation';
 
 import { ServerStyleSheet, StyleSheetManager, ThemeProvider } from 'styled-components';
 import lightTheme from 'styles/theme';
 
-function StyledComponentsRegistry({ children }: { children: ReactNode }) {
+function StyledComponentsRegistry({ children }: { children: ReactNode }): ReactElement {
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
 
   useServerInsertedHTML(() => {

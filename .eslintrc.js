@@ -73,6 +73,9 @@ module.exports = {
     },
   ],
   rules: {
+    'react/jsx-no-useless-fragment': ['error', {
+      allowExpressions: true,
+    }],
     '@next/next/no-html-link-for-pages': ['error', 'app/'],
     'simple-import-sort/imports': ['error', {
       groups: [
