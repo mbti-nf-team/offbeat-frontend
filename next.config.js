@@ -4,10 +4,13 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  pageExtensions: ['page.tsx', 'api.ts'],
+  // pageExtensions: ['page.tsx', 'api.ts'],
   swcMinify: true,
   compiler: {
-    emotion: true,
+    styledComponents: true,
+  },
+  experimental: {
+    appDir: true,
   },
 };
 
