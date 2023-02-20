@@ -10,7 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' --fix",
+    "lint": "eslint '**/*.{js,jsx,ts,tsx}' --fix",
     "test:unit": "jest",
     "test:watch": "jest --watch",
     "test:watchAll": "jest --watchAll",
@@ -29,12 +29,11 @@
   },
   "homepage": "https://github.com/mbti-nf-team/unnamed-k-place-frontend#readme",
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
     "@react-google-maps/api": "^2.18.1",
-    "next": "^13.1.6",
+    "next": "v13.1.7-canary.21",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "styled-components": "beta"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.3",
@@ -77,5 +76,10 @@
     "start-server-and-test": "^1.14.0",
     "typescript": "4.7.4"
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@3.3.0",
+  "dependenciesMeta": {
+    "next@13.1.7-canary.21": {
+      "unplugged": true
+    }
+  }
 }
