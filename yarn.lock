@@ -9579,6 +9579,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"styled-normalize@npm:^8.0.7":
+  version: 8.0.7
+  resolution: "styled-normalize@npm:8.0.7"
+  peerDependencies:
+    styled-components: ^4.0.0 || ^5.0.0
+  checksum: afdb450407ec4dcd41b4806a1193060e128f617fbbb6c14cc8679f9a651b93afc54bd13035c84aec3c298a7ae0084aef4a8a651c082c9bf209843b17cfc73305
+  languageName: node
+  linkType: hard
+
 "stylis@npm:^4.1.3":
   version: 4.1.3
   resolution: "stylis@npm:4.1.3"
@@ -10119,6 +10128,7 @@ __metadata:
     react-test-renderer: ^18.2.0
     start-server-and-test: ^1.14.0
     styled-components: beta
+    styled-normalize: ^8.0.7
     typescript: 4.7.4
   dependenciesMeta:
     next@13.1.7-canary.21:

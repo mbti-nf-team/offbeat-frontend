@@ -1,6 +1,9 @@
 import { ReactNode } from 'react';
 
 import StyledComponentsRegistry from 'lib/StyledComponentsRegistry';
+import Layout from 'ui/common/Layout';
+
+import GlobalStyleThemeProvider from './GlobalStyleThemeProvider';
 
 export const metadata = {
   title: 'Home',
@@ -15,7 +18,11 @@ function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <StyledComponentsRegistry>
-          {children}
+          <GlobalStyleThemeProvider>
+            <Layout>
+              {children}
+            </Layout>
+          </GlobalStyleThemeProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

@@ -33,7 +33,8 @@
     "next": "v13.1.7-canary.21",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "styled-components": "beta"
+    "styled-components": "beta",
+    "styled-normalize": "^8.0.7"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.3",

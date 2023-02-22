@@ -8,11 +8,6 @@ import { styled } from 'styled-components';
 
 import PlaceResultMarker from './PlaceResultMarker';
 
-const mapContainerStyle = {
-  height: '500px',
-  width: '1000px',
-};
-
 const center = {
   lat: 0,
   lng: -180,
@@ -103,7 +98,11 @@ function SampleMap() {
 
   return isLoaded ? (
     <GoogleMap
-      mapContainerStyle={mapContainerStyle}
+      mapContainerStyle={{
+        height: '100vh',
+        width: '100%',
+        maxWidth: '390px',
+      }}
       zoom={2}
       center={center}
       onUnmount={onUnmount}
