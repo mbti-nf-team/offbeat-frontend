@@ -71,6 +71,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-test-renderer", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:18.2.0"],\
             ["start-server-and-test", "npm:1.15.4"],\
             ["styled-components", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:6.0.0-beta.11"],\
+            ["styled-normalize", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:8.0.7"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=65a307"]\
           ],\
           "linkType": "SOFT"\
@@ -12577,6 +12578,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["styled-normalize", [\
+        ["npm:8.0.7", {\
+          "packageLocation": "./.yarn/cache/styled-normalize-npm-8.0.7-76e7b6a203-afdb450407.zip/node_modules/styled-normalize/",\
+          "packageDependencies": [\
+            ["styled-normalize", "npm:8.0.7"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:8.0.7", {\
+          "packageLocation": "./.yarn/__virtual__/styled-normalize-virtual-bd29716f28/0/cache/styled-normalize-npm-8.0.7-76e7b6a203-afdb450407.zip/node_modules/styled-normalize/",\
+          "packageDependencies": [\
+            ["styled-normalize", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:8.0.7"],\
+            ["@types/styled-components", null],\
+            ["styled-components", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:6.0.0-beta.11"]\
+          ],\
+          "packagePeers": [\
+            "@types/styled-components",\
+            "styled-components"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["stylis", [\
         ["npm:4.1.3", {\
           "packageLocation": "./.yarn/cache/stylis-npm-4.1.3-c3e2662f97-d04dbffcb9.zip/node_modules/stylis/",\
@@ -13180,6 +13203,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-test-renderer", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:18.2.0"],\
             ["start-server-and-test", "npm:1.15.4"],\
             ["styled-components", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:6.0.0-beta.11"],\
+            ["styled-normalize", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:8.0.7"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=65a307"]\
           ],\
           "linkType": "SOFT"\

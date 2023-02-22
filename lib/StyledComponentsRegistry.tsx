@@ -4,8 +4,7 @@ import { ReactElement, ReactNode, useState } from 'react';
 
 import { useServerInsertedHTML } from 'next/navigation';
 
-import { ServerStyleSheet, StyleSheetManager, ThemeProvider } from 'styled-components';
-import lightTheme from 'styles/theme';
+import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
 function StyledComponentsRegistry({ children }: { children: ReactNode }): ReactElement {
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
@@ -23,9 +22,7 @@ function StyledComponentsRegistry({ children }: { children: ReactNode }): ReactE
 
   return (
     <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
-      <ThemeProvider theme={lightTheme}>
-        {children}
-      </ThemeProvider>
+      {children}
     </StyleSheetManager>
   );
 }
