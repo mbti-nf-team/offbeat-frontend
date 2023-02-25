@@ -11,6 +11,6 @@ declare module 'styled-components' {
 
 declare module 'react' {
   interface DOMAttributes<T> {
-    css?: CSSProp;
+    css?: CSSProp<T>;
   }
 }
