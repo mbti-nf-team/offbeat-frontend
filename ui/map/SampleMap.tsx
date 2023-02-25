@@ -110,6 +110,9 @@ function SampleMap() {
       onBoundsChanged={() => {
         searchBoxState?.setBounds(mapState?.getBounds() as google.maps.LatLngBounds);
       }}
+      options={{
+        disableDefaultUI: true,
+      }}
     >
       <StandaloneSearchBox
         bounds={google.maps.LatLngBounds.MAX_BOUNDS}
@@ -127,7 +130,7 @@ function SampleMap() {
         <PlaceResultMarker key={place.place_id} place={place} />
       ))}
     </GoogleMap>
-  ) : <>로딩중</>;
+  ) : null;
 }
 
 export default memo(SampleMap);
