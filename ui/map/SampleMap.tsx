@@ -136,5 +136,5 @@ function SampleMap() {
 export default memo(SampleMap);
 
 const Input = styled.input`
-  color: ${({ theme }) => theme.accent8};
+  color: ${({ theme }) => theme.black};
 `;

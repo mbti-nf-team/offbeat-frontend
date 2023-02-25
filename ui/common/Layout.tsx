@@ -29,7 +29,7 @@ const ContentBox = styled.div`
   max-width: 390px;
   min-height: 100vh;
   position: relative;
-  background-color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => theme.white};
   margin: 0 auto;
   padding: 0;
 
