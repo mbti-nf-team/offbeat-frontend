@@ -30,7 +30,7 @@
   "homepage": "https://github.com/mbti-nf-team/unnamed-k-place-frontend#readme",
   "dependencies": {
     "@react-google-maps/api": "^2.18.1",
-    "next": "v13.1.7-canary.21",
+    "next": "^13.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "styled-components": "beta",
@@ -39,7 +39,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.3",
     "@commitlint/config-conventional": "^17.4.3",
-    "@next/eslint-plugin-next": "^13.1.6",
+    "@next/eslint-plugin-next": "^13.2.1",
     "@svgr/webpack": "^6.5.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -80,7 +80,7 @@
   },
   "packageManager": "yarn@3.3.0",
   "dependenciesMeta": {
-    "next@13.1.7-canary.21": {
+    "next@13.2.1": {
       "unplugged": true
     }
   }
