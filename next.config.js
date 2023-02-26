@@ -10,6 +10,7 @@ const nextConfig = {
   },
   experimental: {
     appDir: true,
+    typedRoutes: true,
   },
   webpack: (config) => {
     config.module.rules.push({
