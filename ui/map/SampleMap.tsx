@@ -1,32 +1,18 @@
 import {
-  CSSProperties, memo, useCallback, useEffect, useState,
+  memo, useCallback, useEffect, useState,
 } from 'react';
 
 import { GoogleMap, StandaloneSearchBox, useLoadScript } from '@react-google-maps/api';
+import SearchIcon from 'lib/assets/icons/search-md.svg';
 import { PlaceGeometry } from 'lib/model/google.maps';
 import { styled } from 'styled-components';
+import { h3Font } from 'styles/fontStyles';
 
 import PlaceResultMarker from './PlaceResultMarker';
 
 const center = {
   lat: 0,
   lng: -180,
-};
-
-const inputStyle: CSSProperties = {
-  boxSizing: 'border-box',
-  border: '1px solid transparent',
-  width: '240px',
-  height: '32px',
-  padding: '0 12px',
-  borderRadius: '3px',
-  boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
-  fontSize: '14px',
-  outline: 'none',
-  textOverflow: 'ellipses',
-  position: 'absolute',
-  top: '10px',
-  right: '10px',
 };
 
 // TODO - Sample Map 추후 리팩터링 및 수정
@@ -120,11 +106,16 @@ function SampleMap() {
         onPlacesChanged={onPlacesChanged}
         onUnmount={() => setSearchBoxState(undefined)}
       >
-        <Input
-          type="text"
-          placeholder="입력.."
-          style={inputStyle}
-        />
+        {/* TODO - 인풋 컴포넌트 추후 공통 컴포넌트로 변경 */}
+        <InputWrapper>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <Input
+            type="text"
+            placeholder="장소 검색"
+          />
+        </InputWrapper>
       </StandaloneSearchBox>
       {placeResults.map((place) => (
         <PlaceResultMarker key={place.place_id} place={place} />
@@ -135,6 +126,40 @@ function SampleMap() {
 
 export default memo(SampleMap);
 
+const SearchIconWrapper = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: 12px;
+  left: 16px;
+`;
+
+const InputWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  top: 24px;
+  right: 24px;
+  position: absolute;
+  width: calc(100% - 48px);
+`;
+
 const Input = styled.input`
+  ${h3Font({ isBold: false })};
   color: ${({ theme }) => theme.black};
+  display: flex;
+  width: 100%;
+  height: 48px;
+  flex-direction: row;
+  align-items: center;
+  padding: 11px 16px 11px 52px;
+  background: ${({ theme }) => theme.white};
+  // TODO - 추후 수정
+  border: 1px solid #E8EAF0;
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+
+  &::placeholder {
+    // TODO - 추후 수정
+    color: #C0C3CD;
+  }
 `;
