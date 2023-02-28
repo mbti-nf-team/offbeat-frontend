@@ -73,6 +73,7 @@ module.exports = {
     },
   ],
   rules: {
+    'import/order': 'off',
     'react/jsx-no-useless-fragment': ['error', {
       allowExpressions: true,
     }],
@@ -87,6 +88,7 @@ module.exports = {
         ['^\\u0000'],
         ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
         ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+        ['^.+\\.svg$'],
         ['^.+\\.s?css$'],
       ],
     }],

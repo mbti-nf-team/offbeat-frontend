@@ -13,7 +13,7 @@ function StyledComponentsRegistry({ children }: { children: ReactNode }): ReactE
     const styles = styledComponentsStyleSheet.getStyleElement();
     styledComponentsStyleSheet.instance.clearTag();
 
-    return styles;
+    return <>{styles}</>;
   });
 
   if (typeof window !== 'undefined') {

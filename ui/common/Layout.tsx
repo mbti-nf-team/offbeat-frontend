@@ -26,10 +26,10 @@ const LayoutWrapper = styled.div`
 const ContentBox = styled.div`
   height: auto;
   width: auto;
-  max-width: 390px;
+  max-width: 430px;
   min-height: 100vh;
   position: relative;
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.gray100};
   margin: 0 auto;
   padding: 0;
 
@@ -53,7 +53,7 @@ const ContentBox = styled.div`
     border-right: 1px solid #D2C6C6;
   }
 
-  @media (max-width: 390px) {
+  @media (max-width: 430px) {
     width: 100%;
     max-width: initial;
 

@@ -3,12 +3,13 @@ import {
 } from 'react';
 
 import { GoogleMap, StandaloneSearchBox, useLoadScript } from '@react-google-maps/api';
-import SearchIcon from 'lib/assets/icons/search-md.svg';
 import { PlaceGeometry } from 'lib/model/google.maps';
 import { styled } from 'styled-components';
 import { h3Font } from 'styles/fontStyles';
 
 import PlaceResultMarker from './PlaceResultMarker';
+
+import SearchIcon from 'lib/assets/icons/search-md.svg';
 
 const center = {
   lat: 0,
@@ -82,12 +83,16 @@ function SampleMap() {
     return <div>Map cannot be loaded right now, sorry.</div>;
   }
 
-  return isLoaded ? (
+  if (!isLoaded) {
+    return null;
+  }
+
+  return (
     <GoogleMap
       mapContainerStyle={{
         height: '100vh',
         width: '100%',
-        maxWidth: '390px',
+        maxWidth: '430px',
       }}
       zoom={2}
       center={center}
@@ -121,7 +126,7 @@ function SampleMap() {
         <PlaceResultMarker key={place.place_id} place={place} />
       ))}
     </GoogleMap>
-  ) : null;
+  );
 }
 
 export default memo(SampleMap);
