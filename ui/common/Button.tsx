@@ -70,6 +70,7 @@ const ButtonWrapper = ({ theme }: StyledButtonProps) => css`
   align-items: center;
   justify-content: center;
   text-align: center;
+  color: ${theme.black};
 
   /* TODO - 추후 디자인 정의 후 반영 */
   padding: 4px 20px;
