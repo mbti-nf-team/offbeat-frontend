@@ -2,9 +2,12 @@
 
 import { PropsWithChildren } from 'react';
 
+import useResizeViewportHeight from 'hooks/useResizeViewportHeight';
 import styled from 'styled-components';
 
 function Layout({ children }: PropsWithChildren) {
+  useResizeViewportHeight();
+
   return (
     <LayoutWrapper>
       <ContentBox>
@@ -27,7 +30,7 @@ const ContentBox = styled.div`
   height: auto;
   width: auto;
   max-width: 430px;
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   position: relative;
   background-color: ${({ theme }) => theme.gray100};
   margin: 0 auto;

@@ -90,7 +90,7 @@ function SampleMap() {
   return (
     <GoogleMap
       mapContainerStyle={{
-        height: '100vh',
+        minHeight: 'calc(var(--vh, 1vh) * 100)',
         width: '100%',
         maxWidth: '430px',
       }}
