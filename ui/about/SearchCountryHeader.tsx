@@ -1,13 +1,20 @@
 'use client';
 
+import { ReactNode } from 'react';
+
 import styled from 'styled-components';
+import Button from 'ui/common/Button';
 
 import LogoIcon from 'lib/assets/icons/offbeat_logo_draft.svg';
 import SearchSvg from 'lib/assets/icons/search.svg';
 
-function SearchCountryHeader() {
+type Props = {
+  children: ReactNode;
+};
+
+function SearchCountryHeader({ children }: Props) {
   return (
-    <>
+    <div>
       <SearchCountryHeaderWrapper>
         <LogoIcon />
       </SearchCountryHeaderWrapper>
@@ -18,7 +25,13 @@ function SearchCountryHeader() {
           placeholder="찾는 장소가 어떤 나라인가요?"
         />
       </SearchInputWrapper>
-    </>
+      {children}
+      <ButtonWrapper>
+        <FindLocationButton type="button">
+          현재위치에서 찾기
+        </FindLocationButton>
+      </ButtonWrapper>
+    </div>
   );
 }
 
@@ -42,6 +55,7 @@ const SearchCountryInput = styled.input`
   width: 100%;
   border-width: 1px 0px;
   border-style: solid;
+  border-radius: 0;
   border-color: ${({ theme }) => theme.black};
   padding: 12px 16px 12px 56px;
 
@@ -77,4 +91,19 @@ const SearchIcon = styled(SearchSvg)`
   position: absolute;
   top: 16px;
   left: 16px;
+`;
+
+const FindLocationButton = styled(Button)`
+  /* position: fixed;
+  bottom: 40px; */
+`;
+
+const ButtonWrapper = styled.div`
+  width: calc(100% - 40px);
+  position: fixed;
+  bottom: 40px;
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  justify-content: center;
 `;

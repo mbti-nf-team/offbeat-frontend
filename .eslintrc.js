@@ -73,6 +73,7 @@ module.exports = {
     },
   ],
   rules: {
+    'react/require-default-props': 'off',
     'import/order': 'off',
     'react/jsx-no-useless-fragment': ['error', {
       allowExpressions: true,
