@@ -8,10 +8,9 @@ type Props = {
 
 function Layout({ children }: Props) {
   return (
-    <>
-      <SearchCountryHeader />
+    <SearchCountryHeader>
       {children}
-    </>
+    </SearchCountryHeader>
   );
 }
 
