@@ -7,8 +7,9 @@ describe('CountryList', () => {
 
   const renderCountryList = () => render((
     <CountryList countries={[{
+      id: 1,
       emoji: '',
-      id: '1',
+      code: 'kr',
       name: countryName,
     }]}
     />

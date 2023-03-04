@@ -4,7 +4,8 @@ import styled from 'styled-components';
 
 type Props = {
   countries: {
-    id: string;
+    id: number;
+    code: string;
     name: string;
     emoji: string;
   }[]

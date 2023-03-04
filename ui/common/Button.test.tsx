@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import MockTheme from 'lib/test/MockTheme';
+
+import MockTheme from 'utils/test/MockTheme';
 
 import Button from './Button';
 
