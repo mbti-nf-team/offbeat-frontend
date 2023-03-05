@@ -7,10 +7,10 @@ describe('CountryList', () => {
 
   const renderCountryList = () => render((
     <CountryList countries={[{
-      id: 1,
       emoji: '',
       code: 'kr',
-      name: countryName,
+      englishName: countryName,
+      koreanName: countryName,
     }]}
     />
   ));
