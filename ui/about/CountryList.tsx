@@ -1,23 +1,19 @@
 'use client';
 
+import { Country } from 'lib/model/country';
 import styled from 'styled-components';
 
 type Props = {
-  countries: {
-    id: number;
-    code: string;
-    name: string;
-    emoji: string;
-  }[]
+  countries: Country[];
 };
 
 function CountryList({ countries }: Props) {
   return (
     <CountryListWrapper>
-      {countries.map(({ id, name, emoji }) => (
-        <CountryItem key={id}>
+      {countries.map(({ code, koreanName, emoji }) => (
+        <CountryItem role="button" tabIndex={0} key={code}>
           <div>{emoji}</div>
-          <div>{name}</div>
+          <div>{koreanName}</div>
         </CountryItem>
       ))}
     </CountryListWrapper>
@@ -26,12 +22,14 @@ function CountryList({ countries }: Props) {
 export default CountryList;
 
 const CountryListWrapper = styled.ul`
+  user-select: none;
   list-style: none;
   margin: 0;
   padding: 0;
 `;
 
 const CountryItem = styled.li`
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -44,4 +42,11 @@ const CountryItem = styled.li`
   font-weight: 500;
   font-size: 24px;
   line-height: 32px;
+  transition: background-color 0.1s ease-in-out;
+
+  @media(hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: ${({ theme }) => theme.gray100};
+    }
+  }
 `;
