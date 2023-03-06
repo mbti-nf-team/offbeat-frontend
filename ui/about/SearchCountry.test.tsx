@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react';
 
-import CountryList from './CountryList';
+import SearchCountry from './SearchCountry';
 
-describe('CountryList', () => {
+describe('SearchCountry', () => {
   const countryName = 'korea';
 
-  const renderCountryList = () => render((
-    <CountryList countries={[{
+  const renderSearchCountry = () => render((
+    <SearchCountry countries={[{
       emoji: '',
       code: 'kr',
       englishName: countryName,
@@ -16,7 +16,7 @@ describe('CountryList', () => {
   ));
 
   it('나라 리스트가 나타나만 한다', () => {
-    const { container } = renderCountryList();
+    const { container } = renderSearchCountry();
 
     expect(container).toHaveTextContent(countryName);
   });

@@ -1,16 +1,35 @@
-'use client';
+import { memo, useEffect, useState } from 'react';
 
 import { Country } from 'lib/model/country';
 import styled from 'styled-components';
 
 type Props = {
+  keyword: string;
   countries: Country[];
 };
 
-function CountryList({ countries }: Props) {
+function CountryList({ keyword, countries }: Props) {
+  const [state, setState] = useState<Country[]>(countries);
+
+  useEffect(() => {
+    if (!keyword.trim()) {
+      setState(countries);
+    }
+
+    setState(countries.filter(({ englishName, koreanName }) => {
+      const keywordRegExp = new RegExp(keyword, 'ig');
+
+      if (keywordRegExp.test(englishName) || keywordRegExp.test(koreanName)) {
+        return true;
+      }
+
+      return false;
+    }));
+  }, [keyword]);
+
   return (
     <CountryListWrapper>
-      {countries.map(({ code, koreanName, emoji }) => (
+      {state.map(({ code, koreanName, emoji }) => (
         <CountryItem role="button" tabIndex={0} key={code}>
           <div>{emoji}</div>
           <div>{koreanName}</div>
@@ -19,7 +38,8 @@ function CountryList({ countries }: Props) {
     </CountryListWrapper>
   );
 }
-export default CountryList;
+
+export default memo(CountryList, (prev, next) => prev.keyword === next.keyword);
 
 const CountryListWrapper = styled.ul`
   user-select: none;
