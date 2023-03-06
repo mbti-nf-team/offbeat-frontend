@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import ISO_3166_COUNTRY_CODES from 'lib/assets/data/iso3166CountryCodes';
 import { Country } from 'lib/model/country';
-import CountryList from 'ui/about/CountryList';
+import SearchCountry from 'ui/about/SearchCountry';
 
 import { codeToFlag } from 'utils';
 
@@ -20,9 +20,7 @@ function Page() {
     ], []), []);
 
   return (
-    <div>
-      <CountryList countries={countries} />
-    </div>
+    <SearchCountry countries={countries} />
   );
 }
 
