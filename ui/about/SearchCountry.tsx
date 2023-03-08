@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { motion, Variants } from 'framer-motion';
 import useDebounce from 'hooks/useDebounce';
 import { Country } from 'lib/model/country';
 import styled from 'styled-components';
@@ -14,20 +15,53 @@ type Props = {
   countries: Country[];
 };
 
+const logoVariants: Variants = {
+  blur: {
+    width: 306,
+    height: 64,
+  },
+  focus: {
+    width: 191.25,
+    height: 40,
+    transition: {
+      type: 'spring',
+      bounce: 0.5,
+      stiffness: 400,
+    },
+  },
+};
+
 function SearchCountry({ countries }: Props) {
   const [keyword, setKeyword] = useState<string>('');
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
   const debounceKeyword = useDebounce(keyword, 200);
 
   const onChange = (nextKeyword: string) => setKeyword(nextKeyword);
 
+  const onFocus = () => setIsFocused(true);
+
+  const onBlur = () => setIsFocused(false);
+
   return (
     <>
+      <SearchCountryHeaderWrapper>
+        <motion.img
+          alt="logo"
+          src="/offbeat_logo_draft.png"
+          variants={logoVariants}
+          initial="blur"
+          animate={isFocused ? 'focus' : 'blur'}
+        />
+      </SearchCountryHeaderWrapper>
       <SearchInputWrapper>
         <SearchIcon />
         <SearchCountryInput
           type="text"
           placeholder="찾는 장소가 어떤 나라인가요?"
           value={keyword}
+          onFocus={onFocus}
+          onBlur={onBlur}
           onChange={(e) => onChange(e.target.value)}
         />
       </SearchInputWrapper>
@@ -36,6 +70,15 @@ function SearchCountry({ countries }: Props) {
   );
 }
 export default SearchCountry;
+
+const SearchCountryHeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0px 16px 24px;
+  background-color: ${({ theme }) => theme.gray100};
+  width: 100%;
+`;
 
 const SearchInputWrapper = styled.div`
   position: relative;
