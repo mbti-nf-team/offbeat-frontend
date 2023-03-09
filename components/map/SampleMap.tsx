@@ -3,7 +3,7 @@ import {
 } from 'react';
 
 import { GoogleMap, StandaloneSearchBox, useLoadScript } from '@react-google-maps/api';
-import { PlaceGeometry } from 'lib/model/google.maps';
+import { PlaceGeometry } from 'lib/types/google.maps';
 import { styled } from 'styled-components';
 import { h3Font } from 'styles/fontStyles';
 

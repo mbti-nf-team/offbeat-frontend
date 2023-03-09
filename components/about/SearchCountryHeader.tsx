@@ -3,7 +3,8 @@
 import { ReactNode } from 'react';
 
 import styled from 'styled-components';
-import Button from 'ui/common/Button';
+
+import Button from 'components/common/Button';
 
 type Props = {
   children: ReactNode;

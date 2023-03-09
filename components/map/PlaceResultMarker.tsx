@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { InfoWindowF, MarkerF, useGoogleMap } from '@react-google-maps/api';
-import { PlaceGeometry } from 'lib/model/google.maps';
+import { PlaceGeometry } from 'lib/types/google.maps';
 
 type Props = {
   place: PlaceGeometry;

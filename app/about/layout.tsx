@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import SearchCountryHeader from 'ui/about/SearchCountryHeader';
+import SearchCountryHeader from 'components/about/SearchCountryHeader';
 
 type Props = {
   children: ReactNode;

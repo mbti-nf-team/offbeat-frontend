@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from 'react';
 
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
-import { Country } from 'lib/model/country';
+import { Country } from 'lib/types/country';
 import styled from 'styled-components';
 
 import CountryItem from './CountryItem';
