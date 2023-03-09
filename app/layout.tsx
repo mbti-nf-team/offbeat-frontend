@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 
 import StyledComponentsRegistry from 'lib/StyledComponentsRegistry';
-import Layout from 'ui/common/Layout';
+
+import Layout from 'components/common/Layout';
 
 import GlobalStyleThemeProvider from './GlobalStyleThemeProvider';
 

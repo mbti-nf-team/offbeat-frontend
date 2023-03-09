@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { motion, Variants } from 'framer-motion';
 import useDebounce from 'hooks/useDebounce';
-import { Country } from 'lib/model/country';
+import { Country } from 'lib/types/country';
 import styled from 'styled-components';
 
 import CountryList from './CountryList';

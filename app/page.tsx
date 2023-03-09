@@ -1,6 +1,6 @@
 'use client';
 
-import SampleMap from 'ui/map/SampleMap';
+import SampleMap from 'components/map/SampleMap';
 
 function Page() {
   return (
