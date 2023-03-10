@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
-import { motion, Variants } from 'framer-motion';
+import { motion, useScroll, Variants } from 'framer-motion';
+import useDebounce from 'hooks/useDebounce';
 import useLessThenScrollY from 'hooks/useLessThenScrollY';
 import { Country } from 'lib/types/country';
 import styled from 'styled-components';
@@ -17,12 +18,12 @@ type Props = {
 
 const logoVariants: Variants = {
   large: {
-    width: 306,
-    height: 64,
+    // width: 306,
+    // height: 64,
   },
   small: {
-    width: 191.25,
-    height: 40,
+    // width: 191.25,
+    // height: 40,
     transition: {
       type: 'spring',
       bounce: 0.5,
@@ -33,22 +34,38 @@ const logoVariants: Variants = {
 
 function SearchCountry({ countries }: Props) {
   const [keyword, setKeyword] = useState<string>('');
-  const [isScrollTop, setIsScrollTop] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [scrollWith, setScrollWith] = useState(1);
+  const { scrollYProgress, scrollY } = useScroll();
 
-  const isBodyScrollTop = useLessThenScrollY();
+  const debounceKeyword = useDebounce(keyword, 200);
 
   const onChange = (nextKeyword: string) => setKeyword(nextKeyword);
 
-  const onFocus = () => setIsScrollTop(true);
+  const onFocus = () => setIsFocused(true);
+
+  const isBodyScrollTop = useLessThenScrollY();
+
+  console.log(scrollYProgress);
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      const width = Math.max(0.625, 1 - 0.01 * window.scrollY);
+
+      setScrollWith(width);
+    });
+  });
 
   useEffect(() => {
     if (isBodyScrollTop) {
-      setIsScrollTop(false);
+      setIsFocused(false);
       return;
     }
 
-    setIsScrollTop(true);
+    setIsFocused(true);
   }, [isBodyScrollTop]);
+
+  console.log(scrollY);
 
   return (
     <>
@@ -59,7 +76,9 @@ function SearchCountry({ countries }: Props) {
             src="/offbeat_logo_draft.png"
             variants={logoVariants}
             initial="large"
-            animate={isScrollTop ? 'small' : 'large'}
+            width={306 * scrollWith}
+            height={64 * scrollWith}
+            animate={scrollWith === 0.700 ? 'small' : 'large'}
           />
         </LogoWrapper>
         <SearchInputWrapper>
@@ -73,7 +92,7 @@ function SearchCountry({ countries }: Props) {
           />
         </SearchInputWrapper>
       </SearchCountryHeaderWrapper>
-      <CountryList keyword={keyword} countries={countries} />
+      <CountryList keyword={debounceKeyword} countries={countries} />
     </>
   );
 }
@@ -95,6 +114,7 @@ const LogoWrapper = styled.div`
 
 const SearchInputWrapper = styled.div`
   position: relative;
+
   &:focus-within {
     & > svg > path {
       fill: ${({ theme }) => theme.purple500};
@@ -121,6 +141,7 @@ const SearchCountryInput = styled.input`
   border-radius: 0;
   border-color: ${({ theme }) => theme.black};
   padding: 12px 16px 12px 56px;
+
   /* TODO - 추후 공통 변수로 적용 */
   font-weight: 500;
   font-size: 24px;
