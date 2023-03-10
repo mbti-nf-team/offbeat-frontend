@@ -25,10 +25,7 @@ function SearchCountryHeader({ children }: Props) {
 
 export default SearchCountryHeader;
 
-const FindLocationButton = styled(Button)`
-  /* position: fixed;
-  bottom: 40px; */
-`;
+const FindLocationButton = styled(Button)``;
 
 const ButtonWrapper = styled.div`
   width: calc(100% - 40px);

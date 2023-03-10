@@ -1,6 +1,5 @@
 import { memo, useEffect, useState } from 'react';
 
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { Country } from 'lib/types/country';
 import styled from 'styled-components';
 
@@ -31,25 +30,21 @@ function CountryList({ keyword, countries }: Props) {
   }, [keyword]);
 
   return (
-    <LayoutGroup>
-      <CountryListWrapper layout>
-        <AnimatePresence>
-          {state.map(({ code, koreanName, emoji }) => (
-            <CountryItem
-              key={code}
-              emoji={emoji}
-              koreanName={koreanName}
-            />
-          ))}
-        </AnimatePresence>
-      </CountryListWrapper>
-    </LayoutGroup>
+    <CountryListWrapper>
+      {state.map(({ code, koreanName, emoji }) => (
+        <CountryItem
+          key={code}
+          emoji={emoji}
+          koreanName={koreanName}
+        />
+      ))}
+    </CountryListWrapper>
   );
 }
 
 export default memo(CountryList, (prev, next) => prev.keyword === next.keyword);
 
-const CountryListWrapper = styled(motion.ul)`
+const CountryListWrapper = styled.ul`
   user-select: none;
   list-style: none;
   margin: 0;
