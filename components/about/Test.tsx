@@ -32,6 +32,7 @@ const logoVariants: Variants = {
   },
 };
 
+// TODO - 추후 삭제
 function SearchCountry({ countries }: Props) {
   const [keyword, setKeyword] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);

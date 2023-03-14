@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { motion, Variants } from 'framer-motion';
-import useLessThenScrollY from 'hooks/useLessThenScrollY';
 import { Country } from 'lib/types/country';
 import styled from 'styled-components';
 import { headlineFont } from 'styles/fontStyles';
@@ -17,11 +16,11 @@ type Props = {
 };
 
 const logoVariants: Variants = {
-  large: {
+  blur: {
     width: 306,
     height: 64,
   },
-  small: {
+  focus: {
     width: 191.25,
     height: 40,
     transition: {
@@ -34,22 +33,11 @@ const logoVariants: Variants = {
 
 function SearchCountry({ countries }: Props) {
   const [keyword, setKeyword] = useState<string>('');
-  const [isScrollTop, setIsScrollTop] = useState<boolean>(false);
-
-  const isBodyScrollTop = useLessThenScrollY();
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const onChange = (nextKeyword: string) => setKeyword(nextKeyword);
 
-  const onFocus = () => setIsScrollTop(true);
-
-  useEffect(() => {
-    if (isBodyScrollTop) {
-      setIsScrollTop(false);
-      return;
-    }
-
-    setIsScrollTop(true);
-  }, [isBodyScrollTop]);
+  const onFocus = () => setIsFocused(true);
 
   return (
     <>
@@ -59,8 +47,8 @@ function SearchCountry({ countries }: Props) {
             alt="logo"
             src="/offbeat_logo_draft.png"
             variants={logoVariants}
-            initial="large"
-            animate={isScrollTop ? 'small' : 'large'}
+            initial="blur"
+            animate={isFocused ? 'focus' : 'blur'}
           />
         </LogoWrapper>
         <SearchInputWrapper>
