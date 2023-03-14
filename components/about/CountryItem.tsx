@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
 import styled from 'styled-components';
+import { headlineFont } from 'styles/fontStyles';
 
 type Props = {
   koreanName: string;
@@ -22,6 +23,9 @@ function CountryItem({ emoji, koreanName }: Props) {
 export default memo(CountryItem);
 
 const CountryItemWrapper = styled.li`
+  ${headlineFont({ fontWeight: 500 })};
+  letter-spacing: -0.012em;
+
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -30,11 +34,6 @@ const CountryItemWrapper = styled.li`
   background: ${({ theme }) => theme.white};
   border-bottom: 1px solid ${({ theme }) => theme.black};
   gap: 16px;
-
-  /* TODO - 폰트 정의 */
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 32px;
   transition: background-color 0.1s ease-in-out;
 
   @media(hover: hover) and (pointer: fine) {

@@ -5,7 +5,7 @@ import {
 import { GoogleMap, StandaloneSearchBox, useLoadScript } from '@react-google-maps/api';
 import { PlaceGeometry } from 'lib/types/google.maps';
 import { styled } from 'styled-components';
-import { h3Font } from 'styles/fontStyles';
+import { headlineFont } from 'styles/fontStyles';
 
 import PlaceResultMarker from './PlaceResultMarker';
 
@@ -149,7 +149,9 @@ const InputWrapper = styled.div`
 `;
 
 const Input = styled.input`
-  ${h3Font({ isBold: false })};
+  ${headlineFont({ fontWeight: 500 })};
+  letter-spacing: -0.012em;
+
   color: ${({ theme }) => theme.black};
   display: flex;
   width: 100%;

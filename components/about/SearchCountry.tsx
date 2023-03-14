@@ -6,6 +6,7 @@ import { motion, Variants } from 'framer-motion';
 import useLessThenScrollY from 'hooks/useLessThenScrollY';
 import { Country } from 'lib/types/country';
 import styled from 'styled-components';
+import { headlineFont } from 'styles/fontStyles';
 
 import CountryList from './CountryList';
 
@@ -95,6 +96,7 @@ const LogoWrapper = styled.div`
 
 const SearchInputWrapper = styled.div`
   position: relative;
+
   &:focus-within {
     & > svg > path {
       fill: ${({ theme }) => theme.purple500};
@@ -110,6 +112,9 @@ const SearchIcon = styled(SearchSvg)`
 `;
 
 const SearchCountryInput = styled.input`
+  ${headlineFont({ fontWeight: 500 })};
+  letter-spacing: -0.012em;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -120,12 +125,7 @@ const SearchCountryInput = styled.input`
   border-style: solid;
   border-radius: 0;
   border-color: ${({ theme }) => theme.black};
-  padding: 12px 16px 12px 56px;
-  /* TODO - 추후 공통 변수로 적용 */
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 32px;
-  letter-spacing: -0.02em;
+  padding: 12px 16px 12px 56px;  
   outline: none;
 
   &::placeholder {
