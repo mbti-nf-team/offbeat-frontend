@@ -3,13 +3,16 @@ import {
 } from 'react';
 
 import { GoogleMap, StandaloneSearchBox, useLoadScript } from '@react-google-maps/api';
+import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import { PlaceGeometry } from 'lib/types/google.maps';
 import { styled } from 'styled-components';
 import { headlineFont } from 'styles/fontStyles';
 
 import PlaceResultMarker from './PlaceResultMarker';
 
-import SearchIcon from 'lib/assets/icons/search-md.svg';
+import CloseIcon from 'lib/assets/icons/close.svg';
+import MenuIcon from 'lib/assets/icons/menu.svg';
+import SearchIcon from 'lib/assets/icons/search.svg';
 
 const center = {
   lat: 0,
@@ -29,6 +32,10 @@ function SampleMap() {
   const [searchBoxState, setSearchBoxState] = useState<google.maps.places.SearchBox>();
   const [placeResults, setPlaceResult] = useState<PlaceGeometry[]>([]);
   const [mapState, setMapState] = useState<google.maps.Map | null>(null);
+  const [searchInput, setSearchInput] = useState<string>('');
+
+  const onKeyDown = useActionKeyEvent<HTMLInputElement>(['Enter', 'NumpadEnter'], (e) => setSearchInput(e.currentTarget.value));
+  const onDeleteInput = () => setSearchInput('');
 
   const onLoad = useCallback((map: google.maps.Map) => {
     setMapState(map);
@@ -114,12 +121,22 @@ function SampleMap() {
         {/* TODO - 인풋 컴포넌트 추후 공통 컴포넌트로 변경 */}
         <InputWrapper>
           <SearchIconWrapper>
-            <SearchIcon />
+            <SearchIcon className="search-icon" />
           </SearchIconWrapper>
           <Input
             type="text"
             placeholder="장소 검색"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={onKeyDown}
           />
+          <MenuIconWrapper>
+            {searchInput.trim() ? (
+              <CloseIcon onClick={onDeleteInput} />
+            ) : (
+              <MenuIcon />
+            )}
+          </MenuIconWrapper>
         </InputWrapper>
       </StandaloneSearchBox>
       {placeResults.map((place) => (
@@ -134,8 +151,17 @@ export default memo(SampleMap);
 const SearchIconWrapper = styled.div`
   cursor: pointer;
   position: absolute;
-  top: 12px;
-  left: 16px;
+  display: flex;
+  top: 16px;
+  left: 20px;
+`;
+
+const MenuIconWrapper = styled.div`
+  display: flex;
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  cursor: pointer;
 `;
 
 const InputWrapper = styled.div`
@@ -146,6 +172,12 @@ const InputWrapper = styled.div`
   right: 24px;
   position: absolute;
   width: calc(100% - 48px);
+
+  &:focus-within {
+    .search-icon > path {
+      fill: ${({ theme }) => theme.purple500};
+    }
+  }
 `;
 
 const Input = styled.input`
@@ -153,20 +185,23 @@ const Input = styled.input`
   letter-spacing: -0.012em;
 
   color: ${({ theme }) => theme.black};
-  display: flex;
+  background: ${({ theme }) => theme.white};
+  box-shadow: 0px 4px 0px rgba(19, 17, 24, 0.16);
+  outline: none;
   width: 100%;
-  height: 48px;
+  height: 56px;
+  display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 11px 16px 11px 52px;
-  background: ${({ theme }) => theme.white};
-  // TODO - 추후 수정
-  border: 1px solid #E8EAF0;
-  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  padding: 12px 60px;
+  border: 2px solid ${({ theme }) => theme.black};
+  border-radius: 56px;
 
   &::placeholder {
-    // TODO - 추후 수정
-    color: #C0C3CD;
+    color: ${({ theme }) => theme.gray400};
+  }
+
+  &:focus {
+    caret-color: ${({ theme }) => theme.purple500};
   }
 `;
