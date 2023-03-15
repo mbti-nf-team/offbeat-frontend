@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import {
+  memo, useEffect, useMemo, useState,
+} from 'react';
 
 import { InfoWindowF, MarkerF, useGoogleMap } from '@react-google-maps/api';
 import { PlaceGeometry } from 'lib/types/google.maps';
@@ -86,4 +88,4 @@ function PlaceResultMarker({ place }: Props) {
   );
 }
 
-export default PlaceResultMarker;
+export default memo(PlaceResultMarker);
