@@ -6,6 +6,8 @@ import Layout from 'components/common/Layout';
 
 import GlobalStyleThemeProvider from './GlobalStyleThemeProvider';
 
+import 'react-spring-bottom-sheet/dist/style.css';
+
 export const metadata = {
   title: 'Home',
   description: 'Welcome to Next.js',
