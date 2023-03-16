@@ -8,6 +8,7 @@ import { PlaceGeometry } from 'lib/types/google.maps';
 import { styled } from 'styled-components';
 import { headlineFont } from 'styles/fontStyles';
 
+import PlaceBottomSheet from './PlaceBottomSheet';
 import PlaceResultMarker from './PlaceResultMarker';
 
 import CloseIcon from 'lib/assets/icons/close.svg';
@@ -95,54 +96,58 @@ function SampleMap() {
   }
 
   return (
-    <GoogleMap
-      mapContainerStyle={{
-        minHeight: 'calc(var(--vh, 1vh) * 100)',
-        width: '100%',
-        maxWidth: '430px',
-      }}
-      zoom={2}
-      center={center}
-      onUnmount={onUnmount}
-      onLoad={onLoad}
-      onBoundsChanged={() => {
-        searchBoxState?.setBounds(mapState?.getBounds() as google.maps.LatLngBounds);
-      }}
-      options={{
-        disableDefaultUI: true,
-      }}
-    >
-      <StandaloneSearchBox
-        bounds={google.maps.LatLngBounds.MAX_BOUNDS}
-        onLoad={onLoadSearchBox}
-        onPlacesChanged={onPlacesChanged}
-        onUnmount={() => setSearchBoxState(undefined)}
+    <>
+      <GoogleMap
+        mapContainerStyle={{
+          minHeight: 'calc(var(--vh, 1vh) * 100)',
+          width: '100%',
+          maxWidth: '430px',
+        }}
+        zoom={2}
+        center={center}
+        onUnmount={onUnmount}
+        onLoad={onLoad}
+        onBoundsChanged={() => {
+          searchBoxState?.setBounds(mapState?.getBounds() as google.maps.LatLngBounds);
+        }}
+        options={{
+          disableDefaultUI: true,
+        }}
       >
-        {/* TODO - 인풋 컴포넌트 추후 공통 컴포넌트로 변경 */}
-        <InputWrapper>
-          <SearchIconWrapper>
-            <SearchIcon className="search-icon" />
-          </SearchIconWrapper>
-          <Input
-            type="text"
-            placeholder="장소 검색"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            onKeyDown={onKeyDown}
-          />
-          <MenuIconWrapper>
-            {searchInput.trim() ? (
-              <CloseIcon onClick={onDeleteInput} />
-            ) : (
-              <MenuIcon />
-            )}
-          </MenuIconWrapper>
-        </InputWrapper>
-      </StandaloneSearchBox>
-      {placeResults.map((place) => (
-        <PlaceResultMarker key={place.place_id} place={place} />
-      ))}
-    </GoogleMap>
+        <StandaloneSearchBox
+          bounds={google.maps.LatLngBounds.MAX_BOUNDS}
+          onLoad={onLoadSearchBox}
+          onPlacesChanged={onPlacesChanged}
+          onUnmount={() => setSearchBoxState(undefined)}
+        >
+          {/* TODO - 인풋 컴포넌트 추후 공통 컴포넌트로 변경 */}
+          <InputWrapper>
+            <SearchIconWrapper>
+              <SearchIcon className="search-icon" />
+            </SearchIconWrapper>
+            <Input
+              type="text"
+              placeholder="장소 검색"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={onKeyDown}
+            />
+            <MenuIconWrapper>
+              {searchInput.trim() ? (
+                <CloseIcon onClick={onDeleteInput} />
+              ) : (
+                <MenuIcon />
+              )}
+            </MenuIconWrapper>
+          </InputWrapper>
+        </StandaloneSearchBox>
+        {placeResults.map((place) => (
+          <PlaceResultMarker key={place.place_id} place={place} />
+        ))}
+      </GoogleMap>
+      <PlaceBottomSheet placeResult={placeResults} />
+    </>
+
   );
 }
 
