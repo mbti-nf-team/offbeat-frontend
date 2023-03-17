@@ -9,20 +9,6 @@ import lightTheme from '../styles/theme';
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize};
-  
-  [data-rsbs-overlay], [data-rsbs-backdrop], [data-rsbs-root]:after {
-    z-index: 10;
-    max-width: 430px;
-    margin: 0 auto;
-  }
-
-  [data-rsbs-backdrop] {
-    background-color: transparent;
-  }
-
-  [data-rsbs-overlay] {
-    box-shadow: 0px -8px 32px rgba(19, 17, 24, 0.12), 0px 1px 3px rgba(19, 17, 24, 0.16);
-  }
 
   * {
     box-sizing: border-box;
@@ -44,6 +30,30 @@ export const GlobalStyle = createGlobalStyle`
     &:disabled {
       cursor: not-allowed;
     }
+  }
+
+  [data-rsbs-overlay], [data-rsbs-backdrop], [data-rsbs-root]:after {
+    z-index: 10;
+    max-width: 430px;
+    margin: 0 auto;
+  }
+
+  [data-rsbs-backdrop] {
+    background-color: transparent;
+  }
+
+  [data-rsbs-overlay] {
+    box-shadow: 0px -8px 32px rgba(19, 17, 24, 0.12), 0px 1px 3px rgba(19, 17, 24, 0.16);
+  }
+
+  [data-rsbs-header] {
+    padding-bottom: 12px;
+  }
+
+  [data-rsbs-header]:before {
+    width: 96px;
+    height: 5px;
+    border-radius: 4px;
   }
 `;
 
