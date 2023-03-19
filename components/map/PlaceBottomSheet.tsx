@@ -23,6 +23,7 @@ function PlaceBottomSheet({ placeResult }: Props) {
   return (
     <BottomSheet
       open={open}
+      blocking={false}
       onDismiss={onDismiss}
       defaultSnap={({ maxHeight }) => maxHeight / 2}
       snapPoints={({ maxHeight }) => [
@@ -43,7 +44,6 @@ function PlaceBottomSheet({ placeResult }: Props) {
               <div className="place-user-ratings-total">{`(${user_ratings_total})`}</div>
             </PlaceRatingWrapper>
             <div className="naver-search-total">네이버 검색결과 500개</div>
-
           </PlaceItem>
         ))}
       </PlaceList>
