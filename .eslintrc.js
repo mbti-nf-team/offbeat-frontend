@@ -44,6 +44,7 @@ module.exports = {
       ],
       rules: {
         '@typescript-eslint/no-use-before-define': 'off',
+        '@typescript-eslint/naming-convention': 'off',
       },
       parser: '@typescript-eslint/parser',
       parserOptions: {

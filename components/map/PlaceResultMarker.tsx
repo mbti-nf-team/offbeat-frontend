@@ -17,6 +17,7 @@ function PlaceResultMarker({ place }: Props) {
     placeDetailState, setPlaceDetailState,
   ] = useState<google.maps.places.PlaceResult | null>(null);
 
+  // TODO - console 삭제 예정
   console.log(placeDetailState);
 
   const icon = useMemo(() => ({
