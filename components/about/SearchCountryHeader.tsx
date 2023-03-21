@@ -2,6 +2,7 @@
 
 import { ReactNode } from 'react';
 
+import useGeoLocation from 'hooks/useGeolocation';
 import styled from 'styled-components';
 
 import Button from 'components/common/Button';
@@ -11,11 +12,15 @@ type Props = {
 };
 
 function SearchCountryHeader({ children }: Props) {
+  const [location, onClick] = useGeoLocation();
+
+  console.log(location);
+
   return (
     <div>
       {children}
       <ButtonWrapper>
-        <FindLocationButton type="button">
+        <FindLocationButton type="button" onClick={onClick}>
           현재위치에서 찾기
         </FindLocationButton>
       </ButtonWrapper>

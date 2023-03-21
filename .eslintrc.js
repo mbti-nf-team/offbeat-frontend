@@ -52,7 +52,7 @@ module.exports = {
       },
     },
     {
-      files: ['src/hooks/**/**/*.test.ts?(x)'],
+      files: ['hooks/**/**/*.test.ts?(x)'],
       rules: {
         'react-hooks/rules-of-hooks': 'off',
       },
