@@ -8,11 +8,13 @@ describe('CountryList', () => {
     koreanName: '북한',
     englishName: 'Korea, Democratic People"S Republic of',
     emoji: '🇰🇵',
+    ranking: -1,
   }, {
     code: 'KR',
     koreanName: '대한민국',
     englishName: 'Korea, Republic of',
     emoji: '🇰🇷',
+    ranking: 0,
   }];
 
   const renderCountryList = () => render((
@@ -25,10 +27,9 @@ describe('CountryList', () => {
   context('keyword가 존재하지 않는 경우', () => {
     given('keyword', () => '');
 
-    it('전체 나라 리스트가 나타나야만 한다', () => {
+    it('랭킹 나라 리스트가 나타나야만 한다', () => {
       const { container } = renderCountryList();
 
-      expect(container).toHaveTextContent(countries[0].koreanName);
       expect(container).toHaveTextContent(countries[1].koreanName);
     });
   });

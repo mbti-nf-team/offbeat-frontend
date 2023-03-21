@@ -1,4 +1,6 @@
-import { memo, useEffect, useState } from 'react';
+import {
+  memo, useEffect, useMemo, useState,
+} from 'react';
 
 import { Country } from 'lib/types/country';
 import styled from 'styled-components';
@@ -11,11 +13,16 @@ type Props = {
 };
 
 function CountryList({ keyword, countries }: Props) {
-  const [state, setState] = useState<Country[]>(countries);
+  const rankingCountries = useMemo(() => [...countries
+    .filter(({ ranking }) => ranking !== -1)]
+    .sort((a, b) => a.ranking - b.ranking), [countries]);
+
+  const [state, setState] = useState<Country[]>(rankingCountries);
 
   useEffect(() => {
     if (!keyword.trim()) {
-      setState(countries);
+      setState(rankingCountries);
+      return;
     }
 
     setState(countries.filter(({ englishName, koreanName }) => {

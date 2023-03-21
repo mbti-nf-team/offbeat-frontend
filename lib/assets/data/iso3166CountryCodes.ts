@@ -1087,7 +1087,7 @@ const ISO_3166_COUNTRY_CODES = [
   },
   {
     code: 'TH',
-    koreanName: '타이',
+    koreanName: '태국',
     englishName: 'Thailand',
   },
   {
@@ -1137,7 +1137,7 @@ const ISO_3166_COUNTRY_CODES = [
   },
   {
     code: 'TW',
-    koreanName: '타이완',
+    koreanName: '대만',
     englishName: 'Taiwan, Province of China',
   },
   {
