@@ -3,4 +3,5 @@ export type Country = {
   englishName: string;
   code: string;
   emoji: string;
+  ranking: number;
 };

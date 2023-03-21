@@ -16,6 +16,7 @@ function SampleMap() {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
     libraries,
+    region: 'KR',
   });
 
   const [markers, setMarkers] = useState<google.maps.Marker[]>([]);

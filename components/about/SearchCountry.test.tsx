@@ -11,6 +11,7 @@ describe('SearchCountry', () => {
       code: 'kr',
       englishName: countryName,
       koreanName: countryName,
+      ranking: 1,
     }]}
     />
   ));
