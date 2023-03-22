@@ -13,8 +13,6 @@ type Props = {
 function PlaceBottomSheet({ placeResult }: Props) {
   const [open, setOpen] = useState<boolean>(false);
 
-  const onDismiss = () => setOpen(false);
-
   useEffect(() => {
     if (placeResult.length) {
       setOpen(true);
@@ -25,12 +23,11 @@ function PlaceBottomSheet({ placeResult }: Props) {
     <BottomSheet
       open={open}
       blocking={false}
-      onDismiss={onDismiss}
       defaultSnap={({ maxHeight }) => maxHeight / 2}
       snapPoints={({ maxHeight }) => [
-        maxHeight - maxHeight / 10,
-        maxHeight / 4,
-        maxHeight * 0.6,
+        maxHeight - maxHeight / 8,
+        maxHeight / 2,
+        maxHeight * 0.2,
       ]}
       expandOnContentDrag
     >
