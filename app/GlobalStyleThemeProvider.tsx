@@ -43,6 +43,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   [data-rsbs-overlay] {
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
     box-shadow: 0px -8px 32px rgba(19, 17, 24, 0.12), 0px 1px 3px rgba(19, 17, 24, 0.16);
   }
 
