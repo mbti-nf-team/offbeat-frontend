@@ -6,6 +6,8 @@ import Layout from 'components/common/Layout';
 
 import GlobalStyleThemeProvider from './GlobalStyleThemeProvider';
 
+import 'styles/normalize.css';
+import 'styles/global.scss';
 import 'react-spring-bottom-sheet/dist/style.css';
 
 export const metadata = {
