@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import ISO_3166_COUNTRY_CODES from 'lib/assets/data/iso3166CountryCodes';
 import { Country } from 'lib/types/country';
 
-import SearchCountry from 'components/about/SearchCountry';
+import SearchCountry from 'components/about/searchCountry';
 import { codeToFlag } from 'utils';
 
 export const metadata = {

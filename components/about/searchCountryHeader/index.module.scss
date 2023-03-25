@@ -1,0 +1,11 @@
+@import "/styles/main.scss";
+
+.buttonWrapper {
+  width: calc(100% - 40px);
+  position: fixed;
+  bottom: 40px;
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  justify-content: center;
+}
