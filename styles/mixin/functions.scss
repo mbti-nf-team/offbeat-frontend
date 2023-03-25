@@ -1,0 +1,40 @@
+@function str-split($string, $separator) {
+  $split-arr: ();
+  $index: str-index($string, $separator);
+
+  @while $index != null {
+    $item: str-slice($string, 1, $index - 1);
+    $split-arr: append($split-arr, $item);
+    $string: str-slice($string, $index + 1);
+    $index: str-index($string, $separator);
+  }
+
+  $split-arr: append($split-arr, $string);
+
+  @return $split-arr;
+}
+
+@function color($code) {
+  @if $code == "" {
+    @return currentColor;
+  } @else if $code == "none" {
+    @return none;
+  } @else if $code == "transparent" {
+    @return transparent;
+  } @else {
+    $list: str-split($code, ".");
+    $key: "";
+
+    @if length($list) == 2 {
+      $key: nth($list, 1) + "-" + nth($list, 2);
+    } @else if length($list) == 3 {
+      $key: nth($list, 1) + "-" + nth($list, 2) + "-" + nth($list, 3);
+    } @else {
+      $key: $code;
+    }
+
+    $code: $key;
+  }
+
+  @return var(-- + $code);
+}
