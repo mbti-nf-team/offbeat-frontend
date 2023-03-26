@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import { PlaceGeometry } from 'lib/types/google.maps';
-import styled from 'styled-components';
 
-import PlaceBottomSheetItem from './PlaceBottomSheetItem';
+import PlaceBottomSheetItem from '../placeBottomSheetItem';
+
+import styles from './index.module.scss';
 
 type Props = {
   placeResult: PlaceGeometry[];
@@ -31,19 +32,13 @@ function PlaceBottomSheet({ placeResult }: Props) {
       ]}
       expandOnContentDrag
     >
-      <PlaceList>
+      <div className={styles.placeList}>
         {placeResult.map((placeGeometry) => (
           <PlaceBottomSheetItem key={placeGeometry.place_id} placeGeometry={placeGeometry} />
         ))}
-      </PlaceList>
+      </div>
     </BottomSheet>
   );
 }
 
 export default PlaceBottomSheet;
-
-const PlaceList = styled.ul`
-  list-style: none;
-  margin: 0px;
-  padding: 0px;
-`;

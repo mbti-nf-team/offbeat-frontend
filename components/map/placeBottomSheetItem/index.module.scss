@@ -1,0 +1,35 @@
+@import "/styles/main.scss";
+
+.placeItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px 24px;
+  gap: 4px;
+  padding: 16px 24px;
+  border-bottom: 1px solid color("gray.200");
+
+  & > div.placeName {
+    @include text("title.large/600", "black");
+    letter-spacing: -0.01em;
+  }
+
+  & > div.naverSearchTotal {
+    @include text("title.small/500", "gray.500");
+  }
+}
+
+.placeRatingWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+
+  & > div.placeRating {
+    @include text("title.small/600");
+  }
+
+  & > div.placeUserRatingsTotal {
+    @include text("title.small/500", "gray.500");
+  }
+}

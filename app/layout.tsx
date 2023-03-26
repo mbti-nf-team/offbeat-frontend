@@ -1,14 +1,10 @@
 import { ReactNode } from 'react';
 
-import StyledComponentsRegistry from 'lib/StyledComponentsRegistry';
+import Layout from 'components/common/layout';
 
-import Layout from 'components/common/Layout';
-
-import GlobalStyleThemeProvider from './GlobalStyleThemeProvider';
-
+import 'react-spring-bottom-sheet/dist/style.css';
 import 'styles/normalize.css';
 import 'styles/global.scss';
-import 'react-spring-bottom-sheet/dist/style.css';
 
 export const metadata = {
   title: 'Home',
@@ -22,13 +18,9 @@ function RootLayout({ children }: { children: ReactNode }) {
         <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css" />
       </head>
       <body>
-        <StyledComponentsRegistry>
-          <GlobalStyleThemeProvider>
-            <Layout>
-              {children}
-            </Layout>
-          </GlobalStyleThemeProvider>
-        </StyledComponentsRegistry>
+        <Layout>
+          {children}
+        </Layout>
       </body>
     </html>
   );

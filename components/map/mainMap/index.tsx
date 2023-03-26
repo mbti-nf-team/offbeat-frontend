@@ -5,12 +5,12 @@ import {
 import { GoogleMap, StandaloneSearchBox, useLoadScript } from '@react-google-maps/api';
 import { PlaceGeometry } from 'lib/types/google.maps';
 
-import PlaceBottomSheet from './PlaceBottomSheet';
-import PlaceResultMarker from './PlaceResultMarker';
-import SearchInput from './SearchInput';
+import PlaceBottomSheet from '../placeBottomSheet';
+import PlaceResultMarker from '../placeResultMarker';
+import SearchInput from '../searchInput';
 
-// TODO - Sample Map 추후 리팩터링 및 수정
-function SampleMap() {
+// TODO - 추후 리팩터링 및 수정
+function MainMap() {
   const [libraries] = useState<['places']>(['places']);
 
   const { isLoaded, loadError } = useLoadScript({
@@ -101,7 +101,7 @@ function SampleMap() {
         }}
       >
         <StandaloneSearchBox
-          // NOTE - 일본 bounds
+          // NOTE - 일본 bounds (임시)
           bounds={new google.maps.LatLngBounds(
             new google.maps.LatLng(20.3585295, 122.8554688),
             new google.maps.LatLng(45.6412626, 154.0031455),
@@ -122,4 +122,4 @@ function SampleMap() {
   );
 }
 
-export default memo(SampleMap);
+export default memo(MainMap);

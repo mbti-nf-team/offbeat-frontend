@@ -1,0 +1,46 @@
+@import "/styles/main.scss";
+
+.buttonWrapper {
+  position: relative;
+  transform: translateZ(0);
+  user-select: none;
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out,
+    border-color 0.1s ease-in-out, opacity 0.1s ease-in-out;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: color("black");
+
+  /* TODO - 추후 디자인 정의 후 반영 */
+  padding: 4px 20px;
+  width: 277px;
+  height: 56px;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 48px;
+  background: color("purple.300");
+  border: 2px solid color("black");
+  border-radius: 28px;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:not(:disabled):after {
+      content: " ";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: color("black");
+      opacity: 0;
+      transition: opacity 0.1s ease-in-out;
+    }
+
+    &:not(:disabled):not(.disabled):hover:after {
+      opacity: 0.15;
+    }
+  }
+}

@@ -3,9 +3,8 @@
 import { ReactNode } from 'react';
 
 import useGeoLocation from 'hooks/useGeolocation';
-import styled from 'styled-components';
 
-import Button from 'components/common/Button';
+import Button from 'components/common/button';
 
 import styles from './index.module.scss';
 
@@ -22,14 +21,12 @@ function SearchCountryHeader({ children }: Props) {
     <div>
       {children}
       <div className={styles.buttonWrapper}>
-        <FindLocationButton type="button" onClick={onClick}>
+        <Button type="button" onClick={onClick}>
           현재위치에서 찾기
-        </FindLocationButton>
+        </Button>
       </div>
     </div>
   );
 }
 
 export default SearchCountryHeader;
-
-const FindLocationButton = styled(Button)``;

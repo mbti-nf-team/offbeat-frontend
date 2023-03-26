@@ -1,16 +1,12 @@
 import { render, screen } from '@testing-library/react';
 
-import MockTheme from 'utils/test/MockTheme';
-
-import Button from './Button';
+import Button from '.';
 
 describe('Button', () => {
   const renderButton = () => render((
-    <MockTheme>
-      <Button href={given.url}>
-        버튼
-      </Button>
-    </MockTheme>
+    <Button href={given.url}>
+      버튼
+    </Button>
   ));
 
   describe('"href" 속성 유무에 따라 버튼 또는 링크가 나타난다', () => {
