@@ -1,8 +1,6 @@
 import { useMemo } from 'react';
 
 import { PlaceGeometry } from 'lib/types/google.maps';
-import styled from 'styled-components';
-import { titleLargeFont, titleSmallFont } from 'styles/fontStyles';
 
 import { checkNumberValue, generateArrayOfNumber } from 'utils';
 
@@ -10,11 +8,13 @@ import EmptyStarIcon from 'lib/assets/icons/empty-star.svg';
 import FillStarSvg from 'lib/assets/icons/fill-star.svg';
 import HalfStarIcon from 'lib/assets/icons/half-star.svg';
 
+import styles from './index.module.scss';
+
 type Props = {
   placeGeometry: PlaceGeometry;
 };
 
-const MAX_RATING = 5 as const;
+const MAX_RATING = 5;
 
 function PlaceBottomSheetItem({ placeGeometry }: Props) {
   const { place_id, name, user_ratings_total } = placeGeometry;
@@ -40,10 +40,10 @@ function PlaceBottomSheetItem({ placeGeometry }: Props) {
   }, [rating]);
 
   return (
-    <PlaceItem key={place_id}>
-      <div className="place-name">{name}</div>
-      <PlaceRatingWrapper>
-        <div className="place-rating">{rating}</div>
+    <li key={place_id} className={styles.placeItem}>
+      <div className={styles.placeName}>{name}</div>
+      <div className={styles.placeRatingWrapper}>
+        <div className={styles.placeRating}>{rating}</div>
         <div>
           {generateArrayOfNumber(fillStarCount).map((key) => (
             <FillStarSvg key={key} />
@@ -53,48 +53,11 @@ function PlaceBottomSheetItem({ placeGeometry }: Props) {
             <EmptyStarIcon key={key} />
           ))}
         </div>
-        <div className="place-user-ratings-total">{`(${user_ratings_total})`}</div>
-      </PlaceRatingWrapper>
-      <div className="naver-search-total">네이버 검색결과 500개</div>
-    </PlaceItem>
+        <div className={styles.placeUserRatingsTotal}>{`(${user_ratings_total})`}</div>
+      </div>
+      <div className={styles.naverSearchTotal}>네이버 검색결과 500개</div>
+    </li>
   );
 }
 
 export default PlaceBottomSheetItem;
-
-const PlaceItem = styled.li`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 16px 24px;
-  gap: 4px;
-  padding: 16px 24px;
-  border-bottom: 1px solid ${({ theme }) => theme.gray200};
-
-  & > div.place-name {
-    ${titleLargeFont({ fontWeight: 600 })};
-    letter-spacing: -0.01em;
-    color: ${({ theme }) => theme.black};
-  }
-
-  & > div.naver-search-total {
-    ${titleSmallFont({ fontWeight: 500 })};
-    color: ${({ theme }) => theme.gray500};
-  }
-`;
-
-const PlaceRatingWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 4px;
-
-  & > div.place-rating {
-    ${titleSmallFont({ fontWeight: 600 })};
-  }
-
-  & > div.place-user-ratings-total {
-    ${titleSmallFont({ fontWeight: 500 })};
-    color: ${({ theme }) => theme.gray500};
-  }
-`;

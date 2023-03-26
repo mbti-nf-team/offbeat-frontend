@@ -1,10 +1,10 @@
 'use client';
 
-import SampleMap from 'components/map/SampleMap';
+import MainMap from 'components/map/mainMap';
 
 function Page() {
   return (
-    <SampleMap />
+    <MainMap />
   );
 }
 
