@@ -3,6 +3,22 @@
 .countryListWrapper {
   user-select: none;
   list-style: none;
+  background-color: color("white");
   margin: 0;
-  padding: 0;
+  padding: 0 16px;
+}
+
+.countryItemTitle {
+  @include text("title.large/700", "black");
+
+  letter-spacing: -0.01em;
+  background-color: color("white");
+  position: sticky;
+  top: 120px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 14px 0px;
+  border-top: 2px solid color("black");
+  border-bottom: 1px solid color("black");
 }
