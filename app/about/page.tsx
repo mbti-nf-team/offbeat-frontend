@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 function Page() {
-  const topRankingCountries = ['JP', 'US', 'TH', 'VN', 'HK', 'TW', 'PH', 'SG', 'FR'];
+  const topRankingCountries = ['KR', 'JP', 'US', 'TH', 'VN', 'HK', 'TW', 'PH', 'SG', 'FR'];
 
   const countries = useMemo(() => ISO_3166_COUNTRY_CODES
     .reduce((prev: Country[], curr) => [

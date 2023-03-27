@@ -14,19 +14,29 @@ type Props = {
 };
 
 function CountryList({ keyword, countries }: Props) {
+  const unRankingCountries = useMemo(() => countries.filter(({
+    ranking,
+  }) => ranking === -1), [countries]);
+
   const rankingCountries = useMemo(() => [...countries
     .filter(({ ranking }) => ranking !== -1)]
     .sort((a, b) => a.ranking - b.ranking), [countries]);
 
-  const [state, setState] = useState<Country[]>(rankingCountries);
+  const [rankingCountriesState, setRankingCountriesState] = useState<Country[]>(rankingCountries);
+  const [
+    unRankingCountriesState, setUnRankingCountriesState,
+  ] = useState<Country[]>(unRankingCountries);
 
   useEffect(() => {
     if (!keyword.trim()) {
-      setState(rankingCountries);
+      setUnRankingCountriesState(unRankingCountries);
+      setRankingCountriesState(rankingCountries);
       return;
     }
 
-    setState(countries.filter(({ englishName, koreanName }) => {
+    const filteredCountries = (
+      filterCountries: Country[],
+    ) => filterCountries.filter(({ englishName, koreanName }) => {
       const keywordRegExp = new RegExp(keyword, 'ig');
 
       if (keywordRegExp.test(englishName) || keywordRegExp.test(koreanName)) {
@@ -34,12 +44,24 @@ function CountryList({ keyword, countries }: Props) {
       }
 
       return false;
-    }));
+    });
+
+    setRankingCountriesState(filteredCountries(rankingCountries));
+    setUnRankingCountriesState(filteredCountries(unRankingCountries));
   }, [keyword]);
 
   return (
     <ul className={styles.countryListWrapper}>
-      {state.map(({ code, koreanName, emoji }) => (
+      <div className={styles.countryItemTitle}>BEST 10</div>
+      {rankingCountriesState.map(({ code, koreanName, emoji }) => (
+        <CountryItem
+          key={code}
+          emoji={emoji}
+          koreanName={koreanName}
+        />
+      ))}
+      <div className={styles.countryItemTitle}>그 외</div>
+      {unRankingCountriesState.map(({ code, koreanName, emoji }) => (
         <CountryItem
           key={code}
           emoji={emoji}
