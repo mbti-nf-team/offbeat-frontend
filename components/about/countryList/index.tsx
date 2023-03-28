@@ -2,6 +2,7 @@ import {
   memo, useEffect, useMemo, useState,
 } from 'react';
 
+import clsx from 'clsx';
 import { Country } from 'lib/types/country';
 
 import CountryItem from '../countryItem';
@@ -11,9 +12,10 @@ import styles from './index.module.scss';
 type Props = {
   keyword: string;
   countries: Country[];
+  isFocused: boolean;
 };
 
-function CountryList({ keyword, countries }: Props) {
+function CountryList({ keyword, countries, isFocused }: Props) {
   const unRankingCountries = useMemo(() => countries.filter(({
     ranking,
   }) => ranking === -1), [countries]);
@@ -26,6 +28,8 @@ function CountryList({ keyword, countries }: Props) {
   const [
     unRankingCountriesState, setUnRankingCountriesState,
   ] = useState<Country[]>(unRankingCountries);
+
+  const itemTitleClassName = clsx(styles.countryItemTitle, { [styles.isFocused]: isFocused });
 
   useEffect(() => {
     if (!keyword.trim()) {
@@ -52,7 +56,7 @@ function CountryList({ keyword, countries }: Props) {
 
   return (
     <ul className={styles.countryListWrapper}>
-      <div className={styles.countryItemTitle}>BEST 10</div>
+      <div className={itemTitleClassName}>BEST 10</div>
       {rankingCountriesState.map(({ code, koreanName, emoji }) => (
         <CountryItem
           key={code}
@@ -60,7 +64,7 @@ function CountryList({ keyword, countries }: Props) {
           koreanName={koreanName}
         />
       ))}
-      <div className={styles.countryItemTitle}>그 외</div>
+      <div className={itemTitleClassName}>그 외</div>
       {unRankingCountriesState.map(({ code, koreanName, emoji }) => (
         <CountryItem
           key={code}
@@ -72,4 +76,7 @@ function CountryList({ keyword, countries }: Props) {
   );
 }
 
-export default memo(CountryList, (prev, next) => prev.keyword === next.keyword);
+export default memo(
+  CountryList,
+  (prev, next) => prev.keyword === next.keyword && prev.isFocused === next.isFocused,
+);

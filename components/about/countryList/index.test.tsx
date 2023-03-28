@@ -21,6 +21,7 @@ describe('CountryList', () => {
     <CountryList
       keyword={given.keyword}
       countries={countries}
+      isFocused
     />
   ));
 

@@ -63,7 +63,7 @@ function SearchCountry({ countries }: Props) {
           />
         </div>
       </div>
-      <CountryList keyword={keyword} countries={countries} />
+      <CountryList keyword={keyword} countries={countries} isFocused={isFocused} />
     </>
   );
 }
