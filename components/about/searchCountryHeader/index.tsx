@@ -3,6 +3,8 @@
 import { ReactNode } from 'react';
 
 import useGeoLocation from 'hooks/useGeolocation';
+import useToastStore from 'stores/toast';
+import { shallow } from 'zustand/shallow';
 
 import Button from 'components/common/button';
 
@@ -13,7 +15,15 @@ type Props = {
 };
 
 function SearchCountryHeader({ children }: Props) {
+  const { renderToast } = useToastStore((state) => ({
+    renderToast: state.renderToast,
+  }), shallow);
   const [location, onClick] = useGeoLocation();
+
+  const handleClick = () => {
+    onClick();
+    renderToast('현재 위치를 불러올 수 없어요.');
+  };
 
   console.log(location);
 
@@ -21,7 +31,7 @@ function SearchCountryHeader({ children }: Props) {
     <div>
       {children}
       <div className={styles.buttonWrapper}>
-        <Button type="button" onClick={onClick}>
+        <Button type="button" onClick={handleClick}>
           현재위치에서 찾기
         </Button>
       </div>

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import Layout from 'components/common/layout';
+import Toast from 'components/common/toast';
 
 import 'react-spring-bottom-sheet/dist/style.css';
 import 'styles/normalize.css';
@@ -20,6 +21,7 @@ function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <Layout>
           {children}
+          <Toast />
         </Layout>
       </body>
     </html>
