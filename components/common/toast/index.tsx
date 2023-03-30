@@ -1,7 +1,8 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
 import { motion, Variants } from 'framer-motion';
-import useTimeout from 'hooks/useTimeout';
 import useToastStore from 'stores/toast';
 import { shallow } from 'zustand/shallow';
 
@@ -19,13 +20,31 @@ const logoVariants: Variants = {
 };
 
 function Toast() {
-  const { isRender, message, closeToast } = useToastStore((state) => ({
+  const {
+    isRender, message, closeToast, delay,
+  } = useToastStore((state) => ({
     isRender: state.isRender,
     message: state.message,
+    delay: state.delay,
     closeToast: state.closeToast,
   }), shallow);
 
-  useTimeout(() => closeToast(), 3000);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (isRender) {
+      timer.current = setTimeout(() => {
+        closeToast();
+        timer.current = null;
+      }, delay);
+    }
+
+    return () => {
+      if (timer.current) {
+        clearTimeout(timer.current);
+      }
+    };
+  }, [isRender, delay]);
 
   return (
     <motion.div
