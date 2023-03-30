@@ -1,21 +1,40 @@
 'use client';
 
+import { motion, Variants } from 'framer-motion';
+import useTimeout from 'hooks/useTimeout';
 import useToastStore from 'stores/toast';
 import { shallow } from 'zustand/shallow';
 
 import styles from './index.module.scss';
 
+const logoVariants: Variants = {
+  none: {
+    opacity: 0,
+    transform: 'translateY(100%)',
+  },
+  visible: {
+    opacity: 1,
+    transform: 'translateY(0px)',
+  },
+};
+
 function Toast() {
-  const { isRender, message } = useToastStore((state) => ({
-    isRender: state.isRender, message: state.message,
+  const { isRender, message, closeToast } = useToastStore((state) => ({
+    isRender: state.isRender,
+    message: state.message,
+    closeToast: state.closeToast,
   }), shallow);
 
-  if (!isRender) {
-    return null;
-  }
+  useTimeout(() => closeToast(), 3000);
 
   return (
-    <div className={styles.toastContainer}>{message}</div>
+    <motion.div
+      animate={isRender ? 'visible' : 'none'}
+      variants={logoVariants}
+      className={styles.toastContainer}
+    >
+      {message}
+    </motion.div>
   );
 }
 
