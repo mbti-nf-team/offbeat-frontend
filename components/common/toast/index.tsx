@@ -1,10 +1,14 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 
-import { motion, Variants } from 'framer-motion';
+import { ControlsAnimationDefinition, motion, Variants } from 'framer-motion';
 import useToastStore from 'stores/toast';
 import { shallow } from 'zustand/shallow';
+
+import ErrorIcon from 'lib/assets/icons/error.svg';
 
 import styles from './index.module.scss';
 
@@ -12,29 +16,41 @@ const logoVariants: Variants = {
   none: {
     opacity: 0,
     transform: 'translateY(100%)',
+    transitionEnd: {
+      visibility: 'hidden',
+    },
   },
   visible: {
     opacity: 1,
     transform: 'translateY(0px)',
+    visibility: 'visible',
   },
 };
 
 function Toast() {
   const {
-    isRender, message, closeToast, delay,
+    isRender, message, closeToast, delay, type,
   } = useToastStore((state) => ({
     isRender: state.isRender,
+    type: state.type,
     message: state.message,
     delay: state.delay,
     closeToast: state.closeToast,
   }), shallow);
 
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isOpenToast, setIsOpenToast] = useState<boolean>(false);
+
+  const handleAnimationComplete = useCallback((definition: ControlsAnimationDefinition) => {
+    if (definition === 'none') {
+      closeToast();
+    }
+  }, []);
 
   useEffect(() => {
-    if (isRender) {
+    if (isOpenToast) {
       timer.current = setTimeout(() => {
-        closeToast();
+        setIsOpenToast(false);
         timer.current = null;
       }, delay);
     }
@@ -44,15 +60,30 @@ function Toast() {
         clearTimeout(timer.current);
       }
     };
-  }, [isRender, delay]);
+  }, [isOpenToast, delay]);
+
+  useEffect(() => {
+    if (isRender) {
+      setIsOpenToast(true);
+    }
+  }, [isRender]);
 
   return (
     <motion.div
-      animate={isRender ? 'visible' : 'none'}
+      animate={isOpenToast ? 'visible' : 'none'}
+      initial="none"
       variants={logoVariants}
       className={styles.toastContainer}
+      onAnimationComplete={handleAnimationComplete}
     >
-      {message}
+      <div className={styles.toastBox}>
+        {type === 'error' && (
+        <ErrorIcon className={styles.toastIcon} />
+        )}
+        <div className={styles.toastMessage}>
+          {message}
+        </div>
+      </div>
     </motion.div>
   );
 }

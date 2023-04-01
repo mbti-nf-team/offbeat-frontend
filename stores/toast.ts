@@ -2,26 +2,35 @@ import { create } from 'zustand';
 
 type ToastType = 'error' | 'info' | 'success';
 
-export type ToastStore = {
+type ToastState = {
   message: string;
   type: ToastType;
   isRender: boolean;
   delay: number;
+};
+
+type ToastAction = {
   renderToast: (
     message: string, toastOption?: { type?: ToastType; delay?: number }
   ) => void;
   closeToast: () => void;
 };
 
-const useToastStore = create<ToastStore>((set) => ({
+export type ToastStore = ToastState & ToastAction;
+
+const initialToastState: ToastState = {
   message: '',
   delay: 0,
   isRender: false,
   type: 'success',
+};
+
+const useToastStore = create<ToastStore>((set) => ({
+  ...initialToastState,
   renderToast: (message, { delay = 3000, type = 'info' } = {}) => set((state) => ({
     ...state, isRender: true, message, delay, type,
   })),
-  closeToast: () => set((state) => ({ ...state, isRender: false })),
+  closeToast: () => set(() => ({ ...initialToastState })),
 }));
 
 export default useToastStore;

@@ -21,8 +21,8 @@ function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <Layout>
           {children}
-          <Toast />
         </Layout>
+        <Toast />
       </body>
     </html>
   );

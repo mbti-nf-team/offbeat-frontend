@@ -22,7 +22,7 @@ function SearchCountryHeader({ children }: Props) {
 
   const handleClick = () => {
     onClick();
-    renderToast('현재 위치를 불러올 수 없어요.');
+    renderToast('현재 위치를 불러올 수 없어요.', { type: 'error' });
   };
 
   console.log(location);

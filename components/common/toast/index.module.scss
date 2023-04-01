@@ -1,5 +1,38 @@
+@import "/styles/main.scss";
+
 .toastContainer {
   position: fixed;
   bottom: 112px;
-  left: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: var(--toast-z-index);
+  user-select: none;
+}
+
+.toastIcon {
+  cursor: pointer;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.toastMessage {
+  @include text("title.medium/600", "white");
+  padding: 3px 12px;
+  max-width: 350px;
+  overflow-wrap: break-word;
+}
+
+.toastBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: color("gray.800");
+  border: 2px solid color("black.alpha.024");
+  box-shadow: 0px 4px 0px rgba(19, 17, 24, 0.16);
+  border-radius: 48px;
+  padding: 8px;
+  width: fit-content;
+  max-width: 430px;
 }
