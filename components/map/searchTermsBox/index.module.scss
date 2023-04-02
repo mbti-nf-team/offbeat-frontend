@@ -1,0 +1,32 @@
+@import "/styles/main.scss";
+
+.searchTermsBlock {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  height: 100%;
+  background-color: color("white");
+  z-index: var(--search-terms-box-z-index);
+}
+
+.searchTermsBox {
+  margin: 104px 16px 0px 16px;
+}
+
+.searchTerm {
+  flex-direction: column;
+  display: flex;
+  padding: 14px 0;
+  gap: 4px;
+  border-top: 1px solid color("black");
+
+  & > div:first-of-type {
+    @include text("title.large/600");
+  }
+
+  & > div:last-of-type {
+    @include text("title.small/500", "gray.500");
+  }
+}

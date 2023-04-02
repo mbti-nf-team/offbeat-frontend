@@ -2,7 +2,7 @@ import {
   memo, useCallback, useEffect, useState,
 } from 'react';
 
-import { GoogleMap, StandaloneSearchBox, useLoadScript } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import { PlaceGeometry } from 'lib/types/google.maps';
 
 import PlaceBottomSheet from '../placeBottomSheet';
@@ -100,7 +100,7 @@ function MainMap() {
           disableDefaultUI: true,
         }}
       >
-        <StandaloneSearchBox
+        {/* <StandaloneSearchBox
           // NOTE - 일본 bounds (임시)
           bounds={new google.maps.LatLngBounds(
             new google.maps.LatLng(20.3585295, 122.8554688),
@@ -111,7 +111,8 @@ function MainMap() {
           onUnmount={() => setSearchBoxState(undefined)}
         >
           <SearchInput />
-        </StandaloneSearchBox>
+        </StandaloneSearchBox> */}
+        <SearchInput />
         {placeResults.map((place) => (
           <PlaceResultMarker key={place.place_id} place={place} />
         ))}
