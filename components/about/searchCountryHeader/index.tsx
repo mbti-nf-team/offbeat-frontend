@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 import useGeoLocation from 'hooks/useGeolocation';
 import useToastStore from 'stores/toast';
@@ -22,10 +22,13 @@ function SearchCountryHeader({ children }: Props) {
 
   const handleClick = () => {
     onClick();
-    renderToast('현재 위치를 불러올 수 없어요.', { type: 'error' });
   };
 
-  console.log(location);
+  useEffect(() => {
+    if (location?.error) {
+      renderToast('현재 위치를 불러올 수 없어요.', { type: 'error' });
+    }
+  }, [location?.error]);
 
   return (
     <div>
