@@ -49,9 +49,12 @@ const useGeoLocation = (): [GeoLocation, () => void] => {
     }
 
     onError({
-      code: 0,
+      code: 1,
       message: 'Geolocation not supported',
-    } as GeolocationPositionError);
+      PERMISSION_DENIED: 1,
+      POSITION_UNAVAILABLE: 2,
+      TIMEOUT: 3,
+    });
   }, []);
 
   return [location, onGetGeoLocation];

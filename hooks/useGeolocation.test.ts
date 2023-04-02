@@ -67,7 +67,7 @@ describe('useGeoLocation', () => {
         expect(result.current[0]).toEqual({
           loading: false,
           error: {
-            code: 0,
+            code: 1,
             message: 'Geolocation not supported',
           },
         });
