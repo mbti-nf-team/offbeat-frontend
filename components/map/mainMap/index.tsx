@@ -3,7 +3,7 @@ import {
 } from 'react';
 
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
-import { PlaceGeometry } from 'lib/types/google.maps';
+import useTextSearch from 'hooks/maps/useTextSearch';
 
 import PlaceBottomSheet from '../placeBottomSheet';
 import PlaceResultMarker from '../placeResultMarker';
@@ -19,10 +19,12 @@ function MainMap() {
     region: 'KR',
   });
 
-  const [markers, setMarkers] = useState<google.maps.Marker[]>([]);
-  const [searchBoxState, setSearchBoxState] = useState<google.maps.places.SearchBox>();
-  const [placeResults, setPlaceResult] = useState<PlaceGeometry[]>([]);
+  const [searchKeyWord, setSearchKeyword] = useState<string>('');
   const [mapState, setMapState] = useState<google.maps.Map | null>(null);
+
+  const placeResults = useTextSearch(mapState, {
+    query: searchKeyWord,
+  });
 
   const onLoad = useCallback((map: google.maps.Map) => {
     setMapState(map);
@@ -32,26 +34,7 @@ function MainMap() {
     setMapState(null);
   }, []);
 
-  const onLoadSearchBox = useCallback((searchBox: google.maps.places.SearchBox) => {
-    setSearchBoxState(searchBox);
-  }, []);
-
-  const onPlacesChanged = () => {
-    markers.forEach((marker) => {
-      marker.setMap(null);
-    });
-    setMarkers([]);
-
-    const places = searchBoxState?.getPlaces();
-
-    if (!places?.length) {
-      return;
-    }
-
-    setPlaceResult(places.filter((
-      place,
-    ): place is PlaceGeometry => Boolean(place.geometry?.location)));
-  };
+  const handleSubmit = (keyword: string) => setSearchKeyword(keyword);
 
   useEffect(() => {
     if (!placeResults.length || !mapState) {
@@ -61,11 +44,11 @@ function MainMap() {
     const markerBounds = new google.maps.LatLngBounds();
 
     placeResults.forEach((place) => {
-      if (place.geometry.viewport) {
+      if (place?.geometry?.viewport) {
         markerBounds.union(place.geometry.viewport);
       }
 
-      if (place.geometry.location) {
+      if (place?.geometry?.location) {
         markerBounds.extend(place.geometry.location);
       }
     });
@@ -93,26 +76,11 @@ function MainMap() {
         center={new google.maps.LatLng(36.204824, 138.252924)}
         onUnmount={onUnmount}
         onLoad={onLoad}
-        onBoundsChanged={() => {
-          searchBoxState?.setBounds(mapState?.getBounds() as google.maps.LatLngBounds);
-        }}
         options={{
           disableDefaultUI: true,
         }}
       >
-        {/* <StandaloneSearchBox
-          // NOTE - 일본 bounds (임시)
-          bounds={new google.maps.LatLngBounds(
-            new google.maps.LatLng(20.3585295, 122.8554688),
-            new google.maps.LatLng(45.6412626, 154.0031455),
-          )}
-          onLoad={onLoadSearchBox}
-          onPlacesChanged={onPlacesChanged}
-          onUnmount={() => setSearchBoxState(undefined)}
-        >
-          <SearchInput />
-        </StandaloneSearchBox> */}
-        <SearchInput />
+        <SearchInput onSubmit={handleSubmit} />
         {placeResults.map((place) => (
           <PlaceResultMarker key={place.place_id} place={place} />
         ))}

@@ -5,7 +5,7 @@ import {
 } from 'react';
 
 import { ControlsAnimationDefinition, motion, Variants } from 'framer-motion';
-import useToastStore from 'stores/toast';
+import useToastStore, { ToastStore } from 'stores/toast';
 import { shallow } from 'zustand/shallow';
 
 import ErrorIcon from 'lib/assets/icons/error.svg';
@@ -27,16 +27,18 @@ const logoVariants: Variants = {
   },
 };
 
+const toastSelector = (state: ToastStore) => ({
+  isRender: state.isRender,
+  type: state.type,
+  message: state.message,
+  delay: state.delay,
+  closeToast: state.closeToast,
+});
+
 function Toast() {
   const {
     isRender, message, closeToast, delay, type,
-  } = useToastStore((state) => ({
-    isRender: state.isRender,
-    type: state.type,
-    message: state.message,
-    delay: state.delay,
-    closeToast: state.closeToast,
-  }), shallow);
+  } = useToastStore(toastSelector, shallow);
 
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isOpenToast, setIsOpenToast] = useState<boolean>(false);
@@ -78,7 +80,7 @@ function Toast() {
     >
       <div className={styles.toastBox}>
         {type === 'error' && (
-        <ErrorIcon className={styles.toastIcon} />
+          <ErrorIcon className={styles.toastIcon} />
         )}
         <div className={styles.toastMessage}>
           {message}
