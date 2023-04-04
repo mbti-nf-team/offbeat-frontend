@@ -40,7 +40,7 @@ button {
 [data-rsbs-overlay],
 [data-rsbs-backdrop],
 [data-rsbs-root]:after {
-  z-index: 10;
+  z-index: var(--bottom-sheet-z-index);
   max-width: 430px;
   margin: 0 auto;
 }
