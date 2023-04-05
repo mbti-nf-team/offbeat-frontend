@@ -4,6 +4,8 @@ import {
 
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import useTextSearch from 'hooks/maps/useTextSearch';
+import useRecentSearchStore from 'stores/recentSearch';
+import { shallow } from 'zustand/shallow';
 
 import PlaceBottomSheet from '../placeBottomSheet';
 import PlaceResultMarker from '../placeResultMarker';
@@ -12,6 +14,9 @@ import SearchInput from '../searchInput';
 // TODO - 추후 리팩터링 및 수정
 function MainMap() {
   const [libraries] = useState<['places']>(['places']);
+  const { saveNextKeyword } = useRecentSearchStore(({ addRecentSearch }) => ({
+    saveNextKeyword: addRecentSearch,
+  }), shallow);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
@@ -34,7 +39,10 @@ function MainMap() {
     setMapState(null);
   }, []);
 
-  const handleSubmit = (keyword: string) => setSearchKeyword(keyword);
+  const handleSubmit = (keyword: string) => {
+    setSearchKeyword(keyword);
+    saveNextKeyword(keyword);
+  };
 
   useEffect(() => {
     if (!placeResults.length || !mapState) {

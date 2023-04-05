@@ -2,6 +2,9 @@ import {
   memo, useCallback, useEffect, useState,
 } from 'react';
 
+import useRecentSearchStore from 'stores/recentSearch';
+import { shallow } from 'zustand/shallow';
+
 import styles from './index.module.scss';
 
 type Props = {
@@ -9,6 +12,9 @@ type Props = {
 };
 
 function SearchTermsBox({ keyword }: Props) {
+  const { recentSearch } = useRecentSearchStore((state) => ({
+    recentSearch: state.recentSearch,
+  }), shallow);
   const [service] = useState(new google.maps.places.AutocompleteService());
   const [sessionToken] = useState(new google.maps.places.AutocompleteSessionToken());
   const [
@@ -43,7 +49,16 @@ function SearchTermsBox({ keyword }: Props) {
   return (
     <div className={styles.searchTermsBlock}>
       <div className={styles.searchTermsBox}>
-        {estimatedSearchTerms.map((estimatedSearchTerm) => (
+        {!keyword && recentSearch.map((value, index) => (
+          // TODO - 추후 변경
+          // eslint-disable-next-line react/no-array-index-key
+          <div className={styles.searchTerm} key={index}>
+            <div>
+              {value}
+            </div>
+          </div>
+        ))}
+        {keyword && estimatedSearchTerms.map((estimatedSearchTerm) => (
           <div className={styles.searchTerm} key={estimatedSearchTerm.place_id}>
             <div>
               {estimatedSearchTerm.structured_formatting.main_text}
