@@ -2,24 +2,29 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface RecentSearchState {
-  recentSearch: string[];
+  recentSearchList: string[];
   addRecentSearch: (nextKeyword: string) => void;
 }
 
 const useRecentSearchStore = create<RecentSearchState>()(
   persist(
     (set, get) => ({
-      recentSearch: [],
+      recentSearchList: [],
       addRecentSearch: (nextKeyword) => {
-        const prevRecentSearch = get().recentSearch;
+        const prevRecentSearch = get().recentSearchList;
 
-        const hasKeyword = prevRecentSearch.includes(nextKeyword);
+        const slicedPrevRecentSearch = prevRecentSearch
+          .length >= 5 ? prevRecentSearch.slice(0, 5) : prevRecentSearch;
 
-        set({ recentSearch: hasKeyword ? prevRecentSearch : [nextKeyword, ...prevRecentSearch] });
+        const hasKeyword = slicedPrevRecentSearch.includes(nextKeyword);
+
+        set({
+          recentSearchList: hasKeyword ? prevRecentSearch : [nextKeyword, ...prevRecentSearch],
+        });
       },
     }),
     {
-      name: 'recent-search',
+      name: 'recent-search-list',
       storage: createJSONStorage(() => localStorage),
     },
   ),

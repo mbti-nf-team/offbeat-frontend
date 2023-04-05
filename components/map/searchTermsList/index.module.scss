@@ -1,0 +1,17 @@
+@import "/styles/main.scss";
+
+.searchTerm {
+  flex-direction: column;
+  display: flex;
+  padding: 14px 0;
+  gap: 4px;
+  border-top: 1px solid color("black");
+
+  & > div:first-of-type {
+    @include text("title.large/600");
+  }
+
+  & > div:last-of-type {
+    @include text("title.small/500", "gray.500");
+  }
+}
