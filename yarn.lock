@@ -8395,6 +8395,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "nanoid@npm:4.0.2"
+  bin:
+    nanoid: bin/nanoid.js
+  checksum: 747c399cea4664dd0be1d0ec498ffd1ef8f1f5221676fc8b577e3f46f66d9afcddb9595d63d19a2e78d0bc6cc33984f65e66bf1682c850b9e26288883d96b53f
+  languageName: node
+  linkType: hard
+
 "natural-compare-lite@npm:^1.4.0":
   version: 1.4.0
   resolution: "natural-compare-lite@npm:1.4.0"
@@ -10663,6 +10672,7 @@ __metadata:
     jest-environment-jsdom: ^29.3.1
     jest-plugin-context: ^2.9.0
     lint-staged: ^13.1.2
+    nanoid: ^4.0.2
     next: ^13.2.1
     react: 18.2.0
     react-dom: 18.2.0

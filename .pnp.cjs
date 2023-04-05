@@ -68,6 +68,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:29.4.3"],\
             ["jest-plugin-context", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:2.9.0"],\
             ["lint-staged", "npm:13.1.2"],\
+            ["nanoid", "npm:4.0.2"],\
             ["next", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:13.2.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:18.2.0"],\
@@ -11578,6 +11579,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["nanoid", "npm:3.3.4"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:4.0.2", {\
+          "packageLocation": "./.yarn/cache/nanoid-npm-4.0.2-ae010cad86-747c399cea.zip/node_modules/nanoid/",\
+          "packageDependencies": [\
+            ["nanoid", "npm:4.0.2"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["natural-compare", [\
@@ -14158,6 +14166,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:29.4.3"],\
             ["jest-plugin-context", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:2.9.0"],\
             ["lint-staged", "npm:13.1.2"],\
+            ["nanoid", "npm:4.0.2"],\
             ["next", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:13.2.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:805c1c60ab4e1addf95b0faff387bcfb117ae10972beddb5fe36d14485e5dc38cb1d4f1440922fd970a865da9e8436c0e3886644041e4fdc426349cb031e2607#npm:18.2.0"],\

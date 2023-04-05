@@ -40,6 +40,8 @@ function MainMap() {
   }, []);
 
   const handleSubmit = (keyword: string) => {
+    // TODO - 테스트용
+    console.log(keyword);
     setSearchKeyword(keyword);
     saveNextKeyword(keyword);
   };
