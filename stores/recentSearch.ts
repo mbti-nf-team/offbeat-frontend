@@ -19,7 +19,8 @@ const useRecentSearchStore = create<RecentSearchState>()(
         const hasKeyword = slicedPrevRecentSearch.includes(nextKeyword);
 
         set({
-          recentSearchList: hasKeyword ? prevRecentSearch : [nextKeyword, ...prevRecentSearch],
+          recentSearchList: hasKeyword
+            ? slicedPrevRecentSearch : [nextKeyword, ...slicedPrevRecentSearch],
         });
       },
     }),

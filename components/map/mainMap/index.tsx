@@ -88,6 +88,15 @@ function MainMap() {
         onLoad={onLoad}
         options={{
           disableDefaultUI: true,
+          minZoom: 3,
+          restriction: {
+            // TODO - test 용 일본
+            latLngBounds: new google.maps.LatLngBounds(
+              new google.maps.LatLng(20.3585295, 122.8554688),
+              new google.maps.LatLng(45.6412626, 154.0031455),
+            ),
+            strictBounds: false,
+          },
         }}
       >
         <SearchInput onSubmit={handleSubmit} />
