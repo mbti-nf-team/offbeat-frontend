@@ -25,7 +25,7 @@ function MainMap() {
   });
 
   const [mapState, setMapState] = useState<google.maps.Map | null>(null);
-  const { placeResults, onTextSearch } = useTextSearch(mapState);
+  const { placesResult, onTextSearch } = useTextSearch(mapState);
 
   const onLoad = useCallback((map: google.maps.Map) => {
     setMapState(map);
@@ -41,13 +41,13 @@ function MainMap() {
   };
 
   useEffect(() => {
-    if (!placeResults.length || !mapState) {
+    if (!placesResult.length || !mapState) {
       return;
     }
 
     const markerBounds = new google.maps.LatLngBounds();
 
-    placeResults.forEach((place) => {
+    placesResult.forEach((place) => {
       if (place?.geometry?.viewport) {
         markerBounds.union(place.geometry.viewport);
       }
@@ -59,7 +59,7 @@ function MainMap() {
 
     mapState.fitBounds(markerBounds);
     mapState.fitBounds(markerBounds);
-  }, [placeResults, mapState]);
+  }, [placesResult, mapState]);
 
   if (loadError) {
     return <div>Map cannot be loaded right now, sorry.</div>;
@@ -95,11 +95,11 @@ function MainMap() {
         }}
       >
         <SearchInput onSubmit={handleSubmit} />
-        {placeResults.map((place) => (
+        {placesResult.map((place) => (
           <PlaceResultMarker key={place.place_id} place={place} />
         ))}
       </GoogleMap>
-      <PlaceBottomSheet placeResult={placeResults} />
+      <PlaceBottomSheet placesResult={placesResult} />
     </>
 
   );

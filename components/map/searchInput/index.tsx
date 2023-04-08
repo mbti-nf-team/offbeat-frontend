@@ -35,12 +35,6 @@ function SearchInput({ onSubmit }: Props) {
 
   const onFocus = () => setIsVisibleSearchTerms(true);
 
-  const onBlur = () => {
-    if (!searchInput.trim()) {
-      setIsVisibleSearchTerms(false);
-    }
-  };
-
   return (
     <>
       <div className={styles.inputWrapper}>
@@ -55,7 +49,6 @@ function SearchInput({ onSubmit }: Props) {
             [styles.visibleShadow]: !isVisibleSearchTerms,
           })}
           onFocus={onFocus}
-          onBlur={onBlur}
           onChange={(e) => setSearchInput(e.target.value)}
           onKeyDown={onKeyDown}
         />
@@ -68,7 +61,7 @@ function SearchInput({ onSubmit }: Props) {
         </div>
       </div>
       {isVisibleSearchTerms && (
-        <SearchTermsBox keyword={debouncedValue} onSubmit={onSubmit} />
+        <SearchTermsBox keyword={debouncedValue} onClose={() => setIsVisibleSearchTerms(false)} />
       )}
     </>
   );

@@ -2,24 +2,31 @@ import {
   memo, useCallback, useEffect, useState,
 } from 'react';
 
+import useGetPlaceDetails from 'hooks/maps/useGetPlaceDetails';
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
+import usePlaceStore from 'stores/place';
+import { shallow } from 'zustand/shallow';
 
 import styles from './index.module.scss';
 
 type Props = {
   keyword: string;
-  onSubmit: (keyword: string) => void;
+  onClose: () => void;
 };
 
-function SearchTermsList({ keyword, onSubmit }: Props) {
+function SearchTermsList({ keyword, onClose }: Props) {
   const [service] = useState(new google.maps.places.AutocompleteService());
   const [sessionToken] = useState(new google.maps.places.AutocompleteSessionToken());
   const [
     estimatedSearchTerms, setEstimatedSearchTerms,
   ] = useState<google.maps.places.AutocompletePrediction[]>([]);
+  const [placeDetailsState, onGetPlaceDetails] = useGetPlaceDetails();
+  const { setPlaces } = usePlaceStore((state) => ({
+    setPlaces: state.setPlaces,
+  }), shallow);
 
-  const onKeyDown = useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], () => {
-    onSubmit('test');
+  const onKeyDown = useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], (_, placeId) => {
+    onGetPlaceDetails(placeId);
   });
 
   const displaySuggestions = useCallback((
@@ -45,6 +52,13 @@ function SearchTermsList({ keyword, onSubmit }: Props) {
     }, displaySuggestions);
   }, [keyword, displaySuggestions, service, sessionToken]);
 
+  useEffect(() => {
+    if (placeDetailsState) {
+      setPlaces([placeDetailsState]);
+      onClose();
+    }
+  }, [placeDetailsState]);
+
   return (
     <>
       {estimatedSearchTerms.map(({ place_id, structured_formatting }) => (
@@ -53,8 +67,8 @@ function SearchTermsList({ keyword, onSubmit }: Props) {
           key={place_id}
           tabIndex={0}
           role="menuitem"
-          onKeyDown={(e) => onKeyDown(e, structured_formatting.main_text)}
-          onClick={() => onSubmit(structured_formatting.main_text)}
+          onKeyDown={(e) => onKeyDown(e, place_id)}
+          onClick={() => onGetPlaceDetails(place_id)}
         >
           <div>
             {structured_formatting.main_text}
@@ -68,7 +82,4 @@ function SearchTermsList({ keyword, onSubmit }: Props) {
   );
 }
 
-export default memo(
-  SearchTermsList,
-  (prevProps, nextProps) => (prevProps.keyword === nextProps.keyword),
-);
+export default memo(SearchTermsList);

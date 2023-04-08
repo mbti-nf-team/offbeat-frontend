@@ -1,24 +1,24 @@
 import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
-import { PlaceGeometry } from 'lib/types/google.maps';
+import { PlaceResult } from 'lib/types/google.maps';
 
 import PlaceBottomSheetItem from '../placeBottomSheetItem';
 
 import styles from './index.module.scss';
 
 type Props = {
-  placeResult: PlaceGeometry[];
+  placesResult: PlaceResult[];
 };
 
-function PlaceBottomSheet({ placeResult }: Props) {
+function PlaceBottomSheet({ placesResult }: Props) {
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if (placeResult.length) {
+    if (placesResult.length) {
       setOpen(true);
     }
-  }, [placeResult]);
+  }, [placesResult]);
 
   return (
     <BottomSheet
@@ -33,8 +33,8 @@ function PlaceBottomSheet({ placeResult }: Props) {
       expandOnContentDrag
     >
       <div className={styles.placeList}>
-        {placeResult.map((placeGeometry) => (
-          <PlaceBottomSheetItem key={placeGeometry.place_id} placeGeometry={placeGeometry} />
+        {placesResult.map((place) => (
+          <PlaceBottomSheetItem key={place.place_id} place={place} />
         ))}
       </div>
     </BottomSheet>

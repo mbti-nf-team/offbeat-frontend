@@ -1,3 +1,4 @@
-export interface PlaceGeometry extends google.maps.places.PlaceResult {
+export interface PlaceResult extends google.maps.places.PlaceResult {
   geometry: google.maps.places.PlaceGeometry;
+  place_id: string;
 }

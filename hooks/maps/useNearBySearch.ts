@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 
-import { PlaceGeometry } from 'lib/types/google.maps';
+import { PlaceResult } from 'lib/types/google.maps';
+
+import { filteredPlaces } from 'utils';
 
 const ONE_THOUSAND_METER = 1000;
 
 function useNearBySearch(map: google.maps.Map | null) {
   const [placeService, setPlaceService] = useState<google.maps.places.PlacesService | undefined>();
-  const [placeResults, setPlaceResults] = useState<PlaceGeometry[]>([]);
+  const [placeResults, setPlaceResults] = useState<PlaceResult[]>([]);
 
   function nearBySearchAction(
     places: google.maps.places.PlaceResult[] | null,
@@ -15,9 +17,7 @@ function useNearBySearch(map: google.maps.Map | null) {
     pagination: google.maps.places.PlaceSearchPagination | null,
   ) {
     if (status === google.maps.places.PlacesServiceStatus.OK && places?.length) {
-      setPlaceResults(places.filter((
-        place,
-      ): place is PlaceGeometry => Boolean(place.geometry?.location)));
+      setPlaceResults(filteredPlaces(places));
     }
   }
 

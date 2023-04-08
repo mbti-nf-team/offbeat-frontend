@@ -1,12 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { PlaceGeometry } from 'lib/types/google.maps';
+import usePlaceStore from 'stores/place';
+import { shallow } from 'zustand/shallow';
+
+import { filteredPlaces } from 'utils';
 
 type TextSearchRequest = google.maps.places.TextSearchRequest;
 
 function useTextSearch(map: google.maps.Map | null) {
   const [placeService, setPlaceService] = useState<google.maps.places.PlacesService | undefined>();
-  const [placeResults, setPlaceResults] = useState<PlaceGeometry[]>([]);
+  const { setPlaces, placesResult } = usePlaceStore((state) => ({
+    setPlaces: state.setPlaces,
+    placesResult: state.places,
+  }), shallow);
 
   function textSearchAction(
     places: google.maps.places.PlaceResult[] | null,
@@ -15,9 +21,7 @@ function useTextSearch(map: google.maps.Map | null) {
     pagination: google.maps.places.PlaceSearchPagination | null,
   ) {
     if (status === google.maps.places.PlacesServiceStatus.OK && places?.length) {
-      setPlaceResults(places.filter((
-        place,
-      ): place is PlaceGeometry => Boolean(place.geometry?.location)));
+      setPlaces(filteredPlaces(places));
     }
   }
 
@@ -41,8 +45,8 @@ function useTextSearch(map: google.maps.Map | null) {
   }, [map]);
 
   return {
-    placeResults,
     onTextSearch,
+    placesResult,
   };
 }
 
