@@ -24,12 +24,8 @@ function MainMap() {
     region: 'KR',
   });
 
-  const [searchKeyWord, setSearchKeyword] = useState<string>('');
   const [mapState, setMapState] = useState<google.maps.Map | null>(null);
-
-  const placeResults = useTextSearch(mapState, {
-    query: searchKeyWord,
-  });
+  const { placeResults, onTextSearch } = useTextSearch(mapState);
 
   const onLoad = useCallback((map: google.maps.Map) => {
     setMapState(map);
@@ -40,9 +36,7 @@ function MainMap() {
   }, []);
 
   const handleSubmit = (keyword: string) => {
-    // TODO - 테스트용
-    console.log(keyword);
-    setSearchKeyword(keyword);
+    onTextSearch({ query: keyword });
     saveNextKeyword(keyword);
   };
 
@@ -63,6 +57,7 @@ function MainMap() {
       }
     });
 
+    mapState.fitBounds(markerBounds);
     mapState.fitBounds(markerBounds);
   }, [placeResults, mapState]);
 

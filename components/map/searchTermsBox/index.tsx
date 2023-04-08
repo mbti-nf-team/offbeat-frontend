@@ -7,14 +7,15 @@ import styles from './index.module.scss';
 
 type Props = {
   keyword: string;
+  onSubmit: (keyword: string) => void
 };
 
-function SearchTermsBox({ keyword }: Props) {
+function SearchTermsBox({ keyword, onSubmit }: Props) {
   return (
     <div className={styles.searchTermsBlock}>
       <div className={styles.searchTermsBox}>
         {keyword ? (
-          <SearchTermsList keyword={keyword} />
+          <SearchTermsList keyword={keyword} onSubmit={onSubmit} />
         ) : (
           <SuggestSearchList />
         )}
@@ -23,4 +24,7 @@ function SearchTermsBox({ keyword }: Props) {
   );
 }
 
-export default memo(SearchTermsBox);
+export default memo(
+  SearchTermsBox,
+  (prevProps, nextProps) => prevProps.keyword === nextProps.keyword,
+);
