@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { PlaceGeometry } from 'lib/types/google.maps';
+import { PlaceResult } from 'lib/types/google.maps';
 
 import { checkNumberValue, generateArrayOfNumber } from 'utils';
 
@@ -11,14 +11,14 @@ import HalfStarIcon from 'lib/assets/icons/half-star.svg';
 import styles from './index.module.scss';
 
 type Props = {
-  placeGeometry: PlaceGeometry;
+  place: PlaceResult;
 };
 
 const MAX_RATING = 5;
 
-function PlaceBottomSheetItem({ placeGeometry }: Props) {
-  const { place_id, name, user_ratings_total } = placeGeometry;
-  const rating = checkNumberValue(placeGeometry.rating);
+function PlaceBottomSheetItem({ place }: Props) {
+  const { place_id, name, user_ratings_total } = place;
+  const rating = checkNumberValue(place.rating);
   const fillStarCount = Math.floor(checkNumberValue(rating));
 
   const extraStar = useMemo(() => {
@@ -48,7 +48,7 @@ function PlaceBottomSheetItem({ placeGeometry }: Props) {
           {generateArrayOfNumber(fillStarCount).map((key) => (
             <FillStarSvg key={key} />
           ))}
-          {extraStar}
+          {fillStarCount < 5 && extraStar}
           {generateArrayOfNumber(MAX_RATING - (fillStarCount + 1)).map((key) => (
             <EmptyStarIcon key={key} />
           ))}

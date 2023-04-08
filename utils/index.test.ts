@@ -1,4 +1,6 @@
-import { checkNumberValue, codeToFlag, generateArrayOfNumber } from 'utils';
+import {
+  checkNumberValue, codeToFlag, generateArrayOfNumber,
+} from 'utils';
 
 describe('codeToFlag', () => {
   it('flag 이모지 유니코드로 변경되어야만 한다.', () => {

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Sheet from 'react-modal-sheet';
 
-import { PlaceGeometry } from 'lib/types/google.maps';
+import { PlaceResult } from 'lib/types/google.maps';
 
 type Props = {
-  placeResult: PlaceGeometry[];
+  placeResult: PlaceResult[];
 };
 
 const snapPoints = [-50, 0.5, 200, 0];
