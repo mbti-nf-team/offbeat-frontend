@@ -68,7 +68,7 @@ function SearchInput({ onSubmit }: Props) {
         </div>
       </div>
       {isVisibleSearchTerms && (
-        <SearchTermsBox keyword={debouncedValue} />
+        <SearchTermsBox keyword={debouncedValue} onSubmit={onSubmit} />
       )}
     </>
   );

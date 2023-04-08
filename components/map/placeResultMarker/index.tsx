@@ -29,8 +29,8 @@ function PlaceResultMarker({ place }: Props) {
   }), [place.icon]);
 
   useEffect(() => {
-    if (isVisibleInfoWindow) {
-      const service = new google.maps.places.PlacesService(map as google.maps.Map);
+    if (isVisibleInfoWindow && map) {
+      const service = new google.maps.places.PlacesService(map);
 
       service.getDetails({
         placeId: place.place_id as string,

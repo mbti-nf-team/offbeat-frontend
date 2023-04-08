@@ -9,6 +9,7 @@
   height: 100%;
   background-color: color("white");
   z-index: var(--search-terms-box-z-index);
+  overflow-y: auto;
 }
 
 .searchTermsBox {

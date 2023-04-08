@@ -2,18 +2,25 @@ import {
   memo, useCallback, useEffect, useState,
 } from 'react';
 
+import useActionKeyEvent from 'hooks/useActionKeyEvent';
+
 import styles from './index.module.scss';
 
 type Props = {
   keyword: string;
+  onSubmit: (keyword: string) => void;
 };
 
-function SearchTermsList({ keyword }: Props) {
+function SearchTermsList({ keyword, onSubmit }: Props) {
   const [service] = useState(new google.maps.places.AutocompleteService());
   const [sessionToken] = useState(new google.maps.places.AutocompleteSessionToken());
   const [
     estimatedSearchTerms, setEstimatedSearchTerms,
   ] = useState<google.maps.places.AutocompletePrediction[]>([]);
+
+  const onKeyDown = useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], () => {
+    onSubmit('test');
+  });
 
   const displaySuggestions = useCallback((
     predictions: google.maps.places.AutocompletePrediction[] | null,
@@ -40,13 +47,20 @@ function SearchTermsList({ keyword }: Props) {
 
   return (
     <>
-      {estimatedSearchTerms.map((estimatedSearchTerm) => (
-        <div className={styles.searchTerm} key={estimatedSearchTerm.place_id}>
+      {estimatedSearchTerms.map(({ place_id, structured_formatting }) => (
+        <div
+          className={styles.searchTerm}
+          key={place_id}
+          tabIndex={0}
+          role="menuitem"
+          onKeyDown={(e) => onKeyDown(e, structured_formatting.main_text)}
+          onClick={() => onSubmit(structured_formatting.main_text)}
+        >
           <div>
-            {estimatedSearchTerm.structured_formatting.main_text}
+            {structured_formatting.main_text}
           </div>
           <div>
-            {estimatedSearchTerm.structured_formatting.secondary_text}
+            {structured_formatting.secondary_text}
           </div>
         </div>
       ))}
@@ -54,4 +68,7 @@ function SearchTermsList({ keyword }: Props) {
   );
 }
 
-export default memo(SearchTermsList);
+export default memo(
+  SearchTermsList,
+  (prevProps, nextProps) => (prevProps.keyword === nextProps.keyword),
+);

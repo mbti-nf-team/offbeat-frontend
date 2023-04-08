@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { PlaceGeometry } from 'lib/types/google.maps';
 
 type TextSearchRequest = google.maps.places.TextSearchRequest;
 
-function useTextSearch(map: google.maps.Map | null, request: TextSearchRequest) {
+function useTextSearch(map: google.maps.Map | null) {
   const [placeService, setPlaceService] = useState<google.maps.places.PlacesService | undefined>();
   const [placeResults, setPlaceResults] = useState<PlaceGeometry[]>([]);
 
@@ -21,14 +21,8 @@ function useTextSearch(map: google.maps.Map | null, request: TextSearchRequest) 
     }
   }
 
-  useEffect(() => {
-    if (map) {
-      setPlaceService(new google.maps.places.PlacesService(map));
-    }
-  }, [map]);
-
-  useEffect(() => {
-    if (request.query) {
+  const onTextSearch = useCallback((request: TextSearchRequest) => {
+    if (request?.query) {
       placeService?.textSearch({
         ...request,
         // TODO - 입력받을 수 있겠끔 변경
@@ -38,9 +32,18 @@ function useTextSearch(map: google.maps.Map | null, request: TextSearchRequest) 
         ),
       }, textSearchAction);
     }
-  }, [request.query]);
+  }, [placeService]);
 
-  return placeResults;
+  useEffect(() => {
+    if (map) {
+      setPlaceService(new google.maps.places.PlacesService(map));
+    }
+  }, [map]);
+
+  return {
+    placeResults,
+    onTextSearch,
+  };
 }
 
 export default useTextSearch;
