@@ -15,6 +15,10 @@ function useActionKeyEvent<T = Element, U extends unknown[] = []>(
 
     const isKeyEvent = !isArray && (event.code === targetKeys || event.key === targetKeys);
 
+    if (event.nativeEvent.isComposing) {
+      return;
+    }
+
     if (isMultipleKeyEvent || isKeyEvent) {
       callback?.(event, ...args);
     }
