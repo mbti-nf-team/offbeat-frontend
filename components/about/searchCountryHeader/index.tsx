@@ -3,8 +3,7 @@
 import { ReactNode, useEffect } from 'react';
 
 import useGeoLocation from 'hooks/useGeolocation';
-import useToastStore from 'stores/toast';
-import { shallow } from 'zustand/shallow';
+import useRenderToast from 'hooks/useRenderToast';
 
 import Button from 'components/common/button';
 
@@ -15,10 +14,8 @@ type Props = {
 };
 
 function SearchCountryHeader({ children }: Props) {
-  const { renderToast } = useToastStore((state) => ({
-    renderToast: state.renderToast,
-  }), shallow);
   const [location, onClick] = useGeoLocation();
+  const renderToast = useRenderToast();
 
   const handleClick = () => {
     onClick();

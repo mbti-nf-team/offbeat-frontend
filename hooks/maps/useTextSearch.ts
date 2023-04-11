@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import useRenderToast from 'hooks/useRenderToast';
 import usePlaceStore from 'stores/place';
 import { shallow } from 'zustand/shallow';
 
@@ -9,6 +10,8 @@ type TextSearchRequest = google.maps.places.TextSearchRequest;
 
 function useTextSearch(map: google.maps.Map | null) {
   const [placeService, setPlaceService] = useState<google.maps.places.PlacesService | undefined>();
+  const renderToast = useRenderToast();
+  const [isZeroResult, setIsZeroResult] = useState<boolean>();
   const { setPlaces, placesResult } = usePlaceStore((state) => ({
     setPlaces: state.setPlaces,
     placesResult: state.places,
@@ -21,8 +24,18 @@ function useTextSearch(map: google.maps.Map | null) {
     pagination: google.maps.places.PlaceSearchPagination | null,
   ) {
     if (status === google.maps.places.PlacesServiceStatus.OK && places?.length) {
+      setIsZeroResult(false);
       setPlaces(filteredPlaces(places));
+      return;
     }
+
+    if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS || !places?.length) {
+      setIsZeroResult(true);
+      return;
+    }
+
+    setIsZeroResult(true);
+    renderToast('다시 시도해주세요.', { type: 'error' });
   }
 
   const onTextSearch = useCallback((request: TextSearchRequest) => {
@@ -47,6 +60,7 @@ function useTextSearch(map: google.maps.Map | null) {
   return {
     onTextSearch,
     placesResult,
+    isZeroResult,
   };
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import clsx from 'clsx';
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
@@ -20,40 +20,47 @@ function SearchInput({ onSubmit }: Props) {
   const [searchInput, setSearchInput] = useState<string>('');
   const debouncedValue = useDebounce(searchInput, 200);
   const [isVisibleSearchTerms, setIsVisibleSearchTerms] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const isHiddenSearchIcon = !isVisibleSearchTerms && searchInput.trim();
 
   const onKeyDown = useActionKeyEvent<HTMLInputElement>(['Enter', 'NumpadEnter'], () => {
     if (searchInput.trim()) {
       onSubmit(searchInput.trim());
+      inputRef.current?.blur();
       setIsVisibleSearchTerms(false);
     }
   });
 
-  const onDeleteInput = () => {
-    setSearchInput('');
+  const onDeleteInput = useCallback(() => {
     setIsVisibleSearchTerms(false);
-  };
+  }, []);
 
   const onFocus = () => setIsVisibleSearchTerms(true);
 
   return (
     <>
       <div className={styles.inputWrapper}>
-        <div className={styles.searchIconWrapper}>
-          <SearchIcon className={styles.searchIcon} />
-        </div>
+        {!isHiddenSearchIcon && (
+          <div className={styles.searchIconWrapper}>
+            <SearchIcon className={styles.searchIcon} />
+          </div>
+        )}
         <input
+          ref={inputRef}
           type="text"
           placeholder="장소 검색"
           value={searchInput}
           className={clsx(styles.searchInput, {
             [styles.visibleShadow]: !isVisibleSearchTerms,
+            [styles.isHiddenSearchIcon]: isHiddenSearchIcon,
           })}
           onFocus={onFocus}
           onChange={(e) => setSearchInput(e.target.value)}
           onKeyDown={onKeyDown}
         />
         <div className={styles.menuIconWrapper}>
-          {searchInput.trim() ? (
+          {(isVisibleSearchTerms || searchInput.trim()) ? (
             <CloseIcon onClick={onDeleteInput} />
           ) : (
             <MenuIcon />
@@ -61,7 +68,7 @@ function SearchInput({ onSubmit }: Props) {
         </div>
       </div>
       {isVisibleSearchTerms && (
-        <SearchTermsBox keyword={debouncedValue} onClose={() => setIsVisibleSearchTerms(false)} />
+        <SearchTermsBox keyword={debouncedValue} onClose={onDeleteInput} />
       )}
     </>
   );

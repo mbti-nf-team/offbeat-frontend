@@ -1,12 +1,9 @@
-import { useEffect } from 'react';
+import { memo } from 'react';
 
 import { useGoogleMap } from '@react-google-maps/api';
-import useGetPlaceDetails from 'hooks/maps/useGetPlaceDetails';
-import useNearBySearch from 'hooks/maps/useNearBySearch';
 import useTextSearch from 'hooks/maps/useTextSearch';
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import { nanoid } from 'nanoid';
-import usePlaceStore from 'stores/place';
 import useRecentSearchStore from 'stores/recentSearch';
 import { shallow } from 'zustand/shallow';
 
@@ -21,32 +18,33 @@ function SuggestSearchList({ onClose }: Props) {
   const { recentSearchList } = useRecentSearchStore((state) => ({
     recentSearchList: state.recentSearchList,
   }), shallow);
-  const nearbyStarRatingList = useNearBySearch(map);
+  // const nearbyStarRatingList = useNearBySearch(map);
   const { onTextSearch } = useTextSearch(map);
-  const [placeDetailsState, onGetPlaceDetails] = useGetPlaceDetails();
-  const { setPlaces } = usePlaceStore((state) => ({
-    setPlaces: state.setPlaces,
-  }), shallow);
+  // const [placeDetailsState, onGetPlaceDetails] = useGetPlaceDetails();
+  // const { setPlaces } = usePlaceStore((state) => ({
+  //   setPlaces: state.setPlaces,
+  // }), shallow);
 
   const onActionTextSearch = (keyword: string) => {
     onTextSearch({ query: keyword });
     onClose();
   };
 
-  const onNearByRatingItemKeyDown = useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], (_, placeId) => {
-    onGetPlaceDetails(placeId);
-  });
+  // const onNearByRatingItemKeyDown =
+  // useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], (_, placeId) => {
+  //   onGetPlaceDetails(placeId);
+  // });
 
   const onRecentSearchItemKeyDown = useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], (_, keyword) => {
     onActionTextSearch(keyword);
   });
 
-  useEffect(() => {
-    if (placeDetailsState) {
-      setPlaces([placeDetailsState]);
-      onClose();
-    }
-  }, [placeDetailsState]);
+  // useEffect(() => {
+  //   if (placeDetailsState) {
+  //     setPlaces([placeDetailsState]);
+  //     onClose();
+  //   }
+  // }, [placeDetailsState]);
 
   return (
     <>
@@ -66,7 +64,7 @@ function SuggestSearchList({ onClose }: Props) {
           <div />
         </div>
       ))}
-      <div className={styles.title}>주변 별점순</div>
+      {/* <div className={styles.title}>주변 별점순</div>
       {nearbyStarRatingList.slice(0, 5).map(({ place_id, name, vicinity }) => (
         <div
           className={styles.searchTerm}
@@ -83,9 +81,9 @@ function SuggestSearchList({ onClose }: Props) {
             {vicinity}
           </div>
         </div>
-      ))}
+      ))} */}
     </>
   );
 }
 
-export default SuggestSearchList;
+export default memo(SuggestSearchList);

@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { useGoogleMap } from '@react-google-maps/api';
+import useRenderToast from 'hooks/useRenderToast';
 import { PlaceResult } from 'lib/types/google.maps';
 
 const hasPlaceLocation = (
@@ -10,6 +11,7 @@ const hasPlaceLocation = (
 function useGetPlaceDetails():
 [PlaceResult | null, (placeId: string) => void, () => void] {
   const map = useGoogleMap();
+  const renderToast = useRenderToast();
   const [
     placeDetailsState, setPlaceDetailsState,
   ] = useState<PlaceResult | null>(null);
@@ -24,7 +26,14 @@ function useGetPlaceDetails():
     service.getDetails({ placeId }, (placeDetail, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK && hasPlaceLocation(placeDetail)) {
         setPlaceDetailsState(placeDetail);
+        return;
       }
+
+      if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+        return;
+      }
+
+      renderToast('다시 시도해주세요.', { type: 'error' });
     });
   }, [map]);
 
