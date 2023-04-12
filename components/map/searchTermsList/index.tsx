@@ -2,23 +2,23 @@ import {
   memo, useCallback, useEffect, useState,
 } from 'react';
 
-import { useGoogleMap } from '@react-google-maps/api';
 import useGetPlaceDetails from 'hooks/maps/useGetPlaceDetails';
-import useTextSearch from 'hooks/maps/useTextSearch';
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import useRenderToast from 'hooks/useRenderToast';
 import usePlaceStore from 'stores/place';
 import { shallow } from 'zustand/shallow';
+
+import ZeroSearchResult from '../ZeroSearchResult';
 
 import styles from './index.module.scss';
 
 type Props = {
   keyword: string;
   onClose: () => void;
+  onInput: (value: string) => void;
 };
 
-function SearchTermsList({ keyword, onClose }: Props) {
-  const map = useGoogleMap();
+function SearchTermsList({ keyword, onClose, onInput }: Props) {
   const [service] = useState(new google.maps.places.AutocompleteService());
   const [sessionToken] = useState(new google.maps.places.AutocompleteSessionToken());
   const [
@@ -26,20 +26,13 @@ function SearchTermsList({ keyword, onClose }: Props) {
   ] = useState<google.maps.places.AutocompletePrediction[]>([]);
   const renderToast = useRenderToast();
   const [placeDetailsState, onGetPlaceDetails] = useGetPlaceDetails();
-  const { onTextSearch, isZeroResult: isTextSearchZeroResult } = useTextSearch(map);
   const [isZeroResult, setIsZeroResult] = useState<boolean>();
   const { setPlaces } = usePlaceStore((state) => ({
     setPlaces: state.setPlaces,
   }), shallow);
 
-  const onKeyDownItem = useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], (_, placeId) => {
+  const onKeyDown = useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], (_, placeId) => {
     onGetPlaceDetails(placeId);
-  });
-
-  const onKeyDownEmptyKeyword = useActionKeyEvent<HTMLDivElement>(['Enter', 'NumpadEnter'], () => {
-    onTextSearch({
-      query: keyword,
-    });
   });
 
   const displaySuggestions = useCallback((
@@ -75,6 +68,7 @@ function SearchTermsList({ keyword, onClose }: Props) {
   useEffect(() => {
     if (placeDetailsState) {
       setPlaces([placeDetailsState]);
+      onInput(`${placeDetailsState?.name}`);
       onClose();
     }
   }, [placeDetailsState]);
@@ -85,25 +79,9 @@ function SearchTermsList({ keyword, onClose }: Props) {
     }
   }, [isZeroResult]);
 
-  useEffect(() => {
-    if (isTextSearchZeroResult) {
-      onClose();
-    }
-  }, [isTextSearchZeroResult]);
-
   if (isZeroResult) {
     return (
-      <div
-        className={styles.emptySearchTerm}
-        tabIndex={0}
-        role="menuitem"
-        onKeyDown={onKeyDownEmptyKeyword}
-        onClick={() => onTextSearch({ query: keyword })}
-      >
-        <strong>{`‘${keyword}’`}</strong>
-        &nbsp;
-        <p>검색</p>
-      </div>
+      <ZeroSearchResult keyword={keyword} onClose={onClose} onInput={onInput} />
     );
   }
 
@@ -115,7 +93,7 @@ function SearchTermsList({ keyword, onClose }: Props) {
           key={place_id}
           tabIndex={0}
           role="menuitem"
-          onKeyDown={(e) => onKeyDownItem(e, place_id)}
+          onKeyDown={(e) => onKeyDown(e, place_id)}
           onClick={() => onGetPlaceDetails(place_id)}
         >
           <div>
