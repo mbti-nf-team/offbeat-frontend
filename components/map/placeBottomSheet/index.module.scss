@@ -1,5 +1,19 @@
+@import "/styles/main.scss";
+
 .placeList {
-  list-style: none;
   margin: 0px;
   padding: 0px;
+}
+
+.zeroResultBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+
+  & > div:first-of-type {
+    @include text("title.large/600", "black");
+  }
 }

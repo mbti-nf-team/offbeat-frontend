@@ -1,6 +1,4 @@
-import {
-  memo, useCallback, useEffect, useState,
-} from 'react';
+import { useCallback, useState } from 'react';
 
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import useTextSearch from 'hooks/maps/useTextSearch';
@@ -11,7 +9,6 @@ import PlaceBottomSheet from '../placeBottomSheet';
 import PlaceResultMarker from '../placeResultMarker';
 import SearchInput from '../searchInput';
 
-// TODO - 추후 리팩터링 및 수정
 function MainMap() {
   const [libraries] = useState<['places']>(['places']);
   const { saveNextKeyword } = useRecentSearchStore(({ addRecentSearch }) => ({
@@ -25,7 +22,7 @@ function MainMap() {
   });
 
   const [mapState, setMapState] = useState<google.maps.Map | null>(null);
-  const { placesResult, onTextSearch } = useTextSearch(mapState);
+  const { placesResult, onTextSearch, isZeroResult } = useTextSearch(mapState);
 
   const onLoad = useCallback((map: google.maps.Map) => {
     setMapState(map);
@@ -39,27 +36,6 @@ function MainMap() {
     onTextSearch({ query: keyword });
     saveNextKeyword(keyword);
   };
-
-  useEffect(() => {
-    if (!placesResult.length || !mapState) {
-      return;
-    }
-
-    const markerBounds = new google.maps.LatLngBounds();
-
-    placesResult.forEach((place) => {
-      if (place?.geometry?.viewport) {
-        markerBounds.union(place.geometry.viewport);
-      }
-
-      if (place?.geometry?.location) {
-        markerBounds.extend(place.geometry.location);
-      }
-    });
-
-    mapState.fitBounds(markerBounds);
-    mapState.fitBounds(markerBounds);
-  }, [placesResult, mapState]);
 
   if (loadError) {
     return <div>Map cannot be loaded right now, sorry.</div>;
@@ -99,10 +75,9 @@ function MainMap() {
           <PlaceResultMarker key={place.place_id} place={place} />
         ))}
       </GoogleMap>
-      <PlaceBottomSheet placesResult={placesResult} />
+      <PlaceBottomSheet placesResult={placesResult} isZeroResult={isZeroResult} />
     </>
-
   );
 }
 
-export default memo(MainMap);
+export default MainMap;

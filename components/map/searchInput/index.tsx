@@ -33,10 +33,17 @@ function SearchInput({ onSubmit }: Props) {
   });
 
   const onDeleteInput = useCallback(() => {
-    setIsVisibleSearchTerms(false);
-  }, []);
+    if (isVisibleSearchTerms) {
+      setIsVisibleSearchTerms(false);
+      return;
+    }
+
+    setSearchInput('');
+  }, [isVisibleSearchTerms]);
 
   const onFocus = () => setIsVisibleSearchTerms(true);
+
+  const onInput = useCallback((value: string) => setSearchInput(value), []);
 
   return (
     <>
@@ -68,7 +75,11 @@ function SearchInput({ onSubmit }: Props) {
         </div>
       </div>
       {isVisibleSearchTerms && (
-        <SearchTermsBox keyword={debouncedValue} onClose={onDeleteInput} />
+        <SearchTermsBox
+          keyword={debouncedValue}
+          onClose={onDeleteInput}
+          onInput={onInput}
+        />
       )}
     </>
   );

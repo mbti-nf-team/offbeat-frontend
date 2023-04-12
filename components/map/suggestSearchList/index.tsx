@@ -11,9 +11,10 @@ import styles from './index.module.scss';
 
 type Props = {
   onClose: () => void;
+  onInput: (value: string) => void;
 };
 
-function SuggestSearchList({ onClose }: Props) {
+function SuggestSearchList({ onClose, onInput }: Props) {
   const map = useGoogleMap();
   const { recentSearchList } = useRecentSearchStore((state) => ({
     recentSearchList: state.recentSearchList,
@@ -27,6 +28,7 @@ function SuggestSearchList({ onClose }: Props) {
 
   const onActionTextSearch = (keyword: string) => {
     onTextSearch({ query: keyword });
+    onInput(keyword);
     onClose();
   };
 
