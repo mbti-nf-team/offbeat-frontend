@@ -1,5 +1,5 @@
 {
-  "name": "unnamed-k-place-frontend",
+  "name": "offbeat-frontend",
   "version": "0.0.1",
   "private": true,
   "description": "해외에서 찾는 k place",
@@ -83,7 +83,7 @@
     "start-server-and-test": "^1.14.0",
     "typescript": "4.7.4"
   },
-  "packageManager": "yarn@3.3.0",
+  "packageManager": "yarn@3.5.0",
   "dependenciesMeta": {
     "next@13.3.0": {
       "unplugged": true
