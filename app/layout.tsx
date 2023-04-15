@@ -25,8 +25,9 @@ function RootLayout({ children }: { children: ReactNode }) {
           <Layout>
             {children}
           </Layout>
+          <Toast />
+          <div id="portal-container" />
         </Providers>
-        <Toast />
       </body>
     </html>
   );
