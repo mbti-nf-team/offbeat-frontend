@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import { PlaceResult } from 'lib/types/google.maps';
 
 import { checkNumberValue, generateArrayOfNumber } from 'utils';
@@ -12,14 +13,17 @@ import styles from './index.module.scss';
 
 type Props = {
   place: PlaceResult;
+  onClick: () => void;
 };
 
 const MAX_RATING = 5;
 
-function PlaceBottomSheetItem({ place }: Props) {
-  const { place_id, name, user_ratings_total } = place;
+function PlaceBottomSheetItem({ place, onClick }: Props) {
+  const { name, user_ratings_total } = place;
   const rating = checkNumberValue(place.rating);
   const fillStarCount = Math.floor(checkNumberValue(rating));
+
+  const onKeyDown = useActionKeyEvent<HTMLLIElement>(['Enter', 'NumpadEnter'], () => onClick);
 
   const extraStar = useMemo(() => {
     const onlyDecimal = Number((checkNumberValue(rating) % 1).toFixed(1));
@@ -40,7 +44,13 @@ function PlaceBottomSheetItem({ place }: Props) {
   }, [rating]);
 
   return (
-    <li key={place_id} className={styles.placeItem}>
+    <li
+      className={styles.placeItem}
+      tabIndex={0}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      role="menuitem"
+    >
       <div className={styles.placeName}>{name}</div>
       <div className={styles.placeRatingWrapper}>
         <div className={styles.placeRating}>{rating}</div>
