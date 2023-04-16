@@ -1,6 +1,5 @@
 import {
-  checkEmpty,
-  checkNumberValue, codeToFlag, generateArrayOfNumber,
+  checkEmpty, checkNumberValue, codeToFlag, generateArrayOfNumber,
 } from 'utils';
 
 describe('codeToFlag', () => {
