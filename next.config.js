@@ -10,6 +10,7 @@ const nextConfig = {
   experimental: {
     appDir: true,
     typedRoutes: true,
+    esmExternals: 'loose',
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],

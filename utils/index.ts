@@ -19,3 +19,11 @@ export const checkNumberValue = (value?: number | null): number => {
 export const filteredPlaces = (places: google.maps.places.PlaceResult[]) => places.filter((
   place,
 ): place is PlaceResult => Boolean(place.geometry?.location) && Boolean(place.place_id));
+
+export const checkEmpty = <T>(value?: T[]): T[] => {
+  if (!value || !value.length) {
+    return [];
+  }
+
+  return value;
+};
