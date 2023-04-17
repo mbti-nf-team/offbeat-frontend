@@ -23,7 +23,9 @@ function useGetPlaceDetails():
 
     const service = new google.maps.places.PlacesService(map);
 
-    service.getDetails({ placeId }, (placeDetail, status) => {
+    service.getDetails({
+      placeId,
+    }, (placeDetail, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK && hasPlaceLocation(placeDetail)) {
         setPlaceDetailsState(placeDetail);
         return;
@@ -37,7 +39,7 @@ function useGetPlaceDetails():
     });
   }, [map]);
 
-  const resetPlaceDetails = () => setPlaceDetailsState(null);
+  const resetPlaceDetails = useCallback(() => setPlaceDetailsState(null), []);
 
   return [placeDetailsState, onGetPlaceDetails, resetPlaceDetails];
 }

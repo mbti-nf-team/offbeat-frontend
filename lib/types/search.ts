@@ -1,3 +1,5 @@
+import { PlaceResult } from './google.maps';
+
 export type BlogPost = {
   title: string;
   link: string;
@@ -7,5 +9,10 @@ export type BlogPost = {
 
 export interface NaverSearchBlog<T = boolean> {
   total_count: number;
-  posts: T extends true ? BlogPost[] : undefined;
+  posts: T extends true ? BlogPost[] : null;
+}
+
+export interface PlaceWithBlogPost<T = boolean> extends PlaceResult {
+  total_count: number;
+  posts: T extends true ? BlogPost[] : null;
 }
