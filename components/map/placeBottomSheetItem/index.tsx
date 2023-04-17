@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
-import { PlaceResult } from 'lib/types/google.maps';
+import { PlaceWithBlogPost } from 'lib/types/search';
 
-import { checkNumberValue, generateArrayOfNumber } from 'utils';
+import { checkNumberValue, generateArrayOfNumber, numberWithComma } from 'utils';
 
 import EmptyStarIcon from 'lib/assets/icons/empty-star.svg';
 import FillStarSvg from 'lib/assets/icons/fill-star.svg';
@@ -12,7 +12,7 @@ import HalfStarIcon from 'lib/assets/icons/half-star.svg';
 import styles from './index.module.scss';
 
 type Props = {
-  place: PlaceResult;
+  place: PlaceWithBlogPost<false>;
   onClick: () => void;
 };
 
@@ -65,7 +65,7 @@ function PlaceBottomSheetItem({ place, onClick }: Props) {
         </div>
         <div className={styles.placeUserRatingsTotal}>{`(${user_ratings_total})`}</div>
       </div>
-      <div className={styles.naverSearchTotal}>네이버 검색결과 500개</div>
+      <div className={styles.naverSearchTotal}>{`네이버 검색결과 ${numberWithComma(place.total_count)}개`}</div>
     </li>
   );
 }

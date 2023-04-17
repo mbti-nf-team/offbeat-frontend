@@ -16,9 +16,11 @@ export const checkNumberValue = (value?: number | null): number => {
   return 0;
 };
 
-export const filteredPlaces = (places: google.maps.places.PlaceResult[]) => places.filter((
-  place,
-): place is PlaceResult => Boolean(place.geometry?.location) && Boolean(place.place_id));
+export const filteredPlaces = (
+  places: google.maps.places.PlaceResult[],
+) => places.filter((place): place is PlaceResult => [
+  place.geometry?.location, place.place_id, place.name,
+].some((value) => Boolean(value)));
 
 export const checkEmpty = <T>(value?: T[]): T[] => {
   if (!value || !value.length) {
@@ -27,3 +29,18 @@ export const checkEmpty = <T>(value?: T[]): T[] => {
 
   return value;
 };
+
+export function numberWithComma(
+  value?: number | null,
+  returnZero = true,
+): string {
+  if (value) {
+    return value.toLocaleString(undefined, { maximumFractionDigits: 20 });
+  }
+
+  if (returnZero) {
+    return '0';
+  }
+
+  return '';
+}
