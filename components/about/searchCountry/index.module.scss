@@ -2,7 +2,9 @@
 
 .searchCountryHeaderWrapper {
   position: sticky;
+  background-color: color("white");
   top: 0;
+  padding-bottom: 36px;
 }
 
 .logoWrapper {
@@ -10,7 +12,6 @@
   flex-direction: row;
   justify-content: center;
   padding: 0px 16px 24px;
-  background-color: color("gray.100");
   width: 100%;
 }
 

@@ -3,11 +3,9 @@
 .inputWrapper {
   display: flex;
   flex-direction: row;
-  top: 24px;
-  right: 16px;
-  position: absolute;
+  position: relative;
+  margin: 0 auto;
   width: calc(100% - 32px);
-  z-index: var(--search-input-z-index);
 
   .suffixIconWrapper {
     display: flex;

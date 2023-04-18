@@ -1,4 +1,5 @@
 import {
+  CSSProperties,
   DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes,
 } from 'react';
 
@@ -17,15 +18,17 @@ InputHTMLAttributes<HTMLInputElement>, HTMLInputElement
   isFocused: boolean;
   value: string;
   placeholder: string;
-  goBack: () => void;
+  goBack?: () => void;
   onRemove: () => void;
+  wrapperStyle?: CSSProperties;
+  isVisibleMenuIcon?: boolean;
 }
 
 function Input({
-  isFocused, goBack, value, placeholder, onRemove, ...rest
+  isFocused, goBack, value, placeholder, onRemove, wrapperStyle, isVisibleMenuIcon, ...rest
 }: Props, ref: ForwardedRef<HTMLInputElement>) {
   return (
-    <div className={styles.inputWrapper}>
+    <div className={styles.inputWrapper} style={wrapperStyle}>
       <div className={styles.prefixIconWrapper}>
         {!isFocused ? (
           <SearchIcon className={styles.searchIcon} />
@@ -47,7 +50,7 @@ function Input({
         {(isFocused && value) && (
           <RemoveIcon onClick={onRemove} />
         )}
-        {!isFocused && <MenuIcon />}
+        {(!isFocused && isVisibleMenuIcon) && <MenuIcon />}
       </div>
     </div>
   );

@@ -38,6 +38,7 @@ function SearchInput({ onSubmit }: Props) {
     <>
       <Input
         ref={inputRef}
+        isVisibleMenuIcon
         type="text"
         goBack={() => setIsFocused(false)}
         isFocused={isFocused}
@@ -45,6 +46,12 @@ function SearchInput({ onSubmit }: Props) {
         placeholder="장소 검색"
         value={searchInput}
         onFocus={onFocus}
+        wrapperStyle={{
+          top: '24px',
+          right: '16px',
+          position: 'absolute',
+          zIndex: 'var(--search-input-z-index)',
+        }}
         onChange={(e) => setSearchInput(e.target.value)}
         onKeyDown={onKeyDown}
       />
