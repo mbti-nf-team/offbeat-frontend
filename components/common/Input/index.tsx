@@ -26,28 +26,26 @@ function Input({
 }: Props, ref: ForwardedRef<HTMLInputElement>) {
   return (
     <div className={styles.inputWrapper}>
-      {!isFocused ? (
-        <div className={styles.searchIconWrapper}>
+      <div className={styles.prefixIconWrapper}>
+        {!isFocused ? (
           <SearchIcon className={styles.searchIcon} />
-        </div>
-      ) : (
-        <div className={styles.searchIconWrapper}>
+        ) : (
           <ArrowLeftIcon onClick={goBack} />
-        </div>
-      )}
+        )}
+      </div>
       <input
         ref={ref}
         placeholder={placeholder}
         value={value}
-        className={clsx(styles.searchInput, {
+        className={clsx(styles.input, {
           [styles.visibleShadow]: !isFocused,
         })}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}
       />
-      <div className={styles.menuIconWrapper}>
+      <div className={styles.suffixIconWrapper}>
         {(isFocused && value) && (
-        <RemoveIcon onClick={onRemove} />
+          <RemoveIcon onClick={onRemove} />
         )}
         {!isFocused && <MenuIcon />}
       </div>
