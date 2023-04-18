@@ -7,18 +7,17 @@ import styles from './index.module.scss';
 
 type Props = {
   keyword: string;
-  onClose: () => void;
   onInput: (value: string) => void;
 };
 
-function SearchTermsBox({ keyword, onClose, onInput }: Props) {
+function SearchTermsBox({ keyword, onInput }: Props) {
   return (
     <div className={styles.searchTermsBlock}>
       <div className={styles.searchTermsBox}>
         {keyword ? (
-          <SearchTermsList keyword={keyword} onClose={onClose} onInput={onInput} />
+          <SearchTermsList keyword={keyword} onInput={onInput} />
         ) : (
-          <SuggestSearchList onClose={onClose} onInput={onInput} />
+          <SuggestSearchList onInput={onInput} />
         )}
       </div>
     </div>

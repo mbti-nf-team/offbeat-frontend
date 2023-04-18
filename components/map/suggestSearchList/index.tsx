@@ -10,11 +10,10 @@ import { shallow } from 'zustand/shallow';
 import styles from './index.module.scss';
 
 type Props = {
-  onClose: () => void;
   onInput: (value: string) => void;
 };
 
-function SuggestSearchList({ onClose, onInput }: Props) {
+function SuggestSearchList({ onInput }: Props) {
   const map = useGoogleMap();
   const { recentSearchList } = useRecentSearchStore((state) => ({
     recentSearchList: state.recentSearchList,
@@ -29,7 +28,6 @@ function SuggestSearchList({ onClose, onInput }: Props) {
   const onActionTextSearch = (keyword: string) => {
     onTextSearch({ query: keyword });
     onInput(keyword);
-    onClose();
   };
 
   // const onNearByRatingItemKeyDown =

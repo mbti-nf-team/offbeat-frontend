@@ -14,11 +14,10 @@ import styles from './index.module.scss';
 
 type Props = {
   keyword: string;
-  onClose: () => void;
   onInput: (value: string) => void;
 };
 
-function SearchTermsList({ keyword, onClose, onInput }: Props) {
+function SearchTermsList({ keyword, onInput }: Props) {
   const [service] = useState(new google.maps.places.AutocompleteService());
   const [sessionToken] = useState(new google.maps.places.AutocompleteSessionToken());
   const [
@@ -69,7 +68,6 @@ function SearchTermsList({ keyword, onClose, onInput }: Props) {
     if (placeDetailsState) {
       setPlaces([placeDetailsState]);
       onInput(`${placeDetailsState?.name}`);
-      onClose();
     }
   }, [placeDetailsState]);
 
@@ -81,7 +79,7 @@ function SearchTermsList({ keyword, onClose, onInput }: Props) {
 
   if (isZeroResult) {
     return (
-      <ZeroSearchResult keyword={keyword} onClose={onClose} onInput={onInput} />
+      <ZeroSearchResult keyword={keyword} onInput={onInput} />
     );
   }
 
