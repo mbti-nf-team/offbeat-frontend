@@ -1,16 +1,11 @@
 import { useCallback, useRef, useState } from 'react';
 
-import clsx from 'clsx';
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import useDebounce from 'hooks/useDebounce';
 
+import Input from 'components/common/Input';
+
 import SearchTermsBox from '../searchTermsBox';
-
-import CloseIcon from 'lib/assets/icons/close.svg';
-import MenuIcon from 'lib/assets/icons/menu.svg';
-import SearchIcon from 'lib/assets/icons/search.svg';
-
-import styles from './index.module.scss';
 
 type Props = {
   onSubmit: (keyword: string) => void;
@@ -19,65 +14,43 @@ type Props = {
 function SearchInput({ onSubmit }: Props) {
   const [searchInput, setSearchInput] = useState<string>('');
   const debouncedValue = useDebounce(searchInput, 200);
-  const [isVisibleSearchTerms, setIsVisibleSearchTerms] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const isHiddenSearchIcon = !isVisibleSearchTerms && searchInput.trim();
 
   const onKeyDown = useActionKeyEvent<HTMLInputElement>(['Enter', 'NumpadEnter'], () => {
     if (searchInput.trim()) {
       onSubmit(searchInput.trim());
       inputRef.current?.blur();
-      setIsVisibleSearchTerms(false);
+      setIsFocused(false);
     }
   });
 
-  const onDeleteInput = useCallback(() => {
-    if (isVisibleSearchTerms) {
-      setIsVisibleSearchTerms(false);
-      return;
-    }
+  const onRemoveInput = () => setSearchInput('');
 
-    setSearchInput('');
-  }, [isVisibleSearchTerms]);
+  const onFocus = () => setIsFocused(true);
 
-  const onFocus = () => setIsVisibleSearchTerms(true);
-
-  const onInput = useCallback((value: string) => setSearchInput(value), []);
+  const onInput = useCallback((value: string) => {
+    setSearchInput(value);
+    setIsFocused(false);
+  }, []);
 
   return (
     <>
-      <div className={styles.inputWrapper}>
-        {!isHiddenSearchIcon && (
-          <div className={styles.searchIconWrapper}>
-            <SearchIcon className={styles.searchIcon} />
-          </div>
-        )}
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="장소 검색"
-          value={searchInput}
-          className={clsx(styles.searchInput, {
-            [styles.visibleShadow]: !isVisibleSearchTerms,
-            [styles.isHiddenSearchIcon]: isHiddenSearchIcon,
-          })}
-          onFocus={onFocus}
-          onChange={(e) => setSearchInput(e.target.value)}
-          onKeyDown={onKeyDown}
-        />
-        <div className={styles.menuIconWrapper}>
-          {(isVisibleSearchTerms || searchInput.trim()) ? (
-            <CloseIcon onClick={onDeleteInput} />
-          ) : (
-            <MenuIcon />
-          )}
-        </div>
-      </div>
-      {isVisibleSearchTerms && (
+      <Input
+        ref={inputRef}
+        type="text"
+        goBack={() => setIsFocused(false)}
+        isFocused={isFocused}
+        onRemove={onRemoveInput}
+        placeholder="장소 검색"
+        value={searchInput}
+        onFocus={onFocus}
+        onChange={(e) => setSearchInput(e.target.value)}
+        onKeyDown={onKeyDown}
+      />
+      {isFocused && (
         <SearchTermsBox
           keyword={debouncedValue}
-          onClose={onDeleteInput}
           onInput={onInput}
         />
       )}

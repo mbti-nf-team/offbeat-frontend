@@ -8,11 +8,10 @@ import styles from './index.module.scss';
 
 type Props = {
   keyword: string;
-  onClose: () => void;
   onInput: (value: string) => void;
 };
 
-function ZeroSearchResult({ keyword, onClose, onInput }: Props) {
+function ZeroSearchResult({ keyword, onInput }: Props) {
   const map = useGoogleMap();
   const { onTextSearch } = useTextSearch(map);
 
@@ -21,7 +20,6 @@ function ZeroSearchResult({ keyword, onClose, onInput }: Props) {
       query: keyword,
     });
     onInput(keyword);
-    onClose();
   };
 
   const onKeyDownKeyword = useActionKeyEvent<HTMLDivElement>(['Enter', 'NumpadEnter'], onSubmit);
