@@ -1,10 +1,10 @@
 @import "/styles/main.scss";
 
 .title {
-  @include text("title.small/700", "black");
+  @include text("title.small/700", "black/default");
 
   margin-top: 24px;
-  border-top: 2px solid color("black");
+  border-top: 2px solid color("black/default");
   padding: 12px 0px;
 }
 
@@ -14,7 +14,7 @@
   display: flex;
   padding: 14px 0;
   gap: 4px;
-  border-top: 1px solid color("black");
+  border-top: 1px solid color("black/default");
 
   & > div:first-of-type {
     @include text("title.large/600");

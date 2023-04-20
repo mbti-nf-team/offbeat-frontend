@@ -6,7 +6,7 @@
   display: flex;
   padding: 14px 0;
   gap: 4px;
-  border-top: 1px solid color("black");
+  border-top: 1px solid color("black/default");
 
   & > div:first-of-type {
     @include text("title.large/600");
