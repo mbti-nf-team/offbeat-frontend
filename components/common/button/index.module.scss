@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: color("black");
+  color: color("black/default");
 
   /* TODO - 추후 디자인 정의 후 반영 */
   padding: 4px 20px;
@@ -22,8 +22,8 @@
   font-weight: 600;
   font-size: 32px;
   line-height: 48px;
-  background: color("purple.300");
-  border: 2px solid color("black");
+  background: color("highlight/default");
+  border: 2px solid color("black/default");
   border-radius: 28px;
 
   @media (hover: hover) and (pointer: fine) {
@@ -34,7 +34,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      background-color: color("black");
+      background-color: color("black/default");
       opacity: 0;
       transition: opacity 0.1s ease-in-out;
     }

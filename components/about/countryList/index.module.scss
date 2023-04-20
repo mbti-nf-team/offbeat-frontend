@@ -19,8 +19,8 @@
   flex-direction: row;
   align-items: flex-start;
   padding: 14px 0px;
-  border-top: 2px solid color("black");
-  border-bottom: 1px solid color("black");
+  border-top: 2px solid color("black/default");
+  border-bottom: 1px solid color("black/default");
 
   &.isFocused {
     top: 120px;

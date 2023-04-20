@@ -1,6 +1,5 @@
 import {
-  CSSProperties,
-  DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes,
+  CSSProperties, DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes,
 } from 'react';
 
 import clsx from 'clsx';

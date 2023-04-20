@@ -12,7 +12,7 @@
   justify-content: center;
 
   .placeDetailContentsWrapper {
-    background-color: color('white');
+    background-color: color('white/default');
     min-height: calc(var(--vh, 1vh) * 100);
     max-width: 430px;
     width: 100%;
