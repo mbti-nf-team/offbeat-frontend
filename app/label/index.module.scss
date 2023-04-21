@@ -1,0 +1,13 @@
+@import "/styles/main.scss";
+
+.doneIcon {
+  & > path {
+    fill: color("done/default");
+  }
+}
+
+.highlightIcon {
+  & > path {
+    fill: color("highlight/default");
+  }
+}
