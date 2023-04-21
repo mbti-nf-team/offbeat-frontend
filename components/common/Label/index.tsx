@@ -25,9 +25,6 @@ function Label({
     onClick?.();
   });
 
-  const isDefault = type === 'default';
-  const isReverse = type === 'reverse';
-
   return (
     <div
       role={onClick ? 'button' : undefined}
@@ -36,9 +33,9 @@ function Label({
         [styles.button]: !!onClick,
         [styles[size]]: size,
         [styles[type]]: type,
-        [styles[`default-${size}`]]: isDefault,
-        [styles[`default-${color}`]]: isDefault,
-        [styles[`reverse-${color}`]]: isReverse,
+        [styles[`default-${size}`]]: type === 'default',
+        [styles[`default-${color}`]]: type === 'default',
+        [styles[`reverse-${color}`]]: type === 'reverse',
       })}
       onClick={onClick}
       onKeyDown={onKeyDown}
