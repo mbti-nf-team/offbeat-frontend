@@ -158,12 +158,15 @@ jobs:
         with:
           node-version: ${{ env.DEFAULT_NODE_VERSION }}
 
+      - name: Set node linker to nodeModules
+        run: yarn config set nodeLinker "node-modules"
+
       - name: Install dependencies
-        run: |
-          echo 'nodeLinker: "node-modules"' >> .yarnrc.yml
-          yarn install
+        run: yarn install --immutable
+
       - uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           skip: "dependabot/**"
           exitOnceUploaded: true
+          onlyChanged: true
