@@ -50,3 +50,6 @@ cypress/log
 
 # eslint
 .eslintcache
+
+# storybook
+storybook-static

@@ -18,7 +18,9 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "test:e2e": "start-server-and-test dev http://localhost:3000 cypress:run",
-    "postinstall": "husky install && chmod ug+x .husky/*"
+    "postinstall": "husky install && chmod ug+x .husky/*",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
@@ -45,12 +47,21 @@
     "zustand": "^4.3.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.4",
     "@commitlint/cli": "^17.4.3",
     "@commitlint/config-conventional": "^17.4.3",
     "@next/eslint-plugin-next": "^13.3.0",
+    "@storybook/addon-essentials": "^7.0.6",
+    "@storybook/addon-interactions": "^7.0.6",
+    "@storybook/addon-links": "^7.0.6",
+    "@storybook/blocks": "^7.0.6",
+    "@storybook/nextjs": "^7.0.6",
+    "@storybook/react": "^7.0.6",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@svgr/webpack": "^6.5.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "@types/babel__core": "^7",
     "@types/google.maps": "^3.52.0",
     "@types/jest": "^29.2.4",
     "@types/jest-plugin-context": "^2",
@@ -62,6 +73,7 @@
     "@types/testing-library__jest-dom": "^5.14.5",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
+    "css-loader": "^6.7.3",
     "cypress": "^12.1.0",
     "eslint": "^8.18.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -75,6 +87,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-storybook": "^0.6.11",
     "eslint-plugin-testing-library": "^5.10.1",
     "eslint-plugin-unused-imports": "^2.0.0",
     "given2": "^2.1.7",
@@ -85,7 +98,11 @@
     "lint-staged": "^13.1.2",
     "react-test-renderer": "^18.2.0",
     "start-server-and-test": "^1.14.0",
-    "typescript": "4.7.4"
+    "storybook": "^7.0.6",
+    "styled-jsx": "^5.1.2",
+    "typescript": "4.7.4",
+    "util": "^0.12.5",
+    "webpack": "^5.80.0"
   },
   "packageManager": "yarn@3.5.0",
   "dependenciesMeta": {
