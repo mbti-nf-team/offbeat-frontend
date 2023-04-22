@@ -1,0 +1,51 @@
+import path from "path";
+
+import type { StorybookConfig } from "@storybook/nextjs";
+
+const config: StorybookConfig = {
+  stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
+  addons: [
+    path.dirname(
+      require.resolve(path.join("@storybook/addon-links", "package.json"))
+    ),
+    path.dirname(
+      require.resolve(path.join("@storybook/addon-essentials", "package.json"))
+    ),
+    path.dirname(
+      require.resolve(
+        path.join("@storybook/addon-interactions", "package.json")
+      )
+    ),
+  ],
+  framework: {
+    name: '@storybook/nextjs',
+    options: {
+      nextConfigPath: path.resolve(__dirname, '../next.config.js'),
+    },
+  },
+  docs: {
+    autodocs: "tag",
+  },
+  webpackFinal: async (config) => {
+    const imageRule = config.module?.rules?.find((rule) => {
+      const test = (rule as { test: RegExp }).test;
+
+      if (!test) {
+        return false;
+      }
+
+      return test.test(".svg");
+    }) as { [key: string]: any };
+
+    imageRule.exclude = /\.svg$/;
+
+    config.module?.rules?.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    });
+
+    return config;
+  },
+};
+
+export default config;
