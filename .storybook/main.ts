@@ -1,9 +1,16 @@
 import path from "path";
+import remarkGfm from 'remark-gfm';
 
 import type { StorybookConfig } from "@storybook/nextjs";
 
 const config: StorybookConfig = {
-  stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
+  staticDirs: ['../public'],
+  stories: [
+    "../components/**/*.stories.mdx",
+    "../components/**/*.stories.@(js|jsx|ts|tsx)",
+    "../stories/**/*.mdx", 
+    "../stories/**/*.stories.@(js|jsx|ts|tsx)"
+  ],
   addons: [
     path.dirname(
       require.resolve(path.join("@storybook/addon-links", "package.json"))
@@ -16,6 +23,16 @@ const config: StorybookConfig = {
         path.join("@storybook/addon-interactions", "package.json")
       )
     ),
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
   framework: {
     name: '@storybook/nextjs',

@@ -40,11 +40,11 @@ function Label({
       onClick={onClick}
       onKeyDown={onKeyDown}
     >
-      <div>{prefixIcon}</div>
+      <div className={styles.iconWrapper}>{prefixIcon}</div>
       <div>
         {children}
       </div>
-      <div>{suffixIcon}</div>
+      <div className={styles.iconWrapper}>{suffixIcon}</div>
     </div>
   );
 }

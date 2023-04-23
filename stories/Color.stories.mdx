@@ -1,0 +1,256 @@
+import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs";
+
+import { neutral, functional, opacity } from "../styles/palette";
+
+export const { black, white } = neutral;
+export const { highlight, danger, positive, done, active, attention, relate } =
+  functional;
+export const {
+  opacity100,
+  opacity096,
+  opacity088,
+  opacity080,
+  opacity072,
+  opacity064,
+  opacity056,
+  opacity048,
+  opacity040,
+  opacity032,
+  opacity024,
+  opacity020,
+  opacity018,
+  opacity016,
+  opacity014,
+  opacity012,
+  opacity010,
+  opacity008,
+  opacity006,
+  opacity004,
+  opacity002,
+  opacity000,
+} = opacity;
+
+<Meta title="Token/Colors" />
+
+# Colors
+
+## Neutral
+
+<ColorPalette>
+  <ColorItem title="Black" subtitle="default" colors={[black]} />
+  <ColorItem title="White" subtitle="default" colors={[white]} />
+</ColorPalette>
+
+## Functional
+
+<ColorPalette>
+  <ColorItem title="Highlight" subtitle="default" colors={[highlight]} />
+  <ColorItem title="Danger" subtitle="default" colors={[danger]} />
+  <ColorItem title="Positive" subtitle="default" colors={[positive]} />
+  <ColorItem title="Done" subtitle="default" colors={[done]} />
+  <ColorItem title="Active" subtitle="default" colors={[active]} />
+  <ColorItem title="Attention" subtitle="default" colors={[attention]} />
+  <ColorItem title="Relate" subtitle="default" colors={[relate]} />
+</ColorPalette>
+
+## Opacity
+
+<ColorPalette>
+  <ColorItem
+    title="opacity"
+    subtitle="100"
+    colors={{ [`#{hex}${opacity100}`]: `${black}${opacity100}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="096"
+    colors={{ [`#{hex}${opacity096}`]: `${black}${opacity096}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="088"
+    colors={{ [`#{hex}${opacity088}`]: `${black}${opacity088}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="080"
+    colors={{ [`#{hex}${opacity080}`]: `${black}${opacity080}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="072"
+    colors={{ [`#{hex}${opacity072}`]: `${black}${opacity072}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="064"
+    colors={{ [`#{hex}${opacity064}`]: `${black}${opacity064}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="056"
+    colors={{ [`#{hex}${opacity056}`]: `${black}${opacity056}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="048"
+    colors={{ [`#{hex}${opacity048}`]: `${black}${opacity048}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="040"
+    colors={{ [`#{hex}${opacity040}`]: `${black}${opacity040}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="032"
+    colors={{ [`#{hex}${opacity032}`]: `${black}${opacity032}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="024"
+    colors={{ [`#{hex}${opacity024}`]: `${black}${opacity024}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="020"
+    colors={{ [`#{hex}${opacity020}`]: `${black}${opacity020}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="018"
+    colors={{ [`#{hex}${opacity018}`]: `${black}${opacity018}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="016"
+    colors={{ [`#{hex}${opacity016}`]: `${black}${opacity016}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="014"
+    colors={{ [`#{hex}${opacity014}`]: `${black}${opacity014}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="012"
+    colors={{ [`#{hex}${opacity012}`]: `${black}${opacity012}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="010"
+    colors={{ [`#{hex}${opacity010}`]: `${black}${opacity010}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="008"
+    colors={{ [`#{hex}${opacity008}`]: `${black}${opacity008}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="006"
+    colors={{ [`#{hex}${opacity006}`]: `${black}${opacity006}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="004"
+    colors={{ [`#{hex}${opacity004}`]: `${black}${opacity004}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="002"
+    colors={{ [`#{hex}${opacity002}`]: `${black}${opacity002}` }}
+  />
+  <ColorItem
+    title="opacity"
+    subtitle="000"
+    colors={{ [`#{hex}${opacity000}`]: `${black}${opacity000}` }}
+  />
+</ColorPalette>
+
+## Semantic
+
+<ColorPalette>
+
+<ColorItem
+    title="function type"
+    colors={{
+      [`default #{hex}${opacity100}`]: `${black}${opacity100}`,
+      [`disabled #{hex}${opacity064}`]: `${black}${opacity064}`,
+      [`placeholder #{hex}${opacity024}`]: `${black}${opacity024}`,
+      [`shadow #{hex}${opacity010}`]: `${black}${opacity010}`,
+    }}
+  />
+  <ColorItem
+    title="Black"
+    colors={{
+      primary: `${black}${opacity100}`,
+      secondary: `${black}${opacity096}`,
+      tertiary: `${black}${opacity040}`,
+      bg: `${black}${opacity016}`,
+    }}
+  />
+  <ColorItem
+    title="White"
+    colors={{
+      primary: `${white}${opacity100}`,
+      secondary: `${white}${opacity096}`,
+      tertiary: `${white}${opacity040}`,
+      bg: `${white}${opacity016}`,
+    }}
+  />
+  <ColorItem
+    title="Highlight"
+    colors={{
+      primary: `${highlight}${opacity100}`,
+      secondary: `${highlight}${opacity096}`,
+      tertiary: `${highlight}${opacity040}`,
+      bg: `${highlight}${opacity016}`,
+    }}
+  />
+  <ColorItem
+    title="Danger"
+    colors={{
+      primary: `${danger}${opacity100}`,
+      secondary: `${danger}${opacity096}`,
+      tertiary: `${danger}${opacity040}`,
+      bg: `${danger}${opacity016}`,
+    }}
+  />
+  <ColorItem
+    title="Positive"
+    colors={{
+      primary: `${positive}${opacity100}`,
+      secondary: `${positive}${opacity096}`,
+      tertiary: `${positive}${opacity040}`,
+      bg: `${positive}${opacity016}`,
+    }}
+  />
+  <ColorItem
+    title="Active"
+    colors={{
+      primary: `${active}${opacity100}`,
+      secondary: `${active}${opacity096}`,
+      tertiary: `${active}${opacity040}`,
+      bg: `${active}${opacity016}`,
+    }}
+  />
+  <ColorItem
+    title="Attention"
+    colors={{
+      primary: `${attention}${opacity100}`,
+      secondary: `${attention}${opacity096}`,
+      tertiary: `${attention}${opacity040}`,
+      bg: `${attention}${opacity016}`,
+    }}
+  />
+  <ColorItem
+    title="Relate"
+    colors={{
+      primary: `${relate}${opacity100}`,
+      secondary: `${relate}${opacity096}`,
+      tertiary: `${relate}${opacity040}`,
+      bg: `${relate}${opacity016}`,
+    }}
+  />
+</ColorPalette>
