@@ -50,7 +50,6 @@ function SuggestSearchList({ onInput }: Props) {
 
   return (
     <>
-      {/* <div className={styles.title}>최근 검색</div> */}
       <div className={styles.title}>
         <Label color="attention" type="default" size="small">
           최근 검색기록
