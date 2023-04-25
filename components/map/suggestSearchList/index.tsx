@@ -7,6 +7,8 @@ import { nanoid } from 'nanoid';
 import useRecentSearchStore from 'stores/recentSearch';
 import { shallow } from 'zustand/shallow';
 
+import Label from 'components/common/Label';
+
 import styles from './index.module.scss';
 
 type Props = {
@@ -48,7 +50,11 @@ function SuggestSearchList({ onInput }: Props) {
 
   return (
     <>
-      <div className={styles.title}>최근 검색</div>
+      <div className={styles.title}>
+        <Label color="attention" type="default" size="small">
+          최근 검색기록
+        </Label>
+      </div>
       {recentSearchList.map((recentSearch) => (
         <div
           key={nanoid()}

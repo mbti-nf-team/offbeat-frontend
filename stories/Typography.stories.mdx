@@ -1,0 +1,212 @@
+import { Meta, Typeset, Source } from "@storybook/addon-docs/blocks";
+
+<Meta title="Token/Typography" />
+
+export const { type, weight, size, lineHieght } = {
+  type: {
+    pretendard:
+      "'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif",
+  },
+  weight: {
+    regular: "400",
+    meduim: "500",
+    semibold: "600",
+    bold: "700",
+  },
+  size: {
+    body1: 16,
+    title3: 18,
+    title2: 20,
+    title1: 22,
+    headline2: 24,
+    headline1: 32,
+    display: 36,
+  },
+  lineHieght: {
+    body1: 20,
+    title3: 24,
+    title2: 26,
+    title1: 28,
+    headline2: 32,
+    headline1: 48,
+    display: 44,
+  },
+};
+
+export const sampleText =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
+# Typography
+
+**Font:** Pretendard
+
+**Weight:** 400(regular), 500(meduim), 600(semibold), 700(bold)
+
+<Typeset
+  fontSizes={[
+    size.body1,
+    size.title3,
+    size.title2,
+    size.title1,
+    size.headline2,
+    size.headline1,
+    size.display,
+  ]}
+  fontWeight={weight.bold}
+  sampleText={sampleText}
+  fontFamily={type.pretendard}
+/>
+
+## Display Font
+
+**Styles:**
+
+<Source
+  language="css"
+  code={`
+font-weight: normal; // 500, 600, bold
+font-size: ${size.display}px;
+line-height: ${lineHieght.display}px;
+`}
+  format
+  dark
+/>
+
+<Typeset
+  fontSizes={[size.display]}
+  sampleText={sampleText}
+  fontWeight={weight.regular}
+  fontFamily={type.pretendard}
+/>
+
+## Headline 1 Font
+
+**Styles:**
+
+<Source
+  language="css"
+  code={`
+font-weight: normal; // 500, 600, bold
+font-size: ${size.headline1}px;
+line-height: ${lineHieght.headline1}px;
+`}
+  format
+  dark
+/>
+
+<Typeset
+  fontSizes={[size.headline1]}
+  sampleText={sampleText}
+  fontWeight={weight.regular}
+  fontFamily={type.pretendard}
+/>
+
+## Headline 2 Font
+
+**Styles:**
+
+<Source
+  language="css"
+  code={`
+font-weight: normal; // 500, 600, bold
+font-size: ${size.headline2}px;
+line-height: ${lineHieght.headline2}px;
+`}
+  format
+  dark
+/>
+
+<Typeset
+  fontSizes={[size.headline2]}
+  sampleText={sampleText}
+  fontWeight={weight.regular}
+  fontFamily={type.pretendard}
+/>
+
+## Title 1 Font
+
+**Styles:**
+
+<Source
+  language="css"
+  code={`
+font-weight: normal; // 500, 600, bold
+font-size: ${size.title1}px;
+line-height: ${lineHieght.title1}px;
+`}
+  format
+  dark
+/>
+
+<Typeset
+  fontSizes={[size.title1]}
+  sampleText={sampleText}
+  fontWeight={weight.regular}
+  fontFamily={type.pretendard}
+/>
+
+## Title 2 Font
+
+**Styles:**
+
+<Source
+  language="css"
+  code={`
+font-weight: normal; // 500, 600, bold
+font-size: ${size.title2}px;
+line-height: ${lineHieght.title2}px;
+`}
+  format
+  dark
+/>
+
+<Typeset
+  fontSizes={[size.title2]}
+  sampleText={sampleText}
+  fontWeight={weight.regular}
+  fontFamily={type.pretendard}
+/>
+
+## Title 3 Font
+
+**Styles:**
+
+<Source
+  language="css"
+  code={`
+font-weight: normal; // 500, 600, bold
+font-size: ${size.title3}px;
+line-height: ${lineHieght.title3}px;
+`}
+  format
+  dark
+/>
+
+<Typeset
+  fontSizes={[size.title3]}
+  sampleText={sampleText}
+  fontWeight={weight.regular}
+  fontFamily={type.pretendard}
+/>
+
+## Body 1 Font
+
+**Styles:**
+
+<Source
+  language="css"
+  code={`
+font-weight: normal; // 500, 600, bold
+font-size: ${size.body1}px;
+line-height: ${lineHieght.body1}px;
+`}
+  format
+  dark
+/>
+
+<Typeset
+  fontSizes={[size.body1]}
+  sampleText={sampleText}
+  fontWeight={weight.regular}
+  fontFamily={type.pretendard}
+/>
