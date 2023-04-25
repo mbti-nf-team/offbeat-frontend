@@ -1,9 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { ChevronDownIcon, ChevronUpIcon } from 'lib/assets/icons';
 
 import Label from '.';
-
-import MediumChevronDownIcon from 'lib/assets/icons/chevron-down-medium.svg';
-import MediumChevronUpIcon from 'lib/assets/icons/chevron-up-medium.svg';
 
 const meta: Meta<typeof Label> = {
   title: 'Components/Label',
@@ -112,7 +110,7 @@ export const RelateColor: Story = {
   },
 };
 
-export const HasOnClickLabel: Story = {
+export const HasClickEventLabel: Story = {
   args: {
     type: 'default',
     size: 'medium',
@@ -124,7 +122,7 @@ export const HasPrefixIcon: Story = {
   args: {
     type: 'default',
     size: 'medium',
-    prefixIcon: <MediumChevronDownIcon />,
+    prefixIcon: <ChevronDownIcon />,
   },
 };
 
@@ -132,6 +130,6 @@ export const HasSuffixIcon: Story = {
   args: {
     type: 'default',
     size: 'medium',
-    suffixIcon: <MediumChevronUpIcon />,
+    suffixIcon: <ChevronUpIcon />,
   },
 };

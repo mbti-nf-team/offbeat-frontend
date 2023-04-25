@@ -3,11 +3,9 @@ import {
 } from 'react';
 
 import clsx from 'clsx';
-
-import ArrowLeftIcon from 'lib/assets/icons/arrow-left.svg';
-import MenuIcon from 'lib/assets/icons/menu.svg';
-import RemoveIcon from 'lib/assets/icons/remove-icon.svg';
-import SearchIcon from 'lib/assets/icons/search.svg';
+import {
+  ArrowLeftIcon, MenuIcon, RemoveIcon, SearchIcon,
+} from 'lib/assets/icons';
 
 import styles from './index.module.scss';
 

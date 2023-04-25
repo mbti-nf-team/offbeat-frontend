@@ -5,10 +5,9 @@ import {
 } from 'react';
 
 import { ControlsAnimationDefinition, motion, Variants } from 'framer-motion';
+import { ErrorCircleIcon } from 'lib/assets/icons';
 import useToastStore, { ToastStore } from 'stores/toast';
 import { shallow } from 'zustand/shallow';
-
-import ErrorIcon from 'lib/assets/icons/error.svg';
 
 import styles from './index.module.scss';
 
@@ -80,7 +79,7 @@ function Toast() {
     >
       <div className={styles.toastBox}>
         {type === 'error' && (
-          <ErrorIcon className={styles.toastIcon} />
+          <ErrorCircleIcon className={styles.toastIcon} />
         )}
         <div className={styles.toastMessage}>
           {message}
