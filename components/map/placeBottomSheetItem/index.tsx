@@ -1,13 +1,10 @@
 import { useMemo } from 'react';
 
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
+import { EmptyStarIcon, FillStarIcon, HalfStarIcon } from 'lib/assets/icons';
 import { PlaceWithBlogPost } from 'lib/types/search';
 
 import { checkNumberValue, generateArrayOfNumber, numberWithComma } from 'utils';
-
-import EmptyStarIcon from 'lib/assets/icons/empty-star.svg';
-import FillStarSvg from 'lib/assets/icons/fill-star.svg';
-import HalfStarIcon from 'lib/assets/icons/half-star.svg';
 
 import styles from './index.module.scss';
 
@@ -40,7 +37,7 @@ function PlaceBottomSheetItem({ place, onClick }: Props) {
       );
     }
 
-    return <FillStarSvg />;
+    return <FillStarIcon />;
   }, [rating]);
 
   return (
@@ -56,7 +53,7 @@ function PlaceBottomSheetItem({ place, onClick }: Props) {
         <div className={styles.placeRating}>{rating}</div>
         <div>
           {generateArrayOfNumber(fillStarCount).map((key) => (
-            <FillStarSvg key={key} />
+            <FillStarIcon key={key} />
           ))}
           {fillStarCount < 5 && extraStar}
           {generateArrayOfNumber(MAX_RATING - (fillStarCount + 1)).map((key) => (
