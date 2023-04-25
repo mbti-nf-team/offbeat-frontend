@@ -1,4 +1,4 @@
-import { Meta, Typeset, Source } from "@storybook/addon-docs/blocks";
+import { Meta, Typeset, Source } from "@storybook/addon-docs";
 
 <Meta title="Token/Typography" />
 
@@ -34,26 +34,53 @@ export const { type, weight, size, lineHieght } = {
 };
 
 export const sampleText =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+  "다람쥐 헌 쳇바퀴에 타고파 ‘Typography’, 1972. @ㅇ0ㅇ ₩0 〈♥〉 『♪』";
 
 # Typography
 
 **Font:** Pretendard
 
-**Weight:** 400(regular), 500(meduim), 600(semibold), 700(bold)
+**FontSizes**
 
 <Typeset
   fontSizes={[
-    size.body1,
-    size.title3,
-    size.title2,
-    size.title1,
-    size.headline2,
-    size.headline1,
     size.display,
+    size.headline1,
+    size.headline2,
+    size.title1,
+    size.title2,
+    size.title3,
+    size.body1,
   ]}
   fontWeight={weight.bold}
   sampleText={sampleText}
+  fontFamily={type.pretendard}
+/>
+
+**Weight:** 400(regular), 500(meduim), 600(semibold), 700(bold)
+
+<Typeset
+  fontSizes={[size.title1]}
+  sampleText={sampleText}
+  fontWeight={weight.regular}
+  fontFamily={type.pretendard}
+/>
+<Typeset
+  fontSizes={[size.title1]}
+  sampleText={sampleText}
+  fontWeight={weight.meduim}
+  fontFamily={type.pretendard}
+/>
+<Typeset
+  fontSizes={[size.title1]}
+  sampleText={sampleText}
+  fontWeight={weight.semibold}
+  fontFamily={type.pretendard}
+/>
+<Typeset
+  fontSizes={[size.title1]}
+  sampleText={sampleText}
+  fontWeight={weight.bold}
   fontFamily={type.pretendard}
 />
 
