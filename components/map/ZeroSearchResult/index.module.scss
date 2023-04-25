@@ -1,7 +1,7 @@
 @import "/styles/main.scss";
 
 .emptySearchTerm {
-  @include text("title.large/600");
+  @include text("title 1/600");
   cursor: pointer;
   flex-direction: row;
   display: flex;
@@ -9,11 +9,11 @@
   padding: 14px 0;
 
   & > strong {
-    @include text("title.large/600");
+    @include text("title 1/600");
   }
 
   & > p {
-    @include text("title.large/500");
+    @include text("title 1/500");
     margin: 0;
   }
 }

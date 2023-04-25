@@ -13,27 +13,24 @@
   @if $font == "display" {
     font-size: var(--display-font-size);
     line-height: var(--display-line-height);
-  } @else if $font == "headline" {
-    font-size: var(--headline-font-size);
-    line-height: var(--headline-line-height);
-  } @else if $font == "title.large" {
-    font-size: var(--large-title-font-size);
-    line-height: var(--large-title-line-height);
-  } @else if $font == "title.medium" {
-    font-size: var(--medium-title-font-size);
-    line-height: var(--medium-title-line-height);
-  } @else if $font == "title.small" {
-    font-size: var(--small-title-font-size);
-    line-height: var(--small-title-line-height);
-  } @else if $font == "body.large" {
-    font-size: var(--large-body-font-size);
-    line-height: var(--large-body-line-height);
-  } @else if $font == "body.medium" {
-    font-size: var(--medium-body-font-size);
-    line-height: var(--medium-body-line-height);
-  } @else if $font == "body.small" {
-    font-size: var(--small-body-font-size);
-    line-height: var(--small-body-line-height);
+  } @else if $font == "headline 1" {
+    font-size: var(--headline-1-font-size);
+    line-height: var(--headline-1-line-height);
+  } @else if $font == "headline 2" {
+    font-size: var(--headline-2-font-size);
+    line-height: var(--headline-2-line-height);
+  } @else if $font == "title 1" {
+    font-size: var(--title-1-font-size);
+    line-height: var(--title-1-line-height);
+  } @else if $font == "title 2" {
+    font-size: var(--title-2-font-size);
+    line-height: var(--title-2-line-height);
+  } @else if $font == "title 3" {
+    font-size: var(--title-3-font-size);
+    line-height: var(--title-3-line-height);
+  } @else if $font == "body 1" {
+    font-size: var(--body-1-font-size);
+    line-height: var(--body-1-line-height);
   }
 
   @if $weight == "400" {

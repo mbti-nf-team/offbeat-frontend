@@ -19,21 +19,35 @@
 }
 
 .medium {
-  width: 140px;
+  @include text("headline 2/600");
+
+  min-width: 140px;
+  width: fit-content;
   height: 40px;
-  gap: 12px;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 32px;
+
+  .prefixIcon {
+    margin-right: 12px;
+  }
+
+  .suffixIcon {
+    margin-left: 12px;
+  }
 }
 
 .small {
-  width: 117px;
+  @include text("title 2/600");
+
+  min-width: 117px;
+  width: fit-content;
   height: 34px;
-  gap: 8px;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 26px;
+
+  .prefixIcon {
+    margin-right: 8px;
+  }
+
+  .suffixIcon {
+    margin-left: 8px;
+  }
 }
 
 .default {

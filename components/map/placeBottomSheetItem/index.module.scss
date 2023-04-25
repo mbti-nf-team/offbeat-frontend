@@ -11,12 +11,12 @@
   cursor: pointer;
 
   & > div.placeName {
-    @include text("title.large/600", "black/default");
+    @include text("title 1/600", "black/default");
     letter-spacing: -0.01em;
   }
 
   & > div.naverSearchTotal {
-    @include text("title.small/500", "gray.500");
+    @include text("title 3/500", "gray.500");
   }
 }
 
@@ -27,10 +27,10 @@
   gap: 4px;
 
   & > div.placeRating {
-    @include text("title.small/600");
+    @include text("title 3/600");
   }
 
   & > div.placeUserRatingsTotal {
-    @include text("title.small/500", "gray.500");
+    @include text("title 3/500", "gray.500");
   }
 }

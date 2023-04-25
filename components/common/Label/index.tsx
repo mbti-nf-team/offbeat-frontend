@@ -40,11 +40,15 @@ function Label({
       onClick={onClick}
       onKeyDown={onKeyDown}
     >
-      <div className={styles.iconWrapper}>{prefixIcon}</div>
+      {prefixIcon && (
+        <div className={clsx(styles.iconWrapper, styles.prefixIcon)}>{prefixIcon}</div>
+      )}
       <div>
         {children}
       </div>
-      <div className={styles.iconWrapper}>{suffixIcon}</div>
+      {suffixIcon && (
+        <div className={clsx(styles.iconWrapper, styles.suffixIcon)}>{suffixIcon}</div>
+      )}
     </div>
   );
 }

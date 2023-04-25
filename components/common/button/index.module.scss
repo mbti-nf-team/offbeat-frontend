@@ -1,6 +1,7 @@
 @import "/styles/main.scss";
 
 .buttonWrapper {
+  @include text("headline 1/600");
   position: relative;
   transform: translateZ(0);
   user-select: none;
@@ -19,9 +20,6 @@
   padding: 4px 20px;
   width: 277px;
   height: 56px;
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 48px;
   background: color("highlight/default");
   border: 2px solid color("black/default");
   border-radius: 28px;

@@ -17,7 +17,8 @@
 }
 
 .toastMessage {
-  @include text("title.medium/600", "white/default");
+  @include text("title 2/600", "white/default");
+
   padding: 3px 12px;
   max-width: 350px;
   overflow-wrap: break-word;

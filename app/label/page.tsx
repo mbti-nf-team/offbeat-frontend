@@ -16,7 +16,7 @@ export default function Page() {
 
   return (
     <div style={{
-      gap: '10px', display: 'flex', flexDirection: 'column', marginLeft: '10px',
+      gap: '10px', display: 'inline-flex', flexDirection: 'column', marginLeft: '10px',
     }}
     >
       <Label
