@@ -12,7 +12,7 @@ const nextConfig = {
     reactRemoveProperties: isProd && {
       properties: ['^data-test'],
     },
-    removeConsole: isProd && true,
+    removeConsole: isProd,
   },
   swcMinify: true,
   experimental: {
