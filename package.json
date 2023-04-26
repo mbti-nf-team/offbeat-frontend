@@ -37,20 +37,19 @@
     "clsx": "^1.2.1",
     "framer-motion": "^10.2.2",
     "nanoid": "^4.0.2",
-    "next": "^13.3.0",
+    "next": "^13.3.1",
     "qs": "^6.11.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-modal-sheet": "^1.10.1",
     "react-spring-bottom-sheet": "3.5.0-alpha.0",
-    "sass": "^1.59.3",
     "zustand": "^4.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
     "@commitlint/cli": "^17.4.3",
     "@commitlint/config-conventional": "^17.4.3",
-    "@next/eslint-plugin-next": "^13.3.0",
+    "@next/eslint-plugin-next": "^13.3.1",
     "@storybook/addon-docs": "^7.0.6",
     "@storybook/addon-essentials": "^7.0.6",
     "@storybook/addon-interactions": "^7.0.6",
@@ -99,6 +98,7 @@
     "lint-staged": "^13.1.2",
     "react-test-renderer": "^18.2.0",
     "remark-gfm": "^3.0.1",
+    "sass": "^1.62.1",
     "start-server-and-test": "^1.14.0",
     "storybook": "^7.0.6",
     "styled-jsx": "^5.1.2",
@@ -108,7 +108,7 @@
   },
   "packageManager": "yarn@3.5.0",
   "dependenciesMeta": {
-    "next@13.3.0": {
+    "next@13.3.1": {
       "unplugged": true
     }
   }
