@@ -92,7 +92,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-spring-bottom-sheet", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:3.5.0-alpha.0"],\
             ["react-test-renderer", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:18.2.0"],\
             ["remark-gfm", "npm:3.0.1"],\
-            ["sass", "npm:1.59.3"],\
+            ["sass", "npm:1.62.1"],\
             ["start-server-and-test", "npm:1.15.4"],\
             ["storybook", "npm:7.0.6"],\
             ["styled-jsx", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:5.1.2"],\
@@ -17914,7 +17914,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss", "npm:8.4.14"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:18.2.0"],\
-            ["sass", "npm:1.59.3"],\
+            ["sass", "npm:1.62.1"],\
             ["styled-jsx", "virtual:5329cabe1a1f13dcd0d144c40710db23c4ce8937e8306604f2254b885ca25334241a2d462f322436ccea3f58511d122d5d95b0f2560bf63d4a74a3a71ff0e396#npm:5.1.1"]\
           ],\
           "packagePeers": [\
@@ -18313,7 +18313,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-spring-bottom-sheet", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:3.5.0-alpha.0"],\
             ["react-test-renderer", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:18.2.0"],\
             ["remark-gfm", "npm:3.0.1"],\
-            ["sass", "npm:1.59.3"],\
+            ["sass", "npm:1.62.1"],\
             ["start-server-and-test", "npm:1.15.4"],\
             ["storybook", "npm:7.0.6"],\
             ["styled-jsx", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:5.1.2"],\
@@ -20220,10 +20220,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["sass", [\
-        ["npm:1.59.3", {\
-          "packageLocation": "./.yarn/cache/sass-npm-1.59.3-abfbd94be0-839b5282cd.zip/node_modules/sass/",\
+        ["npm:1.62.1", {\
+          "packageLocation": "./.yarn/cache/sass-npm-1.62.1-c16d65fd28-1b1b3584b3.zip/node_modules/sass/",\
           "packageDependencies": [\
-            ["sass", "npm:1.59.3"],\
+            ["sass", "npm:1.62.1"],\
             ["chokidar", "npm:3.5.3"],\
             ["immutable", "npm:4.3.0"],\
             ["source-map-js", "npm:1.0.2"]\
