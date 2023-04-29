@@ -1,9 +1,9 @@
-import { memo } from 'react';
+import { memo, MouseEvent } from 'react';
 
 import { useGoogleMap } from '@react-google-maps/api';
 import useTextSearch from 'hooks/maps/useTextSearch';
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
-import { nanoid } from 'nanoid';
+import { ClockIcon, CloseIcon } from 'lib/assets/icons';
 import useRecentSearchStore from 'stores/recentSearch';
 import { shallow } from 'zustand/shallow';
 
@@ -17,36 +17,35 @@ type Props = {
 
 function SuggestSearchList({ onInput }: Props) {
   const map = useGoogleMap();
-  const { recentSearchList } = useRecentSearchStore((state) => ({
+  const {
+    recentSearchList, addRecentSearch, removeRecentSearch,
+  } = useRecentSearchStore((state) => ({
     recentSearchList: state.recentSearchList,
+    addRecentSearch: state.addRecentSearch,
+    removeRecentSearch: state.removeRecentSearch,
   }), shallow);
-  // const nearbyStarRatingList = useNearBySearch(map);
+
   const { onTextSearch } = useTextSearch(map);
-  // const [placeDetailsState, onGetPlaceDetails] = useGetPlaceDetails();
-  // const { setPlaces } = usePlaceStore((state) => ({
-  //   setPlaces: state.setPlaces,
-  // }), shallow);
 
   const onActionTextSearch = (keyword: string) => {
     onTextSearch({ query: keyword });
+    addRecentSearch(keyword);
     onInput(keyword);
   };
-
-  // const onNearByRatingItemKeyDown =
-  // useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], (_, placeId) => {
-  //   onGetPlaceDetails(placeId);
-  // });
 
   const onRecentSearchItemKeyDown = useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], (_, keyword) => {
     onActionTextSearch(keyword);
   });
 
-  // useEffect(() => {
-  //   if (placeDetailsState) {
-  //     setPlaces([placeDetailsState]);
-  //     onClose();
-  //   }
-  // }, [placeDetailsState]);
+  const removeRecentSearchItemKeyDown = useActionKeyEvent<SVGElement, string[]>(['Enter', 'NumpadEnter'], (e, keyword) => {
+    e.stopPropagation();
+    removeRecentSearch(keyword);
+  });
+
+  const onClickCloseIcon = (removeKeyword: string) => (e: MouseEvent<SVGElement>) => {
+    e.stopPropagation();
+    removeRecentSearch(removeKeyword);
+  };
 
   return (
     <>
@@ -55,39 +54,31 @@ function SuggestSearchList({ onInput }: Props) {
           최근 검색기록
         </Label>
       </div>
-      {recentSearchList.map((recentSearch) => (
-        <div
-          key={nanoid()}
-          className={styles.searchTerm}
-          tabIndex={0}
-          role="menuitem"
-          onKeyDown={(e) => onRecentSearchItemKeyDown(e, recentSearch)}
-          onClick={() => onActionTextSearch(recentSearch)}
-        >
-          <div>
-            {recentSearch}
+      <div className={styles.searchTermWrapper}>
+        {recentSearchList.map((recentSearch) => (
+          <div
+            key={recentSearch}
+            className={styles.searchTerm}
+            tabIndex={0}
+            role="menuitem"
+            onKeyDown={(e) => onRecentSearchItemKeyDown(e, recentSearch)}
+            onClick={() => onActionTextSearch(recentSearch)}
+          >
+            <ClockIcon width={24} height={24} style={{ minWidth: '24px', minHeight: '24px' }} />
+            <div className={styles.recentSearchText}>
+              {recentSearch}
+            </div>
+            <CloseIcon
+              width={16}
+              tabIndex={0}
+              height={16}
+              className={styles.closeIcon}
+              onKeyDown={(e) => removeRecentSearchItemKeyDown(e, recentSearch)}
+              onClick={onClickCloseIcon(recentSearch)}
+            />
           </div>
-          <div />
-        </div>
-      ))}
-      {/* <div className={styles.title}>주변 별점순</div>
-      {nearbyStarRatingList.slice(0, 5).map(({ place_id, name, vicinity }) => (
-        <div
-          className={styles.searchTerm}
-          key={place_id}
-          tabIndex={0}
-          role="menuitem"
-          onKeyDown={(e) => onNearByRatingItemKeyDown(e, place_id)}
-          onClick={() => onGetPlaceDetails(place_id)}
-        >
-          <div>
-            {name}
-          </div>
-          <div>
-            {vicinity}
-          </div>
-        </div>
-      ))} */}
+        ))}
+      </div>
     </>
   );
 }

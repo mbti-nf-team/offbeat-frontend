@@ -3,6 +3,7 @@ export { default as ChevronDownIcon } from './chevron-down-medium.svg';
 export { default as ChevronLeftIcon } from './chevron-left.svg';
 export { default as ChevronRightIcon } from './chevron-right.svg';
 export { default as ChevronUpIcon } from './chevron-up-medium.svg';
+export { default as ClockIcon } from './clock.svg';
 export { default as CloseIcon } from './close.svg';
 export { default as EmptyStarIcon } from './empty-star.svg';
 export { default as ErrorCircleIcon } from './error.svg';
