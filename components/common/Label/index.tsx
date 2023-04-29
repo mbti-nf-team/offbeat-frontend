@@ -16,10 +16,12 @@ type Props = {
   type?: 'default' | 'reverse';
   color: Color;
   size?: 'small' | 'medium';
+  classNames?: { [K in string] : string; };
+  className?: string;
 };
 
 function Label({
-  onClick, prefixIcon, suffixIcon, color, type = 'default', size = 'medium', children,
+  onClick, prefixIcon, suffixIcon, color, type = 'default', size = 'medium', classNames, className, children,
 }: PropsWithChildren<Props>) {
   const onKeyDown = useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], () => {
     onClick?.();
@@ -36,7 +38,8 @@ function Label({
         [styles[`default-${size}`]]: type === 'default',
         [styles[`default-${color}`]]: type === 'default',
         [styles[`reverse-${color}`]]: type === 'reverse',
-      })}
+        ...classNames,
+      }, className)}
       onClick={onClick}
       onKeyDown={onKeyDown}
     >
