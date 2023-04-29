@@ -6,19 +6,32 @@
   margin-bottom: 8px;
 }
 
+.searchTermWrapper {
+  & > :not(div:first-of-type) {
+    border-top: 1px solid color("black/default");
+  }
+}
+
 .searchTerm {
   cursor: pointer;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   display: flex;
   padding: 14px 0;
-  gap: 4px;
-  border-top: 1px solid color("black/default");
+  gap: 12px;
 
-  & > div:first-of-type {
-    @include text("title 1/600", "black/default");
+  @include text("title 1/600", "black/default");
+
+  .recentSearchText {
+    width: 100%;
   }
 
-  & > div:last-of-type {
-    @include text("title 3/500", "black/secondary");
+  .closeIcon {
+    min-width: 16px;
+    min-height: 16px;
+
+    path {
+      fill: color("black/secondary");
+    }
   }
 }
