@@ -3,7 +3,11 @@ import {
 } from 'react';
 
 import clsx from 'clsx';
+import useScrollToTop from 'hooks/useScrollToTop';
+import { ChevronUpIcon } from 'lib/assets/icons';
 import { Country } from 'lib/types/country';
+
+import Label from 'components/common/Label';
 
 import CountryItem from '../countryItem';
 
@@ -28,6 +32,7 @@ function CountryList({ keyword, countries, isFocused }: Props) {
   const [
     unRankingCountriesState, setUnRankingCountriesState,
   ] = useState<Country[]>(unRankingCountries);
+  const { scrollToTop } = useScrollToTop({ top: 0, defaultIsVisible: true });
 
   const itemTitleClassName = clsx(styles.countryItemTitle, { [styles.isFocused]: isFocused });
 
@@ -56,22 +61,40 @@ function CountryList({ keyword, countries, isFocused }: Props) {
 
   return (
     <ul className={styles.countryListWrapper}>
-      <div className={itemTitleClassName}>BEST 10</div>
-      {rankingCountriesState.map(({ code, koreanName, emoji }) => (
-        <CountryItem
-          key={code}
-          emoji={emoji}
-          koreanName={koreanName}
-        />
-      ))}
-      <div className={itemTitleClassName}>그 외</div>
-      {unRankingCountriesState.map(({ code, koreanName, emoji }) => (
-        <CountryItem
-          key={code}
-          emoji={emoji}
-          koreanName={koreanName}
-        />
-      ))}
+      <div className={itemTitleClassName}>
+        <Label color="done" size="medium" className={styles.fixedLabel}>
+          BEST 10
+        </Label>
+      </div>
+      <div className={styles.countryItemWrapper}>
+        {rankingCountriesState.map(({ code, koreanName, emoji }) => (
+          <CountryItem
+            key={code}
+            emoji={emoji}
+            koreanName={koreanName}
+          />
+        ))}
+      </div>
+      <div className={itemTitleClassName}>
+        <Label
+          color="done"
+          size="medium"
+          onClick={scrollToTop}
+          prefixIcon={<ChevronUpIcon />}
+          className={styles.fixedLabel}
+        >
+          BEST 10
+        </Label>
+      </div>
+      <div className={styles.countryItemWrapper}>
+        {unRankingCountriesState.map(({ code, koreanName, emoji }) => (
+          <CountryItem
+            key={code}
+            emoji={emoji}
+            koreanName={koreanName}
+          />
+        ))}
+      </div>
     </ul>
   );
 }

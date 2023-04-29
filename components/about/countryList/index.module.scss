@@ -5,24 +5,37 @@
   list-style: none;
   background-color: color("white");
   margin: 0;
-  padding: 0 16px;
+  padding: 0;
 }
 
 .countryItemTitle {
   @include text("headline 2/600", "black/default");
 
-  letter-spacing: -0.01em;
   background-color: color("white");
   position: sticky;
-  top: 144px;
+  top: 180px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 14px 0px;
-  border-top: 2px solid color("black/default");
-  border-bottom: 1px solid color("black/default");
+  justify-content: center;
 
   &.isFocused {
-    top: 120px;
+    top: 156px;
+  }
+}
+
+.fixedLabel {
+  position: absolute;
+  top: -20px;
+}
+
+
+.countryItemWrapper {
+  li:first-of-type {
+    border-top: 1px solid color("black/default");
+  }
+
+  li:last-of-type {
+    border-bottom: 1px solid color("transparent");
   }
 }
