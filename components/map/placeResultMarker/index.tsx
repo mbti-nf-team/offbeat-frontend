@@ -15,8 +15,6 @@ function PlaceResultMarker({ place }: Props) {
   const [isVisibleInfoWindow, setIsVisibleInfoWindow] = useState<boolean>(false);
   const [placeDetailsState, onGetPlaceDetails, resetPlaceDetails] = useGetPlaceDetails();
 
-  console.log(place);
-
   const icon = useMemo(() => ({
     url: place.icon as string,
     size: new google.maps.Size(71, 71),
