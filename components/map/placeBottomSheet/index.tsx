@@ -49,7 +49,9 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
         {isZeroResult ? (
           <div className={styles.zeroResultBox}>
             <div>검색 결과가 없습니다.</div>
-            <Button type="button">다시 검색하기</Button>
+            <Button type="button" size="small" color="highlight">
+              다시 검색하기
+            </Button>
           </div>
         ) : (
           <div className={styles.placeList}>

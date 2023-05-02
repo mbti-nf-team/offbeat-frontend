@@ -31,7 +31,12 @@ function SearchCountryHeader({ children }: Props) {
     <div>
       {children}
       <div className={styles.buttonWrapper}>
-        <Button type="button" onClick={handleClick}>
+        <Button
+          type="button"
+          onClick={handleClick}
+          color="highlight"
+          isLoading={location.loading}
+        >
           현재위치에서 찾기
         </Button>
       </div>
