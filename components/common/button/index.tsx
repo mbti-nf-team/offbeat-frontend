@@ -1,29 +1,43 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { HTMLProps, PropsWithChildren, ReactElement } from 'react';
+import { HTMLProps, ReactElement, ReactNode } from 'react';
 
 import Link from 'next/link';
 
 import clsx from 'clsx';
+import { ColorType } from 'lib/types';
+
+import Spinner from '../Spinner';
 
 import styles from './index.module.scss';
 
-type ColorType = 'success' | 'outlined' | 'primary' | 'warning' | 'ghost';
-type ButtonSize = 'small' | 'medium' | 'large';
+type ButtonSize = 'small' | 'medium';
 
 interface Props extends Omit<HTMLProps<HTMLButtonElement | HTMLAnchorElement>, 'size'> {
   color?: ColorType;
   size?: ButtonSize;
   isLoading?: boolean;
+  isFloating?: boolean;
+  children: ReactNode;
+  type?: 'submit' | 'reset' | 'button';
 }
 
 function Button({
-  color = 'outlined', size = 'medium', href, children, type = 'button', isLoading = false, disabled, ...rest
-}: PropsWithChildren<Props>): ReactElement {
+  href,
+  color = 'highlight',
+  size = 'medium',
+  type = 'button',
+  isLoading = false,
+  isFloating = false,
+  disabled,
+  children,
+  ...rest
+}: Props): ReactElement {
   const htmlProps = rest as any;
 
-  const buttonClassName = clsx(styles.buttonWrapper, {
-    [styles.size]: size,
-    [styles.color]: color,
+  const className = clsx(styles.buttonWrapper, {
+    [styles[size]]: size,
+    [styles[color]]: color,
+    [styles.floating]: isFloating,
   });
 
   if (href) {
@@ -32,7 +46,7 @@ function Button({
         href={href}
         color={color}
         size={size}
-        className={buttonClassName}
+        className={className}
         {...htmlProps}
       >
         {children}
@@ -44,11 +58,11 @@ function Button({
     <button
       // eslint-disable-next-line react/button-has-type
       type={type}
-      className={buttonClassName}
+      className={className}
       disabled={disabled || isLoading}
       {...htmlProps}
     >
-      {children}
+      {isLoading ? <Spinner color="black" isLoading size={size} /> : children}
     </button>
   );
 }

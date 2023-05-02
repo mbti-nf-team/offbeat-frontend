@@ -1,44 +1,106 @@
 @import "/styles/main.scss";
 
 .buttonWrapper {
-  @include text("headline 1/600");
   position: relative;
-  transform: translateZ(0);
+  transform: translate(0, 0);
   user-select: none;
+  overflow: hidden;
   transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out,
     border-color 0.1s ease-in-out, opacity 0.1s ease-in-out;
   white-space: nowrap;
-  overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: color("black/default");
-
-  /* TODO - 추후 디자인 정의 후 반영 */
-  padding: 4px 20px;
-  width: 277px;
-  height: 56px;
-  background: color("highlight/default");
   border: 2px solid color("black/default");
-  border-radius: 28px;
+  border-radius: 100px;
+  width: fit-content;
 
   @media (hover: hover) and (pointer: fine) {
-    &:not(:disabled):after {
+    &::after {
       content: " ";
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: color("black/default");
+      top: -2px;
+      right: -2px;
+      bottom: -2px;
+      left: -2px;
+      border-radius: 100px;
+    }
+
+    &:not(:disabled):after {
       opacity: 0;
-      transition: opacity 0.1s ease-in-out;
     }
 
     &:not(:disabled):not(.disabled):hover:after {
-      opacity: 0.15;
+      background-color: color("black/default");
+      opacity: 0.04;
+    }
+
+    &:not(:disabled):not(.disabled).floating:active {
+      transform: translate(0px, 4px);
+      box-shadow: 0px 4px 0px color("transparent");
+    }
+
+    &:not(:disabled):not(.disabled):active:after {
+      background-color: color("black/default");
+      opacity: 0.08;
+    }
+
+    &:disabled:after {
+      background-color: color("white/default");
+      opacity: 0.48;
+    }
+
+    &:disabled {
+      overflow: initial;
     }
   }
+}
+
+.floating {
+  box-shadow: 0px 4px 0px color("black/shadow");
+}
+
+.medium {
+  height: 56px;
+  padding: 4px 24px;
+
+  @include text("headline 1/600");
+}
+
+.small {
+  height: 40px;
+  padding: 0px 24px;
+
+  @include text("title 2/600");
+}
+
+.highlight {
+  background-color: color("highlight/default");
+}
+
+.danger {
+  background-color: color("danger/default");
+}
+
+.positive {
+  background-color: color("positive/default");
+}
+
+.done {
+  background-color: color("done/default");
+}
+
+.active {
+  background-color: color("active/default");
+}
+
+.attention {
+  background-color: color("attention/default");
+}
+
+.relate {
+  background-color: color("relate/default");
 }
