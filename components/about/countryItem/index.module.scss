@@ -16,7 +16,11 @@
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      background-color: color("gray.100");
+      background-color: color("black/hover");
+    }
+
+    &:active {
+      background-color: color("black/active");
     }
   }
 }

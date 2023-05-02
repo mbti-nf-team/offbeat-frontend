@@ -2,7 +2,7 @@ import { Meta, ColorPalette, ColorItem } from "@storybook/addon-docs";
 
 import { neutral, functional, opacity } from "../styles/palette";
 
-export const { black, white } = neutral;
+export const { black, white, gray } = neutral;
 export const { highlight, danger, positive, done, active, attention, relate } =
   functional;
 export const {
@@ -39,6 +39,7 @@ export const {
 <ColorPalette>
   <ColorItem title="Black" subtitle="default" colors={[black]} />
   <ColorItem title="White" subtitle="default" colors={[white]} />
+  <ColorItem title="Gray" subtitle="default" colors={[gray]} />
 </ColorPalette>
 
 ## Functional
@@ -173,12 +174,14 @@ export const {
 <ColorPalette>
 
 <ColorItem
-    title="function type"
+    title="action type"
     colors={{
       [`default #{hex}${opacity100}`]: `${black}${opacity100}`,
       [`disabled #{hex}${opacity064}`]: `${black}${opacity064}`,
       [`placeholder #{hex}${opacity024}`]: `${black}${opacity024}`,
       [`shadow #{hex}${opacity010}`]: `${black}${opacity010}`,
+      [`active #{hex}${opacity008}`]: `${black}${opacity008}`,
+      [`hover #{hex}${opacity004}`]: `${black}${opacity004}`,
     }}
   />
   <ColorItem
@@ -197,6 +200,15 @@ export const {
       secondary: `${white}${opacity096}`,
       tertiary: `${white}${opacity040}`,
       bg: `${white}${opacity016}`,
+    }}
+  />
+  <ColorItem
+    title="Gray"
+    colors={{
+      primary: `${gray}${opacity100}`,
+      secondary: `${gray}${opacity096}`,
+      tertiary: `${gray}${opacity040}`,
+      bg: `${gray}${opacity016}`,
     }}
   />
   <ColorItem

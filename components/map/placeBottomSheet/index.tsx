@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
-import useGetSearchBlog from 'hooks/queries/useGetSearchBlog';
 import { PlaceResult } from 'lib/types/google.maps';
 
 import Button from 'components/common/button';
@@ -19,19 +18,20 @@ type Props = {
 function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
   const [open, setOpen] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const { data: placesWithSearchResult } = useGetSearchBlog({
-    placesResult,
-    enabled: !!placesResult?.length && !isZeroResult,
-  });
+  // TODO - 삭제
+  // const { data: placesWithSearchResult } = useGetSearchBlog({
+  //   placesResult,
+  //   enabled: !!placesResult?.length && !isZeroResult,
+  // });
 
   const openDetailWindow = () => setIsVisible(true);
   const closeDetailWindow = () => setIsVisible(false);
 
   useEffect(() => {
-    if (placesWithSearchResult.length || isZeroResult) {
+    if (placesResult.length || isZeroResult) {
       setOpen(true);
     }
-  }, [placesWithSearchResult, isZeroResult]);
+  }, [placesResult, isZeroResult]);
 
   return (
     <>
@@ -53,7 +53,7 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
           </div>
         ) : (
           <div className={styles.placeList}>
-            {placesWithSearchResult.map((place) => (
+            {placesResult.map((place) => (
               <PlaceBottomSheetItem key={place.place_id} place={place} onClick={openDetailWindow} />
             ))}
           </div>
