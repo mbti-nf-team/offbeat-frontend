@@ -1,6 +1,7 @@
 export const neutral = {
   black: '#131118',
   white: '#ffffff',
+  gray: '#6C6D73',
 } as const;
 
 export const functional = {

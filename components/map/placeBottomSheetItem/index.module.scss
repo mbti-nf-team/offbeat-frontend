@@ -7,7 +7,7 @@
   padding: 16px 24px;
   gap: 4px;
   padding: 16px 24px;
-  border-bottom: 1px solid color("gray.200");
+  border-bottom: 1px solid color("black/secondary");
   cursor: pointer;
 
   & > div.placeName {
@@ -16,7 +16,11 @@
   }
 
   & > div.naverSearchTotal {
-    @include text("title 3/500", "gray.500");
+    @include text("title 3/500", "gray/default");
+  }
+
+  & > div.category {
+    @include text("title 3/500", "gray/default");
   }
 }
 
@@ -31,6 +35,6 @@
   }
 
   & > div.placeUserRatingsTotal {
-    @include text("title 3/500", "gray.500");
+    @include text("title 3/500", "black/secondary");
   }
 }
