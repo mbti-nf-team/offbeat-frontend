@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/github/actions/workflow/status/mbti-nf-team/offbeat-frontend/ci.yml?branch=main&label=CI&logo=GitHub&style=flat-square" />
 </a>
 
-<a href="https://main--6444100bc70d7332165a930b.chromatic.com/">
+<a href="https://main--644a9de55c58f79a0d37680b.chromatic.com">
   <img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg">
 </a>
 
