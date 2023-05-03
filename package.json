@@ -32,37 +32,35 @@
   "homepage": "https://github.com/mbti-nf-team/unnamed-k-place-frontend#readme",
   "dependencies": {
     "@react-google-maps/api": "^2.18.1",
-    "@tanstack/react-query": "^4.29.2",
-    "axios": "^1.3.5",
+    "@tanstack/react-query": "^4.29.5",
+    "axios": "^1.4.0",
     "clsx": "^1.2.1",
-    "framer-motion": "^10.2.2",
-    "nanoid": "^4.0.2",
-    "next": "^13.3.1",
+    "framer-motion": "^10.12.7",
+    "next": "^13.3.4",
     "qs": "^6.11.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-modal-sheet": "^1.10.1",
     "react-spring-bottom-sheet": "3.5.0-alpha.0",
-    "zustand": "^4.3.6"
+    "zustand": "^4.3.7"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
     "@commitlint/cli": "^17.4.3",
     "@commitlint/config-conventional": "^17.4.3",
-    "@next/eslint-plugin-next": "^13.3.1",
-    "@storybook/addon-docs": "^7.0.6",
-    "@storybook/addon-essentials": "^7.0.6",
-    "@storybook/addon-interactions": "^7.0.6",
-    "@storybook/addon-links": "^7.0.6",
-    "@storybook/blocks": "^7.0.6",
-    "@storybook/nextjs": "^7.0.6",
-    "@storybook/react": "^7.0.6",
+    "@next/eslint-plugin-next": "^13.3.4",
+    "@storybook/addon-essentials": "^7.0.8",
+    "@storybook/addon-interactions": "^7.0.8",
+    "@storybook/addon-links": "^7.0.8",
+    "@storybook/blocks": "^7.0.8",
+    "@storybook/nextjs": "^7.0.8",
+    "@storybook/react": "^7.0.8",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@svgr/webpack": "^6.5.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/babel__core": "^7",
-    "@types/google.maps": "^3.52.0",
+    "@types/google.maps": "^3.52.6",
     "@types/jest": "^29.2.4",
     "@types/jest-plugin-context": "^2",
     "@types/node": "18.0.0",
@@ -97,19 +95,13 @@
     "jest-plugin-context": "^2.9.0",
     "lint-staged": "^13.1.2",
     "react-test-renderer": "^18.2.0",
-    "remark-gfm": "^3.0.1",
     "sass": "^1.62.1",
     "start-server-and-test": "^1.14.0",
-    "storybook": "^7.0.6",
+    "storybook": "^7.0.8",
     "styled-jsx": "^5.1.2",
     "typescript": "4.7.4",
     "util": "^0.12.5",
     "webpack": "^5.80.0"
   },
-  "packageManager": "yarn@3.5.0",
-  "dependenciesMeta": {
-    "next@13.3.1": {
-      "unplugged": true
-    }
-  }
+  "packageManager": "yarn@3.5.0"
 }

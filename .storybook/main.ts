@@ -1,5 +1,4 @@
 import path from "path";
-import remarkGfm from 'remark-gfm';
 
 import type { StorybookConfig } from "@storybook/nextjs";
 
@@ -23,16 +22,6 @@ const config: StorybookConfig = {
         path.join("@storybook/addon-interactions", "package.json")
       )
     ),
-    {
-      name: '@storybook/addon-docs',
-      options: {
-        mdxPluginOptions: {
-          mdxCompileOptions: {
-            remarkPlugins: [remarkGfm],
-          },
-        },
-      },
-    },
   ],
   framework: {
     name: '@storybook/nextjs',
