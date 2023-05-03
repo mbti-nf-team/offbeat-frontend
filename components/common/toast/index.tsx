@@ -4,7 +4,7 @@ import {
   useCallback, useEffect, useRef, useState,
 } from 'react';
 
-import { ControlsAnimationDefinition, motion, Variants } from 'framer-motion';
+import { AnimationDefinition, motion, Variants } from 'framer-motion';
 import { ErrorCircleIcon } from 'lib/assets/icons';
 import useToastStore, { ToastStore } from 'stores/toast';
 import { shallow } from 'zustand/shallow';
@@ -42,7 +42,7 @@ function Toast() {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isOpenToast, setIsOpenToast] = useState<boolean>(false);
 
-  const handleAnimationComplete = useCallback((definition: ControlsAnimationDefinition) => {
+  const handleAnimationComplete = useCallback((definition: AnimationDefinition) => {
     if (definition === 'none') {
       closeToast();
     }
