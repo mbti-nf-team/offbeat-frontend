@@ -34,6 +34,12 @@ const meta: Meta<typeof Button> = {
       },
       control: { type: 'boolean' },
     },
+    width: {
+      type: { name: 'string', required: false },
+      table: {
+        type: { summary: '"{number}"px' },
+      },
+    },
   },
 };
 
@@ -71,11 +77,28 @@ export const Disabled: Story = {
   },
 };
 
-export const Loading: Story = {
+export const LoadingWithWidth: Story = {
   args: {
     size: 'medium',
     children: 'Label',
     isLoading: true,
+    width: '200px',
+  },
+};
+
+export const LoadingWithoutWidth: Story = {
+  args: {
+    size: 'medium',
+    children: 'Label',
+    isLoading: true,
+  },
+};
+
+export const WithWidth: Story = {
+  args: {
+    size: 'medium',
+    children: 'Label',
+    width: '200px',
   },
 };
 
