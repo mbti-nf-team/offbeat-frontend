@@ -16,7 +16,7 @@ function CountryItem({ emoji, koreanName }: Props) {
       className={styles.countryItemWrapper}
     >
       <div>{emoji}</div>
-      <div>{koreanName}</div>
+      <div className={styles.word} dangerouslySetInnerHTML={{ __html: koreanName }} />
     </li>
   );
 }

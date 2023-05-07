@@ -14,6 +14,12 @@
   gap: 16px;
   transition: background-color 0.1s ease-in-out;
 
+  .word {
+    strong {
+      @include text("headline 2/500", "active/default");
+    }
+  }
+
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: color("black/hover");
