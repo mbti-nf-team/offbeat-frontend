@@ -35,7 +35,7 @@ function SearchCountry({ countries }: Props) {
   const [keyword, setKeyword] = useState<string>('');
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
-  const onChange = (nextKeyword: string) => setKeyword(nextKeyword);
+  const onChange = (nextKeyword: string) => setKeyword(nextKeyword.replace(/\\/g, ''));
 
   const onFocus = () => setIsFocused(true);
 

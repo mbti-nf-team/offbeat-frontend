@@ -4,6 +4,7 @@ import {
 
 import clsx from 'clsx';
 import useScrollToTop from 'hooks/useScrollToTop';
+import Inko from 'inko';
 import { ChevronUpIcon } from 'lib/assets/icons';
 import { Country } from 'lib/types/country';
 
@@ -18,6 +19,8 @@ type Props = {
   countries: Country[];
   isFocused: boolean;
 };
+
+const inko = new Inko();
 
 function CountryList({ keyword, countries, isFocused }: Props) {
   const unRankingCountries = useMemo(() => countries.filter(({
@@ -43,29 +46,49 @@ function CountryList({ keyword, countries, isFocused }: Props) {
       return;
     }
 
-    const filteredCountries = (
+    const replaceCountries = (
       filterCountries: Country[],
-    ) => filterCountries.filter(({ englishName, koreanName }) => {
-      const keywordRegExp = new RegExp(keyword, 'ig');
+    ) => filterCountries.reduce((prevCountries: Country[], currentCountry) => {
+      const { englishName, koreanName } = currentCountry;
 
-      if (keywordRegExp.test(englishName) || keywordRegExp.test(koreanName)) {
-        return true;
+      const englishKeywordRegExp = new RegExp(keyword, 'ig');
+
+      if (englishKeywordRegExp.test(englishName)) {
+        return [
+          ...prevCountries,
+          currentCountry,
+        ];
       }
 
-      return false;
-    });
+      const koreanKeyword = inko.en2ko(keyword);
+      const koreanKeywordRegExp = new RegExp(koreanKeyword, 'ig');
 
-    setRankingCountriesState(filteredCountries(rankingCountries));
-    setUnRankingCountriesState(filteredCountries(unRankingCountries));
+      if (koreanKeywordRegExp.test(koreanName)) {
+        return [
+          ...prevCountries,
+          {
+            ...currentCountry,
+            koreanName: koreanName.replaceAll(koreanKeywordRegExp, `<strong>${koreanKeyword}</strong>`),
+          },
+        ];
+      }
+
+      return prevCountries;
+    }, []);
+
+    setRankingCountriesState(replaceCountries(rankingCountries));
+    setUnRankingCountriesState(replaceCountries(unRankingCountries));
   }, [keyword]);
 
   return (
     <ul className={styles.countryListWrapper}>
-      <div className={itemTitleClassName}>
-        <Label color="done" size="medium" className={styles.fixedLabel}>
-          BEST 10
-        </Label>
-      </div>
+      {!keyword.trim() && (
+        <div className={itemTitleClassName}>
+          <Label color="done" size="medium" className={styles.fixedLabel}>
+            BEST 10
+          </Label>
+        </div>
+      )}
       <div className={styles.countryItemWrapper}>
         {rankingCountriesState.map(({ code, koreanName, emoji }) => (
           <CountryItem
@@ -75,17 +98,19 @@ function CountryList({ keyword, countries, isFocused }: Props) {
           />
         ))}
       </div>
-      <div className={itemTitleClassName}>
-        <Label
-          color="done"
-          size="medium"
-          onClick={scrollToTop}
-          prefixIcon={<ChevronUpIcon />}
-          className={styles.fixedLabel}
-        >
-          BEST 10
-        </Label>
-      </div>
+      {!keyword.trim() && (
+        <div className={itemTitleClassName}>
+          <Label
+            color="done"
+            size="medium"
+            onClick={scrollToTop}
+            prefixIcon={<ChevronUpIcon />}
+            className={styles.fixedLabel}
+          >
+            BEST 10
+          </Label>
+        </div>
+      )}
       <div className={styles.countryItemWrapper}>
         {unRankingCountriesState.map(({ code, koreanName, emoji }) => (
           <CountryItem
