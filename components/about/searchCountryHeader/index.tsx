@@ -36,6 +36,7 @@ function SearchCountryHeader({ children }: Props) {
           onClick={handleClick}
           color="highlight"
           isLoading={location.loading}
+          width="281px"
         >
           현재위치에서 찾기
         </Button>

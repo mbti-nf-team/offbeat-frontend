@@ -18,6 +18,7 @@ interface Props extends Omit<HTMLProps<HTMLButtonElement | HTMLAnchorElement>, '
   isLoading?: boolean;
   isFloating?: boolean;
   children: ReactNode;
+  width?: `${number}px`;
   type?: 'submit' | 'reset' | 'button';
 }
 
@@ -29,6 +30,7 @@ function Button({
   isLoading = false,
   isFloating = false,
   disabled,
+  width,
   children,
   ...rest
 }: Props): ReactElement {
@@ -47,6 +49,9 @@ function Button({
         color={color}
         size={size}
         className={className}
+        style={{
+          width,
+        }}
         {...htmlProps}
       >
         {children}
@@ -60,9 +65,19 @@ function Button({
       type={type}
       className={className}
       disabled={disabled || isLoading}
+      style={{
+        width,
+      }}
       {...htmlProps}
     >
-      {isLoading ? <Spinner color="black" isLoading size={size} /> : children}
+      {isLoading && width && <Spinner color="black" isLoading size={size} />}
+      {isLoading && !width && (
+        <>
+          <Spinner color="black" isLoading size={size} />
+          {children}
+        </>
+      )}
+      {!isLoading && children}
     </button>
   );
 }
