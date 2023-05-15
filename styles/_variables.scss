@@ -176,3 +176,13 @@ $opacity-000: 0;
   --search-terms-box-z-index: 9;
   --bottom-sheet-z-index: 8;
 }
+
+:root {
+  --rsbs-backdrop-bg: transparent;
+  --rsbs-bg: #fff;
+  --rsbs-handle-bg: hsla(0, 0%, 0%, 0.14);
+  --rsbs-max-w: 430px;
+  --rsbs-ml: env(safe-area-inset-left);
+  --rsbs-mr: env(safe-area-inset-right);
+  --rsbs-overlay-round: 32px;
+}
