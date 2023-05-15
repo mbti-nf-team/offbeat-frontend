@@ -40,9 +40,9 @@ button {
 [data-rsbs-overlay],
 [data-rsbs-backdrop],
 [data-rsbs-root]:after {
-  z-index: var(--bottom-sheet-z-index);
-  max-width: 430px;
-  margin: 0 auto;
+  z-index: var(--bottom-sheet-z-index) !important;
+  max-width: 430px !important;
+  margin: 0 auto !important;
 }
 
 [data-rsbs-backdrop] {
