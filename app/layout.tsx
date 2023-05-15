@@ -5,8 +5,8 @@ import Toast from 'components/common/toast';
 
 import Providers from './providers';
 
-import 'react-spring-bottom-sheet/dist/style.css';
 import 'styles/normalize.css';
+import 'styles/bottomSheet.css';
 import 'styles/global.scss';
 
 export const metadata = {
