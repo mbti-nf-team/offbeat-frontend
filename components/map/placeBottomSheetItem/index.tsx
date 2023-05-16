@@ -2,14 +2,14 @@ import { useMemo } from 'react';
 
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import { EmptyStarIcon, FillStarIcon, HalfStarIcon } from 'lib/assets/icons';
-import { PlaceResult } from 'lib/types/google.maps';
+import { PlacesWithSearchResult } from 'lib/types/google.maps';
 
-import { checkNumberValue, generateArrayOfNumber } from 'utils';
+import { checkNumberValue, generateArrayOfNumber, numberWithComma } from 'utils';
 
 import styles from './index.module.scss';
 
 type Props = {
-  place: PlaceResult;
+  place: PlacesWithSearchResult;
   onClick: () => void;
 };
 
@@ -49,7 +49,6 @@ function PlaceBottomSheetItem({ place, onClick }: Props) {
       role="menuitem"
     >
       <div className={styles.placeName}>{name}</div>
-      <div className={styles.category}>{'{category}'}</div>
       <div className={styles.placeRatingWrapper}>
         <div className={styles.placeRating}>{rating}</div>
         <div>
@@ -63,6 +62,9 @@ function PlaceBottomSheetItem({ place, onClick }: Props) {
         </div>
         <div className={styles.placeUserRatingsTotal}>{`(${user_ratings_total})`}</div>
       </div>
+      {place.searchBlogPost.status === 'fulfilled' && (
+        <div className={styles.searchTotal}>{`네이버 검색결과 ${numberWithComma(place.searchBlogPost.value.total_count)}개`}</div>
+      )}
     </li>
   );
 }
