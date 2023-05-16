@@ -15,8 +15,8 @@
     letter-spacing: -0.01em;
   }
 
-  & > div.naverSearchTotal {
-    @include text("title 3/500", "gray/default");
+  & > div.searchTotal {
+    @include text("title 3/500", "black/secondary");
   }
 
   & > div.category {

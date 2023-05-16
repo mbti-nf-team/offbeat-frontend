@@ -10,7 +10,7 @@ import PlaceResultMarker from '../placeResultMarker';
 import SearchInput from '../searchInput';
 
 function MainMap() {
-  const [libraries] = useState<['places']>(['places']);
+  const [libraries] = useState<['places', 'geometry']>(['places', 'geometry']);
   const { saveNextKeyword } = useRecentSearchStore(({ addRecentSearch }) => ({
     saveNextKeyword: addRecentSearch,
   }), shallow);

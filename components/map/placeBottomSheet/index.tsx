@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
+import { useQuery } from '@tanstack/react-query';
+import { fetchNaverSearchBlog } from 'lib/apis/search';
 import { PlaceResult } from 'lib/types/google.maps';
 
 import Button from 'components/common/button';
 import PlaceDetailWindow from 'components/detail/PlaceDetailWindow';
+import { checkEmpty } from 'utils';
 
 import PlaceBottomSheetItem from '../placeBottomSheetItem';
 
@@ -18,20 +21,30 @@ type Props = {
 function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
   const [open, setOpen] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  // TODO - 삭제
-  // const { data: placesWithSearchResult } = useGetSearchBlog({
-  //   placesResult,
-  //   enabled: !!placesResult?.length && !isZeroResult,
-  // });
+  const placeName = placesResult.map((place) => place.name);
+
+  const { data: placesWithSearchResult, isSuccess } = useQuery(
+    [placeName],
+    () => Promise.allSettled([...placeName.map((keyword) => fetchNaverSearchBlog<false>({
+      keyword,
+    }))]),
+    {
+      enabled: !!placesResult?.length && !isZeroResult,
+      select: (searchBlogPosts) => placesResult.map((place, index) => ({
+        ...place,
+        searchBlogPost: searchBlogPosts[index],
+      })),
+    },
+  );
 
   const openDetailWindow = () => setIsVisible(true);
   const closeDetailWindow = () => setIsVisible(false);
 
   useEffect(() => {
-    if (placesResult.length || isZeroResult) {
+    if (isSuccess || isZeroResult) {
       setOpen(true);
     }
-  }, [placesResult, isZeroResult]);
+  }, [isSuccess, isZeroResult]);
 
   return (
     <>
@@ -55,7 +68,7 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
           </div>
         ) : (
           <div className={styles.placeList}>
-            {placesResult.map((place) => (
+            {checkEmpty(placesWithSearchResult).map((place) => (
               <PlaceBottomSheetItem key={place.place_id} place={place} onClick={openDetailWindow} />
             ))}
           </div>
