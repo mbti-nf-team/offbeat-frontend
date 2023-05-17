@@ -2,6 +2,10 @@ import { render } from '@testing-library/react';
 
 import CountryList from '.';
 
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
+}));
+
 describe('CountryList', () => {
   const countries = [{
     code: 'KP',

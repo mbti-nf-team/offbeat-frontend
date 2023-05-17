@@ -2,6 +2,10 @@ import { render } from '@testing-library/react';
 
 import SearchCountry from '.';
 
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
+}));
+
 describe('SearchCountry', () => {
   const countryName = 'korea';
 

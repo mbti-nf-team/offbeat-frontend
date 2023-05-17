@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useState } from 'react';
 
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';

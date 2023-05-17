@@ -1,5 +1,9 @@
 import { memo } from 'react';
 
+import { useRouter } from 'next/navigation';
+
+import useActionKeyEvent from 'hooks/useActionKeyEvent';
+
 import styles from './index.module.scss';
 
 type Props = {
@@ -8,12 +12,20 @@ type Props = {
 };
 
 function CountryItem({ emoji, koreanName }: Props) {
+  const router = useRouter();
+
+  // TODO - 추후 변경
+  const onClickCountryItem = () => router.push('/maps');
+
+  const onKeyDown = useActionKeyEvent<HTMLLIElement, string[]>(['Enter', 'NumpadEnter'], onClickCountryItem);
+
   return (
     <li
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
-      role="button"
+      role="menuitem"
       tabIndex={0}
+      onClick={onClickCountryItem}
       className={styles.countryItemWrapper}
+      onKeyDown={onKeyDown}
     >
       <div>{emoji}</div>
       <div className={styles.word} dangerouslySetInnerHTML={{ __html: koreanName }} />
