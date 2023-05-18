@@ -14,22 +14,24 @@ export const { type, weight, size, lineHieght } = {
     bold: "700",
   },
   size: {
-    body1: 16,
-    title3: 18,
-    title2: 20,
+    display: 49,
+    headline1: 36,
+    headline2: 32,
+    headline3: 24,
     title1: 22,
-    headline2: 24,
-    headline1: 32,
-    display: 36,
+    title2: 20,
+    title3: 18,
+    body1: 16,
   },
   lineHieght: {
-    body1: 20,
-    title3: 24,
-    title2: 26,
+    display: 56,
+    headline1: 44,
+    headline2: 48,
+    headline3: 32,
     title1: 28,
-    headline2: 32,
-    headline1: 48,
-    display: 44,
+    title2: 26,
+    title3: 24,
+    body1: 20,
   },
 };
 
@@ -47,6 +49,7 @@ export const sampleText =
     size.display,
     size.headline1,
     size.headline2,
+    size.headline3,
     size.title1,
     size.title2,
     size.title3,
@@ -145,6 +148,28 @@ line-height: ${lineHieght.headline2}px;
 
 <Typeset
   fontSizes={[size.headline2]}
+  sampleText={sampleText}
+  fontWeight={weight.regular}
+  fontFamily={type.pretendard}
+/>
+
+## Headline 3 Font
+
+**Styles:**
+
+<Source
+  language="css"
+  code={`
+font-weight: normal; // 500, 600, bold
+font-size: ${size.headline3}px;
+line-height: ${lineHieght.headline3}px;
+`}
+  format
+  dark
+/>
+
+<Typeset
+  fontSizes={[size.headline3]}
   sampleText={sampleText}
   fontWeight={weight.regular}
   fontFamily={type.pretendard}

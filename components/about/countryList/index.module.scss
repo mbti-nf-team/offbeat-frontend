@@ -9,7 +9,7 @@
 }
 
 .countryItemTitle {
-  @include text("headline 2/600", "black/default");
+  @include text("headline 3/600", "black/default");
 
   background-color: color("white");
   position: sticky;
