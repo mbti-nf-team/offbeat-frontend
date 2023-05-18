@@ -36,9 +36,9 @@ const nextConfig = {
                 params: {
                   overrides: {
                     removeViewBox: false,
-                    active: false,
                   },
                 },
+                active: false,
               },
             ],
           },

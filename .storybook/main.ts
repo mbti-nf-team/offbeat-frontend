@@ -57,9 +57,9 @@ const config: StorybookConfig = {
                 params: {
                   overrides: {
                     removeViewBox: false,
-                    active: false,
                   },
                 },
+                active: false,
               },
             ],
           },

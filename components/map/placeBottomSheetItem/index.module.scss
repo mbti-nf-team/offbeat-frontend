@@ -10,6 +10,16 @@
   border-bottom: 1px solid color("black/secondary");
   cursor: pointer;
 
+  &:active {
+    background-color: color("black/active");
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: color("black/hover");
+    }
+  }
+
   & > div.placeName {
     @include text("title 1/600", "black/default");
     letter-spacing: -0.01em;
