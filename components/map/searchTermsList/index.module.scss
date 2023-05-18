@@ -8,6 +8,16 @@
   gap: 4px;
   border-top: 1px solid color("black/default");
 
+  &:active {
+    background-color: color("black/active");
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: color("black/hover");
+    }
+  }
+
   & > div:first-of-type {
     @include text("title 1/600", "black/default");
   }

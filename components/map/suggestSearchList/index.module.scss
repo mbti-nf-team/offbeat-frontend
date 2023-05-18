@@ -22,6 +22,16 @@
 
   @include text("title 1/600", "black/default");
 
+  &:active {
+    background-color: color("black/active");
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: color("black/hover");
+    }
+  }
+
   .recentSearchText {
     width: 100%;
   }
