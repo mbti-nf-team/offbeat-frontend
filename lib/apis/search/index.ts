@@ -36,7 +36,7 @@ export const fetchAllSettledSearchBlogs = async <T = boolean>({
     }))]);
 
   if (placeName.length <= 10) {
-    return firstPlaceName;
+    return firstResponse;
   }
 
   await new Promise((resolve) => {
