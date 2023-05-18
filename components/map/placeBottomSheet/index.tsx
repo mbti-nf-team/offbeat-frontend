@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import { useQuery } from '@tanstack/react-query';
-import { fetchNaverSearchBlog } from 'lib/apis/search';
+import { fetchAllSettledSearchBlogs } from 'lib/apis/search';
 import { PlaceResult } from 'lib/types/google.maps';
 
 import Button from 'components/common/button';
@@ -19,15 +19,13 @@ type Props = {
 };
 
 function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
-  const [open, setOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const placeName = placesResult.map((place) => place.name);
 
   const { data: placesWithSearchResult, isSuccess } = useQuery(
     [placeName],
-    () => Promise.allSettled([...placeName.map((keyword) => fetchNaverSearchBlog<false>({
-      keyword,
-    }))]),
+    () => fetchAllSettledSearchBlogs<false>({ placeName }),
     {
       enabled: !!placesResult?.length && !isZeroResult,
       select: (searchBlogPosts) => placesResult.map((place, index) => ({
@@ -42,14 +40,17 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
 
   useEffect(() => {
     if (isSuccess || isZeroResult) {
-      setOpen(true);
+      setIsOpen(true);
+      return;
     }
+
+    setIsOpen(false);
   }, [isSuccess, isZeroResult]);
 
   return (
     <>
       <BottomSheet
-        open={open}
+        open={isOpen}
         blocking={false}
         defaultSnap={({ maxHeight }) => (isZeroResult ? 168 : maxHeight / 2)}
         snapPoints={({ maxHeight }) => (isZeroResult ? [168] : [
