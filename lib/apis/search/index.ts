@@ -29,21 +29,15 @@ export const fetchAllSettledSearchBlogs = async <T = boolean>({
   const copyPlaceName = [...placeName];
   const firstPlaceName = copyPlaceName.splice(0, BATCH_SIZE);
 
-  if (placeName.length <= 10) {
-    const response = await Promise
-      .allSettled([...firstPlaceName.map((keyword) => fetchNaverSearchBlog<T>({
-        keyword,
-        includePost,
-      }))]);
-
-    return response;
-  }
-
   const firstResponse = await Promise
     .allSettled([...firstPlaceName.map((keyword) => fetchNaverSearchBlog<T>({
       keyword,
       includePost,
     }))]);
+
+  if (placeName.length <= 10) {
+    return firstPlaceName;
+  }
 
   await new Promise((resolve) => {
     setTimeout(resolve, DELAY);
