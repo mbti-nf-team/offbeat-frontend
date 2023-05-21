@@ -25,7 +25,7 @@ function PlaceDetailWindowContainer({ placeName, placeId }: Props) {
 
   const { data: searchBlogPost, isSuccess } = useQuery(
     [placeName, true],
-    () => fetchAllSettledSearchBlogs<true>({ placeName: [placeName as string] }),
+    () => fetchAllSettledSearchBlogs<true>({ placeName: [placeName as string], includePost: true }),
     {
       enabled: !!placeName,
     },
