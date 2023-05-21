@@ -48,37 +48,35 @@ function MainMap() {
   }
 
   return (
-    <>
-      <GoogleMap
-        mapContainerStyle={{
-          minHeight: 'calc(var(--vh, 1vh) * 100)',
-          width: '100%',
-          maxWidth: '430px',
-        }}
-        zoom={3}
-        center={new google.maps.LatLng(36.204824, 138.252924)}
-        onUnmount={onUnmount}
-        onLoad={onLoad}
-        options={{
-          disableDefaultUI: true,
-          minZoom: 3,
-          restriction: {
-            // TODO - test 용 일본
-            latLngBounds: new google.maps.LatLngBounds(
-              new google.maps.LatLng(20.3585295, 122.8554688),
-              new google.maps.LatLng(45.6412626, 154.0031455),
-            ),
-            strictBounds: false,
-          },
-        }}
-      >
-        <SearchInput onSubmit={handleSubmit} />
-        {placesResult.map((place) => (
-          <PlaceResultMarker key={place.place_id} place={place} />
-        ))}
-      </GoogleMap>
+    <GoogleMap
+      mapContainerStyle={{
+        minHeight: 'calc(var(--vh, 1vh) * 100)',
+        width: '100%',
+        maxWidth: '430px',
+      }}
+      zoom={3}
+      center={new google.maps.LatLng(36.204824, 138.252924)}
+      onUnmount={onUnmount}
+      onLoad={onLoad}
+      options={{
+        disableDefaultUI: true,
+        minZoom: 3,
+        restriction: {
+          // TODO - test 용 일본
+          latLngBounds: new google.maps.LatLngBounds(
+            new google.maps.LatLng(20.3585295, 122.8554688),
+            new google.maps.LatLng(45.6412626, 154.0031455),
+          ),
+          strictBounds: false,
+        },
+      }}
+    >
+      <SearchInput onSubmit={handleSubmit} />
+      {placesResult.map((place) => (
+        <PlaceResultMarker key={place.place_id} place={place} />
+      ))}
       <PlaceBottomSheet placesResult={placesResult} isZeroResult={isZeroResult} />
-    </>
+    </GoogleMap>
   );
 }
 

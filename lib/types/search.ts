@@ -16,3 +16,8 @@ export interface PlaceWithBlogPost<T = boolean> extends PlaceResult {
   total_count: number;
   posts: T extends true ? BlogPost[] : null;
 }
+
+export type SelectedPlace = {
+  placeId: string | undefined;
+  placeName: string | undefined;
+};
