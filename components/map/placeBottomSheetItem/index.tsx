@@ -10,7 +10,7 @@ import styles from './index.module.scss';
 
 type Props = {
   place: PlacesWithSearchResult;
-  onClick: () => void;
+  onClick: ({ placeId, placeName }: { placeId: string; placeName: string; }) => void;
 };
 
 const MAX_RATING = 5;
@@ -44,7 +44,7 @@ function PlaceBottomSheetItem({ place, onClick }: Props) {
     <li
       className={styles.placeItem}
       tabIndex={0}
-      onClick={onClick}
+      onClick={() => onClick({ placeId: place.place_id, placeName: name })}
       onKeyDown={onKeyDown}
       role="menuitem"
     >

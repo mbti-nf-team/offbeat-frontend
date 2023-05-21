@@ -4,9 +4,10 @@ import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllSettledSearchBlogs } from 'lib/apis/search';
 import { PlaceResult } from 'lib/types/google.maps';
+import { SelectedPlace } from 'lib/types/search';
 
 import Button from 'components/common/button';
-import PlaceDetailWindow from 'components/detail/PlaceDetailWindow';
+import PlaceDetailWindowContainer from 'components/detail/PlaceDetailWindowContainer';
 import { checkEmpty } from 'utils';
 
 import PlaceBottomSheetItem from '../placeBottomSheetItem';
@@ -20,11 +21,15 @@ type Props = {
 
 function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [selectedPlaceState, setSelectedPlaceState] = useState<SelectedPlace>({
+    placeId: undefined,
+    placeName: undefined,
+  });
+
   const placeName = placesResult.map((place) => place.name);
 
   const { data: placesWithSearchResult, isSuccess } = useQuery(
-    [placeName],
+    [placeName, false],
     () => fetchAllSettledSearchBlogs<false>({ placeName }),
     {
       enabled: !!placesResult?.length && !isZeroResult,
@@ -35,8 +40,9 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
     },
   );
 
-  const openDetailWindow = () => setIsVisible(true);
-  const closeDetailWindow = () => setIsVisible(false);
+  const onClickPlaceItem = (
+    selectedPlaceForm: SelectedPlace,
+  ) => setSelectedPlaceState(selectedPlaceForm);
 
   useEffect(() => {
     if (isSuccess || isZeroResult) {
@@ -70,12 +76,15 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
         ) : (
           <div className={styles.placeList}>
             {checkEmpty(placesWithSearchResult).map((place) => (
-              <PlaceBottomSheetItem key={place.place_id} place={place} onClick={openDetailWindow} />
+              <PlaceBottomSheetItem key={place.place_id} place={place} onClick={onClickPlaceItem} />
             ))}
           </div>
         )}
       </BottomSheet>
-      <PlaceDetailWindow isVisible={isVisible} onClose={closeDetailWindow} />
+      <PlaceDetailWindowContainer
+        placeName={selectedPlaceState?.placeName}
+        placeId={selectedPlaceState?.placeId}
+      />
     </>
   );
 }
