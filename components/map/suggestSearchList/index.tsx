@@ -7,6 +7,7 @@ import { ClockIcon, CloseIcon } from 'lib/assets/icons';
 import useRecentSearchStore from 'stores/recentSearch';
 import { shallow } from 'zustand/shallow';
 
+import Button from 'components/common/button';
 import Label from 'components/common/Label';
 
 import styles from './index.module.scss';
@@ -37,12 +38,7 @@ function SuggestSearchList({ onInput }: Props) {
     onActionTextSearch(keyword);
   });
 
-  const removeRecentSearchItemKeyDown = useActionKeyEvent<SVGElement, string[]>(['Enter', 'NumpadEnter'], (e, keyword) => {
-    e.stopPropagation();
-    removeRecentSearch(keyword);
-  });
-
-  const onClickCloseIcon = (removeKeyword: string) => (e: MouseEvent<SVGElement>) => {
+  const onClickCloseIcon = (removeKeyword: string) => (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     removeRecentSearch(removeKeyword);
   };
@@ -68,13 +64,17 @@ function SuggestSearchList({ onInput }: Props) {
             <div className={styles.recentSearchText}>
               {recentSearch}
             </div>
-            <CloseIcon
-              width={16}
-              tabIndex={0}
-              height={16}
-              className={styles.closeIcon}
-              onKeyDown={(e) => removeRecentSearchItemKeyDown(e, recentSearch)}
+            <Button
+              type="button"
+              color="ghost"
               onClick={onClickCloseIcon(recentSearch)}
+              onlyIcon={(
+                <CloseIcon
+                  width={16}
+                  height={16}
+                  className={styles.closeIcon}
+                />
+              )}
             />
           </div>
         ))}
