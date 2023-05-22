@@ -59,22 +59,37 @@
   }
 }
 
+.hasIcon {
+  color: currentColor;
+  border: none;
+  border-radius: 100px;
+  padding: 6px;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+}
+
 .floating {
   box-shadow: 0px 4px 0px color("black/shadow");
 }
 
-.medium {
+:not(.hasIcon).medium {
   height: 56px;
   padding: 4px 24px;
 
   @include text("headline 2/600");
 }
 
-.small {
+:not(.hasIcon).small {
   height: 40px;
   padding: 0px 24px;
 
   @include text("title 2/600");
+}
+
+.ghost {
+  background-color: transparent;
 }
 
 .highlight {

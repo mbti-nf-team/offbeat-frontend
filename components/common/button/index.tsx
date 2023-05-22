@@ -1,5 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { HTMLProps, ReactElement, ReactNode } from 'react';
+import {
+  HTMLProps, PropsWithChildren, ReactElement, ReactNode,
+} from 'react';
 
 import Link from 'next/link';
 
@@ -13,12 +15,12 @@ import styles from './index.module.scss';
 type ButtonSize = 'small' | 'medium';
 
 interface Props extends Omit<HTMLProps<HTMLButtonElement | HTMLAnchorElement>, 'size'> {
-  color?: ColorType;
+  color?: ColorType | 'ghost';
   size?: ButtonSize;
   isLoading?: boolean;
   isFloating?: boolean;
-  children: ReactNode;
   width?: `${number}px`;
+  onlyIcon?: ReactNode;
   type?: 'submit' | 'reset' | 'button';
 }
 
@@ -31,16 +33,20 @@ function Button({
   isFloating = false,
   disabled,
   width,
+  onlyIcon,
   children,
   ...rest
-}: Props): ReactElement {
+}: PropsWithChildren<Props>): ReactElement {
   const htmlProps = rest as any;
 
   const className = clsx(styles.buttonWrapper, {
     [styles[size]]: size,
     [styles[color]]: color,
     [styles.floating]: isFloating,
+    [styles.hasIcon]: onlyIcon,
   });
+
+  const buttonLabel = onlyIcon || children;
 
   if (href) {
     return (
@@ -54,7 +60,7 @@ function Button({
         }}
         {...htmlProps}
       >
-        {children}
+        {buttonLabel}
       </Link>
     );
   }
@@ -77,7 +83,7 @@ function Button({
           {children}
         </>
       )}
-      {!isLoading && children}
+      {!isLoading && buttonLabel}
     </button>
   );
 }

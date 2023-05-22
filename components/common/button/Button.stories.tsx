@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { CloseIcon } from 'lib/assets/icons';
 
 import Button from '.';
 
@@ -66,6 +67,14 @@ export const Floating: Story = {
     size: 'medium',
     children: 'Label',
     isFloating: true,
+  },
+};
+
+export const IconButton: Story = {
+  args: {
+    size: 'medium',
+    onlyIcon: <CloseIcon />,
+    color: 'ghost',
   },
 };
 
