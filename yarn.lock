@@ -12606,6 +12606,7 @@ __metadata:
     start-server-and-test: ^1.14.0
     storybook: ^7.0.12
     styled-jsx: ^5.1.2
+    three: ^0.152.2
     typescript: 4.7.4
     util: ^0.12.5
     webpack: ^5.80.0
@@ -15186,6 +15187,13 @@ __metadata:
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
   checksum: b6937a38c80c7f84d9c11dd75e49d5c44f71d95e810a3250bd1f1797fc7117c57698204adf676b71497acc205d769d65c16ae8fa10afad832ae1322630aef10a
+  languageName: node
+  linkType: hard
+
+"three@npm:^0.152.2":
+  version: 0.152.2
+  resolution: "three@npm:0.152.2"
+  checksum: 6d2d990dbff60b99c7e58b7f1446bb4bd235c7db5dd848a671385e01ae5c72bec865265be7f5a82907ecc96186acc13177d7de1252bc9592f5c9ebaffd1da1e7
   languageName: node
   linkType: hard
 
