@@ -43,6 +43,7 @@
     "react-dom": "18.2.0",
     "react-modal-sheet": "^1.10.1",
     "react-spring-bottom-sheet": "3.5.0-alpha.0",
+    "three": "^0.152.2",
     "zustand": "^4.3.7"
   },
   "devDependencies": {
