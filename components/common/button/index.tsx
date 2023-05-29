@@ -34,17 +34,18 @@ function Button({
   disabled,
   width,
   onlyIcon,
+  className,
   children,
   ...rest
 }: PropsWithChildren<Props>): ReactElement {
   const htmlProps = rest as any;
 
-  const className = clsx(styles.buttonWrapper, {
+  const buttonClassName = clsx(styles.buttonWrapper, {
     [styles[size]]: size,
     [styles[color]]: color,
     [styles.floating]: isFloating,
     [styles.hasIcon]: onlyIcon,
-  });
+  }, className);
 
   const buttonLabel = onlyIcon || children;
 
@@ -54,7 +55,7 @@ function Button({
         href={href}
         color={color}
         size={size}
-        className={className}
+        className={buttonClassName}
         style={{
           width,
         }}
@@ -69,7 +70,7 @@ function Button({
     <button
       // eslint-disable-next-line react/button-has-type
       type={type}
-      className={className}
+      className={buttonClassName}
       disabled={disabled || isLoading}
       style={{
         width,
