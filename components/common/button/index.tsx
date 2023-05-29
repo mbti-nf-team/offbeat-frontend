@@ -22,6 +22,7 @@ interface Props extends Omit<HTMLProps<HTMLButtonElement | HTMLAnchorElement>, '
   width?: `${number}px`;
   onlyIcon?: ReactNode;
   type?: 'submit' | 'reset' | 'button';
+  hasPseudoSelectorStyle?: boolean;
 }
 
 function Button({
@@ -31,6 +32,7 @@ function Button({
   type = 'button',
   isLoading = false,
   isFloating = false,
+  hasPseudoSelectorStyle = true,
   disabled,
   width,
   onlyIcon,
@@ -45,6 +47,7 @@ function Button({
     [styles[color]]: color,
     [styles.floating]: isFloating,
     [styles.hasIcon]: onlyIcon,
+    [styles.hasPseudoSelectorStyle]: hasPseudoSelectorStyle,
   }, className);
 
   const buttonLabel = onlyIcon || children;

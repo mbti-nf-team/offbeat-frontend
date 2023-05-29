@@ -11,9 +11,10 @@ import PlaceDetailWindow from '../PlaceDetailWindow';
 type Props = {
   placeName?: string;
   placeId?: string;
+  onRestPlace: () => void;
 };
 
-function PlaceDetailWindowContainer({ placeName, placeId }: Props) {
+function PlaceDetailWindowContainer({ placeName, placeId, onRestPlace }: Props) {
   const [isVisibleInfoWindow, openDetailWindow, closeDetailWindow] = useBoolean(false);
   const [placeDetailsState, onGetPlaceDetails, resetPlaceDetails] = useGetPlaceDetails();
 
@@ -23,7 +24,7 @@ function PlaceDetailWindowContainer({ placeName, placeId }: Props) {
   //   enabled: !!placeName,
   // });
 
-  const { data: searchBlogPost, isSuccess } = useQuery(
+  const { data: searchBlogPost, isSuccess, isLoading } = useQuery(
     [placeName, true],
     () => fetchAllSettledSearchBlogs<true>({ placeName: [placeName as string], includePost: true }),
     {
@@ -34,16 +35,12 @@ function PlaceDetailWindowContainer({ placeName, placeId }: Props) {
   const onCloseDetailWindow = () => {
     closeDetailWindow();
     resetPlaceDetails();
+    onRestPlace();
   };
 
   useEffect(() => {
-    if (placeDetailsState && isSuccess) {
-      openDetailWindow();
-    }
-  }, [placeDetailsState, isSuccess]);
-
-  useEffect(() => {
     if (placeId) {
+      openDetailWindow();
       onGetPlaceDetails(placeId);
     }
   }, [placeId]);
@@ -55,6 +52,7 @@ function PlaceDetailWindowContainer({ placeName, placeId }: Props) {
 
   return (
     <PlaceDetailWindow
+      isLoading={isLoading}
       isVisible={isVisibleInfoWindow}
       placeDetails={placeDetails}
       onClose={onCloseDetailWindow}

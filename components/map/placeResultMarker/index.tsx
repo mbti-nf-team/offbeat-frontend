@@ -18,16 +18,21 @@ function PlaceResultMarker({ place }: Props) {
   });
 
   const icon = useMemo(() => ({
-    url: '/images/map.marker.png',
-    size: new google.maps.Size(71, 71),
+    url: '/images/map.marker.v2.png',
+    size: new google.maps.Size(32, 32),
     origin: new google.maps.Point(0, 0),
     anchor: new google.maps.Point(17, 34),
-    scaledSize: new google.maps.Size(25, 25),
+    scaledSize: new google.maps.Size(32, 32),
   } as google.maps.Icon), []);
 
   const onClickMarker = () => setSelectedPlaceState({
     placeId: place?.place_id,
     placeName: place?.name,
+  });
+
+  const onClearPlace = () => setSelectedPlaceState({
+    placeId: undefined,
+    placeName: undefined,
   });
 
   return (
@@ -41,6 +46,7 @@ function PlaceResultMarker({ place }: Props) {
         position={place.geometry?.location as google.maps.LatLng}
       />
       <PlaceDetailWindowContainer
+        onRestPlace={onClearPlace}
         placeId={selectedPlaceState?.placeId}
         placeName={selectedPlaceState?.placeName}
       />
