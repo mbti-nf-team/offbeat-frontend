@@ -66,6 +66,7 @@ function SuggestSearchList({ onInput }: Props) {
             </div>
             <Button
               type="button"
+              className={styles.button}
               color="ghost"
               onClick={onClickCloseIcon(recentSearch)}
               onlyIcon={(
