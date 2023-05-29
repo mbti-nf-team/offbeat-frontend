@@ -44,6 +44,11 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
     selectedPlaceForm: SelectedPlace,
   ) => setSelectedPlaceState(selectedPlaceForm);
 
+  const onClearPlace = () => setSelectedPlaceState({
+    placeId: undefined,
+    placeName: undefined,
+  });
+
   useEffect(() => {
     if (isSuccess || isZeroResult) {
       setIsOpen(true);
@@ -82,6 +87,7 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
         )}
       </BottomSheet>
       <PlaceDetailWindowContainer
+        onRestPlace={onClearPlace}
         placeName={selectedPlaceState?.placeName}
         placeId={selectedPlaceState?.placeId}
       />

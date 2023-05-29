@@ -70,7 +70,15 @@ export const Floating: Story = {
   },
 };
 
-export const IconButton: Story = {
+export const SmallIconButton: Story = {
+  args: {
+    size: 'small',
+    onlyIcon: <CloseIcon />,
+    color: 'ghost',
+  },
+};
+
+export const MediumIconButton: Story = {
   args: {
     size: 'medium',
     onlyIcon: <CloseIcon />,

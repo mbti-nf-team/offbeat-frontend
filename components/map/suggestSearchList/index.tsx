@@ -67,12 +67,11 @@ function SuggestSearchList({ onInput }: Props) {
             <Button
               type="button"
               className={styles.button}
+              size="small"
               color="ghost"
               onClick={onClickCloseIcon(recentSearch)}
               onlyIcon={(
                 <CloseIcon
-                  width={16}
-                  height={16}
                   className={styles.closeIcon}
                 />
               )}
