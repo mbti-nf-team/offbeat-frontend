@@ -1,3 +1,4 @@
+/* eslint-disable */
 let scene, camera, renderer;
 let flag;
 let flagColor = "#ffffff";
