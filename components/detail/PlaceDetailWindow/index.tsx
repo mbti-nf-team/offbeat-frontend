@@ -1,5 +1,8 @@
 'use client';
 
+import Image from 'next/image';
+
+import clsx from 'clsx';
 import { motion, Variants } from 'framer-motion';
 import { CloseIcon } from 'lib/assets/icons';
 import { PlacesWithSearchResult } from 'lib/types/google.maps';
@@ -30,13 +33,15 @@ type Props = {
   isVisible: boolean;
   isLoading: boolean;
   onClose: () => void;
-  placeDetails: PlacesWithSearchResult<true>;
+  placeDetail: PlacesWithSearchResult<true> | null;
 };
 
 function PlaceDetailWindow({
-  isVisible, onClose, placeDetails, isLoading,
+  isVisible, onClose, placeDetail, isLoading,
 }: Props) {
-  console.log(placeDetails.searchBlogPost);
+  console.log(placeDetail);
+
+  const isVisibleLoading = isVisible && (isLoading || !placeDetail);
 
   return (
     <DelayRenderComponent isVisible={isVisible}>
@@ -60,25 +65,35 @@ function PlaceDetailWindow({
               />
             </div>
             <div
-              className={styles.placeDetailBody}
+              className={clsx(styles.placeDetailBody, {
+                [styles.loading]: isVisibleLoading,
+              })}
             >
-              <Spinner isLoading={isVisible && isLoading} size="large" />
-              {!isLoading && (
+              <Spinner isLoading={isVisibleLoading} size="large" />
+              {!isLoading && placeDetail && (
                 <>
-                  <h1>{placeDetails?.name}</h1>
-                  <div>{placeDetails?.formatted_address}</div>
-                  <div>{`별점: ${placeDetails?.rating}`}</div>
-                  <div>{`평점 수: ${placeDetails?.user_ratings_total}`}</div>
-                  <div>{`웹사이트: ${placeDetails?.website}`}</div>
-                  <div>{`구글 맵 이동: ${placeDetails?.url}`}</div>
-                  <div>
-                    {placeDetails?.photos?.map((photo) => (
-                      <img key={photo.getUrl()} src={photo.getUrl()} height="100px" width="100px" alt="이미지" />
-                    ))}
-                  </div>
+                  <h1 className={styles.bodyHeader}>{placeDetail?.name}</h1>
+                  {placeDetail?.photos?.[0] && (
+                    <div className={styles.placeImageWrapper}>
+                      <Image
+                        width={0}
+                        height={0}
+                        quality={100}
+                        sizes="100vw"
+                        className={styles.placeImage}
+                        src={placeDetail.photos[0].getUrl()}
+                        alt={placeDetail?.name}
+                      />
+                    </div>
+                  )}
+                  <div>{`별점: ${placeDetail?.rating}`}</div>
+                  <div>{placeDetail?.formatted_address}</div>
+                  <div>{`평점 수: ${placeDetail?.user_ratings_total}`}</div>
+                  <div>{`웹사이트: ${placeDetail?.website}`}</div>
+                  <div>{`구글 맵 이동: ${placeDetail?.url}`}</div>
                   <div style={{ marginBottom: '10px' }}>
                     <h4>리뷰</h4>
-                    {placeDetails?.reviews?.map((review) => (
+                    {placeDetail?.reviews?.map((review) => (
                       <a href={review.author_url} key={review.time} style={{ marginBottom: '10px' }}>
                         <div>{`작성자: ${review.author_name}`}</div>
                         <div>{`언어: ${review.language}`}</div>
