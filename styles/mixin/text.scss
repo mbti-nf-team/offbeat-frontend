@@ -10,7 +10,10 @@
     $weight: nth($list, 2);
   }
 
-  @if $font == "headline 1" {
+  @if $font == "display" {
+    font-size: var(--display-font-size);
+    line-height: var(--display-line-height);
+  } @else if $font == "headline 1" {
     font-size: var(--headline-1-font-size);
     line-height: var(--headline-1-line-height);
   } @else if $font == "headline 2" {

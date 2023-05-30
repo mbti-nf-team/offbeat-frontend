@@ -38,6 +38,11 @@ function PlaceDetailWindowContainer({ placeName, placeId, onRestPlace }: Props) 
     onRestPlace();
   };
 
+  const placeDetail = placeDetailsState && {
+    ...placeDetailsState,
+    searchBlogPost: searchBlogPost?.[0],
+  } as PlacesWithSearchResult<true> | null;
+
   useEffect(() => {
     if (placeId) {
       openDetailWindow();
@@ -45,16 +50,11 @@ function PlaceDetailWindowContainer({ placeName, placeId, onRestPlace }: Props) 
     }
   }, [placeId]);
 
-  const placeDetails = {
-    ...placeDetailsState,
-    searchBlogPost: searchBlogPost?.[0],
-  } as PlacesWithSearchResult<true>;
-
   return (
     <PlaceDetailWindow
       isLoading={isLoading}
       isVisible={isVisibleInfoWindow}
-      placeDetails={placeDetails}
+      placeDetail={placeDetail}
       onClose={onCloseDetailWindow}
     />
   );
