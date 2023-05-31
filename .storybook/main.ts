@@ -51,17 +51,10 @@ const config: StorybookConfig = {
         loader: '@svgr/webpack',
         options: {
           svgoConfig: {
-            plugins: [
-              {
-                name: 'preset-default',
-                params: {
-                  overrides: {
-                    removeViewBox: false,
-                  },
-                },
-                active: false,
-              },
-            ],
+            plugins: [{
+              name: 'removeViewBox',
+              active: false,
+            }],
           },
         },
       }],
