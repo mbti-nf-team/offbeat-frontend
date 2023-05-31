@@ -52,6 +52,30 @@
           aspect-ratio: 1/1;
         }
       }
+
+      .ratingWrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 40px;
+
+        .ratingText {
+          user-select: none;
+          position: absolute;
+          top: 16px;
+
+          @include text("display/700", "black/default");
+        }
+      }
+
+      .recommendDescription {
+        text-align: center;
+        white-space: pre-wrap;
+        margin: 40px 0;
+
+        @include text("title 3/600", "black/default");
+      }
     }
 
     .loading {

@@ -11,6 +11,7 @@ import Button from 'components/common/button';
 import DelayRenderComponent from 'components/common/DelayRenderComponent';
 import GlobalPortal from 'components/common/GlobalPortal';
 import Spinner from 'components/common/Spinner';
+import StarRating from 'components/common/StarRating';
 
 import styles from './index.module.scss';
 
@@ -86,7 +87,13 @@ function PlaceDetailWindow({
                       />
                     </div>
                   )}
-                  <div>{`별점: ${placeDetail?.rating}`}</div>
+                  <div className={styles.ratingWrapper}>
+                    <StarRating rating={placeDetail?.rating} type="detail" />
+                    <div className={styles.ratingText}>{placeDetail?.rating}</div>
+                  </div>
+                  <div className={styles.recommendDescription}>
+                    {'고국의 맛과 분위기를 한몸에 느낄 수 있어요.\n 여행지에서 한국의 맛을 찾고싶다면, 방문 필수!'}
+                  </div>
                   <div>{placeDetail?.formatted_address}</div>
                   <div>{`평점 수: ${placeDetail?.user_ratings_total}`}</div>
                   <div>{`웹사이트: ${placeDetail?.website}`}</div>
