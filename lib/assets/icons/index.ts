@@ -10,5 +10,7 @@ export { default as ErrorCircleIcon } from './error.svg';
 export { default as FillStarIcon } from './fill-star.svg';
 export { default as HalfStarIcon } from './half-star.svg';
 export { default as MenuIcon } from './menu.svg';
+export { default as PixelFillStar } from './pixel-fill-star.svg';
+export { default as PixelHalfStar } from './pixel-half-star.svg';
 export { default as RemoveIcon } from './remove-icon.svg';
 export { default as SearchIcon } from './search.svg';
