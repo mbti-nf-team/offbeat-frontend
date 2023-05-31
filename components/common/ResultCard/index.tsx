@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 
 import styles from './index.module.scss';
 
@@ -16,7 +15,7 @@ function ResultCard({
   url, description, title, thumbnail,
 }: Props) {
   return (
-    <Link href={url} className={styles.resultCardWrapper}>
+    <a href={url} className={styles.resultCardWrapper}>
       <div className={styles.textWrapper}>
         <div className={styles.title}>{title}</div>
         <div className={styles.description}>{description}</div>
@@ -26,7 +25,7 @@ function ResultCard({
       ) : (
         <div className={styles.thumbnail} />
       )}
-    </Link>
+    </a>
   );
 }
 
