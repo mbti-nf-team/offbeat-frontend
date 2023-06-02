@@ -77,10 +77,9 @@ function PlaceDetailWindow({
                   {placeDetail?.photos?.[0] && (
                     <div className={styles.placeImageWrapper}>
                       <Image
-                        width={0}
-                        height={0}
+                        width={382}
+                        height={382}
                         quality={100}
-                        sizes="100vw"
                         className={styles.placeImage}
                         src={placeDetail.photos[0].getUrl()}
                         alt={placeDetail?.name}

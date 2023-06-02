@@ -31,7 +31,6 @@ function StarRating({
     // TODO - 추후 Empty Star로 변경
     detail: PixelFillStar,
   }[type];
-  console.log(EmptyStar);
 
   const HalfStar = {
     list: HalfStarIcon,
