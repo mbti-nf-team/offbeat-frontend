@@ -23,12 +23,14 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'maps.googleapis.com',
-      },
-    ],
+    // unoptimized: true,
+    domains: ['maps.googleapis.com'],
+    // remotePatterns: [
+    //   {
+    //     protocol: 'https',
+    //     hostname: 'maps.googleapis.com',
+    //   },
+    // ],
   },
   webpack: (config) => {
     config.module.rules.push({
