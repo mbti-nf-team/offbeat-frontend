@@ -23,7 +23,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    // unoptimized: true,
+    unoptimized: true,
     domains: ['maps.googleapis.com'],
     // remotePatterns: [
     //   {
