@@ -1,16 +1,35 @@
-export { default as ArrowLeftIcon } from './arrow-left.svg';
-export { default as ChevronDownIcon } from './chevron-down-medium.svg';
-export { default as ChevronLeftIcon } from './chevron-left.svg';
-export { default as ChevronRightIcon } from './chevron-right.svg';
-export { default as ChevronUpIcon } from './chevron-up-medium.svg';
-export { default as ClockIcon } from './clock.svg';
-export { default as CloseIcon } from './close.svg';
-export { default as EmptyStarIcon } from './empty-star.svg';
-export { default as ErrorCircleIcon } from './error.svg';
-export { default as FillStarIcon } from './fill-star.svg';
-export { default as HalfStarIcon } from './half-star.svg';
-export { default as MenuIcon } from './menu.svg';
-export { default as PixelFillStar } from './pixel-fill-star.svg';
-export { default as PixelHalfStar } from './pixel-half-star.svg';
-export { default as RemoveIcon } from './remove-icon.svg';
-export { default as SearchIcon } from './search.svg';
+import ArrowLeftIcon from './arrow-left.svg';
+import ChevronDownIcon from './chevron-down-medium.svg';
+import ChevronLeftIcon from './chevron-left.svg';
+import ChevronRightIcon from './chevron-right.svg';
+import ChevronUpIcon from './chevron-up-medium.svg';
+import ClockIcon from './clock.svg';
+import CloseIcon from './close.svg';
+import EmptyStarIcon from './empty-star.svg';
+import ErrorCircleIcon from './error.svg';
+import FillStarIcon from './fill-star.svg';
+import HalfStarIcon from './half-star.svg';
+import MenuIcon from './menu.svg';
+import PixelFillStar from './pixel-fill-star.svg';
+import PixelHalfStar from './pixel-half-star.svg';
+import RemoveIcon from './remove-icon.svg';
+import SearchIcon from './search.svg';
+
+export {
+  ArrowLeftIcon,
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronUpIcon,
+  ClockIcon,
+  CloseIcon,
+  EmptyStarIcon,
+  ErrorCircleIcon,
+  FillStarIcon,
+  HalfStarIcon,
+  MenuIcon,
+  PixelFillStar,
+  PixelHalfStar,
+  RemoveIcon,
+  SearchIcon,
+};

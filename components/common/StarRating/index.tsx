@@ -31,6 +31,7 @@ function StarRating({
     // TODO - 추후 Empty Star로 변경
     detail: PixelFillStar,
   }[type];
+  console.log(EmptyStar);
 
   const HalfStar = {
     list: HalfStarIcon,
@@ -46,14 +47,14 @@ function StarRating({
     const onlyDecimal = Number((numberRating % 1).toFixed(1));
 
     if (onlyDecimal < 0.3) {
-      return <EmptyStar className={detailClassName} />;
+      return <EmptyStar className={detailClassName} data-testid="decimal-empty-star" />;
     }
 
     if (onlyDecimal >= 0.3 && onlyDecimal < 0.8) {
-      return <HalfStar className={detailClassName} />;
+      return <HalfStar className={detailClassName} data-testid="decimal-half-star" />;
     }
 
-    return <FillStar className={detailClassName} />;
+    return <FillStar className={detailClassName} data-testid="decimal-fill-star" />;
   }, [numberRating, type, detailClassName]);
 
   return (
