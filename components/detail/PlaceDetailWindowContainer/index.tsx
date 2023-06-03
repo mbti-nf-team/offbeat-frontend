@@ -2,20 +2,14 @@ import { useEffect } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 import useGetPlaceDetails from 'hooks/maps/useGetPlaceDetails';
-import useBoolean from 'hooks/useBoolean';
 import { fetchAllSettledSearchBlogs } from 'lib/apis/search';
 import { PlacesWithSearchResult } from 'lib/types/google.maps';
+import usePlaceDetailWindowStore from 'stores/placeDetailWindow';
+import { shallow } from 'zustand/shallow';
 
 import PlaceDetailWindow from '../PlaceDetailWindow';
 
-type Props = {
-  placeName?: string;
-  placeId?: string;
-  onRestPlace: () => void;
-};
-
-function PlaceDetailWindowContainer({ placeName, placeId, onRestPlace }: Props) {
-  const [isVisibleInfoWindow, openDetailWindow, closeDetailWindow] = useBoolean(false);
+function PlaceDetailWindowContainer() {
   const [placeDetailsState, onGetPlaceDetails, resetPlaceDetails] = useGetPlaceDetails();
 
   // const { data: searchBlogPost, isSuccess } = useGetSearchBlog<true>({
@@ -24,7 +18,16 @@ function PlaceDetailWindowContainer({ placeName, placeId, onRestPlace }: Props) 
   //   enabled: !!placeName,
   // });
 
-  const { data: searchBlogPost, isSuccess, isLoading } = useQuery(
+  const {
+    isOpenPlaceDetailWindow, onClosePlaceDetailWindow, placeId, placeName,
+  } = usePlaceDetailWindowStore((state) => ({
+    placeName: state.placeName,
+    placeId: state.placeId,
+    isOpenPlaceDetailWindow: state.isOpenPlaceDetailWindow,
+    onClosePlaceDetailWindow: state.onClosePlaceDetailWindow,
+  }), shallow);
+
+  const { data: searchBlogPost, isLoading } = useQuery(
     [placeName, true],
     () => fetchAllSettledSearchBlogs<true>({ placeName: [placeName as string], includePost: true }),
     {
@@ -33,9 +36,8 @@ function PlaceDetailWindowContainer({ placeName, placeId, onRestPlace }: Props) 
   );
 
   const onCloseDetailWindow = () => {
-    closeDetailWindow();
     resetPlaceDetails();
-    onRestPlace();
+    onClosePlaceDetailWindow();
   };
 
   const placeDetail = placeDetailsState && {
@@ -45,7 +47,6 @@ function PlaceDetailWindowContainer({ placeName, placeId, onRestPlace }: Props) 
 
   useEffect(() => {
     if (placeId) {
-      openDetailWindow();
       onGetPlaceDetails(placeId);
     }
   }, [placeId]);
@@ -53,7 +54,7 @@ function PlaceDetailWindowContainer({ placeName, placeId, onRestPlace }: Props) 
   return (
     <PlaceDetailWindow
       isLoading={isLoading}
-      isVisible={isVisibleInfoWindow}
+      isVisible={isOpenPlaceDetailWindow}
       placeDetail={placeDetail}
       onClose={onCloseDetailWindow}
     />

@@ -2,9 +2,8 @@ import { memo, useMemo, useState } from 'react';
 
 import { MarkerF } from '@react-google-maps/api';
 import { PlaceResult } from 'lib/types/google.maps';
-import { SelectedPlace } from 'lib/types/search';
-
-import PlaceDetailWindowContainer from 'components/detail/PlaceDetailWindowContainer';
+import usePlaceDetailWindowStore from 'stores/placeDetailWindow';
+import { shallow } from 'zustand/shallow';
 
 type Props = {
   place: PlaceResult;
@@ -12,10 +11,9 @@ type Props = {
 
 function PlaceResultMarker({ place }: Props) {
   const [, setMarker] = useState<google.maps.Marker>();
-  const [selectedPlaceState, setSelectedPlaceState] = useState<SelectedPlace>({
-    placeId: undefined,
-    placeName: undefined,
-  });
+  const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore((state) => ({
+    onOpenPlaceDetailWindow: state.onOpenPlaceDetailWindow,
+  }), shallow);
 
   const icon = useMemo(() => ({
     url: '/images/map.marker.v2.png',
@@ -25,32 +23,20 @@ function PlaceResultMarker({ place }: Props) {
     scaledSize: new google.maps.Size(32, 32),
   } as google.maps.Icon), []);
 
-  const onClickMarker = () => setSelectedPlaceState({
+  const onClickMarker = () => onOpenPlaceDetailWindow({
     placeId: place?.place_id,
     placeName: place?.name,
   });
 
-  const onClearPlace = () => setSelectedPlaceState({
-    placeId: undefined,
-    placeName: undefined,
-  });
-
   return (
-    <>
-      <MarkerF
-        icon={icon}
-        onClick={onClickMarker}
-        title={place.name}
-        onLoad={(markerF) => setMarker(markerF)}
-        onUnmount={() => setMarker(undefined)}
-        position={place.geometry?.location as google.maps.LatLng}
-      />
-      <PlaceDetailWindowContainer
-        onRestPlace={onClearPlace}
-        placeId={selectedPlaceState?.placeId}
-        placeName={selectedPlaceState?.placeName}
-      />
-    </>
+    <MarkerF
+      icon={icon}
+      onClick={onClickMarker}
+      title={place.name}
+      onLoad={(markerF) => setMarker(markerF)}
+      onUnmount={() => setMarker(undefined)}
+      position={place.geometry?.location as google.maps.LatLng}
+    />
   );
 }
 
