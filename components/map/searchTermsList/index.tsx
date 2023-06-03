@@ -6,6 +6,7 @@ import useGetPlaceDetails from 'hooks/maps/useGetPlaceDetails';
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import useRenderToast from 'hooks/useRenderToast';
 import usePlaceStore from 'stores/place';
+import useRecentSearchStore from 'stores/recentSearch';
 import { shallow } from 'zustand/shallow';
 
 import ZeroSearchResult from '../ZeroSearchResult';
@@ -29,9 +30,17 @@ function SearchTermsList({ keyword, onInput }: Props) {
   const { setPlaces } = usePlaceStore((state) => ({
     setPlaces: state.setPlaces,
   }), shallow);
+  const { addRecentSearch } = useRecentSearchStore((state) => ({
+    addRecentSearch: state.addRecentSearch,
+  }), shallow);
 
-  const onKeyDown = useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], (_, placeId) => {
+  const onActionTextSearch = (placeId: string, placeName: string) => {
     onGetPlaceDetails(placeId);
+    addRecentSearch(placeName);
+  };
+
+  const onKeyDown = useActionKeyEvent<HTMLDivElement, [string, string]>(['Enter', 'NumpadEnter'], (_, placeId, placeName) => {
+    onActionTextSearch(placeId, placeName);
   });
 
   const displaySuggestions = useCallback((
@@ -91,8 +100,8 @@ function SearchTermsList({ keyword, onInput }: Props) {
           key={place_id}
           tabIndex={0}
           role="menuitem"
-          onKeyDown={(e) => onKeyDown(e, place_id)}
-          onClick={() => onGetPlaceDetails(place_id)}
+          onKeyDown={(e) => onKeyDown(e, place_id, structured_formatting.main_text)}
+          onClick={() => onActionTextSearch(place_id, structured_formatting.main_text)}
         >
           <div>
             {structured_formatting.main_text}
