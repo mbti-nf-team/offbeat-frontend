@@ -3,7 +3,7 @@
 import Image from 'next/image';
 
 import clsx from 'clsx';
-import { motion, Variants } from 'framer-motion';
+import { motion, useIsomorphicLayoutEffect, Variants } from 'framer-motion';
 import { CloseIcon } from 'lib/assets/icons';
 import { PlacesWithSearchResult } from 'lib/types/google.maps';
 
@@ -43,6 +43,15 @@ function PlaceDetailWindow({
   console.log(placeDetail);
 
   const isVisibleLoading = isVisible && (isLoading || !placeDetail);
+
+  useIsomorphicLayoutEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = '';
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+  }, [isVisible]);
 
   return (
     <DelayRenderComponent isVisible={isVisible}>
