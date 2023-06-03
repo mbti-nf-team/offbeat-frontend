@@ -7,6 +7,8 @@ import useTextSearch from 'hooks/maps/useTextSearch';
 import useRecentSearchStore from 'stores/recentSearch';
 import { shallow } from 'zustand/shallow';
 
+import PlaceDetailWindowContainer from 'components/detail/PlaceDetailWindowContainer';
+
 import PlaceBottomSheet from '../placeBottomSheet';
 import PlaceResultMarker from '../placeResultMarker';
 import SearchInput from '../searchInput';
@@ -76,6 +78,7 @@ function MainMap() {
         <PlaceResultMarker key={place.place_id} place={place} />
       ))}
       <PlaceBottomSheet placesResult={placesResult} isZeroResult={isZeroResult} />
+      <PlaceDetailWindowContainer />
     </GoogleMap>
   );
 }
