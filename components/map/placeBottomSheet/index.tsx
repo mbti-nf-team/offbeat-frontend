@@ -9,6 +9,7 @@ import usePlaceDetailWindowStore from 'stores/placeDetailWindow';
 import { shallow } from 'zustand/shallow';
 
 import Button from 'components/common/button';
+import Spinner from 'components/common/Spinner';
 import { checkEmpty } from 'utils';
 
 import PlaceBottomSheetItem from '../placeBottomSheetItem';
@@ -48,13 +49,13 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
   ) => onOpenPlaceDetailWindow(selectedPlaceForm);
 
   useEffect(() => {
-    if (isSuccess || isZeroResult) {
+    if (placesResult?.length || isZeroResult) {
       setIsOpen(true);
       return;
     }
 
     setIsOpen(false);
-  }, [isSuccess, isZeroResult]);
+  }, [placesResult?.length, isZeroResult]);
 
   return (
     <BottomSheet
@@ -77,9 +78,13 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
         </div>
       ) : (
         <div className={styles.placeList}>
-          {checkEmpty(placesWithSearchResult).map((place) => (
+          {isSuccess ? checkEmpty(placesWithSearchResult).map((place) => (
             <PlaceBottomSheetItem key={place.place_id} place={place} onClick={onClickPlaceItem} />
-          ))}
+          )) : (
+            <div className={styles.loadingWrapper}>
+              <Spinner isLoading />
+            </div>
+          )}
         </div>
       )}
     </BottomSheet>
