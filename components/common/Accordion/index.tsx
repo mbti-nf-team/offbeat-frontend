@@ -13,8 +13,9 @@ import styles from './index.module.scss';
 
 type Props = {
   title: string;
-  counter: number;
+  counter?: number;
   counterColor?: 'positive' | 'danger';
+  wrapperClassName?: string;
 };
 
 const accordionVariants: Variants = {
@@ -38,7 +39,7 @@ const accordionVariants: Variants = {
 };
 
 function Accordion({
-  title, counter, counterColor = 'positive', children,
+  title, counter, counterColor = 'positive', wrapperClassName, children,
 }: PropsWithChildren<Props>) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleOpen = () => setIsOpen(!isOpen);
@@ -46,7 +47,7 @@ function Accordion({
   const onKeyDown = useActionKeyEvent<HTMLDivElement>(['Enter', 'NumpadEnter'], toggleOpen);
 
   return (
-    <div className={styles.accordionWrapper}>
+    <div className={clsx(styles.accordionWrapper, wrapperClassName)}>
       <motion.div
         layout
         className={styles.accordionHeader}
