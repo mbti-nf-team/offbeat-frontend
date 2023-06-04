@@ -82,6 +82,8 @@
     }
 
     .header {
+      position: relative;
+      z-index: var(--detail-window-header-z-index);
       height: 40px;
       width: 100%;
       padding: 0 8px;
@@ -92,4 +94,15 @@
       }
     }
   }
+}
+
+.reviewsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 24px;
+}
+
+.reviewAccordionWrapper {
+  margin: 0px -16px;
 }

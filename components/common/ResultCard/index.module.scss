@@ -51,10 +51,26 @@
     width: 100%;
 
     .title {
+      word-break: break-all;
+      overflow-wrap: break-word;
+      text-overflow: ellipsis;
+      display: -webkit-inline-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+
       @include text("body 1/600", "black/default");
     }
 
     .description {
+      word-break: break-all;
+      overflow-wrap: break-word;
+      text-overflow: ellipsis;
+      display: -webkit-inline-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+
       @include text("body 1/500", "gray/primary");
     }
   }

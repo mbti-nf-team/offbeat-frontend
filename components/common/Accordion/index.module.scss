@@ -11,7 +11,7 @@
   padding: 16px 24px;
   gap: 20px;
   position: relative;
-  z-index: 1;
+  z-index: var(--accordion-header-z-index);
   user-select: none;
   cursor: pointer;
   align-items: center;
