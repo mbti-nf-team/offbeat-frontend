@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import clsx from 'clsx';
 import {
-  EmptyStarIcon, FillStarIcon, HalfStarIcon, PixelFillStar, PixelHalfStar,
+  EmptyStarIcon, FillStarIcon, HalfStarIcon, PixelEmptyStar, PixelFillStar, PixelHalfStar,
 } from 'lib/assets/icons';
 
 import { checkNumberValue, generateArrayOfNumber } from 'utils';
@@ -28,8 +28,7 @@ function StarRating({
 
   const EmptyStar = {
     list: EmptyStarIcon,
-    // TODO - 추후 Empty Star로 변경
-    detail: PixelFillStar,
+    detail: PixelEmptyStar,
   }[type];
 
   const HalfStar = {
