@@ -81,7 +81,7 @@ function PlaceDetailWindow({
                 [styles.loading]: isVisibleLoading,
               })}
             >
-              <Spinner isLoading={isVisibleLoading} size="large" />
+              <Spinner isLoading={isVisibleLoading} size="medium" />
               {!isLoading && placeDetail && (
                 <>
                   <h1 className={styles.bodyHeader}>{placeDetail?.name}</h1>
