@@ -14,6 +14,7 @@ import GlobalPortal from 'components/common/GlobalPortal';
 import ResultCard from 'components/common/ResultCard';
 import Spinner from 'components/common/Spinner';
 import StarRating from 'components/common/StarRating';
+import { checkEmpty, checkNumberValue } from 'utils';
 
 import styles from './index.module.scss';
 
@@ -31,6 +32,9 @@ const logoVariants: Variants = {
     visibility: 'visible',
   },
 };
+
+const NAVER_MAX_REVIEW_COUNT = 1000;
+const GOOGLE_MAX_REVIEW_COUNT = 4;
 
 type Props = {
   isVisible: boolean;
@@ -104,7 +108,12 @@ function PlaceDetailWindow({
                   <div className={styles.recommendDescription}>
                     {'고국의 맛과 분위기를 한몸에 느낄 수 있어요.\n 여행지에서 한국의 맛을 찾고싶다면, 방문 필수!'}
                   </div>
-                  <Accordion title="구글 리뷰" counter={placeDetail?.user_ratings_total} wrapperClassName={styles.reviewAccordionWrapper}>
+                  <Accordion
+                    title="구글 리뷰"
+                    counter={placeDetail?.user_ratings_total}
+                    counterColor={checkEmpty(placeDetail?.reviews).filter(({ language }) => language === 'ko').length >= GOOGLE_MAX_REVIEW_COUNT ? 'danger' : 'positive'}
+                    wrapperClassName={styles.reviewAccordionWrapper}
+                  >
                     <div className={styles.reviewsWrapper}>
                       {placeDetail?.reviews?.map((review) => (
                         <a href={review.author_url} key={review.time} style={{ marginBottom: '10px' }}>
@@ -117,7 +126,12 @@ function PlaceDetailWindow({
                     </div>
                   </Accordion>
                   {placeDetail?.searchBlogPost.status === 'fulfilled' && (
-                    <Accordion title="네이버 검색결과" counter={placeDetail?.searchBlogPost.value.total_count} wrapperClassName={styles.reviewAccordionWrapper}>
+                    <Accordion
+                      title="네이버 검색결과"
+                      counterColor={checkNumberValue(placeDetail?.searchBlogPost.value.total_count) > NAVER_MAX_REVIEW_COUNT ? 'danger' : 'positive'}
+                      counter={placeDetail?.searchBlogPost.value.total_count}
+                      wrapperClassName={styles.reviewAccordionWrapper}
+                    >
                       <div className={styles.reviewsWrapper}>
                         {placeDetail?.searchBlogPost.value.posts.map(({
                           title, description, link, thumbnail,
