@@ -32,8 +32,6 @@ const accordionVariants: Variants = {
     opacity: 1,
     transform: 'translateY(0px)',
     visibility: 'visible',
-    paddingTop: '8px',
-    paddingBottom: '40px',
     height: 'auto',
   },
 };
@@ -70,6 +68,8 @@ function Accordion({
           layout
           animate={isOpen ? 'visible' : 'none'}
           initial="none"
+          exit={{ height: 0, opacity: 0, visibility: 'hidden' }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
           variants={accordionVariants}
         >
           {children}
