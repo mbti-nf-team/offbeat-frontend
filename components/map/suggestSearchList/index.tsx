@@ -7,7 +7,7 @@ import { ClockIcon, CloseIcon } from 'lib/assets/icons';
 import useRecentSearchStore from 'stores/recentSearch';
 import { shallow } from 'zustand/shallow';
 
-import Button from 'components/common/button';
+import Button from 'components/common/Button';
 import Label from 'components/common/Label';
 
 import styles from './index.module.scss';

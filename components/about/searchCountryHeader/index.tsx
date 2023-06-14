@@ -5,7 +5,7 @@ import { ReactNode, useEffect } from 'react';
 import useGeoLocation from 'hooks/useGeolocation';
 import useRenderToast from 'hooks/useRenderToast';
 
-import Button from 'components/common/button';
+import Button from 'components/common/Button';
 
 import styles from './index.module.scss';
 
