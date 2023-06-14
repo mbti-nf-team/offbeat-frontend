@@ -3054,32 +3054,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/ssr@npm:^3.4.1":
-  version: 3.5.0
-  resolution: "@react-aria/ssr@npm:3.5.0"
-  dependencies:
-    "@swc/helpers": ^0.4.14
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 3287fe756ff458a3ce46ba0fabe2ede349bff0b232cce30aab0f50afa1c0ac7604809d229b8b19a62a5116cf12bc8099d2c9c72335126499c55c794dd3419dbd
-  languageName: node
-  linkType: hard
-
-"@react-aria/utils@npm:3.14.2":
-  version: 3.14.2
-  resolution: "@react-aria/utils@npm:3.14.2"
-  dependencies:
-    "@react-aria/ssr": ^3.4.1
-    "@react-stately/utils": ^3.5.2
-    "@react-types/shared": ^3.16.0
-    "@swc/helpers": ^0.4.14
-    clsx: ^1.1.1
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: db3f59ace7463268d9214d51368fdd86fa7587d62eaabef23f806d85aa50d98fc9b785a858e9b8208cea10e9a9e92b11f95166fcd2795d0d98c74649a1327768
-  languageName: node
-  linkType: hard
-
 "@react-google-maps/api@npm:^2.18.1":
   version: 2.18.1
   resolution: "@react-google-maps/api@npm:2.18.1"
@@ -3239,26 +3213,6 @@ __metadata:
     react-zdog: ">=1.0"
     zdog: ">=1.0"
   checksum: df6ffe4b19f356faa66b9f957c3897e779d0112279abcfbb3b48b198ef827030a09d7c53952699792f207c94ebd787ac926e3df3ce70e955135dec27e087dbf0
-  languageName: node
-  linkType: hard
-
-"@react-stately/utils@npm:^3.5.2":
-  version: 3.6.0
-  resolution: "@react-stately/utils@npm:3.6.0"
-  dependencies:
-    "@swc/helpers": ^0.4.14
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: d2ff4cfed5555b112ad71b9bc1837abd777d8fa225043c476b7c9417f8b21a0bcddad0d7127e0acdbf4d85dc9a260c9ae97722b4e9507e6243b412c2724c5f54
-  languageName: node
-  linkType: hard
-
-"@react-types/shared@npm:^3.16.0":
-  version: 3.17.0
-  resolution: "@react-types/shared@npm:3.17.0"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 004fc58ab0d3d64a84ce5a98e7e201b88bbb64f8b4a8309d50be30fe6172d0f172f00c666074aa96f13bbbfbced8b986901ad6b35b6d2d32d8dc25e251fcdb31
   languageName: node
   linkType: hard
 
@@ -4559,15 +4513,6 @@ __metadata:
   dependencies:
     tslib: ^2.4.0
   checksum: 71e0e27234590435e4c62b97ef5e796f88e786841a38c7116a5e27a3eafa7b9ead7cdec5249b32165902076de78446945311c973e59bddf77c1e24f33a8f272a
-  languageName: node
-  linkType: hard
-
-"@swc/helpers@npm:^0.4.14":
-  version: 0.4.14
-  resolution: "@swc/helpers@npm:0.4.14"
-  dependencies:
-    tslib: ^2.4.0
-  checksum: 273fd3f3fc461a92f3790cc551ea054745c6d6959afbe1232e6d7aa1c722bbc114d308aab96bef5c78fc0303c85c7b472ef00e2253251cc89737f3b1af56e5a5
   languageName: node
   linkType: hard
 
@@ -7014,7 +6959,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.1.1, clsx@npm:^1.2.1":
+"clsx@npm:^1.2.1":
   version: 1.2.1
   resolution: "clsx@npm:1.2.1"
   checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
@@ -13086,7 +13031,6 @@ __metadata:
     qs: ^6.11.1
     react: 18.2.0
     react-dom: 18.2.0
-    react-modal-sheet: ^1.10.1
     react-spring-bottom-sheet: 3.5.0-alpha.0
     react-test-renderer: ^18.2.0
     sass: ^1.62.1
@@ -14087,18 +14031,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-modal-sheet@npm:^1.10.1":
-  version: 1.10.1
-  resolution: "react-modal-sheet@npm:1.10.1"
-  dependencies:
-    "@react-aria/utils": 3.14.2
-  peerDependencies:
-    framer-motion: ">=2"
-    react: ">=16"
-  checksum: 85cb01456a29dc7ae85255c7294494f9232043b2d749e24b70658613d9d4b9947b96ac32ef2a8ae3743e5bf42d773fa13c1bc9d8c888375de91d5fa3e01ba4dc
-  languageName: node
-  linkType: hard
-
 "react-refresh@npm:^0.11.0":
   version: 0.11.0
   resolution: "react-refresh@npm:0.11.0"
@@ -14782,18 +14714,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8":
-  version: 7.5.0
-  resolution: "semver@npm:7.5.0"
-  dependencies:
-    lru-cache: ^6.0.0
-  bin:
-    semver: bin/semver.js
-  checksum: 2d266937756689a76f124ffb4c1ea3e1bbb2b263219f90ada8a11aebebe1280b13bb76cca2ca96bdee3dbc554cbc0b24752eb895b2a51577aa644427e9229f2b
-  languageName: node
-  linkType: hard
-
-"semver@npm:^7.5.0":
+"semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8, semver@npm:^7.5.0":
   version: 7.5.1
   resolution: "semver@npm:7.5.1"
   dependencies:
