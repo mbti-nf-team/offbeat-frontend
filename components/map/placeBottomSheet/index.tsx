@@ -8,7 +8,7 @@ import { SelectedPlace } from 'lib/types/search';
 import usePlaceDetailWindowStore from 'stores/placeDetailWindow';
 import { shallow } from 'zustand/shallow';
 
-import Button from 'components/common/button';
+import Button from 'components/common/Button';
 import Spinner from 'components/common/Spinner';
 import { checkEmpty } from 'utils';
 

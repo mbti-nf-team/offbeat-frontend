@@ -8,7 +8,7 @@ import { CloseIcon } from 'lib/assets/icons';
 import { PlacesWithSearchResult } from 'lib/types/google.maps';
 
 import Accordion from 'components/common/Accordion';
-import Button from 'components/common/button';
+import Button from 'components/common/Button';
 import DelayRenderComponent from 'components/common/DelayRenderComponent';
 import GlobalPortal from 'components/common/GlobalPortal';
 import ResultCard from 'components/common/ResultCard';
