@@ -10,7 +10,7 @@ import { Country } from 'lib/types/country';
 
 import Label from 'components/common/Label';
 
-import CountryItem from '../countryItem';
+import CountryItem from '../CountryItem';
 
 import styles from './index.module.scss';
 

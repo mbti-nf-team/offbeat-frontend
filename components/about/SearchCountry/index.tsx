@@ -7,7 +7,7 @@ import { Country } from 'lib/types/country';
 
 import Input from 'components/common/Input';
 
-import CountryList from '../countryList';
+import CountryList from '../CountryList';
 
 import styles from './index.module.scss';
 
