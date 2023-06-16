@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import Layout from 'components/common/Layout';
-import Toast from 'components/common/toast';
+import Toast from 'components/common/Toast';
 
 import Providers from './providers';
 
