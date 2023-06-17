@@ -5,7 +5,7 @@ import useDebounce from 'hooks/useDebounce';
 
 import Input from 'components/common/Input';
 
-import SearchTermsBox from '../searchTermsBox';
+import SearchTermsBox from '../SearchTermsBox';
 
 type Props = {
   onSubmit: (keyword: string) => void;
