@@ -1,4 +1,4 @@
-import MainMap from 'components/map/mainMap';
+import MainMap from 'components/map/MainMap';
 
 export const metadata = {
   title: 'offbeat-map',

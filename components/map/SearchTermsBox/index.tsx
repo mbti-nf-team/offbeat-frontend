@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
-import SearchTermsList from '../searchTermsList';
-import SuggestSearchList from '../suggestSearchList';
+import SearchTermsList from '../SearchTermsList';
+import SuggestSearchList from '../SuggestSearchList';
 
 import styles from './index.module.scss';
 

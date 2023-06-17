@@ -9,9 +9,9 @@ import { shallow } from 'zustand/shallow';
 
 import PlaceDetailWindowContainer from 'components/detail/PlaceDetailWindowContainer';
 
-import PlaceBottomSheet from '../placeBottomSheet';
-import PlaceResultMarker from '../placeResultMarker';
-import SearchInput from '../searchInput';
+import PlaceBottomSheet from '../PlaceBottomSheet';
+import PlaceResultMarker from '../PlaceResultMarker';
+import SearchInput from '../SearchInput';
 
 function MainMap() {
   const [libraries] = useState<['places', 'geometry']>(['places', 'geometry']);

@@ -12,7 +12,7 @@ import Button from 'components/common/Button';
 import Spinner from 'components/common/Spinner';
 import { checkEmpty } from 'utils';
 
-import PlaceBottomSheetItem from '../placeBottomSheetItem';
+import PlaceBottomSheetItem from '../PlaceBottomSheetItem';
 
 import styles from './index.module.scss';
 
