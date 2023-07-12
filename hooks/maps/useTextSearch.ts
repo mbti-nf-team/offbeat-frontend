@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import useRenderToast from 'hooks/useRenderToast';
-import usePlaceStore from 'stores/place';
 import { shallow } from 'zustand/shallow';
 
+import useRenderToast from 'hooks/useRenderToast';
+import usePlaceStore from 'stores/place';
 import { filteredPlaces } from 'utils';
 
 type TextSearchRequest = google.maps.places.TextSearchRequest;

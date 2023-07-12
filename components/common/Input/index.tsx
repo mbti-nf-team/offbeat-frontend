@@ -3,6 +3,7 @@ import {
 } from 'react';
 
 import clsx from 'clsx';
+
 import {
   ArrowLeftIcon, MenuIcon, RemoveIcon, SearchIcon,
 } from 'lib/assets/icons';

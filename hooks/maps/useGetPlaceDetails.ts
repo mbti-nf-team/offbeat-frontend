@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { useGoogleMap } from '@react-google-maps/api';
+
 import useRenderToast from 'hooks/useRenderToast';
 import { PlaceResult } from 'lib/types/google.maps';
 

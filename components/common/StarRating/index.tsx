@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 
 import clsx from 'clsx';
+
 import {
   EmptyStarIcon, FillStarIcon, HalfStarIcon, PixelEmptyStar, PixelFillStar, PixelHalfStar,
 } from 'lib/assets/icons';
-
 import { checkNumberValue, generateArrayOfNumber } from 'utils';
 
 import styles from './index.module.scss';

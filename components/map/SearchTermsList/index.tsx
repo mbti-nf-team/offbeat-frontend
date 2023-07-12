@@ -2,12 +2,13 @@ import {
   memo, useCallback, useEffect, useState,
 } from 'react';
 
+import { shallow } from 'zustand/shallow';
+
 import useGetPlaceDetails from 'hooks/maps/useGetPlaceDetails';
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import useRenderToast from 'hooks/useRenderToast';
 import usePlaceStore from 'stores/place';
 import useRecentSearchStore from 'stores/recentSearch';
-import { shallow } from 'zustand/shallow';
 
 import ZeroSearchResult from '../ZeroSearchResult';
 

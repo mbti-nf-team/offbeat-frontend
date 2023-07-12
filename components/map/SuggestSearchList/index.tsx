@@ -1,14 +1,14 @@
 import { memo, MouseEvent } from 'react';
 
 import { useGoogleMap } from '@react-google-maps/api';
-import useTextSearch from 'hooks/maps/useTextSearch';
-import useActionKeyEvent from 'hooks/useActionKeyEvent';
-import { ClockIcon, CloseIcon } from 'lib/assets/icons';
-import useRecentSearchStore from 'stores/recentSearch';
 import { shallow } from 'zustand/shallow';
 
 import Button from 'components/common/Button';
 import Label from 'components/common/Label';
+import useTextSearch from 'hooks/maps/useTextSearch';
+import useActionKeyEvent from 'hooks/useActionKeyEvent';
+import { ClockIcon, CloseIcon } from 'lib/assets/icons';
+import useRecentSearchStore from 'stores/recentSearch';
 
 import styles from './index.module.scss';
 

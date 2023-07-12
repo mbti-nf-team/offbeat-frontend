@@ -5,9 +5,10 @@ import {
 } from 'react';
 
 import { AnimationDefinition, motion, Variants } from 'framer-motion';
+import { shallow } from 'zustand/shallow';
+
 import { ErrorCircleIcon } from 'lib/assets/icons';
 import useToastStore, { ToastStore } from 'stores/toast';
-import { shallow } from 'zustand/shallow';
 
 import styles from './index.module.scss';
 

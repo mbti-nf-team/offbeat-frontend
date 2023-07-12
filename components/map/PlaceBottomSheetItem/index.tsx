@@ -1,7 +1,6 @@
+import StarRating from 'components/common/StarRating';
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import { PlacesWithSearchResult } from 'lib/types/google.maps';
-
-import StarRating from 'components/common/StarRating';
 import { checkNumberValue, numberWithComma } from 'utils';
 
 import styles from './index.module.scss';

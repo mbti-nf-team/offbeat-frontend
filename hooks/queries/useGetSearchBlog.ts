@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+
 import { fetchNaverSearchBlog } from 'lib/apis/search';
 
 function useGetSearchBlog<T = false>({

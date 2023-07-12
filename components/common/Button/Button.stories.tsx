@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { CloseIcon } from 'lib/assets/icons';
 
 import Button from '.';

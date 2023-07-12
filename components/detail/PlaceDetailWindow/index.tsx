@@ -4,8 +4,6 @@ import Image from 'next/image';
 
 import clsx from 'clsx';
 import { motion, useIsomorphicLayoutEffect, Variants } from 'framer-motion';
-import { CloseIcon } from 'lib/assets/icons';
-import { PlacesWithSearchResult } from 'lib/types/google.maps';
 
 import Accordion from 'components/common/Accordion';
 import Button from 'components/common/Button';
@@ -14,6 +12,8 @@ import GlobalPortal from 'components/common/GlobalPortal';
 import ResultCard from 'components/common/ResultCard';
 import Spinner from 'components/common/Spinner';
 import StarRating from 'components/common/StarRating';
+import { CloseIcon } from 'lib/assets/icons';
+import { PlacesWithSearchResult } from 'lib/types/google.maps';
 import { checkEmpty, checkNumberValue } from 'utils';
 
 import styles from './index.module.scss';

@@ -4,9 +4,9 @@ import { PropsWithChildren, useState } from 'react';
 
 import clsx from 'clsx';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
+
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import { ChevronRightIcon } from 'lib/assets/icons';
-
 import { numberWithComma } from 'utils';
 
 import styles from './index.module.scss';

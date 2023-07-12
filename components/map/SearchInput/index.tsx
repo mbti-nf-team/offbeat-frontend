@@ -1,9 +1,8 @@
 import { useCallback, useRef, useState } from 'react';
 
+import Input from 'components/common/Input';
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import useDebounce from 'hooks/useDebounce';
-
-import Input from 'components/common/Input';
 
 import SearchTermsBox from '../SearchTermsBox';
 

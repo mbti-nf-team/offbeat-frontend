@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 
-import useToastStore from 'stores/toast';
 import { shallow } from 'zustand/shallow';
+
+import useToastStore from 'stores/toast';
 
 function useRenderToast() {
   const { renderToast } = useToastStore((state) => ({
