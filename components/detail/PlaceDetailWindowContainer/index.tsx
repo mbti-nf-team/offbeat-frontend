@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
+import { shallow } from 'zustand/shallow';
+
 import useGetPlaceDetails from 'hooks/maps/useGetPlaceDetails';
 import { fetchAllSettledSearchBlogs } from 'lib/apis/search';
 import { PlacesWithSearchResult } from 'lib/types/google.maps';
 import usePlaceDetailWindowStore from 'stores/placeDetailWindow';
-import { shallow } from 'zustand/shallow';
 
 import PlaceDetailWindow from '../PlaceDetailWindow';
 

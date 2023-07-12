@@ -6,6 +6,7 @@ import {
 import Link from 'next/link';
 
 import clsx from 'clsx';
+
 import { ColorType } from 'lib/types';
 
 import Spinner from '../Spinner';

@@ -1,6 +1,7 @@
 import mockAxios from 'axios';
-import { RequestConfig } from 'lib/types/api';
 import qs from 'qs';
+
+import { RequestConfig } from 'lib/types/api';
 
 import { api, getUrl, paramsSerializer } from '.';
 

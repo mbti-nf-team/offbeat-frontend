@@ -1,5 +1,4 @@
 import useIsMounted from 'hooks/useIsMounted';
-
 import renderWithPortal from 'utils/test/renderWithPortal';
 
 import GlobalPortal from '.';

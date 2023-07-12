@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { PlaceResult } from 'lib/types/google.maps';
-
 import { filteredPlaces } from 'utils';
 
 const ONE_THOUSAND_METER = 1000;

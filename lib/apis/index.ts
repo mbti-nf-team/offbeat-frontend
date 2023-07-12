@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { RequestConfig } from 'lib/types/api';
 import qs from 'qs';
+
+import { RequestConfig } from 'lib/types/api';
 
 export const paramsSerializer = <T>(params: T): string => qs.stringify(params, {
   arrayFormat: 'comma',

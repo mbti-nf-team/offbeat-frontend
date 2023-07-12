@@ -3,11 +3,11 @@
 import { useCallback, useState } from 'react';
 
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
-import useTextSearch from 'hooks/maps/useTextSearch';
-import useRecentSearchStore from 'stores/recentSearch';
 import { shallow } from 'zustand/shallow';
 
 import PlaceDetailWindowContainer from 'components/detail/PlaceDetailWindowContainer';
+import useTextSearch from 'hooks/maps/useTextSearch';
+import useRecentSearchStore from 'stores/recentSearch';
 
 import PlaceBottomSheet from '../PlaceBottomSheet';
 import PlaceResultMarker from '../PlaceResultMarker';

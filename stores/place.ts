@@ -1,5 +1,6 @@
-import { PlaceResult } from 'lib/types/google.maps';
 import { create } from 'zustand';
+
+import { PlaceResult } from 'lib/types/google.maps';
 
 type PlaceState = {
   places: PlaceResult[];

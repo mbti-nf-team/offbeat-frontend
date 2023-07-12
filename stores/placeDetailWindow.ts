@@ -1,5 +1,6 @@
-import { SelectedPlace } from 'lib/types/search';
 import { create } from 'zustand';
+
+import { SelectedPlace } from 'lib/types/search';
 
 type PlaceDetailWindowState = {
   isOpenPlaceDetailWindow: boolean;

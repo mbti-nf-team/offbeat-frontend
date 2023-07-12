@@ -3,12 +3,12 @@ import {
 } from 'react';
 
 import clsx from 'clsx';
-import useScrollToTop from 'hooks/useScrollToTop';
 import Inko from 'inko';
-import { ChevronUpIcon } from 'lib/assets/icons';
-import { Country } from 'lib/types/country';
 
 import Label from 'components/common/Label';
+import useScrollToTop from 'hooks/useScrollToTop';
+import { ChevronUpIcon } from 'lib/assets/icons';
+import { Country } from 'lib/types/country';
 
 import CountryItem from '../CountryItem';
 

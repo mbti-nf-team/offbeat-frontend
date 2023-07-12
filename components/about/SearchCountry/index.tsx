@@ -3,9 +3,9 @@
 import { useState } from 'react';
 
 import { motion, Variants } from 'framer-motion';
-import { Country } from 'lib/types/country';
 
 import Input from 'components/common/Input';
+import { Country } from 'lib/types/country';
 
 import CountryList from '../CountryList';
 

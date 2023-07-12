@@ -1,9 +1,10 @@
 import { memo, useMemo, useState } from 'react';
 
 import { MarkerF } from '@react-google-maps/api';
+import { shallow } from 'zustand/shallow';
+
 import { PlaceResult } from 'lib/types/google.maps';
 import usePlaceDetailWindowStore from 'stores/placeDetailWindow';
-import { shallow } from 'zustand/shallow';
 
 type Props = {
   place: PlaceResult;

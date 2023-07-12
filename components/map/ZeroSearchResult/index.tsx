@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
 import { useGoogleMap } from '@react-google-maps/api';
+
 import useTextSearch from 'hooks/maps/useTextSearch';
 import useActionKeyEvent from 'hooks/useActionKeyEvent';
 
