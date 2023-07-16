@@ -2,10 +2,10 @@
 
 import { PropsWithChildren, useState } from 'react';
 
+import { useActionKeyEvent } from '@nft-team/react';
 import clsx from 'clsx';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 
-import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import { ChevronRightIcon } from 'lib/assets/icons';
 import { numberWithComma } from 'utils';
 

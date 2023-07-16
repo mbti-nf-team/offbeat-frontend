@@ -2,13 +2,12 @@
 
 import Image from 'next/image';
 
+import { DelayRenderComponent, GlobalPortal } from '@nft-team/react';
 import clsx from 'clsx';
 import { motion, useIsomorphicLayoutEffect, Variants } from 'framer-motion';
 
 import Accordion from 'components/common/Accordion';
 import Button from 'components/common/Button';
-import DelayRenderComponent from 'components/common/DelayRenderComponent';
-import GlobalPortal from 'components/common/GlobalPortal';
 import ResultCard from 'components/common/ResultCard';
 import Spinner from 'components/common/Spinner';
 import StarRating from 'components/common/StarRating';

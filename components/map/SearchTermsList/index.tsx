@@ -2,10 +2,10 @@ import {
   memo, useCallback, useEffect, useState,
 } from 'react';
 
+import { useActionKeyEvent } from '@nft-team/react';
 import { shallow } from 'zustand/shallow';
 
 import useGetPlaceDetails from 'hooks/maps/useGetPlaceDetails';
-import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import useRenderToast from 'hooks/useRenderToast';
 import usePlaceStore from 'stores/place';
 import useRecentSearchStore from 'stores/recentSearch';

@@ -1,5 +1,6 @@
+import { useActionKeyEvent } from '@nft-team/react';
+
 import StarRating from 'components/common/StarRating';
-import useActionKeyEvent from 'hooks/useActionKeyEvent';
 import { PlacesWithSearchResult } from 'lib/types/google.maps';
 import { checkNumberValue, numberWithComma } from 'utils';
 
