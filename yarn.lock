@@ -2954,6 +2954,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nft-team/react@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@nft-team/react@npm:1.2.0"
+  peerDependencies:
+    react: ^18
+    react-dom: ^18
+  checksum: 3fe204246e5af7367375a81371fb16e007ae05d37b09d3a1ba2eb4fce738610741f8b727884a1a13dacf7cfd2105836875e9c2fb8b55ae4697e85e9f342442f8
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -12963,6 +12973,7 @@ __metadata:
     "@commitlint/config-conventional": ^17.4.3
     "@next/eslint-plugin-next": ^13.4.6
     "@nft-team/eslint-config": ^1.1.1
+    "@nft-team/react": ^1.2.0
     "@react-google-maps/api": ^2.18.1
     "@storybook/addon-essentials": ^7.0.12
     "@storybook/addon-interactions": ^7.0.12

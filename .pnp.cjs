@@ -33,6 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@commitlint/config-conventional", "npm:17.4.4"],\
             ["@next/eslint-plugin-next", "npm:13.4.6"],\
             ["@nft-team/eslint-config", "npm:1.1.1"],\
+            ["@nft-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:1.2.0"],\
             ["@react-google-maps/api", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.18.1"],\
             ["@storybook/addon-essentials", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:7.0.12"],\
             ["@storybook/addon-interactions", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:7.0.12"],\
@@ -7013,6 +7014,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react-hooks", "virtual:1390af237d338a880183e560bb6bead62828805077f7b17b1b2c7c1f5849342807f4b0fae914ee018a2c59cf91af59d28942bcf5037386e8d3c2fdf3f98dd396#npm:4.6.0"],\
             ["eslint-plugin-simple-import-sort", "virtual:1390af237d338a880183e560bb6bead62828805077f7b17b1b2c7c1f5849342807f4b0fae914ee018a2c59cf91af59d28942bcf5037386e8d3c2fdf3f98dd396#npm:10.0.0"],\
             ["eslint-plugin-unused-imports", "virtual:1390af237d338a880183e560bb6bead62828805077f7b17b1b2c7c1f5849342807f4b0fae914ee018a2c59cf91af59d28942bcf5037386e8d3c2fdf3f98dd396#npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@nft-team/react", [\
+        ["npm:1.2.0", {\
+          "packageLocation": "./.yarn/cache/@nft-team-react-npm-1.2.0-59218b9571-3fe204246e.zip/node_modules/@nft-team/react/",\
+          "packageDependencies": [\
+            ["@nft-team/react", "npm:1.2.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:1.2.0", {\
+          "packageLocation": "./.yarn/__virtual__/@nft-team-react-virtual-21efc1d2ba/0/cache/@nft-team-react-npm-1.2.0-59218b9571-3fe204246e.zip/node_modules/@nft-team/react/",\
+          "packageDependencies": [\
+            ["@nft-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:1.2.0"],\
+            ["@types/react", "npm:18.0.38"],\
+            ["@types/react-dom", "npm:18.0.11"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -19895,6 +19922,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@commitlint/config-conventional", "npm:17.4.4"],\
             ["@next/eslint-plugin-next", "npm:13.4.6"],\
             ["@nft-team/eslint-config", "npm:1.1.1"],\
+            ["@nft-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:1.2.0"],\
             ["@react-google-maps/api", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.18.1"],\
             ["@storybook/addon-essentials", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:7.0.12"],\
             ["@storybook/addon-interactions", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:7.0.12"],\

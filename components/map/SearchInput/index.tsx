@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState } from 'react';
 
+import { useActionKeyEvent, useDebounce } from '@nft-team/react';
+
 import Input from 'components/common/Input';
-import useActionKeyEvent from 'hooks/useActionKeyEvent';
-import useDebounce from 'hooks/useDebounce';
 
 import SearchTermsBox from '../SearchTermsBox';
 
