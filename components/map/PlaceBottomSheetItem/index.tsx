@@ -1,8 +1,9 @@
+import { checkNumber } from '@nft-team/core';
 import { useActionKeyEvent } from '@nft-team/react';
 
 import StarRating from 'components/common/StarRating';
 import { PlacesWithSearchResult } from 'lib/types/google.maps';
-import { checkNumberValue, numberWithComma } from 'utils';
+import { numberWithComma } from 'utils';
 
 import styles from './index.module.scss';
 
@@ -13,7 +14,7 @@ type Props = {
 
 function PlaceBottomSheetItem({ place, onClick }: Props) {
   const { name, user_ratings_total } = place;
-  const rating = checkNumberValue(place.rating);
+  const rating = checkNumber(place.rating);
 
   const onKeyDown = useActionKeyEvent<HTMLLIElement>(['Enter', 'NumpadEnter'], () => onClick);
 
