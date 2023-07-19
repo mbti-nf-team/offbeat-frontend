@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 
+import { checkEmpty, checkNumber } from '@nft-team/core';
 import { DelayRenderComponent, GlobalPortal } from '@nft-team/react';
 import clsx from 'clsx';
 import { motion, useIsomorphicLayoutEffect, Variants } from 'framer-motion';
@@ -13,7 +14,6 @@ import Spinner from 'components/common/Spinner';
 import StarRating from 'components/common/StarRating';
 import { CloseIcon } from 'lib/assets/icons';
 import { PlacesWithSearchResult } from 'lib/types/google.maps';
-import { checkEmpty, checkNumberValue } from 'utils';
 
 import styles from './index.module.scss';
 
@@ -127,7 +127,7 @@ function PlaceDetailWindow({
                   {placeDetail?.searchBlogPost.status === 'fulfilled' && (
                     <Accordion
                       title="네이버 검색결과"
-                      counterColor={checkNumberValue(placeDetail?.searchBlogPost.value.total_count) > NAVER_MAX_REVIEW_COUNT ? 'danger' : 'positive'}
+                      counterColor={checkNumber(placeDetail?.searchBlogPost.value.total_count) > NAVER_MAX_REVIEW_COUNT ? 'danger' : 'positive'}
                       counter={placeDetail?.searchBlogPost.value.total_count}
                       wrapperClassName={styles.reviewAccordionWrapper}
                     >

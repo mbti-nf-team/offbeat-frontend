@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 
+import { checkNumber, generateArrayOfNumber } from '@nft-team/core';
 import clsx from 'clsx';
 
 import {
   EmptyStarIcon, FillStarIcon, HalfStarIcon, PixelEmptyStar, PixelFillStar, PixelHalfStar,
 } from 'lib/assets/icons';
-import { checkNumberValue, generateArrayOfNumber } from 'utils';
 
 import styles from './index.module.scss';
 
@@ -19,7 +19,7 @@ type Props = {
 function StarRating({
   rating, maxRating = 5, type, className,
 }: Props) {
-  const numberRating = checkNumberValue(rating);
+  const numberRating = checkNumber(rating);
   const fillStarCount = Math.floor(numberRating);
 
   const detailClassName = clsx({

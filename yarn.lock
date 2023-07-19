@@ -2934,6 +2934,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nft-team/core@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@nft-team/core@npm:1.1.0"
+  checksum: cea9ed8c805d8fcaa23f7b69cf28d3f22f74dd9075d4730441b98af14c9efe9f03ecb539ad7894fb3b993543dc66dd82439e743a387e88bb0e52032b73811f47
+  languageName: node
+  linkType: hard
+
 "@nft-team/eslint-config@npm:^1.1.1":
   version: 1.1.1
   resolution: "@nft-team/eslint-config@npm:1.1.1"
@@ -12972,6 +12979,7 @@ __metadata:
     "@commitlint/cli": ^17.4.3
     "@commitlint/config-conventional": ^17.4.3
     "@next/eslint-plugin-next": ^13.4.6
+    "@nft-team/core": ^1.1.0
     "@nft-team/eslint-config": ^1.1.1
     "@nft-team/react": ^1.2.0
     "@react-google-maps/api": ^2.18.1

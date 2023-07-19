@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
+import { checkEmpty } from '@nft-team/core';
 import { useQuery } from '@tanstack/react-query';
 import { shallow } from 'zustand/shallow';
 
@@ -10,7 +11,6 @@ import { fetchAllSettledSearchBlogs } from 'lib/apis/search';
 import { PlaceResult } from 'lib/types/google.maps';
 import { SelectedPlace } from 'lib/types/search';
 import usePlaceDetailWindowStore from 'stores/placeDetailWindow';
-import { checkEmpty } from 'utils';
 
 import PlaceBottomSheetItem from '../PlaceBottomSheetItem';
 

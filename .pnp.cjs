@@ -32,6 +32,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@commitlint/cli", "npm:17.4.4"],\
             ["@commitlint/config-conventional", "npm:17.4.4"],\
             ["@next/eslint-plugin-next", "npm:13.4.6"],\
+            ["@nft-team/core", "npm:1.1.0"],\
             ["@nft-team/eslint-config", "npm:1.1.1"],\
             ["@nft-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:1.2.0"],\
             ["@react-google-maps/api", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.18.1"],\
@@ -6993,6 +6994,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/unplugged/@next-swc-win32-x64-msvc-npm-13.4.6-fe4097f31e/node_modules/@next/swc-win32-x64-msvc/",\
           "packageDependencies": [\
             ["@next/swc-win32-x64-msvc", "npm:13.4.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@nft-team/core", [\
+        ["npm:1.1.0", {\
+          "packageLocation": "./.yarn/cache/@nft-team-core-npm-1.1.0-407e583f59-cea9ed8c80.zip/node_modules/@nft-team/core/",\
+          "packageDependencies": [\
+            ["@nft-team/core", "npm:1.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -19921,6 +19931,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@commitlint/cli", "npm:17.4.4"],\
             ["@commitlint/config-conventional", "npm:17.4.4"],\
             ["@next/eslint-plugin-next", "npm:13.4.6"],\
+            ["@nft-team/core", "npm:1.1.0"],\
             ["@nft-team/eslint-config", "npm:1.1.1"],\
             ["@nft-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:1.2.0"],\
             ["@react-google-maps/api", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.18.1"],\
