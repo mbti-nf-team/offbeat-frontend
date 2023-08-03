@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { useActionKeyEvent } from '@nft-team/react';
+import { useActionKeyEvent } from '@nf-team/react';
 import { useGoogleMap } from '@react-google-maps/api';
 
 import useTextSearch from 'hooks/maps/useTextSearch';

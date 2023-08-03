@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { checkNumber, generateArrayOfNumber } from '@nft-team/core';
+import { checkNumber, generateArrayOfNumber } from '@nf-team/core';
 import clsx from 'clsx';
 
 import {

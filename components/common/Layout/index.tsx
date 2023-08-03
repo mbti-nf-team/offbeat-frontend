@@ -2,7 +2,7 @@
 
 import { PropsWithChildren } from 'react';
 
-import { useResizeViewportHeight } from '@nft-team/react';
+import { useResizeViewportHeight } from '@nf-team/react';
 
 import styles from './index.module.scss';
 
