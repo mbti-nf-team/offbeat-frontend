@@ -2,7 +2,7 @@ import {
   memo, useCallback, useEffect, useState,
 } from 'react';
 
-import { useActionKeyEvent } from '@nft-team/react';
+import { useActionKeyEvent } from '@nf-team/react';
 import { shallow } from 'zustand/shallow';
 
 import useGetPlaceDetails from 'hooks/maps/useGetPlaceDetails';

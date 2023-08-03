@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { useActionKeyEvent } from '@nft-team/react';
+import { useActionKeyEvent } from '@nf-team/react';
 
 import styles from './index.module.scss';
 

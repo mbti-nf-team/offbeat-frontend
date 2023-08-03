@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
-import { checkEmpty } from '@nft-team/core';
+import { checkEmpty } from '@nf-team/core';
 import { useQuery } from '@tanstack/react-query';
 import { shallow } from 'zustand/shallow';
 

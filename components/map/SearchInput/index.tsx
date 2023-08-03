@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 
-import { useActionKeyEvent, useDebounce } from '@nft-team/react';
+import { useActionKeyEvent, useDebounce } from '@nf-team/react';
 
 import Input from 'components/common/Input';
 

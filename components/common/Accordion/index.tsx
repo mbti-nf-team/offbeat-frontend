@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, useState } from 'react';
 
-import { useActionKeyEvent } from '@nft-team/react';
+import { useActionKeyEvent } from '@nf-team/react';
 import clsx from 'clsx';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 

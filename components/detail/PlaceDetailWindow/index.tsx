@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 
-import { checkEmpty, checkNumber } from '@nft-team/core';
-import { DelayRenderComponent, GlobalPortal } from '@nft-team/react';
+import { checkEmpty, checkNumber } from '@nf-team/core';
+import { DelayRenderComponent, GlobalPortal } from '@nf-team/react';
 import clsx from 'clsx';
 import { motion, useIsomorphicLayoutEffect, Variants } from 'framer-motion';
 

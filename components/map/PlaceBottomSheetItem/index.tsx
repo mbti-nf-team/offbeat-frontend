@@ -1,5 +1,5 @@
-import { checkNumber } from '@nft-team/core';
-import { useActionKeyEvent } from '@nft-team/react';
+import { checkNumber } from '@nf-team/core';
+import { useActionKeyEvent } from '@nf-team/react';
 
 import StarRating from 'components/common/StarRating';
 import { PlacesWithSearchResult } from 'lib/types/google.maps';

@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, ReactNode } from 'react';
 
-import { useActionKeyEvent } from '@nft-team/react';
+import { useActionKeyEvent } from '@nf-team/react';
 import clsx from 'clsx';
 
 import styles from './index.module.scss';
