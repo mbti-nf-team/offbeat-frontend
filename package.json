@@ -105,5 +105,5 @@
     "util": "^0.12.5",
     "webpack": "^5.80.0"
   },
-  "packageManager": "yarn@3.6.0"
+  "packageManager": "yarn@3.6.1"
 }
