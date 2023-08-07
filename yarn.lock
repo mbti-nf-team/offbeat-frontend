@@ -12678,7 +12678,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:^13.4.13":
+"next@npm:^13.4.6":
   version: 13.4.13
   resolution: "next@npm:13.4.13"
   dependencies:
@@ -13085,7 +13085,7 @@ __metadata:
     jest-plugin-context: ^2.9.0
     jest-transformer-svg: ^2.0.1
     lint-staged: ^13.1.2
-    next: ^13.4.13
+    next: ^13.4.6
     qs: ^6.11.1
     react: 18.2.0
     react-dom: 18.2.0
