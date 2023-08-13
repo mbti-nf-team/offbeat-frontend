@@ -2934,16 +2934,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nf-team/core@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@nf-team/core@npm:2.0.0"
-  checksum: 7f0e47bc0e6290560ac017ec95169da97334766c770786d080b0221cdd64275fbde31091f250b88619bf106a49d4c37e567c1c8d2a9426360601a7a2af161f54
+"@nf-team/core@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@nf-team/core@npm:2.0.1"
+  checksum: 3ba9bb2fda840e34409fbe3ba55311814f7dd3f17448858b76195cde9295805725fbac7f9fa7eb798ed6c82e5067838fbe01cdd6fb5b3f40fa3e518cbfe6856f
   languageName: node
   linkType: hard
 
-"@nf-team/eslint-config@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@nf-team/eslint-config@npm:2.0.0"
+"@nf-team/eslint-config@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@nf-team/eslint-config@npm:2.0.1"
   dependencies:
     "@typescript-eslint/eslint-plugin": ^5.60.0
     "@typescript-eslint/parser": ^5.60.0
@@ -2957,17 +2957,17 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-simple-import-sort: ^10.0.0
     eslint-plugin-unused-imports: ^2.0.0
-  checksum: ce3ad728bfafe2a334f6b0f0cdf369874193126892ddc72c6a42a1eae32e494b9caf9ecbbe5dc0a53bd05f6e0c69e766bb499599ed0fab82acc59762e32ed57a
+  checksum: 661cbf41b9b508ca32826a27a42ee6a71b8c79da3201070414673a9fd892f5897800fbabf4a20be23b673796c2cd78a2af65fbb02687d39ad9566d3d0eba3d4c
   languageName: node
   linkType: hard
 
-"@nf-team/react@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@nf-team/react@npm:2.0.0"
+"@nf-team/react@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@nf-team/react@npm:2.0.1"
   peerDependencies:
     react: ^18
     react-dom: ^18
-  checksum: 60beaf4bc8cce200fb69c4bcddad68d590a0e2069e7b23fffd18b92355a0263ba93ad675a2ab648d2faff2f5cbb5f54f8c55ff1309c6c24b8f8f349164883b70
+  checksum: fcab32c88fa733b1304cf2c1350136eee381ae9c9019eaa42b1a364dc2a275abf443e61d5bd140b2acddd1b25f9f3b3f9109b94aeb839d82919d6b0028da090a
   languageName: node
   linkType: hard
 
@@ -13037,9 +13037,9 @@ __metadata:
     "@commitlint/cli": ^17.4.3
     "@commitlint/config-conventional": ^17.4.3
     "@next/eslint-plugin-next": ^13.4.6
-    "@nf-team/core": ^2.0.0
-    "@nf-team/eslint-config": ^2.0.0
-    "@nf-team/react": ^2.0.0
+    "@nf-team/core": ^2.0.1
+    "@nf-team/eslint-config": ^2.0.1
+    "@nf-team/react": ^2.0.1
     "@react-google-maps/api": ^2.18.1
     "@storybook/addon-essentials": ^7.0.12
     "@storybook/addon-interactions": ^7.0.12
