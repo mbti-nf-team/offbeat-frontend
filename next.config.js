@@ -8,6 +8,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  output: 'standalone',
   compiler: {
     reactRemoveProperties: isProd && {
       properties: ['^data-test'],
