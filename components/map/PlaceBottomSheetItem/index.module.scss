@@ -1,0 +1,50 @@
+@import "/styles/main.scss";
+
+.placeItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px 24px;
+  gap: 4px;
+  padding: 16px 24px;
+  border-bottom: 1px solid color("black/secondary");
+  cursor: pointer;
+
+  &:active {
+    background-color: color("black/active");
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: color("black/hover");
+    }
+  }
+
+  & > div.placeName {
+    @include text("title 1/600", "black/default");
+    letter-spacing: -0.01em;
+  }
+
+  & > div.searchTotal {
+    @include text("title 3/500", "black/secondary");
+  }
+
+  & > div.category {
+    @include text("title 3/500", "gray/default");
+  }
+}
+
+.placeRatingWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+
+  & > div.placeRating {
+    @include text("title 3/600");
+  }
+
+  & > div.placeUserRatingsTotal {
+    @include text("title 3/500", "black/secondary");
+  }
+}

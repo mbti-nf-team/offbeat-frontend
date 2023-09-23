@@ -1,0 +1,41 @@
+@import "/styles/main.scss";
+
+.countryListWrapper {
+  user-select: none;
+  list-style: none;
+  background-color: color("white");
+  margin: 0;
+  padding: 0;
+}
+
+.countryItemTitle {
+  @include text("headline 3/600", "black/default");
+
+  background-color: color("white");
+  position: sticky;
+  top: 180px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+
+  &.isFocused {
+    top: 156px;
+  }
+}
+
+.fixedLabel {
+  position: absolute;
+  top: -20px;
+}
+
+
+.countryItemWrapper {
+  li:first-of-type {
+    border-top: 1px solid color("black/default");
+  }
+
+  li:last-of-type {
+    border-bottom: 1px solid color("transparent");
+  }
+}
