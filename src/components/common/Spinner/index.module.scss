@@ -1,0 +1,41 @@
+@import "/src/styles/main.scss";
+
+.loader {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-image: initial;
+  border-radius: 50%;
+  animation-iteration-count: infinite;
+  animation-name: rotation;
+  animation-timing-function: linear;
+}
+
+.large {
+  width: 48px;
+  height: 48px;
+  border-width: 6px;
+}
+
+.medium {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+}
+
+.small {
+  width: 16px;
+  height: 16px;
+  border-width: 1.5px;
+}
+
+.black {
+  border-color: color("black/default") color("black/tertiary")
+    color("black/tertiary") color("black/default");
+}
+
+.white {
+  border-color: color("white/default") color("white/tertiary")
+    color("white/tertiary") color("white/default");
+}
