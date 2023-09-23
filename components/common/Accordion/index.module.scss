@@ -1,0 +1,84 @@
+@import "/styles/main.scss";
+
+.accordionWrapper {
+  border-bottom: 1px solid color("black/default");
+  overflow: hidden;
+  height: auto;
+}
+
+.accordionHeader {
+  display: flex;
+  flex-direction: row;
+  padding: 16px 24px;
+  gap: 20px;
+  position: relative;
+  z-index: var(--accordion-header-z-index);
+  user-select: none;
+  cursor: pointer;
+  align-items: center;
+  width: 100%;
+  background-color: color("white/default");
+
+  &::after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  &:active:after {
+    background-color: color("black/default");
+    opacity: 0.08;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:after {
+      background-color: color("black/default");
+      opacity: 0.04;
+    }
+  }
+
+  .title {
+    width: 100%;
+
+    @include text("headline 3/700", "black/default");
+  }
+
+  .counter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 100px;
+    width: max-content;
+    height: 28px;
+
+    @include text("title 3/700", "white/default");
+  }
+
+  .positive {
+    background-color: color("positive/default");
+  }
+
+  .danger {
+    background-color: color("danger/default");
+  }
+}
+
+.chevronIcon,
+.isOpenAccordion {
+  transform: rotate(90deg);
+}
+
+.chevronIcon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.chevronIcon:not(.isOpenAccordion) {
+  transform: rotate(0);
+}

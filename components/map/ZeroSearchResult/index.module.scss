@@ -1,0 +1,19 @@
+@import "/styles/main.scss";
+
+.emptySearchTerm {
+  @include text("title 1/600");
+  cursor: pointer;
+  flex-direction: row;
+  display: flex;
+  border-top: 1px solid color("black/default");
+  padding: 14px 0;
+
+  & > strong {
+    @include text("title 1/600");
+  }
+
+  & > p {
+    @include text("title 1/500");
+    margin: 0;
+  }
+}
