@@ -5,10 +5,10 @@ import type { StorybookConfig } from "@storybook/nextjs";
 const config: StorybookConfig = {
   staticDirs: ['../public'],
   stories: [
-    "../components/**/*.stories.mdx",
-    "../components/**/*.stories.@(js|jsx|ts|tsx)",
-    "../stories/**/*.mdx", 
-    "../stories/**/*.stories.@(js|jsx|ts|tsx)"
+    "../src/components/**/*.stories.mdx",
+    "../src/components/**/*.stories.@(js|jsx|ts|tsx)",
+    "../src/stories/**/*.mdx", 
+    "../src/stories/**/*.stories.@(js|jsx|ts|tsx)"
   ],
   addons: [
     path.dirname(

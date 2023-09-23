@@ -1,0 +1,28 @@
+@import "/src/styles/main.scss";
+
+.placeList {
+  margin: 0px;
+  padding: 0px;
+}
+
+.zeroResultBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+
+  & > div:first-of-type {
+    @include text("title 1/600", "black/default");
+  }
+}
+
+.loadingWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 112px;
+  width: 100%;
+}
