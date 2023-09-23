@@ -1,0 +1,19 @@
+@import "/src/styles/main.scss";
+
+.searchTermsBlock {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  height: 100%;
+  background-color: color("white/default");
+  z-index: var(--search-terms-box-z-index);
+  overflow-y: auto;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.searchTermsBox {
+  margin: 104px 16px 0px 16px;
+}

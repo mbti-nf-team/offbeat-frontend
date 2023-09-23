@@ -22,7 +22,10 @@
     "incremental": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "plugins": [
       {
         "name": "next"

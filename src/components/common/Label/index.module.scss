@@ -1,0 +1,155 @@
+@import "/src/styles/main.scss";
+
+.labelWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 16px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+
+  .iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.medium {
+  @include text("headline 3/600");
+
+  min-width: 140px;
+  width: fit-content;
+  height: 40px;
+
+  .prefixIcon {
+    margin-right: 12px;
+  }
+
+  .suffixIcon {
+    margin-left: 12px;
+  }
+
+  & svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.small {
+  @include text("title 2/600");
+
+  min-width: 117px;
+  width: fit-content;
+  height: 34px;
+
+  .prefixIcon {
+    margin-right: 8px;
+  }
+
+  .suffixIcon {
+    margin-left: 8px;
+  }
+
+  & svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.default {
+  color: color("black/default");
+}
+
+.reverse {
+  background-color: color("black/primary");
+}
+
+.default-done {
+  background-color: color("done/default");
+}
+
+.default-positive {
+  background-color: color("positive/default");
+}
+
+.default-danger {
+  background-color: color("danger/default");
+}
+
+.default-attention {
+  background-color: color("attention/default");
+}
+
+.default-active {
+  background-color: color("active/default");
+}
+
+.default-relate {
+  background-color: color("relate/default");
+}
+
+.default-highlight {
+  background-color: color("highlight/default");
+}
+
+.reverse-done {
+  color: color("done/default");
+}
+
+.reverse-positive {
+  color: color("positive/default");
+}
+
+.reverse-danger {
+  color: color("danger/default");
+}
+
+.reverse-attention {
+  color: color("attention/default");
+}
+
+.reverse-active {
+  color: color("active/default");
+}
+
+.reverse-relate {
+  color: color("relate/default");
+}
+
+.reverse-highlight {
+  color: color("highlight/default");
+}
+
+.default-small {
+  border: 1.5px solid color("black/default");
+}
+
+.default-medium {
+  border: 2px solid color("black/default");
+}
+
+.button {
+  cursor: pointer;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:not(:disabled):after {
+      content: " ";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: color("black/default");
+      opacity: 0;
+      transition: opacity 0.1s ease-in-out;
+    }
+
+    &:not(:disabled):not(.disabled):hover:after {
+      opacity: 0.15;
+    }
+  }
+}
