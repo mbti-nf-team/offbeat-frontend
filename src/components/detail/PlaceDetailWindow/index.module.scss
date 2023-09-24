@@ -101,15 +101,16 @@
   flex-direction: column;
   gap: 16px;
   padding: 8px 24px 40px 24px;
+  width: 100%;
 }
 
 .reviewWrapper {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   padding: 8px 0 40px 0;
+  width: 100%;
 }
 
 .reviewAccordionWrapper {
-  margin: 0px -16px;
+  width: calc(100% + 32px);
 }

@@ -10,7 +10,7 @@ import { motion, Variants } from 'framer-motion';
 import Accordion from '@/components/common/Accordion';
 import Button from '@/components/common/Button';
 import ResultCard from '@/components/common/ResultCard';
-import ReviewCard from '@/components/common/ReviewCard/ResultCard';
+import ReviewCard from '@/components/common/ReviewCard';
 import Spinner from '@/components/common/Spinner';
 import StarRating from '@/components/common/StarRating';
 import { CloseIcon } from '@/lib/assets/icons';

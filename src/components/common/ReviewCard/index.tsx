@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import clsx from 'clsx';
 
-import StarRating from '../../StarRating';
+import StarRating from '../StarRating';
 
 import styles from './index.module.scss';
 
