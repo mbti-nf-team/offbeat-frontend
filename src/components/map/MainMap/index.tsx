@@ -22,7 +22,7 @@ function MainMap() {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
     libraries,
-    region: 'KR',
+    region: 'JP',
   });
 
   const [mapState, setMapState] = useState<google.maps.Map | null>(null);

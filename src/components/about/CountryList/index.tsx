@@ -27,9 +27,11 @@ function CountryList({ keyword, countries, isFocused }: Props) {
     ranking,
   }) => ranking === -1), [countries]);
 
-  const rankingCountries = useMemo(() => [...countries
-    .filter(({ ranking }) => ranking !== -1)]
-    .sort((a, b) => a.ranking - b.ranking), [countries]);
+  const rankingCountries = useMemo(
+    () => [...countries.filter(({ ranking }) => ranking !== -1)]
+      .sort((a, b) => a.ranking - b.ranking),
+    [countries],
+  );
 
   const [rankingCountriesState, setRankingCountriesState] = useState<Country[]>(rankingCountries);
   const [
