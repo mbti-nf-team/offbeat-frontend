@@ -96,11 +96,18 @@
   }
 }
 
-.reviewsWrapper {
+.resultWrapper {
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 8px 24px 40px 24px;
+}
+
+.reviewWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0 40px 0;
 }
 
 .reviewAccordionWrapper {

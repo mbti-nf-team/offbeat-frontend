@@ -10,6 +10,7 @@ import { motion, Variants } from 'framer-motion';
 import Accordion from '@/components/common/Accordion';
 import Button from '@/components/common/Button';
 import ResultCard from '@/components/common/ResultCard';
+import ReviewCard from '@/components/common/ReviewCard/ResultCard';
 import Spinner from '@/components/common/Spinner';
 import StarRating from '@/components/common/StarRating';
 import { CloseIcon } from '@/lib/assets/icons';
@@ -113,14 +114,18 @@ function PlaceDetailWindow({
                     counterColor={checkEmpty(placeDetail?.reviews).filter(({ language }) => language === 'ko').length >= GOOGLE_MAX_REVIEW_COUNT ? 'danger' : 'positive'}
                     wrapperClassName={styles.reviewAccordionWrapper}
                   >
-                    <div className={styles.reviewsWrapper}>
-                      {placeDetail?.reviews?.map((review) => (
-                        <a href={review.author_url} key={review.time} style={{ marginBottom: '10px' }}>
-                          <div>{`작성자: ${review.author_name}`}</div>
-                          <div>{`언어: ${review.language}`}</div>
-                          <div>{review.relative_time_description}</div>
-                          <div>{review.text}</div>
-                        </a>
+                    <div className={styles.reviewWrapper}>
+                      {placeDetail?.reviews?.map((review, index, array) => (
+                        <ReviewCard
+                          key={review.time}
+                          author={review.author_name}
+                          isLocalReview={review.language !== 'ko'}
+                          profileUrl={review.profile_photo_url}
+                          rating={review.rating}
+                          review={review.text}
+                          createdAt={review.relative_time_description}
+                          hasSeparator={index !== array.length - 1}
+                        />
                       ))}
                     </div>
                   </Accordion>
@@ -131,7 +136,7 @@ function PlaceDetailWindow({
                       counter={placeDetail?.searchBlogPost.value.total_count}
                       wrapperClassName={styles.reviewAccordionWrapper}
                     >
-                      <div className={styles.reviewsWrapper}>
+                      <div className={styles.resultWrapper}>
                         {placeDetail?.searchBlogPost.value.posts.map(({
                           title, description, link, thumbnail,
                         }) => (
