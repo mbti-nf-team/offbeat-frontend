@@ -21,6 +21,7 @@ export async function api<T>(config: RequestConfig): Promise<T> {
     ...config.headers,
     'Content-Type': 'application/json',
     Accept: 'application/json',
+    'nfteam-api-token': process.env.NEXT_PUBLIC_API_HEADER_TOKEN,
   };
 
   const isExternal = config.url.indexOf('://') > -1 || config.url.indexOf('//') > -1;
