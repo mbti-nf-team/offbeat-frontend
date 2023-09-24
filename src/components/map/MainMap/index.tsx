@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import { shallow } from 'zustand/shallow';
@@ -13,7 +13,11 @@ import PlaceBottomSheet from '../PlaceBottomSheet';
 import PlaceResultMarker from '../PlaceResultMarker';
 import SearchInput from '../SearchInput';
 
-function MainMap() {
+type Props = {
+  countryCode?: string;
+};
+
+function MainMap({ countryCode }: Props) {
   const [libraries] = useState<['places', 'geometry']>(['places', 'geometry']);
   const { saveNextKeyword } = useRecentSearchStore(({ addRecentSearch }) => ({
     saveNextKeyword: addRecentSearch,
@@ -22,11 +26,12 @@ function MainMap() {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
     libraries,
-    region: 'JP',
+    region: 'KR',
   });
 
   const [mapState, setMapState] = useState<google.maps.Map | null>(null);
   const { placesResult, onTextSearch, isZeroResult } = useTextSearch(mapState);
+  const [bounds, setBounds] = useState<google.maps.LatLngBounds>();
 
   const onLoad = useCallback((map: google.maps.Map) => {
     setMapState(map);
@@ -41,11 +46,29 @@ function MainMap() {
     saveNextKeyword(keyword);
   };
 
+  useEffect(() => {
+    if (!isLoaded) {
+      return;
+    }
+
+    const geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({
+      componentRestrictions: {
+        country: countryCode || 'KR',
+      },
+    }, (results, status) => {
+      if (status === google.maps.GeocoderStatus.OK) {
+        setBounds(results?.[0].geometry.bounds);
+      }
+    });
+  }, [isLoaded, countryCode]);
+
   if (loadError) {
     return <div>Map cannot be loaded right now, sorry.</div>;
   }
 
-  if (!isLoaded) {
+  if (!isLoaded || !bounds) {
     return null;
   }
 
@@ -56,21 +79,13 @@ function MainMap() {
         width: '100%',
         maxWidth: '430px',
       }}
-      zoom={3}
-      center={new google.maps.LatLng(36.204824, 138.252924)}
+      zoom={5}
+      center={bounds.getCenter()}
       onUnmount={onUnmount}
       onLoad={onLoad}
       options={{
         disableDefaultUI: true,
         minZoom: 3,
-        restriction: {
-          // TODO - test 용 일본
-          latLngBounds: new google.maps.LatLngBounds(
-            new google.maps.LatLng(20.3585295, 122.8554688),
-            new google.maps.LatLng(45.6412626, 154.0031455),
-          ),
-          strictBounds: false,
-        },
       }}
     >
       <SearchInput onSubmit={handleSubmit} />

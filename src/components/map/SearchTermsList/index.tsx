@@ -67,10 +67,6 @@ function SearchTermsList({ keyword, onInput }: Props) {
     service.getPlacePredictions({
       input: keyword,
       sessionToken,
-      bounds: new google.maps.LatLngBounds(
-        new google.maps.LatLng(20.3585295, 122.8554688),
-        new google.maps.LatLng(45.6412626, 154.0031455),
-      ),
     }, displaySuggestions);
   }, [keyword, displaySuggestions, service, sessionToken]);
 
