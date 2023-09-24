@@ -14,16 +14,17 @@ type Props = {
   maxRating?: number;
   type: 'list' | 'detail'
   className?: string;
+  size?: 'large' | 'small';
 };
 
 function StarRating({
-  rating, maxRating = 5, type, className,
+  rating, maxRating = 5, type, className, size = 'large',
 }: Props) {
   const numberRating = checkNumber(rating);
   const fillStarCount = Math.floor(numberRating);
 
   const detailClassName = clsx({
-    [styles.detailStar]: type === 'detail',
+    [styles[size]]: type === 'detail',
   });
 
   const EmptyStar = {
