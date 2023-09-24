@@ -4,9 +4,13 @@ export const metadata = {
   title: 'offbeat-map',
 };
 
-function Page() {
+type Props = {
+  searchParams: { [key: string]: string | undefined; };
+};
+
+function Page({ searchParams }: Props) {
   return (
-    <MainMap />
+    <MainMap countryCode={searchParams?.country} />
   );
 }
 

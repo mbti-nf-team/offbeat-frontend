@@ -10,6 +10,7 @@ jest.mock('next/navigation', () => ({
 
 describe('CountryItem', () => {
   const countryName = '대한민국';
+  const countryCode = 'KR';
   const mockPush = jest.fn();
 
   beforeEach(() => {
@@ -21,7 +22,7 @@ describe('CountryItem', () => {
   });
 
   const renderCountryItem = () => render((
-    <CountryItem emoji="🇰🇷" koreanName={countryName} />
+    <CountryItem code={countryCode} emoji="🇰🇷" koreanName={countryName} />
   ));
 
   it('나라 이름이 나타나야만 한다', () => {
@@ -36,7 +37,7 @@ describe('CountryItem', () => {
 
       fireEvent.click(screen.getByText(countryName));
 
-      expect(mockPush).toHaveBeenCalledWith('/maps');
+      expect(mockPush).toHaveBeenCalledWith(`/maps?country=${countryCode}`);
     });
   });
 });

@@ -43,14 +43,7 @@ function useTextSearch(map: google.maps.Map | null) {
 
   const onTextSearch = useCallback((request: TextSearchRequest) => {
     if (request?.query) {
-      placeService?.textSearch({
-        ...request,
-        // TODO - 입력받을 수 있겠끔 변경
-        bounds: new google.maps.LatLngBounds(
-          new google.maps.LatLng(20.3585295, 122.8554688),
-          new google.maps.LatLng(45.6412626, 154.0031455),
-        ),
-      }, textSearchAction);
+      placeService?.textSearch(request, textSearchAction);
     }
   }, [placeService]);
 

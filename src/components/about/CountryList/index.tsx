@@ -96,6 +96,7 @@ function CountryList({ keyword, countries, isFocused }: Props) {
           <CountryItem
             key={code}
             emoji={emoji}
+            code={code}
             koreanName={koreanName}
           />
         ))}
@@ -117,6 +118,7 @@ function CountryList({ keyword, countries, isFocused }: Props) {
         {unRankingCountriesState.map(({ code, koreanName, emoji }) => (
           <CountryItem
             key={code}
+            code={code}
             emoji={emoji}
             koreanName={koreanName}
           />
