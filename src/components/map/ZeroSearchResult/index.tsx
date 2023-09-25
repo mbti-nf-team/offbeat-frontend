@@ -1,18 +1,23 @@
-import { memo } from 'react';
+import {
+  ForwardedRef, forwardRef, memo, RefObject,
+} from 'react';
 
-import { useActionKeyEvent } from '@nf-team/react';
 import { useGoogleMap } from '@react-google-maps/api';
 
 import useTextSearch from '@/hooks/maps/useTextSearch';
+import useSearchActionKeyEvent from '@/hooks/useSearchActionKeyEvent';
 
 import styles from './index.module.scss';
 
 type Props = {
   keyword: string;
   onInput: (value: string) => void;
+  inputRef: RefObject<HTMLInputElement>;
 };
 
-function ZeroSearchResult({ keyword, onInput }: Props) {
+function ZeroSearchResult({
+  keyword, onInput, inputRef,
+}: Props, ref: ForwardedRef<HTMLButtonElement>) {
   const map = useGoogleMap();
   const { onTextSearch } = useTextSearch(map);
 
@@ -23,21 +28,23 @@ function ZeroSearchResult({ keyword, onInput }: Props) {
     onInput(keyword);
   };
 
-  const onKeyDownKeyword = useActionKeyEvent<HTMLDivElement>(['Enter', 'NumpadEnter'], onSubmit);
+  const onKeyDown = useSearchActionKeyEvent({
+    inputRef, onActionEvent: onSubmit,
+  });
 
   return (
-    <div
+    <button
+      type="button"
+      ref={ref}
       className={styles.emptySearchTerm}
-      tabIndex={0}
-      role="menuitem"
-      onKeyDown={onKeyDownKeyword}
+      onKeyDown={onKeyDown}
       onClick={onSubmit}
     >
       <strong>{`‘${keyword}’`}</strong>
       &nbsp;
       <p>검색</p>
-    </div>
+    </button>
   );
 }
 
-export default memo(ZeroSearchResult);
+export default memo(forwardRef<HTMLButtonElement, Props>(ZeroSearchResult));

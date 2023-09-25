@@ -1,12 +1,12 @@
 import {
-  memo, useCallback, useEffect, useRef, useState,
+  ForwardedRef, forwardRef, memo, RefObject, useCallback, useEffect, useState,
 } from 'react';
 
-import { useActionKeyEvent } from '@nf-team/react';
 import { shallow } from 'zustand/shallow';
 
 import useGetPlaceDetails from '@/hooks/maps/useGetPlaceDetails';
 import useRenderToast from '@/hooks/useRenderToast';
+import useSearchActionKeyEvent from '@/hooks/useSearchActionKeyEvent';
 import usePlaceStore from '@/stores/place';
 import useRecentSearchStore from '@/stores/recentSearch';
 
@@ -17,14 +17,12 @@ import styles from './index.module.scss';
 type Props = {
   keyword: string;
   onInput: (value: string) => void;
-  isArrowDownEvent: boolean;
-  resetArrowDownEvent: () => void;
+  inputRef: RefObject<HTMLInputElement>;
 };
 
 function SearchTermsList({
-  keyword, onInput, isArrowDownEvent, resetArrowDownEvent,
-}: Props) {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  keyword, onInput, inputRef,
+}: Props, ref: ForwardedRef<HTMLButtonElement>) {
   const [service] = useState(new google.maps.places.AutocompleteService());
   const [sessionToken] = useState(new google.maps.places.AutocompleteSessionToken());
   const [
@@ -45,12 +43,8 @@ function SearchTermsList({
     addRecentSearch(placeName);
   };
 
-  const onKeyDown = useActionKeyEvent<HTMLButtonElement, [string, string]>(['Enter', 'NumpadEnter', 'ArrowDown', 'ArrowUp'], (e, placeId, placeName) => {
-    if (e.code === 'ArrowDown') {
-      return;
-    }
-
-    onActionTextSearch(placeId, placeName);
+  const onKeyDown = useSearchActionKeyEvent<[string, string]>({
+    inputRef, onActionEvent: onActionTextSearch,
   });
 
   const displaySuggestions = useCallback((
@@ -92,18 +86,9 @@ function SearchTermsList({
     }
   }, [isZeroResult]);
 
-  console.log(isArrowDownEvent);
-
-  useEffect(() => {
-    if (isArrowDownEvent && buttonRef?.current) {
-      buttonRef.current.focus();
-      resetArrowDownEvent();
-    }
-  }, [isArrowDownEvent]);
-
   if (isZeroResult) {
     return (
-      <ZeroSearchResult keyword={keyword} onInput={onInput} />
+      <ZeroSearchResult ref={ref} inputRef={inputRef} keyword={keyword} onInput={onInput} />
     );
   }
 
@@ -114,7 +99,7 @@ function SearchTermsList({
           className={styles.searchTerm}
           type="button"
           key={place_id}
-          ref={index === 0 ? buttonRef : undefined}
+          ref={index === 0 ? ref : undefined}
           onKeyDown={(e) => onKeyDown(e, place_id, structured_formatting.main_text)}
           onClick={() => onActionTextSearch(place_id, structured_formatting.main_text)}
         >
@@ -130,4 +115,4 @@ function SearchTermsList({
   );
 }
 
-export default memo(SearchTermsList);
+export default memo(forwardRef<HTMLButtonElement, Props>(SearchTermsList));

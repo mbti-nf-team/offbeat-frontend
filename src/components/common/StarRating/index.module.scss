@@ -1,13 +1,19 @@
-.large {
-  width: 40px;
-  height: 40px;
-  min-height: 40px;
-  min-width: 40px;
-}
+.starRatingWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-.small {
-  width: 20px;
-  height: 20px;
-  min-height: 20px;
-  min-width: 20px;
+  .large {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    min-width: 40px;
+  }
+
+  .small {
+    width: 20px;
+    height: 20px;
+    min-height: 20px;
+    min-width: 20px;
+  }
 }

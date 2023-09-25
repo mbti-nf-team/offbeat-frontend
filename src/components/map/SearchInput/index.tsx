@@ -32,7 +32,10 @@ function SearchInput({ onSubmit }: Props) {
 
   const onRemoveInput = () => setSearchInput('');
 
-  const onFocus = () => setIsFocused(true);
+  const onFocus = () => {
+    setIsFocused(true);
+    blurArrowDownEvent();
+  };
 
   const onInput = useCallback((value: string) => {
     setSearchInput(value);
@@ -62,6 +65,7 @@ function SearchInput({ onSubmit }: Props) {
       />
       {isFocused && (
         <SearchTermsBox
+          inputRef={inputRef}
           resetArrowDownEvent={blurArrowDownEvent}
           isArrowDownEvent={isArrowDownEvent}
           keyword={debouncedValue}
