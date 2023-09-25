@@ -34,7 +34,7 @@ function SuggestSearchList({ onInput }: Props) {
     onInput(keyword);
   };
 
-  const onRecentSearchItemKeyDown = useActionKeyEvent<HTMLDivElement, string[]>(['Enter', 'NumpadEnter'], (_, keyword) => {
+  const onRecentSearchItemKeyDown = useActionKeyEvent<HTMLButtonElement, string[]>(['Enter', 'NumpadEnter'], (_, keyword) => {
     onActionTextSearch(keyword);
   });
 
@@ -52,17 +52,18 @@ function SuggestSearchList({ onInput }: Props) {
       </div>
       <div className={styles.searchTermWrapper}>
         {recentSearchList.map((recentSearch) => (
-          <div
+          <button
+            type="button"
             key={recentSearch}
             className={styles.searchTerm}
-            tabIndex={0}
-            role="menuitem"
             onKeyDown={(e) => onRecentSearchItemKeyDown(e, recentSearch)}
             onClick={() => onActionTextSearch(recentSearch)}
           >
-            <ClockIcon width={24} height={24} style={{ minWidth: '24px', minHeight: '24px' }} />
-            <div className={styles.recentSearchText}>
-              {recentSearch}
+            <div className={styles.recentSearchContents}>
+              <ClockIcon width={24} height={24} style={{ minWidth: '24px', minHeight: '24px' }} />
+              <div className={styles.recentSearchText}>
+                {recentSearch}
+              </div>
             </div>
             <Button
               type="button"
@@ -76,7 +77,7 @@ function SuggestSearchList({ onInput }: Props) {
                 />
               )}
             />
-          </div>
+          </button>
         ))}
       </div>
     </>

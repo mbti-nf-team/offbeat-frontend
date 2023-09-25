@@ -1,5 +1,5 @@
 import {
-  memo, useCallback, useEffect, useState,
+  memo, useCallback, useEffect, useRef, useState,
 } from 'react';
 
 import { useActionKeyEvent } from '@nf-team/react';
@@ -17,9 +17,14 @@ import styles from './index.module.scss';
 type Props = {
   keyword: string;
   onInput: (value: string) => void;
+  isArrowDownEvent: boolean;
+  resetArrowDownEvent: () => void;
 };
 
-function SearchTermsList({ keyword, onInput }: Props) {
+function SearchTermsList({
+  keyword, onInput, isArrowDownEvent, resetArrowDownEvent,
+}: Props) {
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [service] = useState(new google.maps.places.AutocompleteService());
   const [sessionToken] = useState(new google.maps.places.AutocompleteSessionToken());
   const [
@@ -40,7 +45,11 @@ function SearchTermsList({ keyword, onInput }: Props) {
     addRecentSearch(placeName);
   };
 
-  const onKeyDown = useActionKeyEvent<HTMLDivElement, [string, string]>(['Enter', 'NumpadEnter'], (_, placeId, placeName) => {
+  const onKeyDown = useActionKeyEvent<HTMLButtonElement, [string, string]>(['Enter', 'NumpadEnter', 'ArrowDown', 'ArrowUp'], (e, placeId, placeName) => {
+    if (e.code === 'ArrowDown') {
+      return;
+    }
+
     onActionTextSearch(placeId, placeName);
   });
 
@@ -83,6 +92,15 @@ function SearchTermsList({ keyword, onInput }: Props) {
     }
   }, [isZeroResult]);
 
+  console.log(isArrowDownEvent);
+
+  useEffect(() => {
+    if (isArrowDownEvent && buttonRef?.current) {
+      buttonRef.current.focus();
+      resetArrowDownEvent();
+    }
+  }, [isArrowDownEvent]);
+
   if (isZeroResult) {
     return (
       <ZeroSearchResult keyword={keyword} onInput={onInput} />
@@ -91,12 +109,12 @@ function SearchTermsList({ keyword, onInput }: Props) {
 
   return (
     <>
-      {estimatedSearchTerms.map(({ place_id, structured_formatting }) => (
-        <div
+      {estimatedSearchTerms.map(({ place_id, structured_formatting }, index) => (
+        <button
           className={styles.searchTerm}
+          type="button"
           key={place_id}
-          tabIndex={0}
-          role="menuitem"
+          ref={index === 0 ? buttonRef : undefined}
           onKeyDown={(e) => onKeyDown(e, place_id, structured_formatting.main_text)}
           onClick={() => onActionTextSearch(place_id, structured_formatting.main_text)}
         >
@@ -106,7 +124,7 @@ function SearchTermsList({ keyword, onInput }: Props) {
           <div>
             {structured_formatting.secondary_text}
           </div>
-        </div>
+        </button>
       ))}
     </>
   );

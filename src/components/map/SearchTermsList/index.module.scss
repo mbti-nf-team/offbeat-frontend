@@ -4,13 +4,13 @@
   cursor: pointer;
   flex-direction: column;
   display: flex;
+  border: none;
+  outline: none;
+  width: 100%;
   padding: 14px 0;
   gap: 4px;
+  background-color: color("white/default");
   border-top: 1px solid color("black/default");
-
-  &:active {
-    background-color: color("black/active");
-  }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
@@ -18,11 +18,23 @@
     }
   }
 
+  &:focus {
+    background-color: color("highlight/tertiary");
+  }
+
+  &:active {
+    background-color: color("black/active");
+  }
+
   & > div:first-of-type {
+    text-align: left;
+
     @include text("title 1/600", "black/default");
   }
 
   & > div:last-of-type {
+    text-align: left;
+
     @include text("title 3/500", "black/secondary");
   }
 }

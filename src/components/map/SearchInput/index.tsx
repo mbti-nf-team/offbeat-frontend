@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 
-import { useActionKeyEvent, useDebounce } from '@nf-team/react';
+import { useActionKeyEvent, useBoolean, useDebounce } from '@nf-team/react';
 
 import Input from '@/components/common/Input';
 
@@ -15,8 +15,14 @@ function SearchInput({ onSubmit }: Props) {
   const debouncedValue = useDebounce(searchInput, 200);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isArrowDownEvent, onArrowDownEvent, blurArrowDownEvent] = useBoolean(false);
 
-  const onKeyDown = useActionKeyEvent<HTMLInputElement>(['Enter', 'NumpadEnter'], () => {
+  const onKeyDown = useActionKeyEvent<HTMLInputElement>(['Enter', 'NumpadEnter', 'ArrowDown'], (e) => {
+    if (e.code === 'ArrowDown') {
+      onArrowDownEvent();
+      return;
+    }
+
     if (searchInput.trim()) {
       onSubmit(searchInput.trim());
       inputRef.current?.blur();
@@ -56,6 +62,8 @@ function SearchInput({ onSubmit }: Props) {
       />
       {isFocused && (
         <SearchTermsBox
+          resetArrowDownEvent={blurArrowDownEvent}
+          isArrowDownEvent={isArrowDownEvent}
           keyword={debouncedValue}
           onInput={onInput}
         />

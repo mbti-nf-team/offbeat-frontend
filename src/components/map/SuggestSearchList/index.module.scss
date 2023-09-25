@@ -17,30 +17,46 @@
   flex-direction: row;
   align-items: center;
   display: flex;
+  border: none;
+  outline: none;
+  width: 100%;
   padding: 14px 0;
   gap: 12px;
+  background-color: color("white/default");
 
   @include text("title 1/600", "black/default");
-
-  .recentSearchText {
-    width: 100%;
-  }
-
-  .closeIcon {
-    path {
-      fill: color("black/secondary");
-    }
-  }
-}
-
-.searchTerm:hover:not(:has(.button:hover)) {
-  &:active {
-    background-color: color("black/active");
-  }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: color("black/hover");
+    }
+  }
+
+  &:focus {
+    background-color: color("highlight/tertiary");
+  }
+
+  &:active {
+    background-color: color("black/active");
+  }
+
+  .recentSearchContents {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+
+    .recentSearchText {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .closeIcon {
+      path {
+        fill: color("black/secondary");
+      }
     }
   }
 }
