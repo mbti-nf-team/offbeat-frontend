@@ -57,7 +57,7 @@ function StarRating({
   }, [numberRating, type, detailClassName]);
 
   return (
-    <div className={className}>
+    <div className={clsx(styles.starRatingWrapper, className)}>
       {generateArrayOfNumber(fillStarCount).map((key) => (
         <FillStar key={key} className={detailClassName} />
       ))}

@@ -1,12 +1,14 @@
-import { memo, MouseEvent } from 'react';
+import {
+  ForwardedRef, forwardRef, memo, MouseEvent, RefObject,
+} from 'react';
 
-import { useActionKeyEvent } from '@nf-team/react';
 import { useGoogleMap } from '@react-google-maps/api';
 import { shallow } from 'zustand/shallow';
 
 import Button from '@/components/common/Button';
 import Label from '@/components/common/Label';
 import useTextSearch from '@/hooks/maps/useTextSearch';
+import useSearchActionKeyEvent from '@/hooks/useSearchActionKeyEvent';
 import { ClockIcon, CloseIcon } from '@/lib/assets/icons';
 import useRecentSearchStore from '@/stores/recentSearch';
 
@@ -14,9 +16,10 @@ import styles from './index.module.scss';
 
 type Props = {
   onInput: (value: string) => void;
+  inputRef: RefObject<HTMLInputElement>;
 };
 
-function SuggestSearchList({ onInput }: Props) {
+function SuggestSearchList({ onInput, inputRef }: Props, ref: ForwardedRef<HTMLButtonElement>) {
   const map = useGoogleMap();
   const {
     recentSearchList, addRecentSearch, removeRecentSearch,
@@ -34,8 +37,8 @@ function SuggestSearchList({ onInput }: Props) {
     onInput(keyword);
   };
 
-  const onRecentSearchItemKeyDown = useActionKeyEvent<HTMLButtonElement, string[]>(['Enter', 'NumpadEnter'], (_, keyword) => {
-    onActionTextSearch(keyword);
+  const onRecentSearchItemKeyDown = useSearchActionKeyEvent<[string]>({
+    inputRef, onActionEvent: onActionTextSearch,
   });
 
   const onClickCloseIcon = (removeKeyword: string) => (e: MouseEvent<HTMLButtonElement>) => {
@@ -51,9 +54,10 @@ function SuggestSearchList({ onInput }: Props) {
         </Label>
       </div>
       <div className={styles.searchTermWrapper}>
-        {recentSearchList.map((recentSearch) => (
+        {recentSearchList.map((recentSearch, index) => (
           <button
             type="button"
+            ref={index === 0 ? ref : undefined}
             key={recentSearch}
             className={styles.searchTerm}
             onKeyDown={(e) => onRecentSearchItemKeyDown(e, recentSearch)}
@@ -66,8 +70,7 @@ function SuggestSearchList({ onInput }: Props) {
               </div>
             </div>
             <Button
-              type="button"
-              className={styles.button}
+              href="#"
               size="small"
               color="ghost"
               onClick={onClickCloseIcon(recentSearch)}
@@ -84,4 +87,4 @@ function SuggestSearchList({ onInput }: Props) {
   );
 }
 
-export default memo(SuggestSearchList);
+export default memo(forwardRef<HTMLButtonElement, Props>(SuggestSearchList));
