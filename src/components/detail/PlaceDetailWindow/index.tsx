@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { checkEmpty, checkNumber } from '@nf-team/core';
 import { DelayRenderComponent, GlobalPortal, useIsomorphicLayoutEffect } from '@nf-team/react';
 import clsx from 'clsx';
-import { motion, Variants } from 'framer-motion';
+import { motion, useUnmountEffect, Variants } from 'framer-motion';
 
 import Accordion from '@/components/common/Accordion';
 import Button from '@/components/common/Button';
@@ -58,6 +58,10 @@ function PlaceDetailWindow({
 
     document.body.style.overflow = 'hidden';
   }, [isVisible]);
+
+  useUnmountEffect(() => {
+    document.body.style.overflow = '';
+  });
 
   return (
     <DelayRenderComponent isVisible={isVisible}>

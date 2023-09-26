@@ -31,7 +31,7 @@ function Label({
     <div
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
-      className={clsx(styles.labelWrapper, {
+      className={clsx(styles.labelWrapper, className, {
         [styles.button]: !!onClick,
         [styles[size]]: size,
         [styles[type]]: type,
@@ -39,7 +39,7 @@ function Label({
         [styles[`default-${color}`]]: type === 'default',
         [styles[`reverse-${color}`]]: type === 'reverse',
         ...classNames,
-      }, className)}
+      })}
       onClick={onClick}
       onKeyDown={onKeyDown}
     >

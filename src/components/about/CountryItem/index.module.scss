@@ -9,7 +9,7 @@
   flex-direction: row;
   align-items: center;
   padding: 12px 16px;
-  background: color("white");
+  background-color: color("white/default");
   border-bottom: 1px solid color("black/default");
   gap: 16px;
   transition: background-color 0.1s ease-in-out;
