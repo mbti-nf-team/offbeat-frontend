@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { motion, Variants } from 'framer-motion';
 
@@ -38,6 +38,15 @@ function SearchCountry({ countries }: Props) {
   const onChange = (nextKeyword: string) => setKeyword(nextKeyword.replace(/\\/g, ''));
 
   const onFocus = () => setIsFocused(true);
+
+  useEffect(() => {
+    if (!keyword) {
+      setIsFocused(false);
+      return;
+    }
+
+    setIsFocused(true);
+  }, [keyword]);
 
   return (
     <>

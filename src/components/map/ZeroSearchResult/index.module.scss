@@ -9,6 +9,8 @@
   padding: 14px 0;
   background-color: color("white/default");
   border: none;
+  align-items: center;
+  gap: 12px;
   outline: none;
   width: 100%;
 
@@ -28,10 +30,12 @@
 
   & > strong {
     @include text("title 1/600");
+    text-align: left;
   }
 
   & > p {
     @include text("title 1/500");
+    min-width: fit-content;
     margin: 0;
   }
 }

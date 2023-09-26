@@ -41,7 +41,6 @@ function ZeroSearchResult({
       onClick={onSubmit}
     >
       <strong>{`‘${keyword}’`}</strong>
-      &nbsp;
       <p>검색</p>
     </button>
   );

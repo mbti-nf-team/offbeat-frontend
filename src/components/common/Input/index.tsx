@@ -40,6 +40,7 @@ function Input({
         value={value}
         className={clsx(styles.input, {
           [styles.visibleShadow]: !isFocused,
+          [styles.blur]: !isVisibleMenuIcon && !value,
         })}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}

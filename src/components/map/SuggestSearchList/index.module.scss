@@ -7,7 +7,7 @@
 }
 
 .searchTermWrapper {
-  & > :not(div:first-of-type) {
+  & > :not(button:first-of-type) {
     border-top: 1px solid color("black/default");
   }
 }
