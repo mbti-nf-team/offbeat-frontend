@@ -1,6 +1,6 @@
 'use client';
 
-import { PropsWithChildren, useState } from 'react';
+import { memo, PropsWithChildren, useState } from 'react';
 
 import { useActionKeyEvent } from '@nf-team/react';
 import clsx from 'clsx';
@@ -40,7 +40,11 @@ function Accordion({
   title, counter, counterColor = 'positive', wrapperClassName, children,
 }: PropsWithChildren<Props>) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const toggleOpen = () => setIsOpen(!isOpen);
+  const toggleOpen = () => {
+    if (counter) {
+      setIsOpen(!isOpen);
+    }
+  };
 
   const onKeyDown = useActionKeyEvent<HTMLDivElement>(['Enter', 'NumpadEnter'], toggleOpen);
 
@@ -48,14 +52,20 @@ function Accordion({
     <div className={clsx(styles.accordionWrapper, wrapperClassName)}>
       <motion.div
         layout
-        className={styles.accordionHeader}
+        className={clsx(styles.accordionHeader, !counter && styles.zeroResult)}
         onClick={toggleOpen}
         tabIndex={0}
         role="menuitem"
         onKeyDown={onKeyDown}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
       >
-        <ChevronRightIcon className={clsx(styles.chevronIcon, isOpen && styles.isOpenAccordion)} />
+        <ChevronRightIcon
+          className={clsx(
+            styles.chevronIcon,
+            isOpen && styles.isOpenAccordion,
+            !counter && styles.zeroResult,
+          )}
+        />
         <div className={styles.title}>
           {title}
         </div>
@@ -79,4 +89,4 @@ function Accordion({
   );
 }
 
-export default Accordion;
+export default memo(Accordion);
