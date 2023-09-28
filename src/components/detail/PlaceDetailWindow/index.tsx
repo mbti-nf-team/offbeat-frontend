@@ -1,5 +1,7 @@
 'use client';
 
+import { useCallback } from 'react';
+
 import Image from 'next/image';
 
 import { checkEmpty, checkNumber } from '@nf-team/core';
@@ -49,6 +51,27 @@ function PlaceDetailWindow({
   console.log(placeDetail);
 
   const isVisibleLoading = isVisible && (isLoading || !placeDetail);
+
+  const displayDetailInfoText = useCallback(() => {
+    const koreanReviewCount = checkEmpty(placeDetail?.reviews).filter(({ language }) => language === 'ko').length;
+    const blogCount = placeDetail?.searchBlogPost.status === 'fulfilled' ? checkNumber(
+      placeDetail?.searchBlogPost.value.total_count,
+    ) : 0;
+
+    if (blogCount > NAVER_MAX_REVIEW_COUNT) {
+      return '고국의 맛과 분위기를 한몸에 느낄 수 있어요.\n 여행지에서 한국의 맛을 찾고싶다면, 방문 필수!';
+    }
+
+    if (koreanReviewCount >= GOOGLE_MAX_REVIEW_COUNT && blogCount > 100) {
+      return '한국인 입맛에도 딱이지만,\n현지인들에게도 인기 만점!';
+    }
+
+    if (koreanReviewCount <= 1 && blogCount <= 10) {
+      return '진짜 로컬 맛집!\n구글에 첫 한국인 리뷰를 남겨보세요.';
+    }
+
+    return '현지인 리뷰 비중이 높아요.';
+  }, [placeDetail]);
 
   useIsomorphicLayoutEffect(() => {
     if (isVisible) {
@@ -110,7 +133,7 @@ function PlaceDetailWindow({
                     <div className={styles.ratingText}>{placeDetail?.rating}</div>
                   </div>
                   <div className={styles.recommendDescription}>
-                    {'고국의 맛과 분위기를 한몸에 느낄 수 있어요.\n 여행지에서 한국의 맛을 찾고싶다면, 방문 필수!'}
+                    {displayDetailInfoText()}
                   </div>
                   <Accordion
                     title="구글 리뷰"
