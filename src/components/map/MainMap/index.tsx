@@ -71,14 +71,15 @@ function MainMap({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props
   }, [isLoaded, defaultCountryCode]);
 
   useEffect(() => {
-    if (defaultPlaceId && defaultPlaceName && isLoaded && mapState) {
+    if (defaultPlaceId && defaultPlaceName && mapState) {
+      onTextSearch({ query: defaultPlaceName });
+
       onOpenPlaceDetailWindow({
         placeId: defaultPlaceId,
         placeName: defaultPlaceName,
       });
-      onTextSearch({ query: defaultPlaceName });
     }
-  }, [defaultPlaceId, defaultPlaceName, isLoaded, mapState]);
+  }, [defaultPlaceId, defaultPlaceName, mapState]);
 
   if (loadError) {
     return <div>Map cannot be loaded right now, sorry.</div>;
