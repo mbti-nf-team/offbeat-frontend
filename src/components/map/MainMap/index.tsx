@@ -7,6 +7,7 @@ import { shallow } from 'zustand/shallow';
 
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
 import useTextSearch from '@/hooks/maps/useTextSearch';
+import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
 
 import PlaceBottomSheet from '../PlaceBottomSheet';
@@ -14,13 +15,18 @@ import PlaceResultMarker from '../PlaceResultMarker';
 import SearchInput from '../SearchInput';
 
 type Props = {
-  countryCode?: string;
+  defaultCountryCode?: string;
+  defaultPlaceId?: string;
+  defaultPlaceName?: string;
 };
 
-function MainMap({ countryCode }: Props) {
+function MainMap({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props) {
   const [libraries] = useState<['places', 'geometry']>(['places', 'geometry']);
   const { saveNextKeyword } = useRecentSearchStore(({ addRecentSearch }) => ({
     saveNextKeyword: addRecentSearch,
+  }), shallow);
+  const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore((state) => ({
+    onOpenPlaceDetailWindow: state.onOpenPlaceDetailWindow,
   }), shallow);
 
   const { isLoaded, loadError } = useLoadScript({
@@ -55,14 +61,24 @@ function MainMap({ countryCode }: Props) {
 
     geocoder.geocode({
       componentRestrictions: {
-        country: countryCode || 'KR',
+        country: defaultCountryCode || 'KR',
       },
     }, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
         setBounds(results?.[0].geometry.bounds);
       }
     });
-  }, [isLoaded, countryCode]);
+  }, [isLoaded, defaultCountryCode]);
+
+  useEffect(() => {
+    if (defaultPlaceId && defaultPlaceName && isLoaded && mapState) {
+      onOpenPlaceDetailWindow({
+        placeId: defaultPlaceId,
+        placeName: defaultPlaceName,
+      });
+      onTextSearch({ query: defaultPlaceName });
+    }
+  }, [defaultPlaceId, defaultPlaceName, isLoaded, mapState]);
 
   if (loadError) {
     return <div>Map cannot be loaded right now, sorry.</div>;
