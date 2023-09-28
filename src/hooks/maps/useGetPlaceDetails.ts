@@ -27,8 +27,13 @@ function useGetPlaceDetails():
     service.getDetails({
       placeId,
     }, (placeDetail, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK && hasPlaceLocation(placeDetail)) {
-        setPlaceDetailsState(placeDetail);
+      const copyPlaceDetail = placeDetail;
+
+      if (status === google.maps.places.PlacesServiceStatus.OK
+        && hasPlaceLocation(copyPlaceDetail)) {
+        delete copyPlaceDetail.utc_offset;
+
+        setPlaceDetailsState(copyPlaceDetail);
         return;
       }
 

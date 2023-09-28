@@ -15,6 +15,7 @@ import PixelFillStar from './pixel-fill-star.svg';
 import PixelHalfStar from './pixel-half-star.svg';
 import RemoveIcon from './remove-icon.svg';
 import SearchIcon from './search.svg';
+import ShareIcon from './share.svg';
 
 export {
   ArrowLeftIcon,
@@ -34,4 +35,5 @@ export {
   PixelHalfStar,
   RemoveIcon,
   SearchIcon,
+  ShareIcon,
 };

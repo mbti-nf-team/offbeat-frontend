@@ -10,7 +10,11 @@ type Props = {
 
 function Page({ searchParams }: Props) {
   return (
-    <MainMap countryCode={searchParams?.country} />
+    <MainMap
+      defaultCountryCode={searchParams?.country}
+      defaultPlaceId={searchParams?.id}
+      defaultPlaceName={searchParams?.name}
+    />
   );
 }
 

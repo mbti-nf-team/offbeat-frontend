@@ -3,6 +3,7 @@
 import { useCallback } from 'react';
 
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 
 import { checkEmpty, checkNumber } from '@nf-team/core';
 import { DelayRenderComponent, GlobalPortal, useIsomorphicLayoutEffect } from '@nf-team/react';
@@ -15,7 +16,9 @@ import ResultCard from '@/components/common/ResultCard';
 import ReviewCard from '@/components/common/ReviewCard';
 import Spinner from '@/components/common/Spinner';
 import StarRating from '@/components/common/StarRating';
-import { CloseIcon } from '@/lib/assets/icons';
+import useRenderToast from '@/hooks/useRenderToast';
+import { paramsSerializer } from '@/lib/apis';
+import { CloseIcon, ShareIcon } from '@/lib/assets/icons';
 import { PlacesWithSearchResult } from '@/lib/types/search';
 
 import styles from './index.module.scss';
@@ -49,15 +52,33 @@ function PlaceDetailWindow({
   isVisible, onClose, placeDetail, isLoading,
 }: Props) {
   console.log(placeDetail);
+  const renderToast = useRenderToast();
+  const params = useSearchParams();
 
   const isVisibleLoading = isVisible && (isLoading || !placeDetail);
 
-  const displayDetailInfoText = useCallback(() => {
-    const koreanReviewCount = checkEmpty(placeDetail?.reviews).filter(({ language }) => language === 'ko').length;
-    const blogCount = placeDetail?.searchBlogPost.status === 'fulfilled' ? checkNumber(
-      placeDetail?.searchBlogPost.value.total_count,
-    ) : 0;
+  const koreanReviewCount = checkEmpty(placeDetail?.reviews).filter(({ language }) => language === 'ko').length;
+  const blogCount = placeDetail?.searchBlogPost?.status === 'fulfilled' ? checkNumber(
+    placeDetail?.searchBlogPost?.value.total_count,
+  ) : 0;
 
+  const onClickShare = useCallback(async () => {
+    try {
+      const shareUrl = `${process.env.NEXT_PUBLIC_ORIGIN}/maps?${paramsSerializer({
+        country: params.get('country'),
+        id: placeDetail?.place_id,
+        name: placeDetail?.name,
+      })}`;
+
+      await navigator.clipboard.writeText(shareUrl);
+
+      renderToast('URL을 복사했습니다.', { type: 'error' });
+    } catch (error) {
+      renderToast('URL 복사에 실패했습니다.', { type: 'error' });
+    }
+  }, [placeDetail?.place_id, placeDetail?.name]);
+
+  const displayDetailInfoText = useCallback(() => {
     if (blogCount > NAVER_MAX_REVIEW_COUNT) {
       return '고국의 맛과 분위기를 한몸에 느낄 수 있어요.\n 여행지에서 한국의 맛을 찾고싶다면, 방문 필수!';
     }
@@ -71,7 +92,7 @@ function PlaceDetailWindow({
     }
 
     return '현지인 리뷰 비중이 높아요.';
-  }, [placeDetail]);
+  }, [blogCount, koreanReviewCount]);
 
   useIsomorphicLayoutEffect(() => {
     if (isVisible) {
@@ -97,15 +118,27 @@ function PlaceDetailWindow({
         >
           <div className={styles.placeDetailContentsWrapper}>
             <div className={styles.header}>
-              <Button
-                type="button"
-                color="ghost"
-                size="medium"
-                onClick={onClose}
-                className={styles.closeButton}
-                hasPseudoSelectorStyle={false}
-                onlyIcon={<CloseIcon />}
-              />
+              <div className={styles.headerContentsWrapper}>
+                <Button
+                  type="button"
+                  color="ghost"
+                  size="medium"
+                  onClick={onClose}
+                  hasPseudoSelectorStyle={false}
+                  onlyIcon={<CloseIcon />}
+                />
+                <Button
+                  type="button"
+                  color="ghost"
+                  size="medium"
+                  onClick={onClickShare}
+                  hasPseudoSelectorStyle={false}
+                  disabled={isLoading || !placeDetail}
+                  onlyIcon={
+                    <ShareIcon className={clsx((isLoading || !placeDetail) && styles.shareIcon)} />
+                  }
+                />
+              </div>
             </div>
             <div
               className={clsx(styles.placeDetailBody, {
@@ -138,7 +171,7 @@ function PlaceDetailWindow({
                   <Accordion
                     title="구글 리뷰"
                     counter={placeDetail?.user_ratings_total}
-                    counterColor={checkEmpty(placeDetail?.reviews).filter(({ language }) => language === 'ko').length >= GOOGLE_MAX_REVIEW_COUNT ? 'danger' : 'positive'}
+                    counterColor={koreanReviewCount ? 'danger' : 'positive'}
                     wrapperClassName={styles.reviewAccordionWrapper}
                   >
                     <div className={styles.reviewWrapper}>
@@ -159,7 +192,7 @@ function PlaceDetailWindow({
                   {placeDetail?.searchBlogPost.status === 'fulfilled' && (
                     <Accordion
                       title="네이버 검색결과"
-                      counterColor={checkNumber(placeDetail?.searchBlogPost.value.total_count) > NAVER_MAX_REVIEW_COUNT ? 'danger' : 'positive'}
+                      counterColor={blogCount ? 'danger' : 'positive'}
                       counter={placeDetail?.searchBlogPost.value.total_count}
                       wrapperClassName={styles.reviewAccordionWrapper}
                     >
