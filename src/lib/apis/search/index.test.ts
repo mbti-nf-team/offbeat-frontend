@@ -21,7 +21,7 @@ describe('search API', () => {
       (api as jest.Mock).mockReturnValueOnce(mockResponse);
     });
 
-    it('GET /naver/search/blog', async () => {
+    it('GET /search', async () => {
       const response = await fetchNaverSearchBlog<typeof includePost>({
         includePost,
         keyword,
@@ -30,12 +30,13 @@ describe('search API', () => {
       expect(response).toEqual(mockResponse);
       expect(api).toBeCalledWith({
         method: 'GET',
-        url: '/naver/search/blog',
+        url: '/search',
         params: {
           query: keyword,
           include_post: includePost,
         },
         paramsSerializer,
+        isBFF: true,
       });
     });
   });
