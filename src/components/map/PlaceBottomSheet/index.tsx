@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import { checkEmpty } from '@nf-team/core';
-import { useQuery } from '@tanstack/react-query';
 import { shallow } from 'zustand/shallow';
 
 import Button from '@/components/common/Button';
 import Spinner from '@/components/common/Spinner';
-import { fetchAllSettledSearchBlogs } from '@/lib/apis/search';
+import useGetSearchBlog from '@/hooks/queries/useGetSearchBlog';
 import { PlaceResult } from '@/lib/types/google.maps';
 import { SelectedPlace } from '@/lib/types/search';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
@@ -30,19 +29,11 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
     isOpenPlaceDetailWindow: state.isOpenPlaceDetailWindow,
   }), shallow);
 
-  const placeName = placesResult.map((place) => place.name);
-
-  const { data: placesWithSearchResult, isSuccess } = useQuery(
-    [placeName, false],
-    () => fetchAllSettledSearchBlogs<false>({ placeName }),
-    {
-      enabled: !!placesResult?.length && !isZeroResult,
-      select: (searchBlogPosts) => placesResult.map((place, index) => ({
-        ...place,
-        searchBlogPost: searchBlogPosts[index],
-      })),
-    },
-  );
+  const { data: placesWithSearchResult, isSuccess } = useGetSearchBlog<false>({
+    placesResult,
+    includePost: false,
+    enabled: !!placesResult?.length && !isZeroResult,
+  });
 
   const onClickPlaceItem = (
     selectedPlaceForm: SelectedPlace,

@@ -10,12 +10,13 @@ export const fetchNaverSearchBlog = async <T = boolean>({
 }: { keyword: string; includePost?: T; }) => {
   const response = await api<NaverSearchBlogResponse<T>>({
     method: 'GET',
-    url: '/naver/search/blog',
+    url: '/search',
     params: {
       query: keyword,
       include_post: includePost,
     },
     paramsSerializer,
+    isBFF: true,
   });
 
   return response;
