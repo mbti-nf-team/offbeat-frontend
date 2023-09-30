@@ -1,17 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { fetchNaverSearchBlog } from '@/lib/apis/search';
+import { fetchAllSettledSearchBlogs } from '@/lib/apis/search';
+import { PlaceResult } from '@/lib/types/google.maps';
 
-function useGetSearchBlog<T = false>({
-  placeName, includePost, enabled,
-}: { placeName: string[]; includePost?: T; enabled?: boolean; }) {
+function useGetSearchBlog<T = boolean>({
+  placesResult, includePost, enabled,
+}: { placesResult: PlaceResult[]; includePost?: T; enabled?: boolean; }) {
+  const placeName = placesResult.map((place) => place?.name);
+
   const query = useQuery(
     [{ placeName, includePost }],
-    () => Promise.allSettled([...placeName.map((keyword) => fetchNaverSearchBlog({
-      keyword, includePost,
-    }))]),
+    () => fetchAllSettledSearchBlogs<T>({ placeName, includePost }),
     {
       enabled,
+      select: (searchBlogPosts) => placesResult.map((place, index) => ({
+        ...place,
+        searchBlogPost: searchBlogPosts[index],
+      })),
     },
   );
 

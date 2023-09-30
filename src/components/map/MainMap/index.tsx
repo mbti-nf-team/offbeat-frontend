@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import { shallow } from 'zustand/shallow';
 
+import Spinner from '@/components/common/Spinner';
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
 import useTextSearch from '@/hooks/maps/useTextSearch';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
@@ -13,6 +14,8 @@ import useRecentSearchStore from '@/stores/recentSearch';
 import PlaceBottomSheet from '../PlaceBottomSheet';
 import PlaceResultMarker from '../PlaceResultMarker';
 import SearchInput from '../SearchInput';
+
+import styles from './index.module.scss';
 
 type Props = {
   defaultCountryCode?: string;
@@ -86,7 +89,11 @@ function MainMap({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props
   }
 
   if (!isLoaded || !bounds) {
-    return null;
+    return (
+      <div className={styles.loading}>
+        <Spinner color="black" isLoading size="large" />
+      </div>
+    );
   }
 
   return (

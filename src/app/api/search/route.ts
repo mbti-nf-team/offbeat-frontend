@@ -1,19 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { paramsSerializer } from '@/lib/apis';
+
 export const runtime = 'edge';
 
-const NAVER_SEARCH_API = 'https://openapi.naver.com/v1/search';
+const TEN_MINUTES = 600;
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
+  const requestHeaders = new Headers(request.headers);
 
-  const keyword = searchParams.get('keyword');
-
-  const response = await fetch(`${NAVER_SEARCH_API}/blog?query=${keyword}`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/naver/search/blog?${paramsSerializer(searchParams)}`, {
     method: 'GET',
+    next: {
+      revalidate: TEN_MINUTES,
+    },
     headers: {
-      'X-Naver-Client-Id': process.env.NEXT_PUBLIC_NAVER_SEARCH_CLIEND_ID,
-      'X-Naver-Client-Secret': process.env.NEXT_PUBLIC_NAVER_SEARCH_CLIEND_SECRET,
+      ...requestHeaders,
+      'nfteam-api-token': process.env.API_HEADER_TOKEN,
     },
   });
 
@@ -21,18 +25,15 @@ export async function GET(request: NextRequest) {
     const searchResult = await response.json();
 
     return NextResponse.json(searchResult, {
-      status: 200,
+      ...response,
       headers: {
-        'content-type': 'application/json',
+        ...response.headers,
+        'Cache-Control': 'public, s-maxage=1',
+        'CDN-Cache-Control': 'public, s-maxage=60',
+        'Vercel-CDN-Cache-Control': `public, s-maxage=${TEN_MINUTES}`,
       },
     });
   }
 
-  return NextResponse.json(null, {
-    headers: {
-      'content-type': 'application/json',
-    },
-    status: 404,
-    statusText: 'error',
-  });
+  return NextResponse.json(null, response);
 }
