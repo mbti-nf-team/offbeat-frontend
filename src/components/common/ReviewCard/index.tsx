@@ -38,7 +38,9 @@ function ReviewCard({
           <div className={styles.localReview}>현지 리뷰</div>
         )}
       </div>
-      <div className={styles.review}>{review}</div>
+      {review && (
+        <div className={styles.review}>{review}</div>
+      )}
     </div>
   );
 }
