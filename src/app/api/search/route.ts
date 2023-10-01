@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { paramsSerializer } from '@/lib/apis';
-
 export const runtime = 'edge';
 
 const TEN_MINUTES = 600;
@@ -10,7 +8,10 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const requestHeaders = new Headers(request.headers);
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/naver/search/blog?${paramsSerializer(searchParams)}`, {
+  const query = searchParams.get('query');
+  const includePost = searchParams.get('include_post');
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/naver/search/blog?query=${query}&include_post=${includePost}`, {
     method: 'GET',
     next: {
       revalidate: TEN_MINUTES,

@@ -18,10 +18,10 @@ function PlaceResultMarker({ place }: Props) {
 
   const icon = useMemo(() => ({
     url: '/images/map.marker.v2.png',
-    size: new google.maps.Size(32, 32),
+    size: new google.maps.Size(34, 40),
     origin: new google.maps.Point(0, 0),
     anchor: new google.maps.Point(17, 34),
-    scaledSize: new google.maps.Size(32, 32),
+    scaledSize: new google.maps.Size(34, 40),
   } as google.maps.Icon), []);
 
   const onClickMarker = () => onOpenPlaceDetailWindow({
