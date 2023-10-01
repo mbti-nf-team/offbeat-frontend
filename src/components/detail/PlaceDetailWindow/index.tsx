@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback } from 'react';
 
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -53,7 +53,6 @@ function PlaceDetailWindow({
 }: Props) {
   console.log(placeDetail);
   const renderToast = useRenderToast();
-  const placePhotoRef = useRef<HTMLDivElement>(null);
   const params = useSearchParams();
 
   const isVisibleLoading = isVisible && (isLoading || !placeDetail);
@@ -108,12 +107,6 @@ function PlaceDetailWindow({
     document.body.style.overflow = '';
   });
 
-  useEffect(() => {
-    if (!isLoading && placeDetail && placePhotoRef?.current) {
-      placePhotoRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }, [isLoading, placeDetail]);
-
   return (
     <DelayRenderComponent isVisible={isVisible}>
       <GlobalPortal>
@@ -157,7 +150,7 @@ function PlaceDetailWindow({
                 <>
                   <h1 className={styles.bodyHeader}>{placeDetail?.name}</h1>
                   {placeDetail?.photos?.[0] && (
-                    <div className={styles.placeImageWrapper} ref={placePhotoRef}>
+                    <div className={styles.placeImageWrapper}>
                       <Image
                         width={382}
                         height={382}
