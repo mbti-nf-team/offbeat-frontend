@@ -1,13 +1,13 @@
 'use client';
 
 import {
-  useCallback, useEffect, useRef, useState,
+  useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 
 import { AnimationDefinition, motion, Variants } from 'framer-motion';
 import { shallow } from 'zustand/shallow';
 
-import { ErrorCircleIcon } from '@/lib/assets/icons';
+import { ErrorCircleIcon, SuccessCircleIcon } from '@/lib/assets/icons';
 import useToastStore, { ToastStore } from '@/stores/toast';
 
 import styles from './index.module.scss';
@@ -49,6 +49,12 @@ function Toast() {
     }
   }, []);
 
+  const icon = useMemo(() => ({
+    error: <ErrorCircleIcon className={styles.toastIcon} />,
+    success: <SuccessCircleIcon className={styles.toastIcon} />,
+    info: <ErrorCircleIcon className={styles.toastIcon} />,
+  }[type]), [type]);
+
   useEffect(() => {
     if (isOpenToast) {
       timer.current = setTimeout(() => {
@@ -79,9 +85,7 @@ function Toast() {
       onAnimationComplete={handleAnimationComplete}
     >
       <div className={styles.toastBox}>
-        {type === 'error' && (
-          <ErrorCircleIcon className={styles.toastIcon} />
-        )}
+        {icon}
         <div className={styles.toastMessage}>
           {message}
         </div>

@@ -72,7 +72,7 @@ function PlaceDetailWindow({
 
       await navigator.clipboard.writeText(shareUrl);
 
-      renderToast('URL을 복사했습니다.', { type: 'error' });
+      renderToast('URL을 복사했습니다.', { type: 'success' });
     } catch (error) {
       renderToast('URL 복사에 실패했습니다.', { type: 'error' });
     }
