@@ -57,6 +57,7 @@ function PlaceDetailWindow({
 
   const isVisibleLoading = isVisible && (isLoading || !placeDetail);
 
+  const googleReviewCount = checkNumber(placeDetail?.reviews?.length);
   const koreanReviewCount = checkEmpty(placeDetail?.reviews).filter(({ language }) => language === 'ko').length;
   const blogCount = placeDetail?.searchBlogPost?.status === 'fulfilled' ? checkNumber(
     placeDetail?.searchBlogPost?.value.total_count,
@@ -79,6 +80,10 @@ function PlaceDetailWindow({
   }, [placeDetail?.place_id, placeDetail?.name]);
 
   const displayDetailInfoText = useCallback(() => {
+    if (googleReviewCount < 3) {
+      return '별점이 없어 방문자 비율을 구분하기 어려워요.';
+    }
+
     if (blogCount > NAVER_MAX_REVIEW_COUNT) {
       return '고국의 맛과 분위기를 한몸에 느낄 수 있어요.\n 여행지에서 한국의 맛을 찾고싶다면, 방문 필수!';
     }
@@ -92,7 +97,7 @@ function PlaceDetailWindow({
     }
 
     return '현지인 리뷰 비중이 높아요.';
-  }, [blogCount, koreanReviewCount]);
+  }, [blogCount, koreanReviewCount, googleReviewCount]);
 
   useIsomorphicLayoutEffect(() => {
     if (isVisible) {
@@ -163,7 +168,9 @@ function PlaceDetailWindow({
                   )}
                   <div className={styles.ratingWrapper}>
                     <StarRating rating={placeDetail?.rating} type="detail" />
-                    <div className={styles.ratingText}>{placeDetail?.rating}</div>
+                    <div className={styles.ratingText}>
+                      {placeDetail?.rating ? checkNumber(placeDetail?.rating).toFixed(1) : '별점 없음'}
+                    </div>
                   </div>
                   <div className={styles.recommendDescription}>
                     {displayDetailInfoText()}
