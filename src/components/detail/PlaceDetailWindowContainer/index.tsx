@@ -13,12 +13,6 @@ import PlaceDetailWindow from '../PlaceDetailWindow';
 function PlaceDetailWindowContainer() {
   const [placeDetailsState, onGetPlaceDetails, resetPlaceDetails] = useGetPlaceDetails();
 
-  // const { data: searchBlogPost, isSuccess } = useGetSearchBlog<true>({
-  //   placeName: [placeName] as string[],
-  //   includePost: true,
-  //   enabled: !!placeName,
-  // });
-
   const {
     isOpenPlaceDetailWindow, onClosePlaceDetailWindow, placeId,
   } = usePlaceDetailWindowStore((state) => ({
@@ -38,11 +32,6 @@ function PlaceDetailWindowContainer() {
     resetPlaceDetails();
     onClosePlaceDetailWindow();
   };
-
-  // const placeDetail = placeDetailsState && {
-  //   ...placeDetailsState,
-  //   searchBlogPost: searchBlogPost?.[0],
-  // } as PlacesWithSearchResult<true> | null;
 
   useEffect(() => {
     if (placeId) {

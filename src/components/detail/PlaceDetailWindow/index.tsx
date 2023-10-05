@@ -51,7 +51,6 @@ type Props = {
 function PlaceDetailWindow({
   isVisible, onClose, placeDetail, isLoading,
 }: Props) {
-  console.log(placeDetail);
   const renderToast = useRenderToast();
   const params = useSearchParams();
 

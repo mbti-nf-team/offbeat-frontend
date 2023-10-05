@@ -13,7 +13,7 @@ const nextConfig = {
     reactRemoveProperties: isProd && {
       properties: ['^data-test'],
     },
-    // removeConsole: isProd,
+    removeConsole: isProd,
   },
   swcMinify: true,
   experimental: {
@@ -26,12 +26,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
     domains: ['maps.googleapis.com', 'lh3.googleusercontent.com'],
-    // remotePatterns: [
-    //   {
-    //     protocol: 'https',
-    //     hostname: 'maps.googleapis.com',
-    //   },
-    // ],
   },
   webpack: (config) => {
     config.module.rules.push({
