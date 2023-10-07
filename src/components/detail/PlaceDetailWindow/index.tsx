@@ -6,9 +6,11 @@ import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
 import { checkEmpty, checkNumber } from '@nf-team/core';
-import { DelayRenderComponent, GlobalPortal, useIsomorphicLayoutEffect } from '@nf-team/react';
+import {
+  DelayRenderComponent, GlobalPortal, useIsomorphicLayoutEffect, useUnmount,
+} from '@nf-team/react';
 import clsx from 'clsx';
-import { motion, useUnmountEffect, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 import Accordion from '@/components/common/Accordion';
 import Button from '@/components/common/Button';
@@ -107,7 +109,7 @@ function PlaceDetailWindow({
     document.body.style.overflow = 'hidden';
   }, [isVisible]);
 
-  useUnmountEffect(() => {
+  useUnmount(() => {
     document.body.style.overflow = '';
   });
 
