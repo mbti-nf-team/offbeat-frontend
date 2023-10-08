@@ -7,9 +7,11 @@ import { shallow } from 'zustand/shallow';
 import Button from '@/components/common/Button';
 import Spinner from '@/components/common/Spinner';
 import useGetSearchBlog from '@/hooks/queries/useGetSearchBlog';
+import { InfiniteRefState } from '@/lib/types';
 import { PlaceResult } from '@/lib/types/google.maps';
 import { SelectedPlace } from '@/lib/types/search';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
+import { targetFalseThenValue } from '@/utils';
 
 import PlaceBottomSheetItem from '../PlaceBottomSheetItem';
 
@@ -18,9 +20,10 @@ import styles from './index.module.scss';
 type Props = {
   placesResult: PlaceResult[];
   isZeroResult?: boolean;
+  refState: InfiniteRefState<HTMLDivElement>;
 };
 
-function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
+function PlaceBottomSheet({ placesResult, isZeroResult, refState }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const {
     onOpenPlaceDetailWindow, isOpenPlaceDetailWindow,
@@ -34,6 +37,8 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
     includePost: false,
     enabled: !!placesResult?.length && !isZeroResult,
   });
+
+  console.log(placesResult, placesWithSearchResult);
 
   const onClickPlaceItem = (
     selectedPlaceForm: SelectedPlace,
@@ -68,9 +73,18 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
           </Button>
         </div>
       ) : (
-        <div className={styles.placeList}>
-          {isSuccess ? checkEmpty(placesWithSearchResult).map((place) => (
-            <PlaceBottomSheetItem key={place.place_id} place={place} onClick={onClickPlaceItem} />
+        <div className={styles.placeList} ref={refState.wrapperRef}>
+          {isSuccess ? checkEmpty(placesWithSearchResult).map((place, index) => (
+            <PlaceBottomSheetItem
+              key={place.place_id}
+              wrapperRef={
+                targetFalseThenValue(
+                  placesWithSearchResult.length - 1 === index,
+                )(refState.lastItemRef)
+              }
+              place={place}
+              onClick={onClickPlaceItem}
+            />
           )) : (
             <div className={styles.loadingWrapper}>
               <Spinner isLoading />

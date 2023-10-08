@@ -1,4 +1,4 @@
-import { codeToFlag, numberWithComma } from '@/utils';
+import { codeToFlag, numberWithComma, targetFalseThenValue } from '@/utils';
 
 describe('codeToFlag', () => {
   it('flag 이모지 유니코드로 변경되어야만 한다.', () => {
@@ -40,6 +40,26 @@ describe('numberWithComma', () => {
 
         expect(result).toBe('0');
       });
+    });
+  });
+});
+
+describe('targetFalseThenValue', () => {
+  const value = 'result';
+
+  context('target이 false인 경우', () => {
+    it('value를 그대로 반환해야만 한다', () => {
+      const result = targetFalseThenValue(false)(value);
+
+      expect(result).toBe(value);
+    });
+  });
+
+  context('target이 true인 경우', () => {
+    it('undefined를 반환해야만 한다', () => {
+      const result = targetFalseThenValue(true)(value);
+
+      expect(result).toBeUndefined();
     });
   });
 });

@@ -39,7 +39,9 @@ function MainMap({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props
   });
 
   const [mapState, setMapState] = useState<google.maps.Map | null>(null);
-  const { placesResult, onTextSearch, isZeroResult } = useTextSearch(mapState);
+  const {
+    placesResult, onTextSearch, isZeroResult, refState,
+  } = useTextSearch(mapState);
   const [bounds, setBounds] = useState<google.maps.LatLngBounds>();
 
   const onLoad = useCallback((map: google.maps.Map) => {
@@ -116,7 +118,11 @@ function MainMap({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props
       {placesResult.map((place) => (
         <PlaceResultMarker key={place.place_id} place={place} />
       ))}
-      <PlaceBottomSheet placesResult={placesResult} isZeroResult={isZeroResult} />
+      <PlaceBottomSheet
+        refState={refState}
+        placesResult={placesResult}
+        isZeroResult={isZeroResult}
+      />
       <PlaceDetailWindowContainer />
     </GoogleMap>
   );
