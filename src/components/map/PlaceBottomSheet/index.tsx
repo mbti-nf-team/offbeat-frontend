@@ -7,9 +7,10 @@ import { shallow } from 'zustand/shallow';
 import Button from '@/components/common/Button';
 import Spinner from '@/components/common/Spinner';
 import useGetSearchBlog from '@/hooks/queries/useGetSearchBlog';
-import { InfiniteRefState } from '@/lib/types';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { PlaceResult } from '@/lib/types/google.maps';
 import { SelectedPlace } from '@/lib/types/search';
+import usePlaceStore from '@/stores/place';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import { targetFalseThenValue } from '@/utils';
 
@@ -20,11 +21,20 @@ import styles from './index.module.scss';
 type Props = {
   placesResult: PlaceResult[];
   isZeroResult?: boolean;
-  refState: InfiniteRefState<HTMLDivElement>;
 };
 
-function PlaceBottomSheet({ placesResult, isZeroResult, refState }: Props) {
+function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { placePagination } = usePlaceStore((state) => ({
+    placePagination: state.pagination,
+  }));
+
+  const refState = useIntersectionObserver<HTMLDivElement>({
+    isRoot: true,
+    fetchNextPage: placePagination?.fetchNextPage,
+    hasNextPage: placePagination?.hasNextPage,
+  });
+
   const {
     onOpenPlaceDetailWindow, isOpenPlaceDetailWindow,
   } = usePlaceDetailWindowStore((state) => ({
@@ -37,8 +47,6 @@ function PlaceBottomSheet({ placesResult, isZeroResult, refState }: Props) {
     includePost: false,
     enabled: !!placesResult?.length && !isZeroResult,
   });
-
-  console.log(placesResult, placesWithSearchResult);
 
   const onClickPlaceItem = (
     selectedPlaceForm: SelectedPlace,
@@ -79,7 +87,7 @@ function PlaceBottomSheet({ placesResult, isZeroResult, refState }: Props) {
               key={place.place_id}
               wrapperRef={
                 targetFalseThenValue(
-                  placesWithSearchResult.length - 1 === index,
+                  !(placesWithSearchResult.length - 1 === index),
                 )(refState.lastItemRef)
               }
               place={place}
