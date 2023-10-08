@@ -40,7 +40,7 @@ function MainMap({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props
 
   const [mapState, setMapState] = useState<google.maps.Map | null>(null);
   const {
-    placesResult, onTextSearch, isZeroResult, refState,
+    placesResult, onTextSearch, isZeroResult,
   } = useTextSearch(mapState);
   const [bounds, setBounds] = useState<google.maps.LatLngBounds>();
 
@@ -119,7 +119,6 @@ function MainMap({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props
         <PlaceResultMarker key={place.place_id} place={place} />
       ))}
       <PlaceBottomSheet
-        refState={refState}
         placesResult={placesResult}
         isZeroResult={isZeroResult}
       />
