@@ -6,9 +6,14 @@ import useRenderToast from '@/hooks/useRenderToast';
 import usePlaceStore from '@/stores/place';
 import { filteredPlaces } from '@/utils';
 
+import useIntersectionObserver from '../useIntersectionObserver';
+
 type TextSearchRequest = google.maps.places.TextSearchRequest;
 
 function useTextSearch(map: google.maps.Map | null) {
+  const [
+    paginationState, setPaginationState,
+  ] = useState<{ hasNextPage?: boolean; fetchNextPage?:() => void; }>();
   const [placeService, setPlaceService] = useState<google.maps.places.PlacesService | undefined>();
   const renderToast = useRenderToast();
   const {
@@ -20,6 +25,12 @@ function useTextSearch(map: google.maps.Map | null) {
     placesResult: state.places,
   }), shallow);
 
+  const refState = useIntersectionObserver<HTMLDivElement>({
+    isRoot: false,
+    fetchNextPage: paginationState?.fetchNextPage,
+    hasNextPage: paginationState?.hasNextPage,
+  });
+
   function textSearchAction(
     places: google.maps.places.PlaceResult[] | null,
     status: google.maps.places.PlacesServiceStatus,
@@ -29,6 +40,10 @@ function useTextSearch(map: google.maps.Map | null) {
     if (status === google.maps.places.PlacesServiceStatus.OK && places?.length) {
       setIsZeroResult(false);
       setPlaces(filteredPlaces(places));
+      setPaginationState({
+        fetchNextPage: pagination?.nextPage,
+        hasNextPage: pagination?.hasNextPage,
+      });
       return;
     }
 
@@ -78,6 +93,7 @@ function useTextSearch(map: google.maps.Map | null) {
     onTextSearch,
     placesResult,
     isZeroResult,
+    refState,
   };
 }
 

@@ -10,9 +10,10 @@ import styles from './index.module.scss';
 type Props = {
   place: PlacesWithSearchResult;
   onClick: ({ placeId, placeName }: { placeId: string; placeName: string; }) => void;
+  wrapperRef?: ((node?: Element | null | undefined) => void);
 };
 
-function PlaceBottomSheetItem({ place, onClick }: Props) {
+function PlaceBottomSheetItem({ place, onClick, wrapperRef }: Props) {
   const { name, user_ratings_total } = place;
   const rating = checkNumber(place.rating);
 
@@ -20,6 +21,7 @@ function PlaceBottomSheetItem({ place, onClick }: Props) {
 
   return (
     <li
+      ref={wrapperRef}
       className={styles.placeItem}
       tabIndex={0}
       onClick={() => onClick({ placeId: place.place_id, placeName: name })}
