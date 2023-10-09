@@ -25,14 +25,19 @@ type Props = {
 
 function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { placePagination } = usePlaceStore((state) => ({
+
+  const { placePagination, isReset } = usePlaceStore((state) => ({
     placePagination: state.pagination,
-  }));
+    isReset: state.isReset,
+  }), shallow);
 
   const refState = useIntersectionObserver<HTMLDivElement>({
     isRoot: true,
     fetchNextPage: placePagination?.fetchNextPage,
     hasNextPage: placePagination?.hasNextPage,
+    intersectionOptions: {
+      rootMargin: '80px',
+    },
   });
 
   const {
@@ -42,7 +47,9 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
     isOpenPlaceDetailWindow: state.isOpenPlaceDetailWindow,
   }), shallow);
 
-  const { data: placesWithSearchResult, isSuccess } = useGetSearchBlog<false>({
+  const {
+    data: placesWithSearchResult, isFetching,
+  } = useGetSearchBlog<false>({
     placesResult,
     includePost: false,
     enabled: !!placesResult?.length && !isZeroResult,
@@ -82,7 +89,7 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
         </div>
       ) : (
         <div className={styles.placeList} ref={refState.wrapperRef}>
-          {isSuccess ? checkEmpty(placesWithSearchResult).map((place, index) => (
+          {checkEmpty(placesWithSearchResult).map((place, index) => (
             <PlaceBottomSheetItem
               key={place.place_id}
               wrapperRef={
@@ -93,7 +100,8 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
               place={place}
               onClick={onClickPlaceItem}
             />
-          )) : (
+          ))}
+          {isFetching && (
             <div className={styles.loadingWrapper}>
               <Spinner isLoading />
             </div>

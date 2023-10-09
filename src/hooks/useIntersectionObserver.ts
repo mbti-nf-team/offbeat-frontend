@@ -20,6 +20,7 @@ function useIntersectionObserver<T = Element>({
 
   const { ref, inView } = useInView({
     ...intersectionOptions,
+    skip: !hasNextPage,
     root: checkRoot(wrapperRef.current) as unknown as Element,
   });
 

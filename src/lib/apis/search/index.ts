@@ -1,3 +1,5 @@
+import { TextSearchResponseData } from '@googlemaps/google-maps-services-js';
+
 import { api, paramsSerializer } from '..';
 
 import { NaverSearchBlogResponse } from './model';
@@ -51,4 +53,20 @@ export const fetchAllSettledSearchBlogs = async <T = boolean>({
     }))]);
 
   return [...firstResponse, ...secondResponse];
+};
+
+export const fetchGoogleSearch = async ({
+  keyword,
+}: { keyword: string; }) => {
+  const response = await api<TextSearchResponseData>({
+    method: 'GET',
+    url: '/google-text-search',
+    params: {
+      query: keyword,
+    },
+    paramsSerializer,
+    isBFF: true,
+  });
+
+  return response;
 };
