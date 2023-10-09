@@ -46,6 +46,7 @@ function useTextSearch(map: google.maps.Map | null) {
     }
 
     setIsZeroResult(false);
+    resetPlaces();
     renderToast('다시 시도해주세요.', { type: 'error' });
   }
 

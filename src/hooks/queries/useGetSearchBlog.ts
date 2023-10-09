@@ -1,3 +1,4 @@
+import { checkEmpty } from '@nf-team/core';
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchAllSettledSearchBlogs } from '@/lib/apis/search';
@@ -8,7 +9,7 @@ const TEN_MINUTES = 600000;
 function useGetSearchBlog<T = boolean>({
   placesResult, includePost, enabled,
 }: { placesResult: PlaceResult[]; includePost?: T; enabled?: boolean; }) {
-  const placeName = placesResult.map((place) => place?.name);
+  const placeName = placesResult.filter((place) => place).map((place) => place?.name);
 
   const query = useQuery(
     [{ placeName, includePost }],
@@ -24,7 +25,10 @@ function useGetSearchBlog<T = boolean>({
     },
   );
 
-  return query;
+  return {
+    ...query,
+    data: checkEmpty(query.data),
+  };
 }
 
 export default useGetSearchBlog;

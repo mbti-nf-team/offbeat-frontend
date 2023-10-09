@@ -4,6 +4,7 @@ import { PlaceResult } from '@/lib/types/google.maps';
 
 type PlaceState = {
   places: PlaceResult[];
+  isReset: boolean;
   isZeroResult: boolean;
   pagination?: { hasNextPage?: boolean; fetchNextPage?: () => void; };
 };
@@ -21,17 +22,21 @@ export type PlaceStore = PlaceAction & PlaceState;
 const initialPlaceState = {
   places: [],
   isZeroResult: false,
+  isReset: false,
   pagination: undefined,
 };
 
 const usePlaceStore = create<PlaceStore>((set) => ({
   ...initialPlaceState,
-  setPagination: (pagination) => set((state) => ({ ...state, pagination })),
-  setPlaces: (places) => set((state) => ({ ...state, places })),
-  addPlaces: (places) => set((state) => ({ ...state, places: [...state.places, ...places] })),
-  setIsZeroResult: (isZeroResult) => set((state) => ({ ...state, isZeroResult })),
+  setPagination: (pagination) => set((state) => ({ ...state, pagination, isReset: false })),
+  setPlaces: (places) => set((state) => ({ ...state, places, isReset: false })),
+  addPlaces: (places) => set((
+    state,
+  ) => ({ ...state, places: [...state.places, ...places], isReset: false })),
+  setIsZeroResult: (isZeroResult) => set((state) => ({ ...state, isZeroResult, isReset: false })),
   resetPlaces: () => set({
     ...initialPlaceState,
+    isReset: true,
   }),
 }));
 

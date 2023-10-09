@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/mbti-nf-team/unnamed-k-place-frontend#readme",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.40",
     "@nf-team/core": "^2.0.1",
     "@nf-team/react": "^2.4.0",
     "@react-google-maps/api": "^2.19.2",
