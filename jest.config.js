@@ -10,7 +10,7 @@ const customJestConfig = {
     // add your setup files..
   ],
   setupFilesAfterEnv: [
-    '<rootDir>/jest.setup.js',
+    '<rootDir>/jest.setup.ts',
   ],
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
