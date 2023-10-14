@@ -1,4 +1,6 @@
-import { create } from 'zustand';
+import { createWithEqualityFn } from 'zustand/traditional';
+
+import { StoreWithShallow, useStoreWithShallow } from './utils';
 
 type ToastType = 'error' | 'info' | 'success';
 
@@ -25,12 +27,14 @@ const initialToastState: ToastState = {
   type: 'success',
 };
 
-const useToastStore = create<ToastStore>((set) => ({
+const toastStore = createWithEqualityFn<ToastStore>((set) => ({
   ...initialToastState,
   renderToast: (message, { delay = 3000, type = 'info' } = {}) => set((state) => ({
     ...state, isRender: true, message, delay, type,
   })),
   closeToast: () => set(() => ({ ...initialToastState })),
 }));
+
+const useToastStore: StoreWithShallow<ToastStore> = (keys) => useStoreWithShallow(toastStore, keys);
 
 export default useToastStore;

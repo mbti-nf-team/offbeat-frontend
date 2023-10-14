@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
 import { useGoogleMap } from '@react-google-maps/api';
-import { shallow } from 'zustand/shallow';
 
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
 import useTextSearch from '@/hooks/maps/useTextSearch';
@@ -21,12 +20,8 @@ type Props = {
 function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props) {
   const map = useGoogleMap();
 
-  const { saveNextKeyword } = useRecentSearchStore(({ addRecentSearch }) => ({
-    saveNextKeyword: addRecentSearch,
-  }), shallow);
-  const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore((state) => ({
-    onOpenPlaceDetailWindow: state.onOpenPlaceDetailWindow,
-  }), shallow);
+  const { addRecentSearch: saveNextKeyword } = useRecentSearchStore(['addRecentSearch']);
+  const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow']);
   const {
     placesResult, onTextSearch, isZeroResult,
   } = useTextSearch(map);

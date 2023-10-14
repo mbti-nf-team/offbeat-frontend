@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { shallow } from 'zustand/shallow';
-
 import useRenderToast from '@/hooks/useRenderToast';
 import usePlaceStore from '@/stores/place';
 import { filteredPlaces } from '@/utils';
@@ -12,15 +10,8 @@ function useTextSearch(map: google.maps.Map | null) {
   const [placeService, setPlaceService] = useState<google.maps.places.PlacesService | undefined>();
   const renderToast = useRenderToast();
   const {
-    addPlaces, placesResult, isZeroResult, setIsZeroResult, setPagination, resetPlaces,
-  } = usePlaceStore((state) => ({
-    isZeroResult: state.isZeroResult,
-    setIsZeroResult: state.setIsZeroResult,
-    addPlaces: state.addPlaces,
-    placesResult: state.places,
-    setPagination: state.setPagination,
-    resetPlaces: state.resetPlaces,
-  }), shallow);
+    addPlaces, places: placesResult, isZeroResult, setIsZeroResult, setPagination, resetPlaces,
+  } = usePlaceStore(['addPlaces', 'isZeroResult', 'setIsZeroResult', 'setPagination', 'resetPlaces', 'places']);
 
   function textSearchAction(
     places: google.maps.places.PlaceResult[] | null,
