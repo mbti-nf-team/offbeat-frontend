@@ -1,6 +1,8 @@
-import { create } from 'zustand';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 import { PlaceResult } from '@/lib/types/google.maps';
+
+import { StoreWithShallow, useStoreWithShallow } from './utils';
 
 type PlaceState = {
   places: PlaceResult[];
@@ -26,7 +28,7 @@ const initialPlaceState = {
   pagination: undefined,
 };
 
-const usePlaceStore = create<PlaceStore>((set) => ({
+const placeStore = createWithEqualityFn<PlaceStore>((set) => ({
   ...initialPlaceState,
   setPagination: (pagination) => set((state) => ({ ...state, pagination, isReset: false })),
   setPlaces: (places) => set((state) => ({ ...state, places, isReset: false })),
@@ -39,5 +41,7 @@ const usePlaceStore = create<PlaceStore>((set) => ({
     isReset: true,
   }),
 }));
+
+const usePlaceStore: StoreWithShallow<PlaceStore> = (keys) => useStoreWithShallow(placeStore, keys);
 
 export default usePlaceStore;

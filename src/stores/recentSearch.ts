@@ -1,5 +1,7 @@
-import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { createWithEqualityFn } from 'zustand/traditional';
+
+import { StoreWithShallow, useStoreWithShallow } from './utils';
 
 type RecentSearchState = {
   recentSearchList: string[];
@@ -12,7 +14,7 @@ type RecentSearchAction = {
 
 type RecentSearch = RecentSearchState & RecentSearchAction;
 
-const useRecentSearchStore = create<RecentSearch>()(
+const recentSearchStore = createWithEqualityFn<RecentSearch>()(
   persist(
     (set, get) => ({
       recentSearchList: [],
@@ -40,5 +42,9 @@ const useRecentSearchStore = create<RecentSearch>()(
     },
   ),
 );
+
+const useRecentSearchStore: StoreWithShallow<RecentSearch> = (
+  keys,
+) => useStoreWithShallow(recentSearchStore, keys);
 
 export default useRecentSearchStore;

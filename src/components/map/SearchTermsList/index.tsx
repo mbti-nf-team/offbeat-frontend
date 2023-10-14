@@ -2,8 +2,6 @@ import {
   ForwardedRef, forwardRef, memo, RefObject, useCallback, useEffect, useState,
 } from 'react';
 
-import { shallow } from 'zustand/shallow';
-
 import useGetPlaceDetails from '@/hooks/maps/useGetPlaceDetails';
 import useRenderToast from '@/hooks/useRenderToast';
 import useSearchActionKeyEvent from '@/hooks/useSearchActionKeyEvent';
@@ -31,12 +29,8 @@ function SearchTermsList({
   const renderToast = useRenderToast();
   const [placeDetailsState, onGetPlaceDetails] = useGetPlaceDetails();
   const [isZeroResult, setIsZeroResult] = useState<boolean>();
-  const { setPlaces } = usePlaceStore((state) => ({
-    setPlaces: state.setPlaces,
-  }), shallow);
-  const { addRecentSearch } = useRecentSearchStore((state) => ({
-    addRecentSearch: state.addRecentSearch,
-  }), shallow);
+  const { setPlaces } = usePlaceStore(['setPlaces']);
+  const { addRecentSearch } = useRecentSearchStore(['addRecentSearch']);
 
   const onActionTextSearch = (placeId: string, placeName: string) => {
     onGetPlaceDetails(placeId);

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import { checkEmpty } from '@nf-team/core';
-import { shallow } from 'zustand/shallow';
 
 import Button from '@/components/common/Button';
 import Spinner from '@/components/common/Spinner';
@@ -26,10 +25,7 @@ type Props = {
 function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const { placePagination, isReset } = usePlaceStore((state) => ({
-    placePagination: state.pagination,
-    isReset: state.isReset,
-  }), shallow);
+  const { pagination: placePagination } = usePlaceStore(['pagination']);
 
   const refState = useIntersectionObserver<HTMLDivElement>({
     isRoot: true,
@@ -42,10 +38,7 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
 
   const {
     onOpenPlaceDetailWindow, isOpenPlaceDetailWindow,
-  } = usePlaceDetailWindowStore((state) => ({
-    onOpenPlaceDetailWindow: state.onOpenPlaceDetailWindow,
-    isOpenPlaceDetailWindow: state.isOpenPlaceDetailWindow,
-  }), shallow);
+  } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow', 'isOpenPlaceDetailWindow']);
 
   const {
     data: placesWithSearchResult, isFetching,

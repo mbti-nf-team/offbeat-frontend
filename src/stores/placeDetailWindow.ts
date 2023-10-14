@@ -1,6 +1,8 @@
-import { create } from 'zustand';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 import { SelectedPlace } from '@/lib/types/search';
+
+import { StoreWithShallow, useStoreWithShallow } from './utils';
 
 type PlaceDetailWindowState = {
   isOpenPlaceDetailWindow: boolean;
@@ -19,7 +21,7 @@ const initialPlaceDetailWindowState = {
   placeName: undefined,
 };
 
-const usePlaceDetailWindowStore = create<PlaceDetailWindow>((set) => ({
+const placeDetailWindowStore = createWithEqualityFn<PlaceDetailWindow>((set) => ({
   ...initialPlaceDetailWindowState,
   onClosePlaceDetailWindow: () => set({
     ...initialPlaceDetailWindowState,
@@ -28,5 +30,9 @@ const usePlaceDetailWindowStore = create<PlaceDetailWindow>((set) => ({
     isOpenPlaceDetailWindow: true, ...selectedPlace,
   })),
 }));
+
+const usePlaceDetailWindowStore: StoreWithShallow<PlaceDetailWindow> = (
+  keys,
+) => useStoreWithShallow(placeDetailWindowStore, keys);
 
 export default usePlaceDetailWindowStore;

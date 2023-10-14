@@ -5,10 +5,9 @@ import {
 } from 'react';
 
 import { AnimationDefinition, motion, Variants } from 'framer-motion';
-import { shallow } from 'zustand/shallow';
 
 import { ErrorCircleIcon, SuccessCircleIcon } from '@/lib/assets/icons';
-import useToastStore, { ToastStore } from '@/stores/toast';
+import useToastStore from '@/stores/toast';
 
 import styles from './index.module.scss';
 
@@ -27,18 +26,10 @@ const logoVariants: Variants = {
   },
 };
 
-const toastSelector = (state: ToastStore) => ({
-  isRender: state.isRender,
-  type: state.type,
-  message: state.message,
-  delay: state.delay,
-  closeToast: state.closeToast,
-});
-
 function Toast() {
   const {
     isRender, message, closeToast, delay, type,
-  } = useToastStore(toastSelector, shallow);
+  } = useToastStore(['closeToast', 'isRender', 'message', 'delay', 'type']);
 
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isOpenToast, setIsOpenToast] = useState<boolean>(false);

@@ -1,7 +1,6 @@
 import { memo, useMemo } from 'react';
 
 import { MarkerF } from '@react-google-maps/api';
-import { shallow } from 'zustand/shallow';
 
 import { PlaceResult } from '@/lib/types/google.maps';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
@@ -11,9 +10,7 @@ type Props = {
 };
 
 function PlaceResultMarker({ place }: Props) {
-  const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore((state) => ({
-    onOpenPlaceDetailWindow: state.onOpenPlaceDetailWindow,
-  }), shallow);
+  const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow']);
 
   const icon = useMemo(() => ({
     url: '/images/map.marker.v2.png',

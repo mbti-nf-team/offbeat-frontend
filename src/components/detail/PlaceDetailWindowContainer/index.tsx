@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 
-import { shallow } from 'zustand/shallow';
-
 import useGetPlaceDetails from '@/hooks/maps/useGetPlaceDetails';
 import useGetSearchBlog from '@/hooks/queries/useGetSearchBlog';
 import { PlaceResult } from '@/lib/types/google.maps';
@@ -15,12 +13,7 @@ function PlaceDetailWindowContainer() {
 
   const {
     isOpenPlaceDetailWindow, onClosePlaceDetailWindow, placeId,
-  } = usePlaceDetailWindowStore((state) => ({
-    placeName: state.placeName,
-    placeId: state.placeId,
-    isOpenPlaceDetailWindow: state.isOpenPlaceDetailWindow,
-    onClosePlaceDetailWindow: state.onClosePlaceDetailWindow,
-  }), shallow);
+  } = usePlaceDetailWindowStore(['isOpenPlaceDetailWindow', 'onClosePlaceDetailWindow', 'placeId']);
 
   const { data: placesWithSearchResult, isLoading } = useGetSearchBlog<true>({
     placesResult: [placeDetailsState as PlaceResult],

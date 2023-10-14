@@ -3,7 +3,6 @@ import {
 } from 'react';
 
 import { useGoogleMap } from '@react-google-maps/api';
-import { shallow } from 'zustand/shallow';
 
 import Button from '@/components/common/Button';
 import Label from '@/components/common/Label';
@@ -23,11 +22,7 @@ function SuggestSearchList({ onInput, inputRef }: Props, ref: ForwardedRef<HTMLB
   const map = useGoogleMap();
   const {
     recentSearchList, addRecentSearch, removeRecentSearch,
-  } = useRecentSearchStore((state) => ({
-    recentSearchList: state.recentSearchList,
-    addRecentSearch: state.addRecentSearch,
-    removeRecentSearch: state.removeRecentSearch,
-  }), shallow);
+  } = useRecentSearchStore(['addRecentSearch', 'recentSearchList', 'removeRecentSearch']);
 
   const { onTextSearch } = useTextSearch(map);
 
