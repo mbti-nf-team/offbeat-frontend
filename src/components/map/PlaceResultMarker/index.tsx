@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from 'react';
+import { memo, useMemo } from 'react';
 
 import { MarkerF } from '@react-google-maps/api';
 import { shallow } from 'zustand/shallow';
@@ -11,7 +11,6 @@ type Props = {
 };
 
 function PlaceResultMarker({ place }: Props) {
-  const [, setMarker] = useState<google.maps.Marker>();
   const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore((state) => ({
     onOpenPlaceDetailWindow: state.onOpenPlaceDetailWindow,
   }), shallow);
@@ -34,8 +33,6 @@ function PlaceResultMarker({ place }: Props) {
       icon={icon}
       onClick={onClickMarker}
       title={place.name}
-      onLoad={(markerF) => setMarker(markerF)}
-      onUnmount={() => setMarker(undefined)}
       position={place.geometry?.location as google.maps.LatLng}
     />
   );
