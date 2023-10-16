@@ -1,8 +1,6 @@
-import { TextSearchPlace } from '@/lib/types/google.maps';
-
 import { api, paramsSerializer } from '..';
 
-import { NaverSearchBlogResponse } from './model';
+import { NaverSearchBlogResponse, TextSearchPlaceResponse } from './model';
 
 const BATCH_SIZE = 10;
 const DELAY = 1000;
@@ -58,7 +56,7 @@ export const fetchAllSettledSearchBlogs = async <T = boolean>({
 export const fetchGoogleSearch = async ({
   keyword, nextCursor,
 }: { keyword: string; nextCursor?: string; }) => {
-  const response = await api<TextSearchPlace>({
+  const response = await api<TextSearchPlaceResponse>({
     method: 'GET',
     url: '/google/search',
     params: {
