@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
+import { Status } from '@googlemaps/google-maps-services-js';
 import { useGoogleMap } from '@react-google-maps/api';
 
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
-import useTextSearch from '@/hooks/maps/useTextSearch';
+import useGetGoogleSearch from '@/hooks/queries/useGetGoogleSearch';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
 
@@ -19,22 +20,22 @@ type Props = {
 
 function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props) {
   const map = useGoogleMap();
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
 
   const { addRecentSearch: saveNextKeyword } = useRecentSearchStore(['addRecentSearch']);
   const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow']);
+
   const {
-    placesResult, onTextSearch, isZeroResult,
-  } = useTextSearch(map);
+    query: { data: places, isSuccess }, refState,
+  } = useGetGoogleSearch({ keyword: searchKeyword });
 
   const handleSubmit = (keyword: string) => {
-    onTextSearch({ query: keyword });
+    setSearchKeyword(keyword);
     saveNextKeyword(keyword);
   };
 
   useEffect(() => {
     if (defaultPlaceId && defaultPlaceName && map) {
-      onTextSearch({ query: defaultPlaceName });
-
       onOpenPlaceDetailWindow({
         placeId: defaultPlaceId,
         placeName: defaultPlaceName,
@@ -60,15 +61,39 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultPlaceName
     });
   }, [defaultCountryCode, map]);
 
+  useEffect(() => {
+    if (
+      !map
+      || !isSuccess
+      || places?.pages?.[0]?.status === Status.ZERO_RESULTS
+      || !places?.pages.length
+    ) {
+      return;
+    }
+
+    const markerBounds = new google.maps.LatLngBounds();
+
+    places.pages.flatMap((place) => place.results).forEach((place) => {
+      if (place?.geometry?.location) {
+        markerBounds.extend(place.geometry.location);
+      }
+    });
+
+    map.fitBounds(markerBounds);
+  }, [map, isSuccess, places]);
+
   return (
     <>
       <SearchInput onSubmit={handleSubmit} />
-      {placesResult.map((place) => (
-        <PlaceResultMarker key={place.place_id} place={place} />
+      {places?.pages?.map((placeResult) => (
+        placeResult.results.map((place) => (
+          <PlaceResultMarker key={place.place_id} place={place} />
+        ))
       ))}
       <PlaceBottomSheet
-        placesResult={placesResult}
-        isZeroResult={isZeroResult}
+        places={places}
+        refState={refState}
+        isSuccess={isSuccess}
       />
       <PlaceDetailWindowContainer />
     </>

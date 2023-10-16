@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
 
   const query = searchParams.get('query');
+  const nextCursor = searchParams.get('nextCursor');
 
   if (!query) {
     return NextResponse.json(null, {
@@ -27,6 +28,8 @@ export async function GET(request: NextRequest) {
       key: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
       query,
       region: 'KR',
+      opennow: false,
+      pagetoken: nextCursor ?? undefined,
     },
   });
 

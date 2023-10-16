@@ -1,3 +1,5 @@
+import { Place } from '@googlemaps/google-maps-services-js';
+
 import { PlaceResult } from '@/lib/types/google.maps';
 
 export const codeToFlag = (code: string): string => String.fromCodePoint(
@@ -7,7 +9,7 @@ export const codeToFlag = (code: string): string => String.fromCodePoint(
 );
 
 export const filteredPlaces = (
-  places: google.maps.places.PlaceResult[],
+  places: Place[],
 ) => places.filter((place): place is PlaceResult => [
   place.geometry?.location, place.place_id, place.name,
 ].some((value) => Boolean(value)));
