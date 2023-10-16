@@ -30,7 +30,7 @@ function PlaceResultMarker({ place }: Props) {
       icon={icon}
       onClick={onClickMarker}
       title={place.name}
-      position={place.geometry?.location as google.maps.LatLng}
+      position={place.geometry?.location}
     />
   );
 }

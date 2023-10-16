@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 
 import useGetPlaceDetails from '@/hooks/maps/useGetPlaceDetails';
 import useGetSearchBlog from '@/hooks/queries/useGetSearchBlog';
-import { PlaceResult } from '@/lib/types/google.maps';
-import { PlacesWithSearchResult } from '@/lib/types/search';
+import { PlaceDetailResult } from '@/lib/types/google.maps';
+import { PlacesWithDetailSearchResult } from '@/lib/types/search';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 
 import PlaceDetailWindow from '../PlaceDetailWindow';
@@ -16,7 +16,7 @@ function PlaceDetailWindowContainer() {
   } = usePlaceDetailWindowStore(['isOpenPlaceDetailWindow', 'onClosePlaceDetailWindow', 'placeId']);
 
   const { data: placesWithSearchResult, isLoading } = useGetSearchBlog<true>({
-    placesResult: [placeDetailsState as PlaceResult],
+    placesResult: [placeDetailsState as PlaceDetailResult],
     includePost: true,
     enabled: !!placeDetailsState,
   });
@@ -36,7 +36,7 @@ function PlaceDetailWindowContainer() {
     <PlaceDetailWindow
       isLoading={isLoading}
       isVisible={isOpenPlaceDetailWindow}
-      placeDetail={placesWithSearchResult?.[0] as PlacesWithSearchResult<true> | null}
+      placeDetail={placesWithSearchResult?.[0] as PlacesWithDetailSearchResult<true> | null}
       onClose={onCloseDetailWindow}
     />
   );

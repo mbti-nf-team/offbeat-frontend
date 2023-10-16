@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
-import { checkEmpty } from '@nf-team/core';
+import { Status } from '@googlemaps/google-maps-services-js';
+import { checkEmpty, isEmpty } from '@nf-team/core';
+import { InfiniteData } from '@tanstack/react-query';
 
 import Button from '@/components/common/Button';
 import Spinner from '@/components/common/Spinner';
 import useGetSearchBlog from '@/hooks/queries/useGetSearchBlog';
-import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-import { PlaceResult } from '@/lib/types/google.maps';
-import { SelectedPlace } from '@/lib/types/search';
-import usePlaceStore from '@/stores/place';
+import { InfiniteRefState } from '@/lib/types';
+import { TextSearchPlace } from '@/lib/types/google.maps';
+import { PlacesWithSearchResult, SelectedPlace } from '@/lib/types/search';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import { targetFalseThenValue } from '@/utils';
 
@@ -18,52 +18,38 @@ import PlaceBottomSheetItem from '../PlaceBottomSheetItem';
 import styles from './index.module.scss';
 
 type Props = {
-  placesResult: PlaceResult[];
-  isZeroResult?: boolean;
+  places?: InfiniteData<TextSearchPlace>;
+  refState: InfiniteRefState<HTMLDivElement>;
+  isSuccess: boolean;
 };
 
-function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const { pagination: placePagination } = usePlaceStore(['pagination']);
-
-  const refState = useIntersectionObserver<HTMLDivElement>({
-    isRoot: true,
-    fetchNextPage: placePagination?.fetchNextPage,
-    hasNextPage: placePagination?.hasNextPage,
-    intersectionOptions: {
-      rootMargin: '80px',
-    },
-  });
+function PlaceBottomSheet({ places, refState, isSuccess }: Props) {
+  const placesResult = checkEmpty(places?.pages.flatMap((value) => value.results));
+  const isZeroResult = isSuccess && (
+    isEmpty(placesResult) || places?.pages?.[0].status === Status.ZERO_RESULTS
+  );
 
   const {
     onOpenPlaceDetailWindow, isOpenPlaceDetailWindow,
   } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow', 'isOpenPlaceDetailWindow']);
 
+  // TODO - 마이그레이션
   const {
-    data: placesWithSearchResult, isFetching,
+    data: placesWithSearchResult, isFetching, isSuccess: isSuccessPlacesWithSearchResult,
   } = useGetSearchBlog<false>({
     placesResult,
     includePost: false,
-    enabled: !!placesResult?.length && !isZeroResult,
+    enabled: !isEmpty(placesResult),
   });
 
   const onClickPlaceItem = (
     selectedPlaceForm: SelectedPlace,
   ) => onOpenPlaceDetailWindow(selectedPlaceForm);
 
-  useEffect(() => {
-    if (placesResult?.length || isZeroResult) {
-      setIsOpen(true);
-      return;
-    }
-
-    setIsOpen(false);
-  }, [placesResult?.length, isZeroResult]);
-
   return (
     <BottomSheet
-      open={isOpen && !isOpenPlaceDetailWindow}
+      open={!isOpenPlaceDetailWindow
+        && (isZeroResult || isSuccessPlacesWithSearchResult || isFetching)}
       blocking={false}
       defaultSnap={({ maxHeight }) => (isZeroResult ? 168 : maxHeight / 2)}
       snapPoints={({ maxHeight }) => (isZeroResult ? [168] : [
@@ -90,7 +76,7 @@ function PlaceBottomSheet({ placesResult, isZeroResult }: Props) {
                   !(placesWithSearchResult.length - 1 === index),
                 )(refState.lastItemRef)
               }
-              place={place}
+              place={place as PlacesWithSearchResult}
               onClick={onClickPlaceItem}
             />
           ))}

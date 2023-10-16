@@ -1,22 +1,22 @@
 import { createWithEqualityFn } from 'zustand/traditional';
 
-import { PlaceResult } from '@/lib/types/google.maps';
+import { PlaceDetailResult } from '@/lib/types/google.maps';
 
 import { StoreWithShallow, useStoreWithShallow } from './utils';
 
 type PlaceState = {
-  places: PlaceResult[];
+  places: PlaceDetailResult[];
   isReset: boolean;
   isZeroResult: boolean;
   pagination?: { hasNextPage?: boolean; fetchNextPage?: () => void; };
 };
 
 type PlaceAction = {
-  setPlaces: (place: PlaceResult[]) => void;
+  setPlaces: (place: PlaceDetailResult[]) => void;
   setIsZeroResult: (isZeroResult: boolean) => void;
   resetPlaces: () => void;
   setPagination: (pagination: { hasNextPage?: boolean; fetchNextPage?: () => void; }) => void;
-  addPlaces: (place: PlaceResult[]) => void;
+  addPlaces: (place: PlaceDetailResult[]) => void;
 };
 
 export type PlaceStore = PlaceAction & PlaceState;

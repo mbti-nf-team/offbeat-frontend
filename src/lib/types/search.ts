@@ -1,4 +1,4 @@
-import { PlaceResult } from './google.maps';
+import { PlaceDetailResult, PlaceResult } from './google.maps';
 
 export type BlogPost = {
   title: string;
@@ -12,16 +12,16 @@ export interface NaverSearchBlog<T = boolean> {
   posts: T extends true ? BlogPost[] : null;
 }
 
-export interface PlaceWithBlogPost<T = boolean> extends PlaceResult {
-  total_count: number;
-  posts: T extends true ? BlogPost[] : null;
-}
-
 export type SelectedPlace = {
   placeId: string | undefined;
   placeName: string | undefined;
 };
 
 export interface PlacesWithSearchResult<T = false> extends PlaceResult {
+  searchBlogPost: PromiseSettledResult<NaverSearchBlog<T>>;
+}
+
+// TODO - 마이그레이션 후 삭제
+export interface PlacesWithDetailSearchResult<T = false> extends PlaceDetailResult {
   searchBlogPost: PromiseSettledResult<NaverSearchBlog<T>>;
 }

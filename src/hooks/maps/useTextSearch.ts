@@ -20,7 +20,7 @@ function useTextSearch(map: google.maps.Map | null) {
   ) {
     if (status === google.maps.places.PlacesServiceStatus.OK && places?.length) {
       setIsZeroResult(false);
-      addPlaces(filteredPlaces(places));
+      addPlaces(filteredPlaces(places as any) as any);
       setPagination({
         hasNextPage: pagination?.hasNextPage,
         fetchNextPage: () => {
@@ -53,27 +53,6 @@ function useTextSearch(map: google.maps.Map | null) {
       setPlaceService(new google.maps.places.PlacesService(map));
     }
   }, [map]);
-
-  useEffect(() => {
-    if (!placesResult.length || !map || isZeroResult) {
-      return;
-    }
-
-    const markerBounds = new google.maps.LatLngBounds();
-
-    placesResult.forEach((place) => {
-      if (place?.geometry?.viewport) {
-        markerBounds.union(place.geometry.viewport);
-      }
-
-      if (place?.geometry?.location) {
-        markerBounds.extend(place.geometry.location);
-      }
-    });
-
-    map.fitBounds(markerBounds);
-    map.fitBounds(markerBounds);
-  }, [placesResult, map, isZeroResult]);
 
   return {
     onTextSearch,

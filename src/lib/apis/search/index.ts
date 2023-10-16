@@ -1,8 +1,6 @@
-import { TextSearchResponseData } from '@googlemaps/google-maps-services-js';
-
 import { api, paramsSerializer } from '..';
 
-import { NaverSearchBlogResponse } from './model';
+import { NaverSearchBlogResponse, TextSearchPlaceResponse } from './model';
 
 const BATCH_SIZE = 10;
 const DELAY = 1000;
@@ -12,7 +10,7 @@ export const fetchNaverSearchBlog = async <T = boolean>({
 }: { keyword: string; includePost?: T; }) => {
   const response = await api<NaverSearchBlogResponse<T>>({
     method: 'GET',
-    url: '/search',
+    url: '/naver/search',
     params: {
       query: keyword,
       include_post: includePost,
@@ -56,13 +54,14 @@ export const fetchAllSettledSearchBlogs = async <T = boolean>({
 };
 
 export const fetchGoogleSearch = async ({
-  keyword,
-}: { keyword: string; }) => {
-  const response = await api<TextSearchResponseData>({
+  keyword, nextCursor,
+}: { keyword: string; nextCursor?: string; }) => {
+  const response = await api<TextSearchPlaceResponse>({
     method: 'GET',
-    url: '/google-text-search',
+    url: '/google/search',
     params: {
       query: keyword,
+      nextCursor,
     },
     paramsSerializer,
     isBFF: true,

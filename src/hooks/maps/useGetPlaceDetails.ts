@@ -3,19 +3,19 @@ import { useCallback, useState } from 'react';
 import { useGoogleMap } from '@react-google-maps/api';
 
 import useRenderToast from '@/hooks/useRenderToast';
-import { PlaceResult } from '@/lib/types/google.maps';
+import { PlaceDetailResult } from '@/lib/types/google.maps';
 
 const hasPlaceLocation = (
   placeDetail: google.maps.places.PlaceResult | null,
-): placeDetail is PlaceResult => Boolean(placeDetail?.geometry?.location);
+): placeDetail is PlaceDetailResult => Boolean(placeDetail?.geometry?.location);
 
 function useGetPlaceDetails():
-[PlaceResult | null, (placeId: string) => void, () => void] {
+[PlaceDetailResult | null, (placeId: string) => void, () => void] {
   const map = useGoogleMap();
   const renderToast = useRenderToast();
   const [
     placeDetailsState, setPlaceDetailsState,
-  ] = useState<PlaceResult | null>(null);
+  ] = useState<PlaceDetailResult | null>(null);
 
   const onGetPlaceDetails = useCallback((placeId: string) => {
     if (!map) {
