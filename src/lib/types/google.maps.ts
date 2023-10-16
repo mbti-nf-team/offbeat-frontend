@@ -6,6 +6,12 @@ export interface PlaceResult extends Place {
   name: string;
 }
 
+export interface PlaceDetailResult extends google.maps.places.PlaceResult {
+  geometry: google.maps.places.PlaceGeometry;
+  place_id: string;
+  name: string;
+}
+
 export interface TextSearchPlace extends TextSearchResponseData {
   results: PlaceResult[];
 }

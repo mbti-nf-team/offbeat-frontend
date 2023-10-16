@@ -20,7 +20,7 @@ function useTextSearch(map: google.maps.Map | null) {
   ) {
     if (status === google.maps.places.PlacesServiceStatus.OK && places?.length) {
       setIsZeroResult(false);
-      addPlaces(filteredPlaces(places as any));
+      addPlaces(filteredPlaces(places as any) as any);
       setPagination({
         hasNextPage: pagination?.hasNextPage,
         fetchNextPage: () => {

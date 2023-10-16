@@ -9,7 +9,7 @@ import Spinner from '@/components/common/Spinner';
 import useGetSearchBlog from '@/hooks/queries/useGetSearchBlog';
 import { InfiniteRefState } from '@/lib/types';
 import { TextSearchPlace } from '@/lib/types/google.maps';
-import { SelectedPlace } from '@/lib/types/search';
+import { PlacesWithSearchResult, SelectedPlace } from '@/lib/types/search';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import { targetFalseThenValue } from '@/utils';
 
@@ -35,7 +35,7 @@ function PlaceBottomSheet({ places, refState, isSuccess }: Props) {
 
   // TODO - 마이그레이션
   const {
-    data: placesWithSearchResult, isFetching, isSuccess: isSucessPlacesWithSearchResult,
+    data: placesWithSearchResult, isFetching, isSuccess: isSuccessPlacesWithSearchResult,
   } = useGetSearchBlog<false>({
     placesResult,
     includePost: false,
@@ -49,7 +49,7 @@ function PlaceBottomSheet({ places, refState, isSuccess }: Props) {
   return (
     <BottomSheet
       open={!isOpenPlaceDetailWindow
-        && (isZeroResult || isSucessPlacesWithSearchResult || isFetching)}
+        && (isZeroResult || isSuccessPlacesWithSearchResult || isFetching)}
       blocking={false}
       defaultSnap={({ maxHeight }) => (isZeroResult ? 168 : maxHeight / 2)}
       snapPoints={({ maxHeight }) => (isZeroResult ? [168] : [
@@ -76,7 +76,7 @@ function PlaceBottomSheet({ places, refState, isSuccess }: Props) {
                   !(placesWithSearchResult.length - 1 === index),
                 )(refState.lastItemRef)
               }
-              place={place}
+              place={place as PlacesWithSearchResult}
               onClick={onClickPlaceItem}
             />
           ))}

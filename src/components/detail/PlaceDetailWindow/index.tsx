@@ -21,7 +21,7 @@ import StarRating from '@/components/common/StarRating';
 import useRenderToast from '@/hooks/useRenderToast';
 import { paramsSerializer } from '@/lib/apis';
 import { CloseIcon, ShareIcon } from '@/lib/assets/icons';
-import { PlacesWithSearchResult } from '@/lib/types/search';
+import { PlacesWithDetailSearchResult } from '@/lib/types/search';
 
 import styles from './index.module.scss';
 
@@ -47,7 +47,7 @@ type Props = {
   isVisible: boolean;
   isLoading: boolean;
   onClose: () => void;
-  placeDetail: PlacesWithSearchResult<true> | null;
+  placeDetail: PlacesWithDetailSearchResult<true> | null;
 };
 
 function PlaceDetailWindow({
