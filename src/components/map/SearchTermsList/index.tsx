@@ -2,7 +2,7 @@ import {
   ForwardedRef, forwardRef, memo, RefObject, useCallback, useEffect, useState,
 } from 'react';
 
-import useGetPlaceDetails from '@/hooks/maps/useGetPlaceDetails';
+import useGetPlaceDetail from '@/hooks/queries/useGetPlaceDetail';
 import useRenderToast from '@/hooks/useRenderToast';
 import useSearchActionKeyEvent from '@/hooks/useSearchActionKeyEvent';
 import usePlaceStore from '@/stores/place';
@@ -27,14 +27,16 @@ function SearchTermsList({
     estimatedSearchTerms, setEstimatedSearchTerms,
   ] = useState<google.maps.places.AutocompletePrediction[]>([]);
   const renderToast = useRenderToast();
-  const [placeDetailsState, onGetPlaceDetails] = useGetPlaceDetails();
+  const [placeId, setPlaceId] = useState<string>();
   const [isZeroResult, setIsZeroResult] = useState<boolean>();
   const { setPlaces } = usePlaceStore(['setPlaces']);
   const { addRecentSearch } = useRecentSearchStore(['addRecentSearch']);
 
-  const onActionTextSearch = (placeId: string, placeName: string) => {
-    onGetPlaceDetails(placeId);
-    addRecentSearch(placeName);
+  const { data: placeDetail, isSuccess } = useGetPlaceDetail({ placeId });
+
+  const onActionTextSearch = (targetPlaceId: string, targetPlaceName: string) => {
+    setPlaceId(targetPlaceId);
+    addRecentSearch(targetPlaceName);
   };
 
   const onKeyDown = useSearchActionKeyEvent<[string, string]>({
@@ -68,11 +70,11 @@ function SearchTermsList({
   }, [keyword, displaySuggestions, service, sessionToken]);
 
   useEffect(() => {
-    if (placeDetailsState) {
-      setPlaces([placeDetailsState]);
-      onInput(`${placeDetailsState?.name}`);
+    if (isSuccess && placeDetail?.result) {
+      setPlaces([placeDetail.result]);
+      onInput(`${placeDetail.result.name}`);
     }
-  }, [placeDetailsState]);
+  }, [isSuccess, placeDetail]);
 
   useEffect(() => {
     if (isZeroResult) {

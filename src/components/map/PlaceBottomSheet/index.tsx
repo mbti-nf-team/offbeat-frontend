@@ -9,7 +9,7 @@ import Spinner from '@/components/common/Spinner';
 import useGetSearchBlog from '@/hooks/queries/useGetSearchBlog';
 import { InfiniteRefState } from '@/lib/types';
 import { TextSearchPlace } from '@/lib/types/google.maps';
-import { PlacesWithSearchResult, SelectedPlace } from '@/lib/types/search';
+import { SelectedPlace } from '@/lib/types/search';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import { targetFalseThenValue } from '@/utils';
 
@@ -76,7 +76,7 @@ function PlaceBottomSheet({ places, refState, isSuccess }: Props) {
                   !(placesWithSearchResult.length - 1 === index),
                 )(refState.lastItemRef)
               }
-              place={place as PlacesWithSearchResult}
+              place={place}
               onClick={onClickPlaceItem}
             />
           ))}

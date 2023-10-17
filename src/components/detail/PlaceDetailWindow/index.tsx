@@ -21,7 +21,7 @@ import StarRating from '@/components/common/StarRating';
 import useRenderToast from '@/hooks/useRenderToast';
 import { paramsSerializer } from '@/lib/apis';
 import { CloseIcon, ShareIcon } from '@/lib/assets/icons';
-import { PlacesWithDetailSearchResult } from '@/lib/types/search';
+import { PlacesWithSearchResult } from '@/lib/types/search';
 
 import styles from './index.module.scss';
 
@@ -47,7 +47,7 @@ type Props = {
   isVisible: boolean;
   isLoading: boolean;
   onClose: () => void;
-  placeDetail: PlacesWithDetailSearchResult<true> | null;
+  placeDetail: PlacesWithSearchResult<true> | null;
 };
 
 function PlaceDetailWindow({
@@ -155,14 +155,14 @@ function PlaceDetailWindow({
               {!isLoading && placeDetail && (
                 <>
                   <h1 className={styles.bodyHeader}>{placeDetail?.name}</h1>
-                  {placeDetail?.photos?.[0] && (
+                  {placeDetail?.thumbnail && (
                     <div className={styles.placeImageWrapper}>
                       <Image
                         width={382}
                         height={382}
                         quality={100}
                         className={styles.placeImage}
-                        src={placeDetail.photos[0].getUrl()}
+                        src={placeDetail.thumbnail}
                         alt={placeDetail?.name}
                       />
                     </div>

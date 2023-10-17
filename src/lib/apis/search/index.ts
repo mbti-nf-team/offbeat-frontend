@@ -1,6 +1,6 @@
 import { api, paramsSerializer } from '..';
 
-import { NaverSearchBlogResponse, TextSearchPlaceResponse } from './model';
+import { NaverSearchBlogResponse, PlaceDetailResponse, TextSearchPlaceResponse } from './model';
 
 const BATCH_SIZE = 10;
 const DELAY = 1000;
@@ -62,6 +62,25 @@ export const fetchGoogleSearch = async ({
     params: {
       query: keyword,
       nextCursor,
+    },
+    paramsSerializer,
+    isBFF: true,
+  });
+
+  return response;
+};
+
+export const fetchPlaceDetail = async ({
+  placeId, sessionToken,
+}: { placeId: string; sessionToken?: string; }) => {
+  const response = await api<PlaceDetailResponse>({
+    method: 'GET',
+    url: '/google/search/detail',
+    params: {
+      placeId,
+    },
+    headers: {
+      'session-token': sessionToken,
     },
     paramsSerializer,
     isBFF: true,

@@ -1,42 +1,31 @@
-import { useEffect } from 'react';
-
-import useGetPlaceDetails from '@/hooks/maps/useGetPlaceDetails';
+import useGetPlaceDetail from '@/hooks/queries/useGetPlaceDetail';
 import useGetSearchBlog from '@/hooks/queries/useGetSearchBlog';
-import { PlaceDetailResult } from '@/lib/types/google.maps';
-import { PlacesWithDetailSearchResult } from '@/lib/types/search';
+import { PlaceResult } from '@/lib/types/google.maps';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 
 import PlaceDetailWindow from '../PlaceDetailWindow';
 
 function PlaceDetailWindowContainer() {
-  const [placeDetailsState, onGetPlaceDetails, resetPlaceDetails] = useGetPlaceDetails();
-
   const {
     isOpenPlaceDetailWindow, onClosePlaceDetailWindow, placeId,
   } = usePlaceDetailWindowStore(['isOpenPlaceDetailWindow', 'onClosePlaceDetailWindow', 'placeId']);
+  const { data: placeDetail, isSuccess } = useGetPlaceDetail({ placeId });
 
   const { data: placesWithSearchResult, isLoading } = useGetSearchBlog<true>({
-    placesResult: [placeDetailsState as PlaceDetailResult],
+    placesResult: [placeDetail?.result as PlaceResult],
     includePost: true,
-    enabled: !!placeDetailsState,
+    enabled: isSuccess && !!placeDetail?.result,
   });
 
   const onCloseDetailWindow = () => {
-    resetPlaceDetails();
     onClosePlaceDetailWindow();
   };
-
-  useEffect(() => {
-    if (placeId) {
-      onGetPlaceDetails(placeId);
-    }
-  }, [placeId]);
 
   return (
     <PlaceDetailWindow
       isLoading={isLoading}
       isVisible={isOpenPlaceDetailWindow}
-      placeDetail={placesWithSearchResult?.[0] as PlacesWithDetailSearchResult<true> | null}
+      placeDetail={placesWithSearchResult?.[0]}
       onClose={onCloseDetailWindow}
     />
   );
