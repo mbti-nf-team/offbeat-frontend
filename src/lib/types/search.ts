@@ -1,4 +1,4 @@
-import { PlaceDetailResult, PlaceResult } from './google.maps';
+import { PlaceResult } from './google.maps';
 
 export type BlogPost = {
   title: string;
@@ -18,10 +18,5 @@ export type SelectedPlace = {
 };
 
 export interface PlacesWithSearchResult<T = false> extends PlaceResult {
-  searchBlogPost: PromiseSettledResult<NaverSearchBlog<T>>;
-}
-
-// TODO - 마이그레이션 후 삭제
-export interface PlacesWithDetailSearchResult<T = false> extends PlaceDetailResult {
   searchBlogPost: PromiseSettledResult<NaverSearchBlog<T>>;
 }

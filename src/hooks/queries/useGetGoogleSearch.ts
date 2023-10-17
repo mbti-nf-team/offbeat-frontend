@@ -1,3 +1,4 @@
+import { TextSearchResponseData } from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -8,7 +9,7 @@ import { filteredPlaces } from '@/utils';
 import useIntersectionObserver from '../useIntersectionObserver';
 
 function useGetGoogleSearch({ keyword }: { keyword: string; }) {
-  const query = useInfiniteQuery<TextSearchPlace>(['googleSearch', keyword], ({ pageParam }) => fetchGoogleSearch({ keyword, nextCursor: pageParam }), {
+  const query = useInfiniteQuery<TextSearchResponseData, unknown, TextSearchPlace>(['googleSearch', keyword], ({ pageParam }) => fetchGoogleSearch({ keyword, nextCursor: pageParam }), {
     enabled: !!keyword,
     getNextPageParam: ({ next_page_token }) => next_page_token,
     select: (response) => ({
