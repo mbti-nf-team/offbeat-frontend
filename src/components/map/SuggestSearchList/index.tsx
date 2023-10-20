@@ -2,11 +2,8 @@ import {
   ForwardedRef, forwardRef, memo, MouseEvent, RefObject,
 } from 'react';
 
-import { useGoogleMap } from '@react-google-maps/api';
-
 import Button from '@/components/common/Button';
 import Label from '@/components/common/Label';
-import useTextSearch from '@/hooks/maps/useTextSearch';
 import useSearchActionKeyEvent from '@/hooks/useSearchActionKeyEvent';
 import { ClockIcon, CloseIcon } from '@/lib/assets/icons';
 import useRecentSearchStore from '@/stores/recentSearch';
@@ -19,21 +16,12 @@ type Props = {
 };
 
 function SuggestSearchList({ onInput, inputRef }: Props, ref: ForwardedRef<HTMLButtonElement>) {
-  const map = useGoogleMap();
   const {
-    recentSearchList, addRecentSearch, removeRecentSearch,
-  } = useRecentSearchStore(['addRecentSearch', 'recentSearchList', 'removeRecentSearch']);
-
-  const { onTextSearch } = useTextSearch(map);
-
-  const onActionTextSearch = (keyword: string) => {
-    onTextSearch({ query: keyword });
-    addRecentSearch(keyword);
-    onInput(keyword);
-  };
+    recentSearchList, removeRecentSearch,
+  } = useRecentSearchStore(['recentSearchList', 'removeRecentSearch']);
 
   const onRecentSearchItemKeyDown = useSearchActionKeyEvent<[string]>({
-    inputRef, onActionEvent: onActionTextSearch,
+    inputRef, onActionEvent: onInput,
   });
 
   const onClickCloseIcon = (removeKeyword: string) => (e: MouseEvent<HTMLButtonElement>) => {
@@ -56,7 +44,7 @@ function SuggestSearchList({ onInput, inputRef }: Props, ref: ForwardedRef<HTMLB
             key={recentSearch}
             className={styles.searchTerm}
             onKeyDown={(e) => onRecentSearchItemKeyDown(e, recentSearch)}
-            onClick={() => onActionTextSearch(recentSearch)}
+            onClick={() => onInput(recentSearch)}
           >
             <div className={styles.recentSearchContents}>
               <ClockIcon width={24} height={24} style={{ minWidth: '24px', minHeight: '24px' }} />

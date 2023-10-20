@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Status } from '@googlemaps/google-maps-services-js';
 import { useGoogleMap } from '@react-google-maps/api';
@@ -7,6 +7,7 @@ import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowCon
 import useGetGoogleSearch from '@/hooks/queries/useGetGoogleSearch';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
+import useSearchKeywordStore from '@/stores/searchKeyword';
 
 import PlaceBottomSheet from '../PlaceBottomSheet';
 import PlaceResultMarker from '../PlaceResultMarker';
@@ -20,8 +21,7 @@ type Props = {
 
 function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props) {
   const map = useGoogleMap();
-  const [searchKeyword, setSearchKeyword] = useState<string>('');
-
+  const { searchKeyword, setSearchKeyword } = useSearchKeywordStore(['searchKeyword', 'setSearchKeyword']);
   const { addRecentSearch: saveNextKeyword } = useRecentSearchStore(['addRecentSearch']);
   const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow']);
 

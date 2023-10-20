@@ -2,11 +2,8 @@ import {
   ForwardedRef, forwardRef, memo, RefObject, useCallback, useEffect, useState,
 } from 'react';
 
-import useGetPlaceDetail from '@/hooks/queries/useGetPlaceDetail';
 import useRenderToast from '@/hooks/useRenderToast';
 import useSearchActionKeyEvent from '@/hooks/useSearchActionKeyEvent';
-import usePlaceStore from '@/stores/place';
-import useRecentSearchStore from '@/stores/recentSearch';
 
 import ZeroSearchResult from '../ZeroSearchResult';
 
@@ -27,20 +24,10 @@ function SearchTermsList({
     estimatedSearchTerms, setEstimatedSearchTerms,
   ] = useState<google.maps.places.AutocompletePrediction[]>([]);
   const renderToast = useRenderToast();
-  const [placeId, setPlaceId] = useState<string>();
   const [isZeroResult, setIsZeroResult] = useState<boolean>();
-  const { setPlaces } = usePlaceStore(['setPlaces']);
-  const { addRecentSearch } = useRecentSearchStore(['addRecentSearch']);
 
-  const { data: placeDetail, isSuccess } = useGetPlaceDetail({ placeId });
-
-  const onActionTextSearch = (targetPlaceId: string, targetPlaceName: string) => {
-    setPlaceId(targetPlaceId);
-    addRecentSearch(targetPlaceName);
-  };
-
-  const onKeyDown = useSearchActionKeyEvent<[string, string]>({
-    inputRef, onActionEvent: onActionTextSearch,
+  const onKeyDown = useSearchActionKeyEvent<[string]>({
+    inputRef, onActionEvent: onInput,
   });
 
   const displaySuggestions = useCallback((
@@ -70,13 +57,6 @@ function SearchTermsList({
   }, [keyword, displaySuggestions, service, sessionToken]);
 
   useEffect(() => {
-    if (isSuccess && placeDetail?.result) {
-      setPlaces([placeDetail.result]);
-      onInput(`${placeDetail.result.name}`);
-    }
-  }, [isSuccess, placeDetail]);
-
-  useEffect(() => {
     if (isZeroResult) {
       setEstimatedSearchTerms([]);
     }
@@ -84,7 +64,12 @@ function SearchTermsList({
 
   if (isZeroResult) {
     return (
-      <ZeroSearchResult ref={ref} inputRef={inputRef} keyword={keyword} onInput={onInput} />
+      <ZeroSearchResult
+        ref={ref}
+        inputRef={inputRef}
+        keyword={keyword}
+        onInput={onInput}
+      />
     );
   }
 
@@ -96,8 +81,8 @@ function SearchTermsList({
           type="button"
           key={place_id}
           ref={index === 0 ? ref : undefined}
-          onKeyDown={(e) => onKeyDown(e, place_id, structured_formatting.main_text)}
-          onClick={() => onActionTextSearch(place_id, structured_formatting.main_text)}
+          onKeyDown={(e) => onKeyDown(e, structured_formatting.main_text)}
+          onClick={() => onInput(structured_formatting.main_text)}
         >
           <div>
             {structured_formatting.main_text}

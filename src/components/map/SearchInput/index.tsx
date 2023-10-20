@@ -3,6 +3,8 @@ import { useCallback, useRef, useState } from 'react';
 import { useActionKeyEvent, useBoolean, useDebounce } from '@nf-team/react';
 
 import Input from '@/components/common/Input';
+import useRecentSearchStore from '@/stores/recentSearch';
+import useSearchKeywordStore from '@/stores/searchKeyword';
 
 import SearchTermsBox from '../SearchTermsBox';
 
@@ -16,6 +18,9 @@ function SearchInput({ onSubmit }: Props) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isArrowDownEvent, onArrowDownEvent, blurArrowDownEvent] = useBoolean(false);
+
+  const { addRecentSearch } = useRecentSearchStore(['addRecentSearch']);
+  const { setSearchKeyword } = useSearchKeywordStore(['setSearchKeyword']);
 
   const onKeyDown = useActionKeyEvent<HTMLInputElement>(['Enter', 'NumpadEnter', 'ArrowDown'], (e) => {
     if (e.code === 'ArrowDown') {
@@ -37,8 +42,10 @@ function SearchInput({ onSubmit }: Props) {
     blurArrowDownEvent();
   };
 
-  const onInput = useCallback((value: string) => {
-    setSearchInput(value);
+  const onInput = useCallback((keyword: string) => {
+    setSearchKeyword(keyword);
+    addRecentSearch(keyword);
+    setSearchInput(keyword);
     setIsFocused(false);
   }, []);
 
