@@ -17,9 +17,12 @@ type Props = {
   defaultCountryCode?: string;
   defaultPlaceId?: string;
   defaultPlaceName?: string;
+  defaultLocation: { lng?: string; lat?: string; }
 };
 
-function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props) {
+function LoadMapContainer({
+  defaultCountryCode, defaultPlaceId, defaultPlaceName, defaultLocation,
+}: Props) {
   const map = useGoogleMap();
   const { searchKeyword, setSearchKeyword } = useSearchKeywordStore(['searchKeyword', 'setSearchKeyword']);
   const { addRecentSearch: saveNextKeyword } = useRecentSearchStore(['addRecentSearch']);
@@ -50,16 +53,32 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultPlaceName
 
     const geocoder = new google.maps.Geocoder();
 
+    const geocoderCallbackResult = (
+      results: google.maps.GeocoderResult[] | null,
+      status: google.maps.GeocoderStatus,
+    ) => {
+      if (status === google.maps.GeocoderStatus.OK && results?.[0].geometry.bounds) {
+        map.setCenter(results[0].geometry.bounds.getCenter());
+        map.setZoom(10);
+      }
+    };
+
+    if (defaultLocation?.lat && defaultLocation?.lng) {
+      geocoder?.geocode({
+        location: new google.maps.LatLng({
+          lat: Number(defaultLocation.lat),
+          lng: Number(defaultLocation.lng),
+        }),
+      }, geocoderCallbackResult);
+      return;
+    }
+
     geocoder?.geocode({
       componentRestrictions: {
         country: defaultCountryCode || 'KR',
       },
-    }, (results, status) => {
-      if (status === google.maps.GeocoderStatus.OK && results?.[0].geometry.bounds) {
-        map?.setCenter(results[0].geometry.bounds.getCenter());
-      }
-    });
-  }, [defaultCountryCode, map]);
+    }, geocoderCallbackResult);
+  }, [defaultCountryCode, map, defaultLocation]);
 
   useEffect(() => {
     if (
