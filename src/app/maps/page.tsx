@@ -14,6 +14,10 @@ function Page({ searchParams }: Props) {
       defaultCountryCode={searchParams?.country}
       defaultPlaceId={searchParams?.id}
       defaultPlaceName={searchParams?.name}
+      defaultLocation={{
+        lat: searchParams?.lat,
+        lng: searchParams?.lng,
+      }}
     />
   );
 }

@@ -14,9 +14,12 @@ type Props = {
   defaultCountryCode?: string;
   defaultPlaceId?: string;
   defaultPlaceName?: string;
+  defaultLocation: { lng?: string; lat?: string; }
 };
 
-function MainMap({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props) {
+function MainMap({
+  defaultCountryCode, defaultPlaceId, defaultPlaceName, defaultLocation,
+}: Props) {
   const [libraries] = useState<['places', 'geometry']>(['places', 'geometry']);
 
   const { isLoaded, loadError } = useLoadScript({
@@ -54,6 +57,7 @@ function MainMap({ defaultCountryCode, defaultPlaceId, defaultPlaceName }: Props
         defaultCountryCode={defaultCountryCode}
         defaultPlaceId={defaultPlaceId}
         defaultPlaceName={defaultPlaceName}
+        defaultLocation={defaultLocation}
       />
     </GoogleMap>
   );

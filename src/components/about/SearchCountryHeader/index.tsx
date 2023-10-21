@@ -2,9 +2,12 @@
 
 import { ReactNode, useEffect } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import Button from '@/components/common/Button';
 import useGeoLocation from '@/hooks/useGeolocation';
 import useRenderToast from '@/hooks/useRenderToast';
+import { paramsSerializer } from '@/lib/apis';
 
 import styles from './index.module.scss';
 
@@ -13,12 +16,9 @@ type Props = {
 };
 
 function SearchCountryHeader({ children }: Props) {
+  const router = useRouter();
   const [location, onClick] = useGeoLocation();
   const renderToast = useRenderToast();
-
-  const handleClick = () => {
-    onClick();
-  };
 
   useEffect(() => {
     if (location?.error) {
@@ -26,13 +26,22 @@ function SearchCountryHeader({ children }: Props) {
     }
   }, [location?.error]);
 
+  useEffect(() => {
+    if (location.coordinates?.lat && location.coordinates?.lng) {
+      router.push(`/maps?${paramsSerializer({
+        lat: location.coordinates?.lat,
+        lng: location.coordinates?.lng,
+      })}`);
+    }
+  }, [location.coordinates]);
+
   return (
     <div>
       {children}
       <div className={styles.buttonWrapper}>
         <Button
           type="button"
-          onClick={handleClick}
+          onClick={onClick}
           color="highlight"
           isLoading={location.loading}
           width="281px"
