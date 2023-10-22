@@ -205,7 +205,7 @@ function PlaceDetailWindow({
                       wrapperClassName={styles.reviewAccordionWrapper}
                     >
                       <div className={styles.resultWrapper}>
-                        {placeDetail?.searchBlogPost.value.posts.map(({
+                        {checkEmpty(placeDetail?.searchBlogPost?.value?.posts).map(({
                           title, description, link, thumbnail,
                         }) => (
                           <ResultCard
