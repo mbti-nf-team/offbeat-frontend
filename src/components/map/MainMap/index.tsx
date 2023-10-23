@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { Language } from '@googlemaps/google-maps-services-js';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 
 import Spinner from '@/components/common/Spinner';
@@ -26,6 +27,7 @@ function MainMap({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
     libraries,
     region: 'KR',
+    language: Language.ko,
   });
 
   if (loadError) {

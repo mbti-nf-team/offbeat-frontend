@@ -1,3 +1,5 @@
+import { TextSearchResponseData } from '@googlemaps/google-maps-services-js';
+
 import { PlaceResult } from './google.maps';
 
 export type BlogPost = {
@@ -19,4 +21,8 @@ export type SelectedPlace = {
 
 export interface PlacesWithSearchResult<T = false> extends PlaceResult {
   searchBlogPost: PromiseSettledResult<NaverSearchBlog<T>>;
+}
+
+export interface SearchPlaces extends TextSearchResponseData {
+  results: PlacesWithSearchResult[];
 }

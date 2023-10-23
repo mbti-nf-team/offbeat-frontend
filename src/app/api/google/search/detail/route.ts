@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { Client } from '@googlemaps/google-maps-services-js';
+import { Client, Language } from '@googlemaps/google-maps-services-js';
 
 export const runtime = 'nodejs';
 
@@ -28,6 +28,7 @@ export async function GET(request: NextRequest) {
       key: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
       place_id: placeId,
       region: 'KR',
+      language: Language.ko,
       sessiontoken: sessionToken ?? undefined,
     },
   });

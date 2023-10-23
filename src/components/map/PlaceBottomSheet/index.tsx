@@ -6,10 +6,8 @@ import { InfiniteData } from '@tanstack/react-query';
 
 import Button from '@/components/common/Button';
 import Spinner from '@/components/common/Spinner';
-import useGetSearchBlog from '@/hooks/queries/useGetSearchBlog';
 import { InfiniteRefState } from '@/lib/types';
-import { TextSearchPlace } from '@/lib/types/google.maps';
-import { SelectedPlace } from '@/lib/types/search';
+import { SearchPlaces, SelectedPlace } from '@/lib/types/search';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import { targetFalseThenValue } from '@/utils';
 
@@ -18,29 +16,24 @@ import PlaceBottomSheetItem from '../PlaceBottomSheetItem';
 import styles from './index.module.scss';
 
 type Props = {
-  places?: InfiniteData<TextSearchPlace>;
+  places?: InfiniteData<SearchPlaces>;
   refState: InfiniteRefState<HTMLDivElement>;
   isSuccess: boolean;
+  isFetchingNextPage: boolean;
+  isFetching: boolean;
 };
 
-function PlaceBottomSheet({ places, refState, isSuccess }: Props) {
-  const placesResult = checkEmpty(places?.pages.flatMap((value) => value.results));
+function PlaceBottomSheet({
+  places, refState, isSuccess, isFetching, isFetchingNextPage,
+}: Props) {
+  const placesWithSearchResult = checkEmpty(places?.pages.flatMap((value) => value.results));
   const isZeroResult = isSuccess && (
-    isEmpty(placesResult) || places?.pages?.[0].status === Status.ZERO_RESULTS
+    isEmpty(placesWithSearchResult) || places?.pages?.[0].status === Status.ZERO_RESULTS
   );
 
   const {
     onOpenPlaceDetailWindow, isOpenPlaceDetailWindow,
   } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow', 'isOpenPlaceDetailWindow']);
-
-  // TODO - 마이그레이션
-  const {
-    data: placesWithSearchResult, isFetching, isSuccess: isSuccessPlacesWithSearchResult,
-  } = useGetSearchBlog<false>({
-    placesResult,
-    includePost: false,
-    enabled: !isEmpty(placesResult),
-  });
 
   const onClickPlaceItem = (
     selectedPlaceForm: SelectedPlace,
@@ -49,7 +42,7 @@ function PlaceBottomSheet({ places, refState, isSuccess }: Props) {
   return (
     <BottomSheet
       open={!isOpenPlaceDetailWindow
-        && (isZeroResult || isSuccessPlacesWithSearchResult || isFetching)}
+        && (isZeroResult || isSuccess || isFetching)}
       blocking={false}
       defaultSnap={({ maxHeight }) => (isZeroResult ? 168 : maxHeight / 2)}
       snapPoints={({ maxHeight }) => (isZeroResult ? [168] : [
@@ -80,7 +73,7 @@ function PlaceBottomSheet({ places, refState, isSuccess }: Props) {
               onClick={onClickPlaceItem}
             />
           ))}
-          {isFetching && (
+          {isFetchingNextPage && (
             <div className={styles.loadingWrapper}>
               <Spinner isLoading />
             </div>

@@ -4,7 +4,7 @@ import { Status } from '@googlemaps/google-maps-services-js';
 import { useGoogleMap } from '@react-google-maps/api';
 
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
-import useGetGoogleSearch from '@/hooks/queries/useGetGoogleSearch';
+import useGetSearchPlaces from '@/hooks/queries/useGetSearchPlaces';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
 import useSearchKeywordStore from '@/stores/searchKeyword';
@@ -29,8 +29,10 @@ function LoadMapContainer({
   const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow']);
 
   const {
-    query: { data: places, isSuccess }, refState,
-  } = useGetGoogleSearch({ keyword: searchKeyword });
+    query: {
+      data: places, isSuccess, isFetching, isFetchingNextPage,
+    }, refState,
+  } = useGetSearchPlaces({ keyword: searchKeyword });
 
   const handleSubmit = (keyword: string) => {
     setSearchKeyword(keyword);
@@ -118,6 +120,8 @@ function LoadMapContainer({
         places={places}
         refState={refState}
         isSuccess={isSuccess}
+        isFetching={isFetching}
+        isFetchingNextPage={isFetchingNextPage}
       />
       <PlaceDetailWindowContainer />
     </>
