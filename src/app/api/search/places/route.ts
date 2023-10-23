@@ -20,7 +20,13 @@ const fetchNaverSearchBlog = async ({
     include_post: includePost,
   })}`);
 
-  return response;
+  if (response.ok) {
+    const searchResult = await response.json();
+
+    return searchResult;
+  }
+
+  return null;
 };
 
 const fetchAllSettledSearchNaverBlogs = async ({
