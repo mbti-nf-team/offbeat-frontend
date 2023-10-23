@@ -4,12 +4,52 @@ import { TextSearchResponseData } from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 
 import { paramsSerializer } from '@/lib/apis';
-import { fetchAllSettledSearchNaverBlogs } from '@/lib/apis/search';
 import { filteredPlaces } from '@/utils';
 
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 const TEN_MINUTES = 600;
+const BATCH_SIZE = 10;
+const DELAY = 1000;
+
+const fetchNaverSearchNaverBlog = async ({
+  query, includePost,
+}: { query: string; includePost: boolean; }, init?: RequestInit) => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/naver/search/blog?query=${query}&include_post=${includePost}`, init);
+
+  return response;
+};
+
+const fetchAllSettledSearchNaverBlogs = async ({
+  placeName,
+}: {
+  placeName: string[];
+}, init?: RequestInit) => {
+  const copyPlaceName = [...placeName];
+  const firstPlaceName = copyPlaceName.splice(0, BATCH_SIZE);
+
+  const firstResponse = await Promise
+    .allSettled([...firstPlaceName.map((query) => fetchNaverSearchNaverBlog({
+      query,
+      includePost: true,
+    }, init))]);
+
+  if (placeName.length <= 10) {
+    return firstResponse;
+  }
+
+  await new Promise((resolve) => {
+    setTimeout(resolve, DELAY);
+  });
+
+  const secondResponse = await Promise
+    .allSettled([...copyPlaceName.map((query) => fetchNaverSearchNaverBlog({
+      query,
+      includePost: true,
+    }, init))]);
+
+  return [...firstResponse, ...secondResponse];
+};
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
