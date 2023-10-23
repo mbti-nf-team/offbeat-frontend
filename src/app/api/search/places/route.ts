@@ -12,10 +12,13 @@ const TEN_MINUTES = 600;
 const BATCH_SIZE = 10;
 const DELAY = 1000;
 
-const fetchNaverSearchNaverBlog = async ({
+const fetchNaverSearchBlog = async ({
   query, includePost,
-}: { query: string; includePost: boolean; }, init?: RequestInit) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/naver/search/blog?query=${query}&include_post=${includePost}`, init);
+}: { query: string; includePost: boolean; }) => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/naver/search?${paramsSerializer({
+    query,
+    include_post: includePost,
+  })}`);
 
   return response;
 };
@@ -24,15 +27,15 @@ const fetchAllSettledSearchNaverBlogs = async ({
   placeName,
 }: {
   placeName: string[];
-}, init?: RequestInit) => {
+}) => {
   const copyPlaceName = [...placeName];
   const firstPlaceName = copyPlaceName.splice(0, BATCH_SIZE);
 
   const firstResponse = await Promise
-    .allSettled([...firstPlaceName.map((query) => fetchNaverSearchNaverBlog({
+    .allSettled([...firstPlaceName.map((query) => fetchNaverSearchBlog({
       query,
       includePost: true,
-    }, init))]);
+    }))]);
 
   if (placeName.length <= 10) {
     return firstResponse;
@@ -43,10 +46,10 @@ const fetchAllSettledSearchNaverBlogs = async ({
   });
 
   const secondResponse = await Promise
-    .allSettled([...copyPlaceName.map((query) => fetchNaverSearchNaverBlog({
+    .allSettled([...copyPlaceName.map((query) => fetchNaverSearchBlog({
       query,
       includePost: true,
-    }, init))]);
+    }))]);
 
   return [...firstResponse, ...secondResponse];
 };
@@ -78,16 +81,7 @@ export async function GET(request: NextRequest) {
   const placesResult = filteredPlaces(checkEmpty(places?.results));
   const placeName = placesResult.filter((place) => !!place?.name).map((place) => place.name);
 
-  const searchBlogPosts = await fetchAllSettledSearchNaverBlogs({ placeName }, {
-    method: 'GET',
-    next: {
-      revalidate: TEN_MINUTES,
-    },
-    headers: {
-      ...requestHeaders,
-      'nfteam-api-token': process.env.API_HEADER_TOKEN,
-    },
-  });
+  const searchBlogPosts = await fetchAllSettledSearchNaverBlogs({ placeName });
 
   const response = placesResult.map((place, index) => ({
     ...place,
