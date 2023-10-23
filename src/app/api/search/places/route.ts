@@ -40,7 +40,7 @@ const fetchAllSettledSearchNaverBlogs = async ({
   const firstResponse = await Promise
     .allSettled([...firstPlaceName.map((query) => fetchNaverSearchBlog({
       query,
-      includePost: true,
+      includePost: false,
     }))]);
 
   if (placeName.length <= 10) {
@@ -54,7 +54,7 @@ const fetchAllSettledSearchNaverBlogs = async ({
   const secondResponse = await Promise
     .allSettled([...copyPlaceName.map((query) => fetchNaverSearchBlog({
       query,
-      includePost: true,
+      includePost: false,
     }))]);
 
   return [...firstResponse, ...secondResponse];
