@@ -1,7 +1,7 @@
 import { api, paramsSerializer } from '..';
 
 import {
-  NaverSearchBlogResponse, PlaceDetailResponse, SearchPlacesResponse, TextSearchPlaceResponse,
+  NaverSearchBlogResponse, PlaceDetailsResponse, SearchPlacesResponse, TextSearchPlaceResponse,
 } from './model';
 
 const BATCH_SIZE = 10;
@@ -92,7 +92,7 @@ export const fetchSearchPlaces = async ({
 export const fetchPlaceDetail = async ({
   placeId, sessionToken,
 }: { placeId: string; sessionToken?: string; }) => {
-  const response = await api<PlaceDetailResponse>({
+  const response = await api<PlaceDetailsResponse>({
     method: 'GET',
     url: '/google/search/detail',
     params: {
