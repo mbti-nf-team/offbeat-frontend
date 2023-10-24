@@ -6,7 +6,9 @@ import FIXTURE_NAVER_SEARCH_BLOG from '@/mocks/fixtures/searchBlog';
 import { api, paramsSerializer } from '..';
 
 import { NaverSearchBlogResponse } from './model';
-import { fetchGoogleSearch, fetchNaverSearchBlog, fetchPlaceDetail } from '.';
+import {
+  fetchGoogleSearch, fetchNaverSearchBlog, fetchPlaceDetail, fetchPlaceDetailV2,
+} from '.';
 
 jest.mock('..');
 
@@ -103,6 +105,38 @@ describe('search API', () => {
         params: {
           placeId,
         },
+        paramsSerializer,
+        isBFF: true,
+      });
+    });
+  });
+
+  describe('fetchPlaceDetailV2', () => {
+    const placeId = 'placeId';
+    const sessionToken = 'sessionToken';
+    const mockResponse: TextSearchPlace = {
+      error_message: '',
+      status: Status.OK,
+      results: [],
+    };
+
+    beforeEach(() => {
+      (api as jest.Mock).mockReturnValueOnce(mockResponse);
+    });
+
+    it(`GET /search/places/${placeId}`, async () => {
+      const response = await fetchPlaceDetailV2({
+        placeId,
+        sessionToken,
+      });
+
+      expect(response).toEqual(mockResponse);
+      expect(api).toBeCalledWith({
+        method: 'GET',
+        headers: {
+          'session-token': sessionToken,
+        },
+        url: `/search/places/${placeId}`,
         paramsSerializer,
         isBFF: true,
       });

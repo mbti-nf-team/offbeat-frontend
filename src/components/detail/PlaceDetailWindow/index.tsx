@@ -47,7 +47,7 @@ type Props = {
   isVisible: boolean;
   isLoading: boolean;
   onClose: () => void;
-  placeDetail: PlacesWithSearchResult<true> | null;
+  placeDetail?: PlacesWithSearchResult<true>;
 };
 
 function PlaceDetailWindow({
@@ -197,11 +197,11 @@ function PlaceDetailWindow({
                       ))}
                     </div>
                   </Accordion>
-                  {placeDetail?.searchBlogPost.status === 'fulfilled' && (
+                  {placeDetail?.searchBlogPost?.status === 'fulfilled' && (
                     <Accordion
                       title="네이버 검색결과"
                       counterColor={blogCount ? 'danger' : 'positive'}
-                      counter={placeDetail?.searchBlogPost.value.total_count}
+                      counter={checkNumber(placeDetail?.searchBlogPost.value?.total_count)}
                       wrapperClassName={styles.reviewAccordionWrapper}
                     >
                       <div className={styles.resultWrapper}>

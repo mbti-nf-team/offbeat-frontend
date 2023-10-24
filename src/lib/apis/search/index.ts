@@ -1,7 +1,11 @@
 import { api, paramsSerializer } from '..';
 
 import {
-  NaverSearchBlogResponse, PlaceDetailsResponse, SearchPlacesResponse, TextSearchPlaceResponse,
+  NaverSearchBlogResponse,
+  PlaceDetailsResponse,
+  SearchPlaceResponse,
+  SearchPlacesResponse,
+  TextSearchPlaceResponse,
 } from './model';
 
 const BATCH_SIZE = 10;
@@ -98,6 +102,22 @@ export const fetchPlaceDetail = async ({
     params: {
       placeId,
     },
+    headers: {
+      'session-token': sessionToken,
+    },
+    paramsSerializer,
+    isBFF: true,
+  });
+
+  return response;
+};
+
+export const fetchPlaceDetailV2 = async ({
+  placeId, sessionToken,
+}: { placeId: string; sessionToken?: string; }) => {
+  const response = await api<SearchPlaceResponse>({
+    method: 'GET',
+    url: `/search/places/${placeId}`,
     headers: {
       'session-token': sessionToken,
     },

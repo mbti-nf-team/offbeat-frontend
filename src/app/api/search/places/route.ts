@@ -6,7 +6,7 @@ import { checkEmpty } from '@nf-team/core';
 import { paramsSerializer } from '@/lib/apis';
 import { filteredPlaces } from '@/utils';
 
-import { fetchAllSettledSearchNaverBlogs } from '../..';
+import { fetchAllSettledSearchNaverBlogs } from '../../handler';
 
 export const runtime = 'edge';
 

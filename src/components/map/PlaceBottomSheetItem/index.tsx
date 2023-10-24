@@ -34,8 +34,8 @@ function PlaceBottomSheetItem({ place, onClick, wrapperRef }: Props) {
         <StarRating rating={place?.rating} type="list" />
         <div className={styles.placeUserRatingsTotal}>{`(${checkNumber(user_ratings_total)})`}</div>
       </div>
-      {place.searchBlogPost.status === 'fulfilled' && (
-        <div className={styles.searchTotal}>{`네이버 검색결과 ${numberWithComma(place.searchBlogPost.value.total_count)}개`}</div>
+      {place.searchBlogPost?.status === 'fulfilled' && (
+        <div className={styles.searchTotal}>{`네이버 검색결과 ${numberWithComma(checkNumber(place.searchBlogPost?.value?.total_count))}개`}</div>
       )}
     </li>
   );
