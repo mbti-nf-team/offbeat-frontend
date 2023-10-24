@@ -1,6 +1,4 @@
-import useGetPlaceDetail from '@/hooks/queries/useGetPlaceDetail';
-import useGetSearchBlog from '@/hooks/queries/useGetSearchBlog';
-import { PlaceResult } from '@/lib/types/google.maps';
+import useGetSearchPlace from '@/hooks/queries/useGetSearchPlace';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 
 import PlaceDetailWindow from '../PlaceDetailWindow';
@@ -9,13 +7,7 @@ function PlaceDetailWindowContainer() {
   const {
     isOpenPlaceDetailWindow, onClosePlaceDetailWindow, placeId,
   } = usePlaceDetailWindowStore(['isOpenPlaceDetailWindow', 'onClosePlaceDetailWindow', 'placeId']);
-  const { data: placeDetail, isSuccess } = useGetPlaceDetail({ placeId });
-
-  const { data: placesWithSearchResult, isLoading } = useGetSearchBlog<true>({
-    placesResult: [placeDetail?.result as PlaceResult],
-    includePost: true,
-    enabled: isSuccess && !!placeDetail?.result,
-  });
+  const { data: placesWithSearchResult, isFetching } = useGetSearchPlace({ placeId });
 
   const onCloseDetailWindow = () => {
     onClosePlaceDetailWindow();
@@ -23,9 +15,9 @@ function PlaceDetailWindowContainer() {
 
   return (
     <PlaceDetailWindow
-      isLoading={isLoading}
+      isLoading={isFetching}
       isVisible={isOpenPlaceDetailWindow}
-      placeDetail={placesWithSearchResult?.[0]}
+      placeDetail={placesWithSearchResult?.result}
       onClose={onCloseDetailWindow}
     />
   );

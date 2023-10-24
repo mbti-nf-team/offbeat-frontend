@@ -73,7 +73,7 @@ function PlaceBottomSheet({
               onClick={onClickPlaceItem}
             />
           ))}
-          {isFetchingNextPage && (
+          {(isFetchingNextPage || isFetching) && (
             <div className={styles.loadingWrapper}>
               <Spinner isLoading />
             </div>
