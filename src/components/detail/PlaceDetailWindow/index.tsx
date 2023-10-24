@@ -60,9 +60,7 @@ function PlaceDetailWindow({
 
   const googleReviewCount = checkNumber(placeDetail?.reviews?.length);
   const koreanReviewCount = checkEmpty(placeDetail?.reviews).filter(({ language }) => language === 'ko').length;
-  const blogCount = placeDetail?.searchBlogPost?.status === 'fulfilled' ? checkNumber(
-    placeDetail?.searchBlogPost?.value.total_count,
-  ) : 0;
+  const blogCount = checkNumber(placeDetail?.searchBlogPost?.total_count);
 
   const onClickShare = useCallback(async () => {
     try {
@@ -197,28 +195,26 @@ function PlaceDetailWindow({
                       ))}
                     </div>
                   </Accordion>
-                  {placeDetail?.searchBlogPost?.status === 'fulfilled' && (
-                    <Accordion
-                      title="네이버 검색결과"
-                      counterColor={blogCount ? 'danger' : 'positive'}
-                      counter={checkNumber(placeDetail?.searchBlogPost.value?.total_count)}
-                      wrapperClassName={styles.reviewAccordionWrapper}
-                    >
-                      <div className={styles.resultWrapper}>
-                        {checkEmpty(placeDetail?.searchBlogPost?.value?.posts).map(({
-                          title, description, link, thumbnail,
-                        }) => (
-                          <ResultCard
-                            key={title}
-                            title={title}
-                            description={description}
-                            url={link}
-                            thumbnail={thumbnail}
-                          />
-                        ))}
-                      </div>
-                    </Accordion>
-                  )}
+                  <Accordion
+                    title="네이버 검색결과"
+                    counterColor={blogCount ? 'danger' : 'positive'}
+                    counter={checkNumber(placeDetail?.searchBlogPost?.total_count)}
+                    wrapperClassName={styles.reviewAccordionWrapper}
+                  >
+                    <div className={styles.resultWrapper}>
+                      {checkEmpty(placeDetail?.searchBlogPost?.posts).map(({
+                        title, description, link, thumbnail,
+                      }) => (
+                        <ResultCard
+                          key={title}
+                          title={title}
+                          description={description}
+                          url={link}
+                          thumbnail={thumbnail}
+                        />
+                      ))}
+                    </div>
+                  </Accordion>
                 </>
               )}
             </div>
