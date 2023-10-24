@@ -20,7 +20,8 @@ export type SelectedPlace = {
 };
 
 export interface PlacesWithSearchResult<T = false> extends PlaceResult {
-  searchBlogPost: PromiseSettledResult<NaverSearchBlog<T>> | null;
+  searchBlogPost: T extends true ? NaverSearchBlog<T> | null
+    : PromiseSettledResult<NaverSearchBlog<T>> | null;
 }
 
 export interface SearchPlaces extends TextSearchResponseData {
