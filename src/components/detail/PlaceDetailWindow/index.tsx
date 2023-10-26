@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 
 import { checkEmpty, checkNumber } from '@nf-team/core';
 import {
-  DelayRenderComponent, GlobalPortal, useIsomorphicLayoutEffect, useUnmount,
+  DelayRenderComponent, GlobalPortal,
 } from '@nf-team/react';
 import clsx from 'clsx';
 import { motion, Variants } from 'framer-motion';
@@ -97,19 +97,6 @@ function PlaceDetailWindow({
 
     return '현지인 리뷰 비중이 높아요.';
   }, [blogCount, koreanReviewCount, googleReviewCount]);
-
-  useIsomorphicLayoutEffect(() => {
-    if (isVisible) {
-      document.body.style.overflow = '';
-      return;
-    }
-
-    document.body.style.overflow = 'hidden';
-  }, [isVisible]);
-
-  useUnmount(() => {
-    document.body.style.overflow = '';
-  });
 
   return (
     <DelayRenderComponent isVisible={isVisible}>
@@ -219,6 +206,18 @@ function PlaceDetailWindow({
               )}
             </div>
           </div>
+          {placeDetail?.url && (
+            <div className={styles.buttonWrapper}>
+              <Button
+                isExternalLink
+                href={placeDetail?.url}
+                color="highlight"
+                width="calc(100% - 80px)"
+              >
+                Google로 이동
+              </Button>
+            </div>
+          )}
         </motion.div>
       </GlobalPortal>
     </DelayRenderComponent>

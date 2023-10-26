@@ -1,3 +1,5 @@
+import { useIsomorphicLayoutEffect, useUnmount } from '@nf-team/react';
+
 import useGetSearchPlace from '@/hooks/queries/useGetSearchPlace';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 
@@ -12,6 +14,19 @@ function PlaceDetailWindowContainer() {
   const onCloseDetailWindow = () => {
     onClosePlaceDetailWindow();
   };
+
+  useIsomorphicLayoutEffect(() => {
+    if (isOpenPlaceDetailWindow) {
+      document.body.style.overflow = '';
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+  }, [isOpenPlaceDetailWindow]);
+
+  useUnmount(() => {
+    document.body.style.overflow = '';
+  });
 
   return (
     <PlaceDetailWindow

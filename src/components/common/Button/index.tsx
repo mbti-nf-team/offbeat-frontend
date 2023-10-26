@@ -20,10 +20,11 @@ interface Props extends Omit<HTMLProps<HTMLButtonElement | HTMLAnchorElement>, '
   size?: ButtonSize;
   isLoading?: boolean;
   isFloating?: boolean;
-  width?: `${number}px`;
+  width?: string;
   onlyIcon?: ReactNode;
   type?: 'submit' | 'reset' | 'button';
   hasPseudoSelectorStyle?: boolean;
+  isExternalLink?: boolean;
 }
 
 function Button({
@@ -37,6 +38,7 @@ function Button({
   disabled,
   width,
   onlyIcon,
+  isExternalLink,
   className,
   children,
   ...rest
@@ -57,6 +59,8 @@ function Button({
     return (
       <Link
         href={href}
+        rel={isExternalLink ? 'noopener noreferrer' : undefined}
+        target={isExternalLink ? '_blank' : undefined}
         color={color}
         size={size}
         className={buttonClassName}
