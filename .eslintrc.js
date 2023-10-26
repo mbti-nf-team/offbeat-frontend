@@ -38,7 +38,6 @@ module.exports = {
       rules: {
         'jest/no-identical-title': 'off',
         'react-hooks/rules-of-hooks': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
       },
     },
     {
@@ -66,6 +65,7 @@ module.exports = {
   rules: {
     'react/require-default-props': 'off',
     'import/order': 'off',
+    '@typescript-eslint/no-explicit-any': 'warn',
     '@next/next/no-html-link-for-pages': ['error', 'app/'],
     'simple-import-sort/imports': ['error', {
       groups: [

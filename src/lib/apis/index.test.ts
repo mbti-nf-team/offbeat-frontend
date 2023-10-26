@@ -70,7 +70,7 @@ describe('api', () => {
       const response = await api<string>(mockAxiosRequestConfig('/test/test', 'test'));
 
       expect(response).toBe(mockResponse.data);
-      expect(mockAxios).toBeCalledTimes(1);
+      expect(mockAxios).toHaveBeenCalledTimes(1);
     });
   });
 

@@ -43,7 +43,7 @@ describe('search API', () => {
       });
 
       expect(response).toEqual(mockResponse);
-      expect(api).toBeCalledWith({
+      expect(api).toHaveBeenCalledWith({
         method: 'GET',
         params: {
           query: keyword,
@@ -79,7 +79,7 @@ describe('search API', () => {
       });
 
       expect(response).toEqual(mockResponse);
-      expect(api).toBeCalledWith({
+      expect(api).toHaveBeenCalledWith({
         method: 'GET',
         headers: {
           'session-token': sessionToken,
