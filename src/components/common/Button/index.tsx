@@ -43,7 +43,7 @@ function Button({
   children,
   ...rest
 }: PropsWithChildren<Props>): ReactElement {
-  const htmlProps = rest as any;
+  const htmlProps = rest as unknown;
 
   const buttonClassName = clsx(styles.buttonWrapper, {
     [styles[size]]: size,
