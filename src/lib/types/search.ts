@@ -1,23 +1,7 @@
 import { PlaceDetailsResponseData, TextSearchResponseData } from '@googlemaps/google-maps-services-js';
 
+import { NaverSearchBlog } from './blog';
 import { PlaceResult } from './google.maps';
-
-export type BlogPost = {
-  title: string;
-  link: string;
-  description: string;
-  thumbnail: string;
-};
-
-export interface NaverSearchBlog<T = boolean> {
-  total_count: number | null;
-  posts: T extends true ? BlogPost[] : null;
-}
-
-export type SelectedPlace = {
-  placeId: string | undefined;
-  placeName: string | undefined;
-};
 
 export interface PlacesWithSearchResult<T = false> extends PlaceResult {
   searchBlogPost: T extends true ? NaverSearchBlog<T> | null

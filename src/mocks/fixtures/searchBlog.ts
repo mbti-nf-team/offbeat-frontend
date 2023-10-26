@@ -1,4 +1,6 @@
-const FIXTURE_NAVER_SEARCH_BLOG = {
+import { NaverSearchBlog } from '@/lib/types/blog';
+
+const FIXTURE_NAVER_SEARCH_BLOG: NaverSearchBlog<true> = {
   posts: [{
     description: 'description',
     link: 'link',
