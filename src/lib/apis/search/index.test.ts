@@ -1,14 +1,12 @@
 import { Status } from '@googlemaps/google-maps-services-js';
 
-import { TextSearchPlace } from '@/lib/types/google.maps';
 import FIXTURE_NAVER_SEARCH_BLOG from '@/mocks/fixtures/searchBlog';
+import FIXTURE_SEARCH_PLACE from '@/mocks/fixtures/searchPlace';
 
 import { api, paramsSerializer } from '..';
 
-import { NaverSearchBlogResponse } from './model';
-import {
-  fetchGoogleSearch, fetchNaverSearchBlog, fetchPlaceDetail, fetchPlaceDetailV2,
-} from '.';
+import { SearchPlaceResponse, SearchPlacesResponse } from './model';
+import { fetchPlaceDetail, fetchSearchPlaces } from '.';
 
 jest.mock('..');
 
@@ -17,59 +15,40 @@ describe('search API', () => {
     (api as jest.Mock).mockClear();
   });
 
-  describe('fetchNaverSearchBlog', () => {
-    const keyword = 'keyword';
-    const includePost = true;
-    const mockResponse: NaverSearchBlogResponse<typeof includePost> = FIXTURE_NAVER_SEARCH_BLOG;
-
-    beforeEach(() => {
-      (api as jest.Mock).mockReturnValueOnce(mockResponse);
-    });
-
-    it('GET /naver/search', async () => {
-      const response = await fetchNaverSearchBlog<typeof includePost>({
-        includePost,
-        keyword,
-      });
-
-      expect(response).toEqual(mockResponse);
-      expect(api).toBeCalledWith({
-        method: 'GET',
-        url: '/naver/search',
-        params: {
-          query: keyword,
-          include_post: includePost,
-        },
-        paramsSerializer,
-        isBFF: true,
-      });
-    });
-  });
-
-  describe('fetchGoogleSearch', () => {
-    const keyword = 'keyword';
-    const mockResponse: TextSearchPlace = {
+  describe('fetchSearchPlaces', () => {
+    const keyword = 'placeName';
+    const mockResponse: SearchPlacesResponse = {
       error_message: '',
+      html_attributions: [],
       status: Status.OK,
-      results: [],
+      results: [{
+        ...FIXTURE_SEARCH_PLACE,
+        searchBlogPost: {
+          status: 'fulfilled',
+          value: {
+            ...FIXTURE_NAVER_SEARCH_BLOG,
+            posts: null,
+          },
+        },
+      }],
     };
 
     beforeEach(() => {
       (api as jest.Mock).mockReturnValueOnce(mockResponse);
     });
 
-    it('GET /google/search', async () => {
-      const response = await fetchGoogleSearch({
+    it('GET /search/places', async () => {
+      const response = await fetchSearchPlaces({
         keyword,
       });
 
       expect(response).toEqual(mockResponse);
       expect(api).toBeCalledWith({
         method: 'GET',
-        url: '/google/search',
         params: {
           query: keyword,
         },
+        url: '/search/places',
         paramsSerializer,
         isBFF: true,
       });
@@ -79,45 +58,14 @@ describe('search API', () => {
   describe('fetchPlaceDetail', () => {
     const placeId = 'placeId';
     const sessionToken = 'sessionToken';
-    const mockResponse: TextSearchPlace = {
+    const mockResponse: SearchPlaceResponse = {
       error_message: '',
+      html_attributions: [],
       status: Status.OK,
-      results: [],
-    };
-
-    beforeEach(() => {
-      (api as jest.Mock).mockReturnValueOnce(mockResponse);
-    });
-
-    it('GET /google/search/detail', async () => {
-      const response = await fetchPlaceDetail({
-        placeId,
-        sessionToken,
-      });
-
-      expect(response).toEqual(mockResponse);
-      expect(api).toBeCalledWith({
-        method: 'GET',
-        headers: {
-          'session-token': sessionToken,
-        },
-        url: '/google/search/detail',
-        params: {
-          placeId,
-        },
-        paramsSerializer,
-        isBFF: true,
-      });
-    });
-  });
-
-  describe('fetchPlaceDetailV2', () => {
-    const placeId = 'placeId';
-    const sessionToken = 'sessionToken';
-    const mockResponse: TextSearchPlace = {
-      error_message: '',
-      status: Status.OK,
-      results: [],
+      result: {
+        ...FIXTURE_SEARCH_PLACE,
+        searchBlogPost: FIXTURE_NAVER_SEARCH_BLOG,
+      },
     };
 
     beforeEach(() => {
@@ -125,7 +73,7 @@ describe('search API', () => {
     });
 
     it(`GET /search/places/${placeId}`, async () => {
-      const response = await fetchPlaceDetailV2({
+      const response = await fetchPlaceDetail({
         placeId,
         sessionToken,
       });

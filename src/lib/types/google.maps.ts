@@ -1,5 +1,5 @@
 import {
-  AddressGeometry, Place, PlaceDetailsResponseData, TextSearchResponseData,
+  AddressGeometry, Place, PlaceDetailsResponseData,
 } from '@googlemaps/google-maps-services-js';
 
 export interface PlaceResult extends Place {
@@ -7,10 +7,6 @@ export interface PlaceResult extends Place {
   place_id: string;
   name: string;
   thumbnail?: string;
-}
-
-export interface TextSearchPlace extends TextSearchResponseData {
-  results: PlaceResult[];
 }
 
 export interface PlaceDetail extends PlaceDetailsResponseData {

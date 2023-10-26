@@ -1,8 +1,11 @@
 import { createWithEqualityFn } from 'zustand/traditional';
 
-import { SelectedPlace } from '@/lib/types/search';
-
 import { StoreWithShallow, useStoreWithShallow } from './utils';
+
+export type SelectedPlace = {
+  placeId: string | undefined;
+  placeName: string | undefined;
+};
 
 type PlaceDetailWindowState = {
   isOpenPlaceDetailWindow: boolean;

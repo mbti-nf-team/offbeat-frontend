@@ -7,8 +7,8 @@ import { InfiniteData } from '@tanstack/react-query';
 import Button from '@/components/common/Button';
 import Spinner from '@/components/common/Spinner';
 import { InfiniteRefState } from '@/lib/types';
-import { SearchPlaces, SelectedPlace } from '@/lib/types/search';
-import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
+import { SearchPlaces } from '@/lib/types/search';
+import usePlaceDetailWindowStore, { SelectedPlace } from '@/stores/placeDetailWindow';
 import { targetFalseThenValue } from '@/utils';
 
 import PlaceBottomSheetItem from '../PlaceBottomSheetItem';
