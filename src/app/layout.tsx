@@ -11,11 +11,6 @@ import 'src/styles/normalize.css';
 import 'src/styles/bottomSheet.css';
 import 'src/styles/global.scss';
 
-export const metadata = {
-  title: 'Home',
-  description: 'Welcome to Next.js',
-};
-
 const pretendardFont = localFont({
   src: [
     {

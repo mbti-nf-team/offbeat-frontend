@@ -6,8 +6,23 @@ import ISO_3166_COUNTRY_CODES from '@/lib/assets/data/iso3166CountryCodes';
 import { Country } from '@/lib/types/country';
 import { codeToFlag } from '@/utils';
 
+const title = 'offbeat';
+const description = '여행에서 ✌️진짜✌️ 로컬 여행지 찾기';
+
 export const metadata = {
-  title: 'offbeat',
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: process.env.NEXT_PUBLIC_ORIGIN,
+    images: ['./sns_share_thumbnail.png'],
+  },
+  twitter: {
+    description,
+    title,
+    images: ['./sns_share_thumbnail.png'],
+  },
 };
 
 function Page() {
