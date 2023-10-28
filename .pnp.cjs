@@ -33,7 +33,7 @@ const RAW_RUNTIME_STATE =
           ["@next/eslint-plugin-next", "npm:13.5.6"],\
           ["@nf-team/core", "npm:2.0.1"],\
           ["@nf-team/eslint-config", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.0.2"],\
-          ["@nf-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.4.0"],\
+          ["@nf-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.4.2"],\
           ["@react-google-maps/api", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.19.2"],\
           ["@storybook/addon-essentials", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:7.5.1"],\
           ["@storybook/addon-interactions", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:7.5.1"],\
@@ -4388,17 +4388,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@nf-team/react", [\
-      ["npm:2.4.0", {\
-        "packageLocation": "./.yarn/cache/@nf-team-react-npm-2.4.0-3e77d4031a-bbdd9f1643.zip/node_modules/@nf-team/react/",\
+      ["npm:2.4.2", {\
+        "packageLocation": "./.yarn/cache/@nf-team-react-npm-2.4.2-713e206395-a8c6c0e184.zip/node_modules/@nf-team/react/",\
         "packageDependencies": [\
-          ["@nf-team/react", "npm:2.4.0"]\
+          ["@nf-team/react", "npm:2.4.2"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.4.0", {\
-        "packageLocation": "./.yarn/__virtual__/@nf-team-react-virtual-aea628b185/0/cache/@nf-team-react-npm-2.4.0-3e77d4031a-bbdd9f1643.zip/node_modules/@nf-team/react/",\
+      ["virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.4.2", {\
+        "packageLocation": "./.yarn/__virtual__/@nf-team-react-virtual-6167ebae29/0/cache/@nf-team-react-npm-2.4.2-713e206395-a8c6c0e184.zip/node_modules/@nf-team/react/",\
         "packageDependencies": [\
-          ["@nf-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.4.0"],\
+          ["@nf-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.4.2"],\
           ["@types/react", "npm:18.2.33"],\
           ["@types/react-dom", "npm:18.2.14"],\
           ["react", "npm:18.2.0"],\
@@ -18491,7 +18491,7 @@ const RAW_RUNTIME_STATE =
           ["@next/eslint-plugin-next", "npm:13.5.6"],\
           ["@nf-team/core", "npm:2.0.1"],\
           ["@nf-team/eslint-config", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.0.2"],\
-          ["@nf-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.4.0"],\
+          ["@nf-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.4.2"],\
           ["@react-google-maps/api", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.19.2"],\
           ["@storybook/addon-essentials", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:7.5.1"],\
           ["@storybook/addon-interactions", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:7.5.1"],\

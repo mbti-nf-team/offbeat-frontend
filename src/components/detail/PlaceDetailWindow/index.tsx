@@ -1,16 +1,14 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
 import { checkEmpty, checkNumber } from '@nf-team/core';
-import {
-  DelayRenderComponent, GlobalPortal,
-} from '@nf-team/react';
+import { DelayRenderComponent, GlobalPortal } from '@nf-team/react';
 import clsx from 'clsx';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import Accordion from '@/components/common/Accordion';
 import Button from '@/components/common/Button';
@@ -18,27 +16,14 @@ import ResultCard from '@/components/common/ResultCard';
 import ReviewCard from '@/components/common/ReviewCard';
 import Spinner from '@/components/common/Spinner';
 import StarRating from '@/components/common/StarRating';
+import useHideOnScroll from '@/hooks/useHideOnScroll';
 import useRenderToast from '@/hooks/useRenderToast';
 import { paramsSerializer } from '@/lib/apis';
 import { CloseIcon, ShareIcon } from '@/lib/assets/icons';
 import { PlacesWithSearchResult } from '@/lib/types/search';
+import { bottomToUpVariants } from '@/styles/framerVariants';
 
 import styles from './index.module.scss';
-
-const logoVariants: Variants = {
-  none: {
-    opacity: 0,
-    transform: 'translateY(100%)',
-    transitionEnd: {
-      visibility: 'hidden',
-    },
-  },
-  visible: {
-    opacity: 1,
-    transform: 'translateY(0px)',
-    visibility: 'visible',
-  },
-};
 
 const NAVER_MAX_REVIEW_COUNT = 1000;
 const GOOGLE_MAX_REVIEW_COUNT = 4;
@@ -53,8 +38,13 @@ type Props = {
 function PlaceDetailWindow({
   isVisible, onClose, placeDetail, isLoading,
 }: Props) {
+  const placeDetailWindowRef = useRef<HTMLDivElement>(null);
+
   const renderToast = useRenderToast();
   const params = useSearchParams();
+  const { hide, onScroll } = useHideOnScroll({
+    rootRef: placeDetailWindowRef, disabled: !isVisible,
+  });
 
   const isVisibleLoading = isVisible && (isLoading || !placeDetail);
 
@@ -104,10 +94,14 @@ function PlaceDetailWindow({
         <motion.div
           animate={isVisible ? 'visible' : 'none'}
           initial="none"
-          variants={logoVariants}
+          variants={bottomToUpVariants}
           className={styles.placeDetailWindowWrapper}
         >
-          <div className={styles.placeDetailContentsWrapper}>
+          <div
+            ref={placeDetailWindowRef}
+            onScroll={onScroll}
+            className={styles.placeDetailContentsWrapper}
+          >
             <div className={styles.header}>
               <div className={styles.headerContentsWrapper}>
                 <Button
@@ -207,7 +201,12 @@ function PlaceDetailWindow({
             </div>
           </div>
           {placeDetail?.url && (
-            <div className={styles.buttonWrapper}>
+            <motion.div
+              animate={!hide ? 'visible' : 'none'}
+              initial="none"
+              variants={bottomToUpVariants}
+              className={styles.buttonWrapper}
+            >
               <Button
                 isExternalLink
                 href={placeDetail?.url}
@@ -216,7 +215,7 @@ function PlaceDetailWindow({
               >
                 Google로 이동
               </Button>
-            </div>
+            </motion.div>
           )}
         </motion.div>
       </GlobalPortal>

@@ -4,27 +4,13 @@ import {
   useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 
-import { AnimationDefinition, motion, Variants } from 'framer-motion';
+import { AnimationDefinition, motion } from 'framer-motion';
 
 import { ErrorCircleIcon, SuccessCircleIcon } from '@/lib/assets/icons';
 import useToastStore from '@/stores/toast';
+import { bottomToUpVariants } from '@/styles/framerVariants';
 
 import styles from './index.module.scss';
-
-const logoVariants: Variants = {
-  none: {
-    opacity: 0,
-    transform: 'translateY(100%)',
-    transitionEnd: {
-      visibility: 'hidden',
-    },
-  },
-  visible: {
-    opacity: 1,
-    transform: 'translateY(0px)',
-    visibility: 'visible',
-  },
-};
 
 function Toast() {
   const {
@@ -71,7 +57,7 @@ function Toast() {
     <motion.div
       animate={isOpenToast ? 'visible' : 'none'}
       initial="none"
-      variants={logoVariants}
+      variants={bottomToUpVariants}
       className={styles.toastContainer}
       onAnimationComplete={handleAnimationComplete}
     >
