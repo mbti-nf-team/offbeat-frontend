@@ -55,7 +55,7 @@ function LoadMapContainer({
 
     const geocoder = new google.maps.Geocoder();
 
-    const geocoderCallbackResult = (type: 'location' | 'country') => (
+    const geocoderCallbackResult = (
       results: google.maps.GeocoderResult[] | null,
       status: google.maps.GeocoderStatus,
     ) => {
@@ -64,19 +64,14 @@ function LoadMapContainer({
       }
 
       map.setCenter(results[0].geometry.bounds.getCenter());
-
-      if (type === 'location') {
-        map.setZoom(10);
-      }
     };
 
     if (defaultLocation?.lat && defaultLocation?.lng) {
-      geocoder?.geocode({
-        location: new google.maps.LatLng({
-          lat: Number(defaultLocation.lat),
-          lng: Number(defaultLocation.lng),
-        }),
-      }, geocoderCallbackResult('location'));
+      map.setCenter(new google.maps.LatLng({
+        lat: Number(defaultLocation.lat),
+        lng: Number(defaultLocation.lng),
+      }));
+      map.setZoom(14);
       return;
     }
 
@@ -84,7 +79,7 @@ function LoadMapContainer({
       componentRestrictions: {
         country: defaultCountryCode || 'KR',
       },
-    }, geocoderCallbackResult('country'));
+    }, geocoderCallbackResult);
   }, [defaultCountryCode, map, defaultLocation]);
 
   useEffect(() => {
