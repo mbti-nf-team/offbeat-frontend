@@ -47,7 +47,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/jest-dom", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:6.1.4"],\
           ["@testing-library/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:14.0.0"],\
           ["@types/babel__core", "npm:7.20.3"],\
-          ["@types/google.maps", "npm:3.54.4"],\
+          ["@types/google.maps", "npm:3.54.5"],\
           ["@types/jest", "npm:29.5.6"],\
           ["@types/jest-plugin-context", "npm:2.9.6"],\
           ["@types/node", "npm:18.0.0"],\
@@ -7930,10 +7930,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:3.54.4", {\
-        "packageLocation": "./.yarn/cache/@types-google.maps-npm-3.54.4-c458696b4e-eb6b5a83af.zip/node_modules/@types/google.maps/",\
+      ["npm:3.54.5", {\
+        "packageLocation": "./.yarn/cache/@types-google.maps-npm-3.54.5-f9c77c377f-294121a1d9.zip/node_modules/@types/google.maps/",\
         "packageDependencies": [\
-          ["@types/google.maps", "npm:3.54.4"]\
+          ["@types/google.maps", "npm:3.54.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18505,7 +18505,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/jest-dom", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:6.1.4"],\
           ["@testing-library/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:14.0.0"],\
           ["@types/babel__core", "npm:7.20.3"],\
-          ["@types/google.maps", "npm:3.54.4"],\
+          ["@types/google.maps", "npm:3.54.5"],\
           ["@types/jest", "npm:29.5.6"],\
           ["@types/jest-plugin-context", "npm:2.9.6"],\
           ["@types/node", "npm:18.0.0"],\
