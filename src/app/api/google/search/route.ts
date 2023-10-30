@@ -4,8 +4,6 @@ import { Client, Language } from '@googlemaps/google-maps-services-js';
 
 export const runtime = 'nodejs';
 
-const TEN_MINUTES = 600;
-
 export async function GET(request: NextRequest) {
   const client = new Client({});
 
@@ -38,12 +36,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(response.data, {
       status: response.status,
       statusText: response.statusText,
-      headers: {
-        ...requestHeaders,
-        'Cache-Control': 'public, s-maxage=1',
-        'CDN-Cache-Control': 'public, s-maxage=60',
-        'Vercel-CDN-Cache-Control': `public, s-maxage=${TEN_MINUTES}`,
-      },
+      headers: requestHeaders,
     });
   }
 

@@ -6,7 +6,7 @@ import { fetchNaverSearchBlog } from '@/app/api/handler';
 import { paramsSerializer } from '@/lib/apis';
 import { PlaceDetail } from '@/lib/types/google.maps';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 const TEN_MINUTES = 600;
 
