@@ -8,9 +8,7 @@ import { filteredPlaces } from '@/utils';
 
 import { fetchAllSettledSearchNaverBlogs } from '../../handler';
 
-export const runtime = 'edge';
-
-const TEN_MINUTES = 600;
+export const runtime = 'nodejs';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -24,9 +22,6 @@ export async function GET(request: NextRequest) {
     nextCursor,
   })}`, {
     method: 'GET',
-    next: {
-      revalidate: TEN_MINUTES,
-    },
     headers: requestHeaders,
   });
 
@@ -51,11 +46,5 @@ export async function GET(request: NextRequest) {
     results: response,
   }, {
     ...textSearchResponse,
-    headers: {
-      ...textSearchResponse.headers,
-      'Cache-Control': 'public, s-maxage=1',
-      'CDN-Cache-Control': 'public, s-maxage=60',
-      'Vercel-CDN-Cache-Control': `public, s-maxage=${TEN_MINUTES}`,
-    },
   });
 }
