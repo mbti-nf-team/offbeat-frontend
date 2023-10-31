@@ -6,9 +6,12 @@ import { SearchPlacesResponse } from '@/lib/apis/search/model';
 import useIntersectionObserver from '../useIntersectionObserver';
 
 function useGetSearchPlaces({ keyword }: { keyword: string; }) {
-  const query = useInfiniteQuery<SearchPlacesResponse>(['searchPlaces', keyword], ({ pageParam }) => fetchSearchPlaces({ keyword, nextCursor: pageParam }), {
-    enabled: !!keyword,
+  const query = useInfiniteQuery<SearchPlacesResponse>({
+    queryKey: ['searchPlaces', keyword],
+    queryFn: ({ pageParam }) => fetchSearchPlaces({ keyword, nextCursor: pageParam as string }),
     getNextPageParam: ({ next_page_token }) => next_page_token,
+    initialPageParam: undefined,
+    enabled: !!keyword,
   });
 
   const { hasNextPage, fetchNextPage } = query;
@@ -19,6 +22,7 @@ function useGetSearchPlaces({ keyword }: { keyword: string; }) {
     hasNextPage,
     intersectionOptions: {
       rootMargin: '80px',
+      triggerOnce: true,
     },
   });
 
