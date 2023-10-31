@@ -8,10 +8,12 @@ const TEN_MINUTES = 600000;
 function useGetSearchPlace({
   placeId, sessionToken,
 }: { placeId?: string; sessionToken?: string; }) {
-  const query = useQuery<SearchPlace>(['placeDetail', placeId], () => fetchPlaceDetail({ placeId: placeId as string, sessionToken }), {
+  const query = useQuery<SearchPlace>({
+    queryKey: ['placeDetail', placeId],
+    queryFn: () => fetchPlaceDetail({ placeId: placeId as string, sessionToken }),
     enabled: !!placeId,
     staleTime: TEN_MINUTES,
-    cacheTime: TEN_MINUTES,
+    gcTime: TEN_MINUTES,
   });
 
   return query;
