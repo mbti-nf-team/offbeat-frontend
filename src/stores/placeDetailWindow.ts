@@ -4,7 +4,6 @@ import { StoreWithShallow, useStoreWithShallow } from './utils';
 
 export type SelectedPlace = {
   placeId: string | undefined;
-  placeName: string | undefined;
 };
 
 type PlaceDetailWindowState = {
@@ -21,7 +20,6 @@ export type PlaceDetailWindow = PlaceDetailWindowState & PlaceDetailWindowAction
 const initialPlaceDetailWindowState = {
   isOpenPlaceDetailWindow: false,
   placeId: undefined,
-  placeName: undefined,
 };
 
 const placeDetailWindowStore = createWithEqualityFn<PlaceDetailWindow>((set) => ({

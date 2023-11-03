@@ -14,13 +14,10 @@ import styles from './index.module.scss';
 type Props = {
   defaultCountryCode?: string;
   defaultPlaceId?: string;
-  defaultPlaceName?: string;
   defaultLocation: { lng?: string; lat?: string; }
 };
 
-function MainMap({
-  defaultCountryCode, defaultPlaceId, defaultPlaceName, defaultLocation,
-}: Props) {
+function MainMap({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
   const [libraries] = useState<['places', 'geometry']>(['places', 'geometry']);
 
   const { isLoaded, loadError } = useLoadScript({
@@ -58,7 +55,6 @@ function MainMap({
       <LoadMapContainer
         defaultCountryCode={defaultCountryCode}
         defaultPlaceId={defaultPlaceId}
-        defaultPlaceName={defaultPlaceName}
         defaultLocation={defaultLocation}
       />
     </GoogleMap>
