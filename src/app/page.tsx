@@ -10,6 +10,7 @@ const title = 'offbeat';
 const description = '여행에서 ✌️진짜✌️ 로컬 여행지 찾기';
 
 export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_ORIGIN),
   title,
   description,
   openGraph: {

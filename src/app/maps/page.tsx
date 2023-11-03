@@ -5,7 +5,7 @@ import { checkEmpty } from '@nf-team/core';
 
 import MainMap from '@/components/map/MainMap';
 import { paramsSerializer } from '@/lib/apis';
-import { fetchPlaceDetail } from '@/lib/apis/search';
+import { PlaceDetail } from '@/lib/types/google.maps';
 
 import { metadata } from '../page';
 
@@ -33,13 +33,23 @@ export async function generateMetadata(
   }
 
   try {
-    const placeDetail = await fetchPlaceDetail({ placeId: searchParams.id });
-    const previousParent = await parent;
+    const searchResponse = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/google/search/detail?${paramsSerializer({
+      placeId: searchParams?.id,
+    })}`, {
+      method: 'GET',
+    });
+
+    if (!searchResponse.ok) {
+      return defaultMetadata;
+    }
+
+    const placeDetail = await searchResponse.json() as PlaceDetail;
 
     if (placeDetail.status !== Status.OK || !placeDetail?.result) {
       return defaultMetadata;
     }
 
+    const previousParent = await parent;
     const previousImages = checkEmpty(previousParent.openGraph?.images);
     const images = placeDetail.result?.thumbnail ? [
       {
@@ -51,6 +61,7 @@ export async function generateMetadata(
     const title = placeDetail.result?.name || metadata.title;
 
     return {
+      metadataBase: new URL(process.env.NEXT_PUBLIC_ORIGIN),
       title,
       description,
       openGraph: {
