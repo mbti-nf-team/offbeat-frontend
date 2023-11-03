@@ -16,13 +16,10 @@ import SearchInput from '../SearchInput';
 type Props = {
   defaultCountryCode?: string;
   defaultPlaceId?: string;
-  defaultPlaceName?: string;
   defaultLocation: { lng?: string; lat?: string; }
 };
 
-function LoadMapContainer({
-  defaultCountryCode, defaultPlaceId, defaultPlaceName, defaultLocation,
-}: Props) {
+function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
   const map = useGoogleMap();
   const { searchKeyword, setSearchKeyword } = useSearchKeywordStore(['searchKeyword', 'setSearchKeyword']);
   const { addRecentSearch: saveNextKeyword } = useRecentSearchStore(['addRecentSearch']);
@@ -40,13 +37,12 @@ function LoadMapContainer({
   };
 
   useEffect(() => {
-    if (defaultPlaceId && defaultPlaceName && map) {
+    if (defaultPlaceId && map) {
       onOpenPlaceDetailWindow({
         placeId: defaultPlaceId,
-        placeName: defaultPlaceName,
       });
     }
-  }, [defaultPlaceId, defaultPlaceName, map]);
+  }, [defaultPlaceId, map]);
 
   useEffect(() => {
     if (!map) {

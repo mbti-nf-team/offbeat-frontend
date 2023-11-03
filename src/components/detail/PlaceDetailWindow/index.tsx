@@ -60,7 +60,6 @@ function PlaceDetailWindow({
       const shareUrl = `${process.env.NEXT_PUBLIC_ORIGIN}/maps?${paramsSerializer({
         country: params.get('country'),
         id: placeDetail?.place_id,
-        name: placeDetail?.name,
       })}`;
 
       await navigator.clipboard.writeText(shareUrl);
@@ -69,7 +68,7 @@ function PlaceDetailWindow({
     } catch (error) {
       renderToast('URL 복사에 실패했습니다.', { type: 'error' });
     }
-  }, [placeDetail?.place_id, placeDetail?.name]);
+  }, [placeDetail?.place_id]);
 
   const displayDetailInfoText = useCallback(() => {
     if (googleReviewCount < 3) {

@@ -22,7 +22,6 @@ function PlaceResultMarker({ place }: Props) {
 
   const onClickMarker = () => onOpenPlaceDetailWindow({
     placeId: place?.place_id,
-    placeName: place?.name,
   });
 
   return (
