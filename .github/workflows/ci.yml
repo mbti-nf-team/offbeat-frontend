@@ -73,6 +73,7 @@ jobs:
         run: |
           touch .env
           echo NEXT_PUBLIC_GOOGLE_MAP_API_KEY = ${{ secrets.GOOGLE_MAP_API_KEY }} >> .env
+          echo NEXT_PUBLIC_GOOGLE_MAP_API_KEY = ${{ secrets.NEXT_PUBLIC_ORIGIN }} >> .env
           cat .env
       - name: Build
         if: steps.cache_built_packages.outputs.cache-hit == ''
