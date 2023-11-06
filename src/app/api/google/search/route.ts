@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { Client, Language } from '@googlemaps/google-maps-services-js';
+import { Language } from '@googlemaps/google-maps-services-js';
 
-export const runtime = 'nodejs';
+import { FetchError } from '../..';
+import { getGoogleTextSearch } from '../handler';
+
+export const runtime = 'edge';
 
 export async function GET(request: NextRequest) {
-  const client = new Client({});
-
   const { searchParams } = new URL(request.url);
   const requestHeaders = new Headers(request.headers);
 
@@ -21,28 +22,25 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  const response = await client.textSearch({
-    params: {
-      key: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
+  try {
+    const response = await getGoogleTextSearch({
       query,
       region: 'KR',
       language: Language.ko,
       opennow: false,
       pagetoken: nextCursor ?? undefined,
-    },
-  });
+    });
 
-  if (response.status === 200) {
-    return NextResponse.json(response.data, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: requestHeaders,
+    return NextResponse.json(response, {
+      status: 200,
+    });
+  } catch (error) {
+    const fetchError = error as FetchError;
+
+    return NextResponse.json(null, {
+      status: fetchError.response?.status,
+      statusText: fetchError.response?.statusText,
+      headers: fetchError.response?.headers,
     });
   }
-
-  return NextResponse.json(null, {
-    status: response.status,
-    statusText: response.statusText,
-    headers: requestHeaders,
-  });
 }
