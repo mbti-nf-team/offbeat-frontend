@@ -6,8 +6,7 @@ import { checkEmpty } from '@nf-team/core';
 import { filteredPlaces } from '@/utils';
 
 import { FetchError } from '../..';
-import { getGoogleTextSearch } from '../../google/handler';
-import { fetchAllSettledSearchNaverBlogs } from '../../handler';
+import { fetchAllSettledSearchNaverBlogs, getGoogleTextSearch } from '../../handler';
 
 export const runtime = 'edge';
 
