@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { PlaceDetailsResponseData } from '@googlemaps/google-maps-services-js';
+import { Language, PlaceDetailsResponseData } from '@googlemaps/google-maps-services-js';
 
-import { fetchNaverSearchBlog } from '@/app/api/handler';
-import { paramsSerializer } from '@/lib/apis';
+import { FetchError } from '@/app/api';
+import { fetchNaverSearchBlog, getGooglePlaceDetails } from '@/app/api/handler';
 import { PlaceDetail } from '@/lib/types/google.maps';
 
 export const runtime = 'edge';
@@ -31,47 +31,59 @@ export async function GET(request: NextRequest) {
 
   const placeId = searchParams.get('placeId');
 
-  const searchResponse = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/google/search/detail?${paramsSerializer({
-    placeId,
-  })}`, {
-    method: 'GET',
-    next: {
-      revalidate: TEN_MINUTES,
-    },
-    headers: requestHeaders,
-  });
-
-  if (!searchResponse.ok) {
-    return NextResponse.json(null, searchResponse);
-  }
-
-  const placeDetail = await searchResponse.json() as PlaceDetailsResponseData;
-
-  if (!hasPlaceId(placeDetail)) {
+  if (!placeId) {
     return NextResponse.json(null, {
       headers: requestHeaders,
       status: 400,
-      statusText: 'not found place name',
+      statusText: 'not found query',
     });
   }
 
-  const searchBlogPost = await fetchNaverSearchBlog({
-    query: placeDetail.result.name, includePost: true,
-  });
+  try {
+    const placeDetails = await getGooglePlaceDetails({
+      place_id: placeId,
+      language: Language.ko,
+      region: 'KR',
+      reviews_sort: 'newest',
+      fields: ['geometry', 'name', 'photos', 'place_id', 'rating', 'reviews', 'url', 'user_ratings_total'],
+    });
 
-  return NextResponse.json({
-    ...placeDetail,
-    result: {
-      ...placeDetail.result,
-      searchBlogPost,
-    },
-  }, {
-    ...searchResponse,
-    headers: {
-      ...searchResponse.headers,
-      'Cache-Control': 'public, s-maxage=1',
-      'CDN-Cache-Control': 'public, s-maxage=60',
-      'Vercel-CDN-Cache-Control': `public, s-maxage=${TEN_MINUTES}`,
-    },
-  });
+    if (!hasPlaceId(placeDetails)) {
+      return NextResponse.json(null, {
+        headers: requestHeaders,
+        status: 400,
+        statusText: 'not found place name',
+      });
+    }
+
+    const thumbnailPhotoReference = placeDetails.result.photos?.[0].photo_reference;
+    const thumbnailPhotoUrl = thumbnailPhotoReference ? `${process.env.GOOGLE_MAP_API_ORIGIN}/place/photo?maxwidth=800&photoreference=${thumbnailPhotoReference}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}` : undefined;
+
+    const searchBlogPost = await fetchNaverSearchBlog<true>({
+      query: placeDetails.result.name, includePost: true,
+    });
+
+    return NextResponse.json({
+      ...placeDetails,
+      result: {
+        ...placeDetails.result,
+        thumbnail: thumbnailPhotoUrl,
+        searchBlogPost,
+      },
+    }, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=1',
+        'CDN-Cache-Control': 'public, s-maxage=60',
+        'Vercel-CDN-Cache-Control': `public, s-maxage=${TEN_MINUTES}`,
+      },
+    });
+  } catch (error) {
+    const fetchError = error as FetchError;
+
+    return NextResponse.json(null, {
+      status: fetchError.response?.status || 500,
+      statusText: fetchError.response?.statusText || fetchError.message,
+      headers: fetchError.response?.headers,
+    });
+  }
 }
