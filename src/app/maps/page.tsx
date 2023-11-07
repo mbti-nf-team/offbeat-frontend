@@ -1,12 +1,12 @@
 import { Metadata, ResolvingMetadata } from 'next';
 
-import { Status } from '@googlemaps/google-maps-services-js';
+import { Language, Status } from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 
 import MainMap from '@/components/map/MainMap';
 import { paramsSerializer } from '@/lib/apis';
-import { PlaceDetail } from '@/lib/types/google.maps';
 
+import { getGooglePlaceDetails, getPlacePhotoUrl } from '../api/handler';
 import { metadata } from '../page';
 
 const description = '이 장소는 ✌️진짜✌️ 로컬 여행지일까? 확인해보세요!';
@@ -33,32 +33,29 @@ export async function generateMetadata(
   }
 
   try {
-    const searchResponse = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/google/search/detail?${paramsSerializer({
-      placeId: searchParams?.id,
-    })}`, {
-      method: 'GET',
+    const placeDetails = await getGooglePlaceDetails({
+      place_id: searchParams.id,
+      language: Language.ko,
+      region: 'KR',
+      fields: ['photos', 'name', 'place_id'],
     });
 
-    if (!searchResponse.ok) {
+    if (placeDetails.status !== Status.OK || !placeDetails?.result) {
       return defaultMetadata;
     }
 
-    const placeDetail = await searchResponse.json() as PlaceDetail;
-
-    if (placeDetail.status !== Status.OK || !placeDetail?.result) {
-      return defaultMetadata;
-    }
+    const thumbnailPhotoUrl = getPlacePhotoUrl(placeDetails.result.photos?.[0].photo_reference);
 
     const previousParent = await parent;
     const previousImages = checkEmpty(previousParent.openGraph?.images);
-    const images = placeDetail.result?.thumbnail ? [
+    const images = thumbnailPhotoUrl ? [
       {
-        url: placeDetail.result.thumbnail,
+        url: thumbnailPhotoUrl,
         width: 800,
         height: 600,
       }, ...previousImages,
     ] : previousImages;
-    const title = placeDetail.result?.name || metadata.title;
+    const title = placeDetails.result?.name || metadata.title;
 
     return {
       metadataBase: new URL(process.env.NEXT_PUBLIC_ORIGIN),
@@ -70,7 +67,7 @@ export async function generateMetadata(
         images,
         url: `${defaultUrl}?${paramsSerializer({
           country: searchParams?.country,
-          id: placeDetail.result.place_id,
+          id: placeDetails.result.place_id,
         })}`,
       },
       twitter: {

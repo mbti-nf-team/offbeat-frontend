@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Language, PlaceDetailsResponseData } from '@googlemaps/google-maps-services-js';
 
 import { FetchError } from '@/app/api';
-import { fetchNaverSearchBlog, getGooglePlaceDetails } from '@/app/api/handler';
+import { fetchNaverSearchBlog, getGooglePlaceDetails, getPlacePhotoUrl } from '@/app/api/handler';
 import { PlaceDetail } from '@/lib/types/google.maps';
 
 export const runtime = 'edge';
@@ -46,6 +46,7 @@ export async function GET(request: NextRequest) {
       region: 'KR',
       reviews_sort: 'newest',
       fields: ['geometry', 'name', 'photos', 'place_id', 'rating', 'reviews', 'url', 'user_ratings_total'],
+      reviews_no_translations: false,
     });
 
     if (!hasPlaceId(placeDetails)) {
@@ -56,8 +57,7 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    const thumbnailPhotoReference = placeDetails.result.photos?.[0].photo_reference;
-    const thumbnailPhotoUrl = thumbnailPhotoReference ? `${process.env.GOOGLE_MAP_API_ORIGIN}/place/photo?maxwidth=800&photoreference=${thumbnailPhotoReference}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}` : undefined;
+    const thumbnailPhotoUrl = getPlacePhotoUrl(placeDetails.result.photos?.[0].photo_reference);
 
     const searchBlogPost = await fetchNaverSearchBlog<true>({
       query: placeDetails.result.name, includePost: true,

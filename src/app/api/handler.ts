@@ -85,3 +85,9 @@ export const getGooglePlaceDetails = async (params: PlaceDetailsRequestParams) =
 
   return response;
 };
+
+export const getPlacePhotoUrl = (photoReference?: string, size = 800) => {
+  const photoUrl = photoReference ? `${process.env.GOOGLE_MAP_API_ORIGIN}/place/photo?maxwidth=${size}&photoreference=${photoReference}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}` : undefined;
+
+  return photoUrl;
+};
