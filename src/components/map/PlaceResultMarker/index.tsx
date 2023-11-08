@@ -2,7 +2,7 @@ import {
   memo, useCallback, useMemo, useState,
 } from 'react';
 
-import { useUpdateEffect } from '@nf-team/react';
+import { useUnmount, useUpdateEffect } from '@nf-team/react';
 import { MarkerF } from '@react-google-maps/api';
 
 import { PlaceResult } from '@/lib/types/google.maps';
@@ -50,11 +50,14 @@ function PlaceResultMarker({ place, selectedPlaceId, onClickMarker }: Props) {
     markerState?.setZIndex(isSelectedPlace ? 2 : 1);
   }, [icon]);
 
+  useUnmount(() => markerState?.unbindAll());
+
   return (
     <MarkerF
       icon={icon}
       onLoad={(marker) => setMarker(marker)}
       onClick={handleClickMarker}
+      zIndex={1}
       title={place.name}
       position={place.geometry?.location}
     />
