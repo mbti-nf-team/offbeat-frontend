@@ -18,17 +18,26 @@ InputHTMLAttributes<HTMLInputElement>, HTMLInputElement
   placeholder: string;
   goBack?: () => void;
   onRemove: () => void;
+  showSearchIcon?: boolean;
   wrapperStyle?: CSSProperties;
   isVisibleMenuIcon?: boolean;
 }
 
 function Input({
-  isFocused, goBack, value, placeholder, onRemove, wrapperStyle, isVisibleMenuIcon, ...rest
+  isFocused,
+  goBack,
+  value,
+  placeholder,
+  onRemove,
+  wrapperStyle,
+  isVisibleMenuIcon,
+  showSearchIcon,
+  ...rest
 }: Props, ref: ForwardedRef<HTMLInputElement>) {
   return (
     <div className={styles.inputWrapper} style={wrapperStyle}>
       <div className={styles.prefixIconWrapper}>
-        {!isFocused ? (
+        {showSearchIcon ? (
           <SearchIcon className={styles.searchIcon} />
         ) : (
           <ArrowLeftIcon onClick={goBack} />

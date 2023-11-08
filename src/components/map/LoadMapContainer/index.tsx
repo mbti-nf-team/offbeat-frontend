@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Status } from '@googlemaps/google-maps-services-js';
+import { checkEmpty, isEmpty } from '@nf-team/core';
 import { useGoogleMap } from '@react-google-maps/api';
 
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
@@ -24,6 +25,7 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
   const { searchKeyword, setSearchKeyword } = useSearchKeywordStore(['searchKeyword', 'setSearchKeyword']);
   const { addRecentSearch: saveNextKeyword } = useRecentSearchStore(['addRecentSearch']);
   const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow']);
+  const [selectedPlaceId, setSelectedPlaceId] = useState<string>();
 
   const {
     query: {
@@ -32,9 +34,14 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
   } = useGetSearchPlaces({ keyword: searchKeyword });
 
   const handleSubmit = (keyword: string) => {
+    setSelectedPlaceId(undefined);
     setSearchKeyword(keyword);
     saveNextKeyword(keyword);
   };
+
+  const placesWithSearchResult = useMemo(() => checkEmpty(places?.pages)
+    .filter((page) => !!page.results?.length && page.status === Status.OK)
+    .flatMap((page) => page.results), [places]);
 
   useEffect(() => {
     if (defaultPlaceId && map) {
@@ -63,10 +70,24 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
     };
 
     if (defaultLocation?.lat && defaultLocation?.lng) {
-      map.setCenter(new google.maps.LatLng({
+      const position = new google.maps.LatLng({
         lat: Number(defaultLocation.lat),
         lng: Number(defaultLocation.lng),
-      }));
+      });
+
+      const currentLocationMarker = new google.maps.Marker({
+        map,
+        position,
+        zIndex: 3,
+      });
+
+      currentLocationMarker.setIcon({
+        url: '/images/current-location-marker.png',
+        size: new google.maps.Size(32, 32),
+        scaledSize: new google.maps.Size(32, 32),
+        anchor: new google.maps.Point(16, 32),
+      });
+      map.setCenter(position);
       map.setZoom(14);
       return;
     }
@@ -79,40 +100,44 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
   }, [defaultCountryCode, map, defaultLocation]);
 
   useEffect(() => {
-    if (
-      !map
-      || !isSuccess
-      || places?.pages?.[0]?.status === Status.ZERO_RESULTS
-      || !places?.pages.length
-    ) {
+    if (!map || !isSuccess || isEmpty(placesWithSearchResult)) {
       return;
     }
 
     const markerBounds = new google.maps.LatLngBounds();
 
-    places.pages.flatMap((place) => place.results).forEach((place) => {
+    placesWithSearchResult.forEach((place) => {
       if (place?.geometry?.location) {
         markerBounds.extend(place.geometry.location);
       }
     });
 
     map.fitBounds(markerBounds);
-  }, [map, isSuccess, places]);
+  }, [map, isSuccess, placesWithSearchResult]);
 
   return (
     <>
-      <SearchInput onSubmit={handleSubmit} />
-      {places?.pages?.map((placeResult) => (
-        placeResult.results.map((place) => (
-          <PlaceResultMarker key={place.place_id} place={place} />
-        ))
+      <SearchInput
+        onSubmit={handleSubmit}
+        selectedPlaceId={selectedPlaceId}
+        onClearSelectedPlace={() => setSelectedPlaceId(undefined)}
+      />
+      {placesWithSearchResult.map((place, _, array) => (
+        <PlaceResultMarker
+          key={place.place_id}
+          place={place}
+          onClickMarker={setSelectedPlaceId}
+          selectedPlaceId={array.length === 1 ? place.place_id : selectedPlaceId}
+        />
       ))}
       <PlaceBottomSheet
-        places={places}
+        places={placesWithSearchResult}
+        selectedPlaceId={selectedPlaceId}
         refState={refState}
         isSuccess={isSuccess}
         isFetching={isFetching}
         isFetchingNextPage={isFetchingNextPage}
+        setSelectedPlaceId={setSelectedPlaceId}
       />
       <PlaceDetailWindowContainer />
     </>
