@@ -63,6 +63,7 @@ function SearchCountry({ countries }: Props) {
         <Input
           type="text"
           placeholder="찾는 장소가 어떤 나라인가요?"
+          showSearchIcon
           value={keyword}
           onFocus={onFocus}
           onChange={(e) => onChange(e.target.value)}

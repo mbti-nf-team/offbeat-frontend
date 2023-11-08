@@ -9,7 +9,7 @@ import styles from './index.module.scss';
 
 type Props = {
   place: PlacesWithSearchResult;
-  onClick: ({ placeId, placeName }: { placeId: string; placeName: string; }) => void;
+  onClick: (placeId: string) => void;
   wrapperRef?: ((node?: Element | null | undefined) => void);
 };
 
@@ -24,7 +24,7 @@ function PlaceBottomSheetItem({ place, onClick, wrapperRef }: Props) {
       ref={wrapperRef}
       className={styles.placeItem}
       tabIndex={0}
-      onClick={() => onClick({ placeId: place.place_id, placeName: name })}
+      onClick={() => onClick(place.place_id)}
       onKeyDown={onKeyDown}
       role="menuitem"
     >

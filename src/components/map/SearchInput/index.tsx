@@ -3,24 +3,21 @@ import { useCallback, useRef, useState } from 'react';
 import { useActionKeyEvent, useBoolean, useDebounce } from '@nf-team/react';
 
 import Input from '@/components/common/Input';
-import useRecentSearchStore from '@/stores/recentSearch';
-import useSearchKeywordStore from '@/stores/searchKeyword';
 
 import SearchTermsBox from '../SearchTermsBox';
 
 type Props = {
   onSubmit: (keyword: string) => void;
+  onClearSelectedPlace: () => void;
+  selectedPlaceId?: string;
 };
 
-function SearchInput({ onSubmit }: Props) {
+function SearchInput({ onSubmit, onClearSelectedPlace, selectedPlaceId }: Props) {
   const [searchInput, setSearchInput] = useState<string>('');
   const debouncedValue = useDebounce(searchInput, 200);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isArrowDownEvent, onArrowDownEvent, blurArrowDownEvent] = useBoolean(false);
-
-  const { addRecentSearch } = useRecentSearchStore(['addRecentSearch']);
-  const { setSearchKeyword } = useSearchKeywordStore(['setSearchKeyword']);
 
   const onKeyDown = useActionKeyEvent<HTMLInputElement>(['Enter', 'NumpadEnter', 'ArrowDown'], (e) => {
     if (e.code === 'ArrowDown') {
@@ -42,9 +39,17 @@ function SearchInput({ onSubmit }: Props) {
     blurArrowDownEvent();
   };
 
+  const onClickGoBack = () => {
+    if (isFocused) {
+      setIsFocused(false);
+      return;
+    }
+
+    onClearSelectedPlace();
+  };
+
   const onInput = useCallback((keyword: string) => {
-    setSearchKeyword(keyword);
-    addRecentSearch(keyword);
+    onSubmit(keyword);
     setSearchInput(keyword);
     setIsFocused(false);
   }, []);
@@ -55,7 +60,8 @@ function SearchInput({ onSubmit }: Props) {
         ref={inputRef}
         isVisibleMenuIcon
         type="text"
-        goBack={() => setIsFocused(false)}
+        goBack={onClickGoBack}
+        showSearchIcon={!isFocused && !selectedPlaceId}
         isFocused={isFocused}
         onRemove={onRemoveInput}
         placeholder="장소 검색"
