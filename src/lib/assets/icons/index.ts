@@ -10,6 +10,7 @@ import ErrorCircleIcon from './error.svg';
 import FillStarIcon from './fill-star.svg';
 import HalfStarIcon from './half-star.svg';
 import MenuIcon from './menu.svg';
+import NavigationIcon from './navigation.svg';
 import PixelEmptyStar from './pixel-empty-star.svg';
 import PixelFillStar from './pixel-fill-star.svg';
 import PixelHalfStar from './pixel-half-star.svg';
@@ -31,6 +32,7 @@ export {
   FillStarIcon,
   HalfStarIcon,
   MenuIcon,
+  NavigationIcon,
   PixelEmptyStar,
   PixelFillStar,
   PixelHalfStar,

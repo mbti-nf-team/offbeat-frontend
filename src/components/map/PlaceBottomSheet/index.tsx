@@ -12,6 +12,7 @@ import { PlacesWithSearchResult } from '@/lib/types/search';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import { targetFalseThenValue } from '@/utils';
 
+import CurrentLocationButton from '../CurrentLocationButton';
 import PlaceBottomSheetItem from '../PlaceBottomSheetItem';
 
 import styles from './index.module.scss';
@@ -86,44 +87,50 @@ function PlaceBottomSheet({
   }, [filteredPlaces]);
 
   return (
-    <BottomSheet
-      ref={sheetRef}
-      open={!isOpenPlaceDetailWindow
-        && (isZeroResult || isSuccess || isFetching)}
-      blocking={false}
-      defaultSnap={getDefaultSnap}
-      snapPoints={getSnapPoints}
-      expandOnContentDrag={false}
-    >
-      {isZeroResult ? (
-        <div className={styles.zeroResultBox}>
-          <div>검색 결과가 없습니다.</div>
-          <Button type="button" size="small" color="highlight">
-            다시 검색하기
-          </Button>
-        </div>
-      ) : (
-        <div className={styles.placeList} ref={refState.wrapperRef}>
-          {filteredPlaces.map((place, index, array) => (
-            <PlaceBottomSheetItem
-              key={place.place_id}
-              wrapperRef={
-                targetFalseThenValue(
-                  !(array.length - 1 === index && !selectedPlaceId),
-                )(refState.lastItemRef)
-              }
-              place={place}
-              onClick={onClickPlaceItem}
-            />
-          ))}
-          {(isFetchingNextPage || isFetching) && (
+    <>
+      <CurrentLocationButton
+        isZeroResult={isZeroResult}
+        placeResultCount={filteredPlaces.length}
+      />
+      <BottomSheet
+        ref={sheetRef}
+        open={!isOpenPlaceDetailWindow
+          && (isZeroResult || isSuccess || isFetching)}
+        blocking={false}
+        defaultSnap={getDefaultSnap}
+        snapPoints={getSnapPoints}
+        expandOnContentDrag={false}
+      >
+        {isZeroResult ? (
+          <div className={styles.zeroResultBox}>
+            <div>검색 결과가 없습니다.</div>
+            <Button type="button" size="small" color="highlight">
+              다시 검색하기
+            </Button>
+          </div>
+        ) : (
+          <div className={styles.placeList} ref={refState.wrapperRef}>
+            {filteredPlaces.map((place, index, array) => (
+              <PlaceBottomSheetItem
+                key={place.place_id}
+                wrapperRef={
+                  targetFalseThenValue(
+                    !(array.length - 1 === index && !selectedPlaceId),
+                  )(refState.lastItemRef)
+                }
+                place={place}
+                onClick={onClickPlaceItem}
+              />
+            ))}
+            {(isFetchingNextPage || isFetching) && (
             <div className={styles.loadingWrapper}>
               <Spinner isLoading />
             </div>
-          )}
-        </div>
-      )}
-    </BottomSheet>
+            )}
+          </div>
+        )}
+      </BottomSheet>
+    </>
   );
 }
 

@@ -5,7 +5,9 @@ import { checkEmpty, isEmpty } from '@nf-team/core';
 import { useGoogleMap } from '@react-google-maps/api';
 
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
+import useRenderCurrentLocationMarker from '@/hooks/maps/useRenderCurrentLocationMarker';
 import useGetSearchPlaces from '@/hooks/queries/useGetSearchPlaces';
+import useCurrentLocationStore from '@/stores/currentLocation';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
 import useSearchKeywordStore from '@/stores/searchKeyword';
@@ -25,7 +27,10 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
   const { searchKeyword, setSearchKeyword } = useSearchKeywordStore(['searchKeyword', 'setSearchKeyword']);
   const { addRecentSearch: saveNextKeyword } = useRecentSearchStore(['addRecentSearch']);
   const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow']);
+  const { setCurrentLocationMarker } = useCurrentLocationStore(['setCurrentLocationMarker']);
   const [selectedPlaceId, setSelectedPlaceId] = useState<string>();
+
+  useRenderCurrentLocationMarker({ ...defaultLocation });
 
   const {
     query: {
@@ -52,7 +57,7 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
   }, [defaultPlaceId, map]);
 
   useEffect(() => {
-    if (!map) {
+    if (!map || !defaultCountryCode) {
       return;
     }
 
@@ -69,35 +74,12 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
       map.setCenter(results[0].geometry.bounds.getCenter());
     };
 
-    if (defaultLocation?.lat && defaultLocation?.lng) {
-      const position = new google.maps.LatLng({
-        lat: Number(defaultLocation.lat),
-        lng: Number(defaultLocation.lng),
-      });
-
-      const currentLocationMarker = new google.maps.Marker({
-        map,
-        position,
-        zIndex: 3,
-      });
-
-      currentLocationMarker.setIcon({
-        url: '/images/current-location-marker.png',
-        size: new google.maps.Size(32, 32),
-        scaledSize: new google.maps.Size(32, 32),
-        anchor: new google.maps.Point(16, 32),
-      });
-      map.setCenter(position);
-      map.setZoom(14);
-      return;
-    }
-
     geocoder?.geocode({
       componentRestrictions: {
         country: defaultCountryCode || 'KR',
       },
     }, geocoderCallbackResult);
-  }, [defaultCountryCode, map, defaultLocation]);
+  }, [defaultCountryCode, map]);
 
   useEffect(() => {
     if (!map || !isSuccess || isEmpty(placesWithSearchResult)) {
@@ -114,6 +96,15 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
 
     map.fitBounds(markerBounds);
   }, [map, isSuccess, placesWithSearchResult]);
+
+  useEffect(() => {
+    if (map) {
+      setCurrentLocationMarker(new google.maps.Marker({
+        map,
+        zIndex: 3,
+      }));
+    }
+  }, [map]);
 
   return (
     <>
