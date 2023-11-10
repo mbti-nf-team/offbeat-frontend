@@ -29,12 +29,12 @@ export const Default: Story = {
   },
 };
 
-export const IsLocalReview: Story = {
+export const IsKoreanReview: Story = {
   args: {
     author: '{{title}}',
     review: '{{description}}',
     rating: 4.3,
-    isLocalReview: true,
+    isKoreanReview: true,
     createdAt: '2달 전',
     profileUrl: '/images/korea-flag.png',
   },
@@ -45,7 +45,7 @@ export const HasSeparator: Story = {
     author: '{{title}}',
     review: '{{description}}',
     rating: 4.3,
-    isLocalReview: true,
+    isKoreanReview: true,
     createdAt: '2달 전',
     hasSeparator: true,
     profileUrl: '/images/korea-flag.png',
