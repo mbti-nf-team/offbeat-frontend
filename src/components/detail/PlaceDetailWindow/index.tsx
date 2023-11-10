@@ -52,7 +52,7 @@ function PlaceDetailWindow({
   const googleReviewCount = checkNumber(placeDetail?.reviews?.length);
   const koreanReviewCount = checkEmpty(placeDetail?.reviews).filter(({
     language, original_language,
-  }) => (original_language ? language === original_language : language === Language.ko)).length;
+  }) => (original_language ? original_language === Language.ko : language === Language.ko)).length;
   const blogCount = checkNumber(placeDetail?.searchBlogPost?.total_count);
 
   const onClickShare = useCallback(async () => {
@@ -76,15 +76,15 @@ function PlaceDetailWindow({
     }
 
     if (blogCount > NAVER_MAX_REVIEW_COUNT) {
-      return '고국의 맛과 분위기를 한몸에 느낄 수 있어요.\n 여행지에서 한국의 맛을 찾고싶다면, 방문 필수!';
+      return '한국의 분위기를 한몸에 느낄 수 있어요.\n여행지에서 K-바이브를 느끼고 싶다면, 방문 필수!';
     }
 
     if (koreanReviewCount >= GOOGLE_MAX_REVIEW_COUNT || blogCount > 100) {
-      return '한국인 입맛에도 딱이지만,\n현지인들에게도 인기 만점!';
+      return '한국인들에게 입소문 난 장소지만\n현지인들에게도 인기 만점 스팟!';
     }
 
     if (koreanReviewCount <= 1 || blogCount <= 10) {
-      return '진짜 로컬 맛집!\n구글에 첫 한국인 리뷰를 남겨보세요.';
+      return '여기는 ✌진짜✌ 로컬 스팟!\n구글에 한국인 리뷰를 남겨보세요.';
     }
 
     return '현지인 리뷰 비중이 높아요.';
@@ -168,7 +168,9 @@ function PlaceDetailWindow({
                         <ReviewCard
                           key={review.time}
                           author={review.author_name}
-                          isLocalReview={review.language !== 'ko'}
+                          isKoreanReview={review?.original_language
+                            ? review.original_language === Language.ko
+                            : review.language === Language.ko}
                           profileUrl={review.profile_photo_url}
                           rating={review.rating}
                           review={review.text}

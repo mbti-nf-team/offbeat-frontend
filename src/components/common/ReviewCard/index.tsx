@@ -12,12 +12,12 @@ type Props = {
   rating?: number;
   createdAt?: string;
   review: string;
-  isLocalReview: boolean;
+  isKoreanReview: boolean;
   hasSeparator: boolean;
 };
 
 function ReviewCard({
-  author, isLocalReview, rating, review, createdAt, profileUrl, hasSeparator,
+  author, isKoreanReview, rating, review, createdAt, profileUrl, hasSeparator,
 }: Props) {
   return (
     <div
@@ -34,8 +34,8 @@ function ReviewCard({
             </div>
           </div>
         </div>
-        {isLocalReview && (
-          <div className={styles.localReview}>현지 리뷰</div>
+        {isKoreanReview && (
+          <div className={styles.koreanReview}>한국어 리뷰</div>
         )}
       </div>
       {review && (

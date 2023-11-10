@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { IntersectionOptions, useInView } from 'react-intersection-observer';
 
 import { InfiniteRefState } from '@/lib/types';
@@ -30,10 +30,10 @@ function useIntersectionObserver<T = Element>({
     }
   }, [inView, hasNextPage]);
 
-  return useMemo(() => ({
+  return {
     lastItemRef: ref,
     wrapperRef: checkRoot(wrapperRef),
-  }), []);
+  };
 }
 
 export default useIntersectionObserver;
