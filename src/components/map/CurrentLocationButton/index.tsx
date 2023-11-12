@@ -22,7 +22,10 @@ function CurrentLocationButton({ placeResultCount, isZeroResult }: Props) {
   const [location, onClick] = useGeoLocation();
   const renderToast = useRenderToast();
 
-  useRenderCurrentLocationMarker({ ...location.coordinates });
+  useRenderCurrentLocationMarker({
+    lat: location.coordinates?.lat,
+    lng: location.coordinates?.lng,
+  });
 
   const handleClick = () => {
     if (map && location.coordinates?.lat && location.coordinates?.lng) {
@@ -38,7 +41,7 @@ function CurrentLocationButton({ placeResultCount, isZeroResult }: Props) {
   };
 
   const bottomPosition = () => {
-    if (placeResultCount === 1) {
+    if (placeResultCount > 0) {
       return '164px';
     }
 
@@ -54,10 +57,6 @@ function CurrentLocationButton({ placeResultCount, isZeroResult }: Props) {
       renderToast('현재 위치를 불러올 수 없어요.', { type: 'error' });
     }
   }, [location?.error]);
-
-  if (placeResultCount > 1) {
-    return null;
-  }
 
   return (
     <GlobalPortal elementId="portal-container">

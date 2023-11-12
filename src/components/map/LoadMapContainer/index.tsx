@@ -30,7 +30,10 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
   const { setCurrentLocationMarker } = useCurrentLocationStore(['setCurrentLocationMarker']);
   const [selectedPlaceId, setSelectedPlaceId] = useState<string>();
 
-  useRenderCurrentLocationMarker({ ...defaultLocation });
+  useRenderCurrentLocationMarker({
+    lat: defaultLocation?.lat,
+    lng: defaultLocation?.lng,
+  });
 
   const {
     query: {
@@ -61,8 +64,6 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
       return;
     }
 
-    const geocoder = new google.maps.Geocoder();
-
     const geocoderCallbackResult = (
       results: google.maps.GeocoderResult[] | null,
       status: google.maps.GeocoderStatus,
@@ -73,6 +74,8 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
 
       map.setCenter(results[0].geometry.bounds.getCenter());
     };
+
+    const geocoder = new google.maps.Geocoder();
 
     geocoder?.geocode({
       componentRestrictions: {
