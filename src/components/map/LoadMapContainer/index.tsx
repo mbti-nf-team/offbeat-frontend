@@ -1,16 +1,19 @@
-import { useEffect, useMemo, useState } from 'react';
+import {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 
 import { Status } from '@googlemaps/google-maps-services-js';
-import { checkEmpty, checkNumber, isEmpty } from '@nf-team/core';
+import { checkEmpty, isEmpty } from '@nf-team/core';
 import { useGoogleMap } from '@react-google-maps/api';
 
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
 import useRenderCurrentLocationMarker from '@/hooks/maps/useRenderCurrentLocationMarker';
 import useGetSearchPlaces from '@/hooks/queries/useGetSearchPlaces';
+import { LatLngLiteral } from '@/lib/types/google.maps';
 import useCurrentLocationStore from '@/stores/currentLocation';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
-import useSearchKeywordStore from '@/stores/searchKeyword';
+import useSearchFormStore from '@/stores/searchKeyword';
 
 import PlaceBottomSheet from '../PlaceBottomSheet';
 import PlaceResultMarker from '../PlaceResultMarker';
@@ -24,11 +27,16 @@ type Props = {
 
 function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
   const map = useGoogleMap();
-  const { searchKeyword, setSearchKeyword } = useSearchKeywordStore(['searchKeyword', 'setSearchKeyword']);
+  const {
+    searchKeyword, setSearchForm, lat, lng,
+  } = useSearchFormStore(['searchKeyword', 'setSearchForm', 'lat', 'lng']);
   const { addRecentSearch: saveNextKeyword } = useRecentSearchStore(['addRecentSearch']);
   const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow']);
   const { setCurrentLocationMarker } = useCurrentLocationStore(['setCurrentLocationMarker']);
   const [selectedPlaceId, setSelectedPlaceId] = useState<string>();
+  const [currentCenter, setCurrentCenter] = useState<Partial<LatLngLiteral>>({
+    lat: undefined, lng: undefined,
+  });
 
   useRenderCurrentLocationMarker({
     lat: defaultLocation?.lat,
@@ -39,13 +47,17 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
     query: {
       data: places, isSuccess, isFetching, isFetchingNextPage,
     }, refState,
-  } = useGetSearchPlaces({ keyword: searchKeyword });
+  } = useGetSearchPlaces({ keyword: searchKeyword, lat, lng });
 
-  const handleSubmit = (keyword: string) => {
+  const handleSubmit = useCallback((keyword: string) => {
     setSelectedPlaceId(undefined);
-    setSearchKeyword(keyword);
+    setSearchForm({
+      searchKeyword: keyword,
+      lat: currentCenter.lat,
+      lng: currentCenter.lng,
+    });
     saveNextKeyword(keyword);
-  };
+  }, [currentCenter.lat, currentCenter.lng]);
 
   const placesWithSearchResult = useMemo(() => checkEmpty(places?.pages)
     .filter((page) => !!page.results?.length && page.status === Status.OK)
@@ -110,17 +122,26 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
   }, [map]);
 
   useEffect(() => {
-    if (map) {
-      google.maps.event.addListener(map, 'zoom_changed', () => {
-        const zoom = map.getZoom();
-        const center = map.getCenter();
-
-        const km = (38000 / (2 ** (checkNumber(zoom) - 3)))
-          * (Math.cos(checkNumber(center?.lat()) * (Math.PI / 180)));
-
-        console.log(zoom, km);
-      });
+    if (!map) {
+      return;
     }
+
+    const onCenterChanged = () => {
+      // const zoom = map.getZoom();
+      const center = map.getCenter();
+
+      // const km = (38000 / (2 ** (checkNumber(zoom) - 3)))
+      //   * (Math.cos(checkNumber(center?.lat()) * (Math.PI / 180)));
+
+      if (center?.lat() && center?.lng()) {
+        setCurrentCenter({
+          lat: center.lat(),
+          lng: center.lng(),
+        });
+      }
+    };
+
+    google.maps.event.addListener(map, 'center_changed', onCenterChanged);
   }, [map]);
 
   return (

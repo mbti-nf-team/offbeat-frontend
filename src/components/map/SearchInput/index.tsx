@@ -52,7 +52,7 @@ function SearchInput({ onSubmit, onClearSelectedPlace, selectedPlaceId }: Props)
     onSubmit(keyword);
     setSearchInput(keyword);
     setIsFocused(false);
-  }, []);
+  }, [onSubmit]);
 
   return (
     <>

@@ -1,13 +1,14 @@
-import {
-  Language, LatLngLiteral, PlaceType1,
-} from '@googlemaps/google-maps-services-js';
+import { Language, PlaceType1 } from '@googlemaps/google-maps-services-js';
 
 import { NaverSearchBlog } from '@/lib/types/blog';
 
 export type TextSearchRequestParams = {
   query: string;
   language?: Language;
-  location?: LatLngLiteral;
+  location?: {
+    lat?: string;
+    lng?: string;
+  };
   maxprice?: number;
   minprice?: number;
   opennow?: boolean;

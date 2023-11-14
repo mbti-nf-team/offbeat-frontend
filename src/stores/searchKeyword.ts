@@ -2,23 +2,25 @@ import { createWithEqualityFn } from 'zustand/traditional';
 
 import { StoreWithShallow, useStoreWithShallow } from './utils';
 
-type SearchKeywordState = {
+type SearchFormState = {
   searchKeyword: string;
+  lat?: number;
+  lng?: number;
 };
 
-type SearchKeywordAction = {
-  setSearchKeyword: (searchKeyword: string) => void;
+type SearchFormAction = {
+  setSearchForm: (searchForm: SearchFormState) => void;
 };
 
-export type KeywordStore = SearchKeywordState & SearchKeywordAction;
+export type FormStore = SearchFormState & SearchFormAction;
 
-const searchKeywordStore = createWithEqualityFn<KeywordStore>((set) => ({
+const searchFormStore = createWithEqualityFn<FormStore>((set) => ({
   searchKeyword: '',
-  setSearchKeyword: (searchKeyword) => set({ searchKeyword }),
+  setSearchForm: (searchForm) => set({ ...searchForm }),
 }));
 
-const useSearchKeywordStore: StoreWithShallow<KeywordStore> = (
+const useSearchFormStore: StoreWithShallow<FormStore> = (
   keys,
-) => useStoreWithShallow(searchKeywordStore, keys);
+) => useStoreWithShallow(searchFormStore, keys);
 
-export default useSearchKeywordStore;
+export default useSearchFormStore;

@@ -2,18 +2,21 @@ import { api, paramsSerializer } from '..';
 
 import {
   SearchPlaceResponse,
+  SearchPlacesRequest,
   SearchPlacesResponse,
 } from './model';
 
 export const fetchSearchPlaces = async ({
-  keyword, nextCursor,
-}: { keyword: string; nextCursor?: string; }) => {
+  keyword, nextCursor, lat, lng,
+}: SearchPlacesRequest) => {
   const response = await api<SearchPlacesResponse>({
     method: 'GET',
     url: '/search/places',
     params: {
       query: keyword,
       nextCursor,
+      lat,
+      lng,
     },
     paramsSerializer,
     isBFF: true,
