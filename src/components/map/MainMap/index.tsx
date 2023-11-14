@@ -50,6 +50,7 @@ function MainMap({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props)
       options={{
         disableDefaultUI: true,
         minZoom: 3,
+        maxZoom: 20,
         restriction: {
           latLngBounds: {
             north: 83.8, south: -57, west: -180, east: 180,

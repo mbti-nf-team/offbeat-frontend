@@ -15,6 +15,8 @@ export async function GET(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
 
   const query = searchParams.get('query');
+  const lat = searchParams.get('lat');
+  const lng = searchParams.get('lng');
   const nextCursor = searchParams.get('nextCursor');
 
   if (!query) {
@@ -32,6 +34,10 @@ export async function GET(request: NextRequest) {
       language: Language.ko,
       opennow: false,
       pagetoken: nextCursor ?? undefined,
+      location: {
+        lat: lat ?? undefined,
+        lng: lng ?? undefined,
+      },
     });
 
     const placesResult = filteredPlaces(checkEmpty(places?.results));

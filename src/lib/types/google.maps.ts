@@ -17,3 +17,7 @@ export interface PlaceResult extends Place {
 export interface PlaceDetail extends PlaceDetailsResponseData {
   result: PlaceResult;
 }
+
+export type LatLngLiteral = {
+  lat: number; lng: number;
+};
