@@ -40,11 +40,11 @@ const ISO_3166_COUNTRY_CODES = [
     koreanName: '앙골라',
     englishName: 'Angola',
   },
-  {
-    code: 'AQ',
-    koreanName: '남극',
-    englishName: 'Antarctica',
-  },
+  // {
+  //   code: 'AQ',
+  //   koreanName: '남극',
+  //   englishName: 'Antarctica',
+  // },
   {
     code: 'AR',
     koreanName: '아르헨티나',

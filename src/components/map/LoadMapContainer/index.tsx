@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { Status } from '@googlemaps/google-maps-services-js';
-import { checkEmpty, isEmpty } from '@nf-team/core';
+import { checkEmpty, checkNumber, isEmpty } from '@nf-team/core';
 import { useGoogleMap } from '@react-google-maps/api';
 
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
@@ -106,6 +106,20 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
         map,
         zIndex: 3,
       }));
+    }
+  }, [map]);
+
+  useEffect(() => {
+    if (map) {
+      google.maps.event.addListener(map, 'zoom_changed', () => {
+        const zoom = map.getZoom();
+        const center = map.getCenter();
+
+        const km = (38000 / (2 ** (checkNumber(zoom) - 3)))
+          * (Math.cos(checkNumber(center?.lat()) * (Math.PI / 180)));
+
+        console.log(zoom, km);
+      });
     }
   }, [map]);
 
