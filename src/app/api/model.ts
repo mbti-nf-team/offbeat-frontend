@@ -17,6 +17,22 @@ export type TextSearchRequestParams = {
   type?: PlaceType1;
 };
 
+export type NearbySearchRequestParams = {
+  location: {
+    lat: string;
+    lng: string;
+  };
+  radius: string;
+  language?: Language;
+  keyword?: string;
+  maxprice?: number;
+  minprice?: number;
+  pagetoken?: string;
+  region?: string;
+  rankBy?: 'prominence' | 'distance';
+  type?: PlaceType1;
+};
+
 export type PlaceDetailsRequestParams = {
   place_id: string;
   fields?: string[];

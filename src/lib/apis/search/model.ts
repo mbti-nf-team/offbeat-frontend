@@ -8,3 +8,7 @@ export type SearchPlaceResponse = SearchPlace;
 export type SearchPlacesRequest = {
   keyword: string; nextCursor?: string;
 } & Partial<LatLngLiteral>;
+
+export type NearbySearchPlacesRequest = {
+  keyword?: string; nextCursor?: string; radius: number;
+} & LatLngLiteral;

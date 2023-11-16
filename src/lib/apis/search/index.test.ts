@@ -5,8 +5,8 @@ import FIXTURE_SEARCH_PLACE from '@/mocks/fixtures/searchPlace';
 
 import { api, paramsSerializer } from '..';
 
-import { SearchPlaceResponse, SearchPlacesResponse } from './model';
-import { fetchPlaceDetail, fetchSearchPlaces } from '.';
+import { NearbySearchPlacesRequest, SearchPlaceResponse, SearchPlacesResponse } from './model';
+import { fetchNearbySearchPlaces, fetchPlaceDetail, fetchSearchPlaces } from '.';
 
 jest.mock('..');
 
@@ -49,6 +49,47 @@ describe('search API', () => {
           query: keyword,
         },
         url: '/search/places',
+        paramsSerializer,
+        isBFF: true,
+      });
+    });
+  });
+
+  describe('fetchNearbySearchPlaces', () => {
+    const requestForm: NearbySearchPlacesRequest = {
+      keyword: 'placeName',
+      lat: 10.124,
+      lng: 20.123,
+      radius: 50,
+    };
+    const mockResponse: SearchPlacesResponse = {
+      error_message: '',
+      html_attributions: [],
+      status: Status.OK,
+      results: [{
+        ...FIXTURE_SEARCH_PLACE,
+        searchBlogPost: {
+          status: 'fulfilled',
+          value: {
+            ...FIXTURE_NAVER_SEARCH_BLOG,
+            posts: null,
+          },
+        },
+      }],
+    };
+
+    beforeEach(() => {
+      (api as jest.Mock).mockReturnValueOnce(mockResponse);
+    });
+
+    it('GET /search/nearby/places', async () => {
+      const response = await fetchNearbySearchPlaces(requestForm);
+
+      expect(response).toEqual(mockResponse);
+      expect(api).toHaveBeenCalledWith({
+        method: 'GET',
+        params: requestForm,
+        url: '/search/nearby/places',
         paramsSerializer,
         isBFF: true,
       });
