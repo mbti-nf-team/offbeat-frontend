@@ -1,6 +1,7 @@
 import { api, paramsSerializer } from '..';
 
 import {
+  NearbySearchPlacesRequest,
   SearchPlaceResponse,
   SearchPlacesRequest,
   SearchPlacesResponse,
@@ -18,6 +19,18 @@ export const fetchSearchPlaces = async ({
       lat,
       lng,
     },
+    paramsSerializer,
+    isBFF: true,
+  });
+
+  return response;
+};
+
+export const fetchNearbySearchPlaces = async (params: NearbySearchPlacesRequest) => {
+  const response = await api<SearchPlacesResponse>({
+    method: 'GET',
+    url: '/search/nearby/places',
+    params,
     paramsSerializer,
     isBFF: true,
   });
