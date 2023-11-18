@@ -18,6 +18,7 @@ export async function GET(request: NextRequest) {
   const lat = searchParams.get('lat');
   const lng = searchParams.get('lng');
   const nextCursor = searchParams.get('nextCursor');
+  const radius = searchParams.get('radius');
 
   if (!query) {
     return NextResponse.json(null, {
@@ -30,14 +31,11 @@ export async function GET(request: NextRequest) {
   try {
     const places = await getGoogleTextSearch({
       query,
-      region: 'KR',
       language: Language.ko,
       opennow: false,
+      radius: radius ?? undefined,
       pagetoken: nextCursor ?? undefined,
-      location: {
-        lat: lat ?? undefined,
-        lng: lng ?? undefined,
-      },
+      location: (lat && lng) ? [lat, lng] : undefined,
     });
 
     const placesResult = filteredPlaces(checkEmpty(places?.results));

@@ -13,7 +13,6 @@ import styles from './index.module.scss';
 interface Props extends DetailedHTMLProps<
 InputHTMLAttributes<HTMLInputElement>, HTMLInputElement
 > {
-  isFocused: boolean;
   value: string;
   placeholder: string;
   goBack?: () => void;
@@ -21,10 +20,10 @@ InputHTMLAttributes<HTMLInputElement>, HTMLInputElement
   showSearchIcon?: boolean;
   wrapperStyle?: CSSProperties;
   isVisibleMenuIcon?: boolean;
+  visibleShadow?: boolean;
 }
 
 function Input({
-  isFocused,
   goBack,
   value,
   placeholder,
@@ -32,6 +31,7 @@ function Input({
   wrapperStyle,
   isVisibleMenuIcon,
   showSearchIcon,
+  visibleShadow,
   ...rest
 }: Props, ref: ForwardedRef<HTMLInputElement>) {
   return (
@@ -48,17 +48,17 @@ function Input({
         placeholder={placeholder}
         value={value}
         className={clsx(styles.input, {
-          [styles.visibleShadow]: !isFocused,
+          [styles.visibleShadow]: visibleShadow,
           [styles.blur]: !isVisibleMenuIcon && !value,
         })}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}
       />
       <div className={styles.suffixIconWrapper}>
-        {(isFocused && value) && (
+        {value && (
           <RemoveIcon onClick={onRemove} />
         )}
-        {(!isFocused && isVisibleMenuIcon) && <MenuIcon />}
+        {isVisibleMenuIcon && <MenuIcon />}
       </div>
     </div>
   );

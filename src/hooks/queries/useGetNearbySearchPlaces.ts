@@ -8,11 +8,11 @@ import useIntersectionObserver from '../useIntersectionObserver';
 
 function useGetNearbySearchPlaces({
   keyword, lat, lng, radius,
-}: { keyword?: string; radius: number; } & LatLngLiteral) {
+}: { keyword?: string; radius: number; } & Partial<LatLngLiteral>) {
   const query = useInfiniteQuery<SearchPlacesResponse>({
     queryKey: ['nearbySearchPlaces', keyword, lat, lng, radius],
     queryFn: ({ pageParam }) => fetchNearbySearchPlaces({
-      keyword, nextCursor: pageParam as string, lat, lng, radius,
+      keyword, nextCursor: pageParam as string, lat: lat as number, lng: lng as number, radius,
     }),
     getNextPageParam: ({ next_page_token }) => next_page_token,
     initialPageParam: undefined,

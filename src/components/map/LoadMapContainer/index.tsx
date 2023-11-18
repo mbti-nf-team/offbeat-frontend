@@ -3,14 +3,15 @@ import {
 } from 'react';
 
 import { Status } from '@googlemaps/google-maps-services-js';
-import { checkEmpty, isEmpty } from '@nf-team/core';
+import { checkEmpty, checkNumber, isEmpty } from '@nf-team/core';
 import { useGoogleMap } from '@react-google-maps/api';
 
+import Button from '@/components/common/Button';
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
+import useCurrentLocationState from '@/hooks/maps/useCurrentLocationState';
 import useRenderCurrentLocationMarker from '@/hooks/maps/useRenderCurrentLocationMarker';
 import useGetSearchPlaces from '@/hooks/queries/useGetSearchPlaces';
 import { LatLngLiteral } from '@/lib/types/google.maps';
-import useCurrentLocationStore from '@/stores/currentLocation';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
 import useSearchFormStore from '@/stores/searchKeyword';
@@ -18,6 +19,8 @@ import useSearchFormStore from '@/stores/searchKeyword';
 import PlaceBottomSheet from '../PlaceBottomSheet';
 import PlaceResultMarker from '../PlaceResultMarker';
 import SearchInput from '../SearchInput';
+
+import styles from './index.module.scss';
 
 type Props = {
   defaultCountryCode?: string;
@@ -28,15 +31,17 @@ type Props = {
 function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
   const map = useGoogleMap();
   const {
-    searchKeyword, setSearchForm, lat, lng,
-  } = useSearchFormStore(['searchKeyword', 'setSearchForm', 'lat', 'lng']);
+    searchKeyword, setSearchForm, lat, lng, radius: searchRadius,
+  } = useSearchFormStore(['searchKeyword', 'setSearchForm', 'lat', 'lng', 'radius']);
   const { addRecentSearch: saveNextKeyword } = useRecentSearchStore(['addRecentSearch']);
   const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow']);
-  const { setCurrentLocationMarker } = useCurrentLocationStore(['setCurrentLocationMarker']);
   const [selectedPlaceId, setSelectedPlaceId] = useState<string>();
-  const [currentCenter, setCurrentCenter] = useState<Partial<LatLngLiteral>>({
-    lat: undefined, lng: undefined,
+  const [searchResultCenter, setSearchResultCenter] = useState<Partial<LatLngLiteral>>({
+    lat: undefined,
+    lng: undefined,
   });
+
+  const { centerLatitude, centerLongitude } = useCurrentLocationState();
 
   useRenderCurrentLocationMarker({
     lat: defaultLocation?.lat,
@@ -47,17 +52,33 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
     query: {
       data: places, isSuccess, isFetching, isFetchingNextPage,
     }, refState,
-  } = useGetSearchPlaces({ keyword: searchKeyword, lat, lng });
+  } = useGetSearchPlaces({
+    keyword: searchKeyword, lat, lng, radius: searchRadius,
+  });
 
-  const handleSubmit = useCallback((keyword: string) => {
+  const handleSubmit = useCallback((keyword: string, radius = 50000) => {
     setSelectedPlaceId(undefined);
     setSearchForm({
       searchKeyword: keyword,
-      lat: currentCenter.lat,
-      lng: currentCenter.lng,
+      lat: centerLatitude,
+      lng: centerLongitude,
+      radius,
     });
     saveNextKeyword(keyword);
-  }, [currentCenter.lat, currentCenter.lng]);
+  }, [centerLatitude, centerLongitude]);
+
+  const isCenterChange = () => {
+    const isEqualLat = checkNumber(searchResultCenter.lat).toFixed(3)
+      === checkNumber(centerLatitude).toFixed(3);
+    const isEqualLng = checkNumber(searchResultCenter.lng).toFixed(3)
+      === checkNumber(centerLongitude).toFixed(3);
+
+    if (isEqualLat && isEqualLng) {
+      return true;
+    }
+
+    return false;
+  };
 
   const placesWithSearchResult = useMemo(() => checkEmpty(places?.pages)
     .filter((page) => !!page.results?.length && page.status === Status.OK)
@@ -110,39 +131,12 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
     });
 
     map.fitBounds(markerBounds);
+    map.setCenter(markerBounds.getCenter());
+    setSearchResultCenter({
+      lat: markerBounds.getCenter().lat(),
+      lng: markerBounds.getCenter().lng(),
+    });
   }, [map, isSuccess, placesWithSearchResult]);
-
-  useEffect(() => {
-    if (map) {
-      setCurrentLocationMarker(new google.maps.Marker({
-        map,
-        zIndex: 3,
-      }));
-    }
-  }, [map]);
-
-  useEffect(() => {
-    if (!map) {
-      return;
-    }
-
-    const onCenterChanged = () => {
-      // const zoom = map.getZoom();
-      const center = map.getCenter();
-
-      // const km = (38000 / (2 ** (checkNumber(zoom) - 3)))
-      //   * (Math.cos(checkNumber(center?.lat()) * (Math.PI / 180)));
-
-      if (center?.lat() && center?.lng()) {
-        setCurrentCenter({
-          lat: center.lat(),
-          lng: center.lng(),
-        });
-      }
-    };
-
-    google.maps.event.addListener(map, 'center_changed', onCenterChanged);
-  }, [map]);
 
   return (
     <>
@@ -151,6 +145,13 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
         selectedPlaceId={selectedPlaceId}
         onClearSelectedPlace={() => setSelectedPlaceId(undefined)}
       />
+      {searchKeyword && !isCenterChange() && (
+        <div className={styles.searchButtonWrapper}>
+          <Button size="small" isFloating onClick={() => handleSubmit(searchKeyword, 2000)}>
+            여기서 검색
+          </Button>
+        </div>
+      )}
       {placesWithSearchResult.map((place, _, array) => (
         <PlaceResultMarker
           key={place.place_id}

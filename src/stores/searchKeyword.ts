@@ -6,6 +6,7 @@ type SearchFormState = {
   searchKeyword: string;
   lat?: number;
   lng?: number;
+  radius?: number;
 };
 
 type SearchFormAction = {

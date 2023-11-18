@@ -2676,13 +2676,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nf-team/react@npm:^2.4.2":
-  version: 2.4.2
-  resolution: "@nf-team/react@npm:2.4.2"
+"@nf-team/react@npm:^2.4.4":
+  version: 2.4.4
+  resolution: "@nf-team/react@npm:2.4.4"
   peerDependencies:
     react: ^18
     react-dom: ^18
-  checksum: a8c6c0e18475afacc5e8c9be5155d87f129bbed81589be118754ab9cb1e97d6fe8c170fa61c1e90cba5ac5569d510109c617fe567a060c702f547ee9bdd25fa8
+  checksum: d1db229267c6d313f6854be20259f602ea02885f4fb9aa17c1038e5c931cececc6c7d18adbdeefdf37502de9c8b5c07ceba8417086c394d36bbba2265610ffea
   languageName: node
   linkType: hard
 
@@ -14081,7 +14081,7 @@ __metadata:
     "@next/eslint-plugin-next": "npm:^14.0.1"
     "@nf-team/core": "npm:^2.0.1"
     "@nf-team/eslint-config": "npm:^2.0.2"
-    "@nf-team/react": "npm:^2.4.2"
+    "@nf-team/react": "npm:^2.4.4"
     "@react-google-maps/api": "npm:^2.19.2"
     "@storybook/addon-essentials": "npm:^7.5.2"
     "@storybook/addon-interactions": "npm:^7.5.2"

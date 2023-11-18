@@ -30,14 +30,10 @@ export async function GET(request: NextRequest) {
   try {
     const places = await getGoogleNearbySearch({
       keyword: keyword ?? undefined,
-      region: 'KR',
       language: Language.ko,
       radius,
       pagetoken: nextCursor ?? undefined,
-      location: {
-        lat,
-        lng,
-      },
+      location: [lat, lng],
     });
 
     const placesResult = filteredPlaces(checkEmpty(places?.results));

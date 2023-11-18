@@ -5,23 +5,18 @@ import { NaverSearchBlog } from '@/lib/types/blog';
 export type TextSearchRequestParams = {
   query: string;
   language?: Language;
-  location?: {
-    lat?: string;
-    lng?: string;
-  };
+  location?: [string, string];
   maxprice?: number;
   minprice?: number;
   opennow?: boolean;
   pagetoken?: string;
   region?: string;
+  radius?: string;
   type?: PlaceType1;
 };
 
 export type NearbySearchRequestParams = {
-  location: {
-    lat: string;
-    lng: string;
-  };
+  location: [string, string];
   radius: string;
   language?: Language;
   keyword?: string;
