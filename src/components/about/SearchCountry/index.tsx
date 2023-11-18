@@ -64,10 +64,10 @@ function SearchCountry({ countries }: Props) {
           type="text"
           placeholder="찾는 장소가 어떤 나라인가요?"
           showSearchIcon
+          visibleShadow
           value={keyword}
           onFocus={onFocus}
           onChange={(e) => onChange(e.target.value)}
-          isFocused={isFocused}
           onRemove={() => onChange('')}
         />
       </div>

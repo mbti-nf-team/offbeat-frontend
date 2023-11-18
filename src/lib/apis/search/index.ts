@@ -8,7 +8,7 @@ import {
 } from './model';
 
 export const fetchSearchPlaces = async ({
-  keyword, nextCursor, lat, lng,
+  keyword, nextCursor, lat, lng, radius,
 }: SearchPlacesRequest) => {
   const response = await api<SearchPlacesResponse>({
     method: 'GET',
@@ -18,6 +18,7 @@ export const fetchSearchPlaces = async ({
       nextCursor,
       lat,
       lng,
+      radius,
     },
     paramsSerializer,
     isBFF: true,

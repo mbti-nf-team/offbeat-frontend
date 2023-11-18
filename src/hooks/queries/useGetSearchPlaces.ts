@@ -6,11 +6,14 @@ import { LatLngLiteral } from '@/lib/types/google.maps';
 
 import useIntersectionObserver from '../useIntersectionObserver';
 
-function useGetSearchPlaces({ keyword, lat, lng }: { keyword: string; } & Partial<LatLngLiteral>) {
+function useGetSearchPlaces({
+  keyword, lat, lng, radius,
+}: {
+  keyword: string; radius?: number; } & Partial<LatLngLiteral>) {
   const query = useInfiniteQuery<SearchPlacesResponse>({
-    queryKey: ['searchPlaces', keyword, lat, lng],
+    queryKey: ['searchPlaces', keyword, lat, lng, radius],
     queryFn: ({ pageParam }) => fetchSearchPlaces({
-      keyword, nextCursor: pageParam as string, lat, lng,
+      keyword, nextCursor: pageParam as string, lat, lng, radius,
     }),
     getNextPageParam: ({ next_page_token }) => next_page_token,
     initialPageParam: undefined,

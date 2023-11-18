@@ -7,12 +7,6 @@ const meta: Meta<typeof Input> = {
   component: Input,
   tags: ['autodocs'],
   argTypes: {
-    isFocused: {
-      table: {
-        type: { summary: 'boolean' },
-      },
-      control: { type: 'boolean' },
-    },
     isVisibleMenuIcon: {
       table: {
         type: { summary: 'boolean' },
@@ -56,18 +50,15 @@ type Story = StoryObj<typeof Input>;
 export const Default: Story = {
   args: {
     placeholder: '입력하세요.',
-    isFocused: false,
     isVisibleMenuIcon: false,
     onChange: () => {},
   },
 };
 
-export const HasValueWithFocused: Story = {
+export const ShowSearchIcon: Story = {
   args: {
     placeholder: '입력하세요.',
-    value: 'value',
-    isFocused: true,
-    isVisibleMenuIcon: false,
+    showSearchIcon: true,
     onChange: () => {},
   },
 };
@@ -75,8 +66,15 @@ export const HasValueWithFocused: Story = {
 export const VisibleMenuIcon: Story = {
   args: {
     placeholder: '입력하세요.',
-    isFocused: false,
     isVisibleMenuIcon: true,
+    onChange: () => {},
+  },
+};
+
+export const VisibleShadowStyle: Story = {
+  args: {
+    placeholder: '입력하세요.',
+    visibleShadow: true,
     onChange: () => {},
   },
 };

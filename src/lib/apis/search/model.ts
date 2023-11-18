@@ -6,7 +6,7 @@ export type SearchPlacesResponse = SearchPlaces;
 export type SearchPlaceResponse = SearchPlace;
 
 export type SearchPlacesRequest = {
-  keyword: string; nextCursor?: string;
+  keyword: string; nextCursor?: string; radius?: number;
 } & Partial<LatLngLiteral>;
 
 export type NearbySearchPlacesRequest = {

@@ -58,17 +58,17 @@ function SearchInput({ onSubmit, onClearSelectedPlace, selectedPlaceId }: Props)
     <>
       <Input
         ref={inputRef}
-        isVisibleMenuIcon
+        isVisibleMenuIcon={!isFocused && !searchInput}
         type="text"
         goBack={onClickGoBack}
         showSearchIcon={!isFocused && !selectedPlaceId}
-        isFocused={isFocused}
         onRemove={onRemoveInput}
         placeholder="장소 검색"
         value={searchInput}
         onFocus={onFocus}
+        visibleShadow={!searchInput && !isFocused}
         wrapperStyle={{
-          top: '24px',
+          top: '16px',
           right: '16px',
           position: 'absolute',
           zIndex: 'var(--search-input-z-index)',
