@@ -93,7 +93,7 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
   }, [defaultPlaceId, map]);
 
   useEffect(() => {
-    if (!map || !defaultCountryCode) {
+    if (!map) {
       return;
     }
 
