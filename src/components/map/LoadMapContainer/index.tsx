@@ -15,6 +15,7 @@ import { LatLngLiteral } from '@/lib/types/google.maps';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
 import useSearchFormStore from '@/stores/searchKeyword';
+import { ZOOM_LEVEL_TO_METER } from '@/utils/constants';
 
 import PlaceBottomSheet from '../PlaceBottomSheet';
 import PlaceResultMarker from '../PlaceResultMarker';
@@ -56,16 +57,18 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
     keyword: searchKeyword, lat, lng, radius: searchRadius,
   });
 
-  const handleSubmit = useCallback((keyword: string, radius = 50000) => {
+  const handleSubmit = useCallback((keyword: string) => {
+    const zoom = map?.getZoom() || 8;
+
     setSelectedPlaceId(undefined);
     setSearchForm({
       searchKeyword: keyword,
       lat: centerLatitude,
       lng: centerLongitude,
-      radius,
+      radius: ZOOM_LEVEL_TO_METER[zoom] || 50000,
     });
     saveNextKeyword(keyword);
-  }, [centerLatitude, centerLongitude]);
+  }, [centerLatitude, centerLongitude, map]);
 
   const isCenterChange = () => {
     const isEqualLat = checkNumber(searchResultCenter.lat).toFixed(3)
@@ -147,7 +150,7 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
       />
       {searchKeyword && !isCenterChange() && (
         <div className={styles.searchButtonWrapper}>
-          <Button size="small" isFloating onClick={() => handleSubmit(searchKeyword, 2000)}>
+          <Button size="small" isFloating onClick={() => handleSubmit(searchKeyword)}>
             여기서 검색
           </Button>
         </div>
