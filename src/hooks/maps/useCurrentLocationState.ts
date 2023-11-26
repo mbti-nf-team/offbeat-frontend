@@ -11,11 +11,7 @@ function useCurrentLocationState() {
   const { currentCenter, setCurrentCenter, setCurrentLocationMarker } = useCurrentLocationStore(['currentCenter', 'setCurrentCenter', 'setCurrentLocationMarker']);
 
   const handleCenterChanged = useThrottleCallback((currentMap: google.maps.Map) => {
-    // const zoom = map.getZoom();
     const center = currentMap.getCenter();
-
-    // const km = (38000 / (2 ** (checkNumber(zoom) - 3)))
-    //   * (Math.cos(checkNumber(center?.lat()) * (Math.PI / 180)));
 
     if (center?.lat() && center?.lng()) {
       setCurrentCenter({
