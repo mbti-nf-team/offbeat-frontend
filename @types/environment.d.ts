@@ -6,5 +6,7 @@ namespace NodeJS {
     NEXT_PUBLIC_API_HOST: string;
     API_HEADER_TOKEN: string;
     GOOGLE_MAP_API_ORIGIN: string;
+    NEXT_PUBLIC_GA_MEASUREMENT_ID: string;
+    NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID: string;
   }
 }
