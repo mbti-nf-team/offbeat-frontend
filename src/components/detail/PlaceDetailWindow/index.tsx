@@ -18,10 +18,10 @@ import ReviewCard from '@/components/common/ReviewCard';
 import Spinner from '@/components/common/Spinner';
 import StarRating from '@/components/common/StarRating';
 import useHideOnScroll from '@/hooks/useHideOnScroll';
-import useRenderToast from '@/hooks/useRenderToast';
 import { paramsSerializer } from '@/lib/apis';
 import { CloseIcon, ShareIcon } from '@/lib/assets/icons';
 import { PlacesWithSearchResult } from '@/lib/types/search';
+import useToastStore from '@/stores/toast';
 import { bottomToUpVariants } from '@/styles/framerVariants';
 
 import styles from './index.module.scss';
@@ -41,7 +41,7 @@ function PlaceDetailWindow({
 }: Props) {
   const placeDetailWindowRef = useRef<HTMLDivElement>(null);
 
-  const renderToast = useRenderToast();
+  const { renderToast } = useToastStore(['renderToast']);
   const params = useSearchParams();
   const { hide, onScroll } = useHideOnScroll({
     rootRef: placeDetailWindowRef, disabled: !isVisible,

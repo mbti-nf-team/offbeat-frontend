@@ -7,8 +7,8 @@ import clsx from 'clsx';
 import Spinner from '@/components/common/Spinner';
 import useRenderCurrentLocationMarker from '@/hooks/maps/useRenderCurrentLocationMarker';
 import useGeoLocation from '@/hooks/useGeolocation';
-import useRenderToast from '@/hooks/useRenderToast';
 import { NavigationIcon } from '@/lib/assets/icons';
+import useToastStore from '@/stores/toast';
 
 import styles from './index.module.scss';
 
@@ -20,7 +20,7 @@ type Props = {
 function CurrentLocationButton({ placeResultCount, isZeroResult }: Props) {
   const map = useGoogleMap();
   const [location, onClick] = useGeoLocation();
-  const renderToast = useRenderToast();
+  const { renderToast } = useToastStore(['renderToast']);
 
   useRenderCurrentLocationMarker({
     lat: location.coordinates?.lat,

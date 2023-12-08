@@ -8,8 +8,8 @@ import { useRouter } from 'next/navigation';
 import Button from '@/components/common/Button';
 import { GA4_EVENT_ACTION, GA4_EVENT_NAME, GA4_EVENT_TYPE } from '@/constants/ga4';
 import useGeoLocation from '@/hooks/useGeolocation';
-import useRenderToast from '@/hooks/useRenderToast';
 import { paramsSerializer } from '@/lib/apis';
+import useToastStore from '@/stores/toast';
 
 import styles from './index.module.scss';
 
@@ -20,7 +20,7 @@ type Props = {
 function SearchCountryHeader({ children }: Props) {
   const router = useRouter();
   const [location, onClick] = useGeoLocation();
-  const renderToast = useRenderToast();
+  const { renderToast } = useToastStore(['renderToast']);
 
   const handleClick = () => {
     ga4.event(GA4_EVENT_NAME.retrieve_current_location, {
