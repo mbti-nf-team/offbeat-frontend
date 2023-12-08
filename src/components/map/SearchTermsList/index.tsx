@@ -2,8 +2,8 @@ import {
   ForwardedRef, forwardRef, memo, RefObject, useCallback, useEffect, useState,
 } from 'react';
 
-import useRenderToast from '@/hooks/useRenderToast';
 import useSearchActionKeyEvent from '@/hooks/useSearchActionKeyEvent';
+import useToastStore from '@/stores/toast';
 
 import ZeroSearchResult from '../ZeroSearchResult';
 
@@ -23,7 +23,7 @@ function SearchTermsList({
   const [
     estimatedSearchTerms, setEstimatedSearchTerms,
   ] = useState<google.maps.places.AutocompletePrediction[]>([]);
-  const renderToast = useRenderToast();
+  const { renderToast } = useToastStore(['renderToast']);
   const [isZeroResult, setIsZeroResult] = useState<boolean>();
 
   const onKeyDown = useSearchActionKeyEvent<[string]>({
