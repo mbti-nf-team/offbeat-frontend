@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import ga4 from 'react-ga4';
 
 import Script from 'next/script';
 
@@ -11,6 +12,12 @@ import Providers from './providers';
 import 'src/styles/normalize.css';
 import 'src/styles/bottomSheet.css';
 import 'src/styles/global.scss';
+
+ga4.initialize(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID, {
+  // testMode: process.env.NODE_ENV === 'development',
+  // TODO - 정의 후 변경
+  testMode: true,
+});
 
 function RootLayout({ children }: { children: ReactNode }) {
   return (
