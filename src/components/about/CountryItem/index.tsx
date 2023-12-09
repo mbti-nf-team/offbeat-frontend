@@ -1,11 +1,10 @@
 import { memo } from 'react';
-import ga4 from 'react-ga4';
 
 import { useRouter } from 'next/navigation';
 
 import { useActionKeyEvent } from '@nf-team/react';
 
-import { GA4_EVENT_ACTION, GA4_EVENT_NAME } from '@/constants/ga4';
+import useActivityLog from '@/hooks/useActivityLog';
 
 import styles from './index.module.scss';
 
@@ -17,12 +16,16 @@ type Props = {
 
 function CountryItem({ emoji, koreanName, code }: Props) {
   const router = useRouter();
+  const { sendEvent } = useActivityLog();
 
   const onClickCountryItem = (countryCode: string) => {
-    ga4.event(GA4_EVENT_NAME.selected_country, {
-      action: GA4_EVENT_ACTION.click,
-      countryCode,
-      countryName: koreanName,
+    sendEvent({
+      action: 'click',
+      name: 'selected_country',
+      value: {
+        countryCode,
+        countryName: koreanName,
+      },
     });
 
     router.push(`/maps?country=${countryCode}`);
