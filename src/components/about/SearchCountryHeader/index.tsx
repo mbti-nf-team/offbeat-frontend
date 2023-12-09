@@ -23,7 +23,7 @@ function SearchCountryHeader({ children }: Props) {
   const { renderToast } = useToastStore(['renderToast']);
 
   const handleClick = () => {
-    ga4.event(GA4_EVENT_NAME.retrieve_current_location, {
+    ga4.event(GA4_EVENT_NAME.bringing_up_the_current_location, {
       action: GA4_EVENT_ACTION.click,
     });
 
@@ -32,7 +32,7 @@ function SearchCountryHeader({ children }: Props) {
 
   useEffect(() => {
     if (location?.error) {
-      ga4.event(GA4_EVENT_NAME.retrieve_current_location, {
+      ga4.event(GA4_EVENT_NAME.bringing_up_the_current_location, {
         action: GA4_EVENT_ACTION.load,
         type: GA4_EVENT_TYPE.error,
         errorMessage: location?.error.message,
@@ -45,7 +45,7 @@ function SearchCountryHeader({ children }: Props) {
 
   useEffect(() => {
     if (location.coordinates?.lat && location.coordinates?.lng) {
-      ga4.event(GA4_EVENT_NAME.retrieve_current_location, {
+      ga4.event(GA4_EVENT_NAME.bringing_up_the_current_location, {
         action: GA4_EVENT_ACTION.load,
         type: GA4_EVENT_TYPE.success,
         latitude: location?.coordinates.lat,

@@ -6,7 +6,7 @@ export const GA4_EVENT_ACTION = {
 
 export const GA4_EVENT_NAME = {
   selected_country: 'selected_country',
-  retrieve_current_location: 'retrieve_current_location',
+  bringing_up_the_current_location: 'bringing_up_the_current_location',
   load_google_map: 'load_google_map',
 } as const;
 
