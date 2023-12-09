@@ -1,12 +1,11 @@
 'use client';
 
 import { ReactNode, useEffect } from 'react';
-import ga4 from 'react-ga4';
 
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/common/Button';
-import { GA4_EVENT_ACTION, GA4_EVENT_NAME, GA4_EVENT_TYPE } from '@/constants/ga4';
+import useActivityLog from '@/hooks/useActivityLog';
 import useGeoLocation from '@/hooks/useGeolocation';
 import { paramsSerializer } from '@/lib/apis';
 import useToastStore from '@/stores/toast';
@@ -20,11 +19,13 @@ type Props = {
 function SearchCountryHeader({ children }: Props) {
   const router = useRouter();
   const [location, onClick] = useGeoLocation();
+  const { sendEvent } = useActivityLog();
   const { renderToast } = useToastStore(['renderToast']);
 
   const handleClick = () => {
-    ga4.event(GA4_EVENT_NAME.bringing_up_the_current_location, {
-      action: GA4_EVENT_ACTION.click,
+    sendEvent({
+      name: 'bringing_up_the_current_location',
+      action: 'click',
     });
 
     onClick();
@@ -32,11 +33,14 @@ function SearchCountryHeader({ children }: Props) {
 
   useEffect(() => {
     if (location?.error) {
-      ga4.event(GA4_EVENT_NAME.bringing_up_the_current_location, {
-        action: GA4_EVENT_ACTION.load,
-        type: GA4_EVENT_TYPE.error,
-        errorMessage: location?.error.message,
-        errorCode: location?.error.code,
+      sendEvent({
+        name: 'bringing_up_the_current_location',
+        action: 'load',
+        type: 'error',
+        value: {
+          errorMessage: location?.error.message,
+          errorCode: location?.error.code,
+        },
       });
 
       renderToast('현재 위치를 불러올 수 없어요.', { type: 'error' });
@@ -45,11 +49,14 @@ function SearchCountryHeader({ children }: Props) {
 
   useEffect(() => {
     if (location.coordinates?.lat && location.coordinates?.lng) {
-      ga4.event(GA4_EVENT_NAME.bringing_up_the_current_location, {
-        action: GA4_EVENT_ACTION.load,
-        type: GA4_EVENT_TYPE.success,
-        latitude: location?.coordinates.lat,
-        longitude: location?.coordinates.lng,
+      sendEvent({
+        name: 'bringing_up_the_current_location',
+        action: 'load',
+        type: 'success',
+        value: {
+          latitude: location?.coordinates.lat,
+          longitude: location?.coordinates.lng,
+        },
       });
 
       router.push(`/maps?${paramsSerializer({

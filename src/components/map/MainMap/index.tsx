@@ -1,13 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import ga4 from 'react-ga4';
 
 import { Language } from '@googlemaps/google-maps-services-js';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 
 import Spinner from '@/components/common/Spinner';
-import { GA4_EVENT_ACTION, GA4_EVENT_NAME, GA4_EVENT_TYPE } from '@/constants/ga4';
+import useActivityLog from '@/hooks/useActivityLog';
 
 import LoadMapContainer from '../LoadMapContainer';
 
@@ -21,6 +20,7 @@ type Props = {
 
 function MainMap({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
   const [libraries] = useState<['places', 'geometry']>(['places', 'geometry']);
+  const { sendEvent } = useActivityLog();
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
@@ -31,18 +31,20 @@ function MainMap({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props)
 
   useEffect(() => {
     if (loadError) {
-      ga4.event(GA4_EVENT_NAME.load_google_map, {
-        action: GA4_EVENT_ACTION.load,
-        type: GA4_EVENT_TYPE.error,
+      sendEvent({
+        name: 'load_google_map',
+        action: 'load',
+        type: 'error',
       });
     }
   }, [loadError]);
 
   useEffect(() => {
     if (isLoaded) {
-      ga4.event(GA4_EVENT_NAME.load_google_map, {
-        action: GA4_EVENT_ACTION.load,
-        type: GA4_EVENT_TYPE.success,
+      sendEvent({
+        name: 'load_google_map',
+        action: 'load',
+        type: 'success',
       });
     }
   }, [isLoaded]);
