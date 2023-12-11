@@ -1,11 +1,16 @@
+import { useRouter, useSearchParams } from 'next/navigation';
+
 import { useIsomorphicLayoutEffect, useUnmount } from '@nf-team/react';
 
 import useGetSearchPlace from '@/hooks/queries/useGetSearchPlace';
+import { paramsSerializer } from '@/lib/apis';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 
 import PlaceDetailWindow from '../PlaceDetailWindow';
 
 function PlaceDetailWindowContainer() {
+  const params = useSearchParams();
+  const router = useRouter();
   const {
     isOpenPlaceDetailWindow, onClosePlaceDetailWindow, placeId,
   } = usePlaceDetailWindowStore(['isOpenPlaceDetailWindow', 'onClosePlaceDetailWindow', 'placeId']);
@@ -13,6 +18,12 @@ function PlaceDetailWindowContainer() {
 
   const onCloseDetailWindow = () => {
     onClosePlaceDetailWindow();
+
+    if (params.has('id')) {
+      router.push(`/maps?${paramsSerializer({
+        country: params.get('country'),
+      })}`);
+    }
   };
 
   useIsomorphicLayoutEffect(() => {

@@ -59,7 +59,7 @@ export async function generateMetadata(
 
     return {
       metadataBase: new URL(process.env.NEXT_PUBLIC_ORIGIN),
-      title,
+      title: placeDetails.result?.name ? `${metadata.title} - ${placeDetails.result?.name}` : metadata.title,
       description,
       openGraph: {
         title,
