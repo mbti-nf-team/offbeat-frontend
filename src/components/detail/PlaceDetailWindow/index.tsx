@@ -17,9 +17,11 @@ import ResultCard from '@/components/common/ResultCard';
 import ReviewCard from '@/components/common/ReviewCard';
 import Spinner from '@/components/common/Spinner';
 import StarRating from '@/components/common/StarRating';
+import useActivityLog from '@/hooks/useActivityLog';
 import useHideOnScroll from '@/hooks/useHideOnScroll';
 import { paramsSerializer } from '@/lib/apis';
 import { CloseIcon, ShareIcon } from '@/lib/assets/icons';
+import { EventName } from '@/lib/types/event';
 import { PlacesWithSearchResult } from '@/lib/types/search';
 import useToastStore from '@/stores/toast';
 import { bottomToUpVariants } from '@/styles/framerVariants';
@@ -39,6 +41,7 @@ type Props = {
 function PlaceDetailWindow({
   isVisible, onClose, placeDetail, isLoading,
 }: Props) {
+  const { sendEvent } = useActivityLog();
   const placeDetailWindowRef = useRef<HTMLDivElement>(null);
 
   const { renderToast } = useToastStore(['renderToast']);
@@ -55,6 +58,14 @@ function PlaceDetailWindow({
   }) => (original_language ? original_language === Language.ko : language === Language.ko)).length;
   const blogCount = checkNumber(placeDetail?.searchBlogPost?.total_count);
 
+  const goToExternalLink = (eventName: EventName) => (url?: string) => sendEvent({
+    name: eventName,
+    action: 'click',
+    value: {
+      url,
+    },
+  });
+
   const onClickShare = useCallback(async () => {
     try {
       const shareUrl = `${process.env.NEXT_PUBLIC_ORIGIN}/maps?${paramsSerializer({
@@ -64,11 +75,33 @@ function PlaceDetailWindow({
 
       await navigator.clipboard.writeText(shareUrl);
 
+      sendEvent({
+        name: 'share_place_detail',
+        action: 'click',
+        type: 'success',
+        value: {
+          url: shareUrl,
+          placeId: placeDetail?.place_id,
+          placeName: placeDetail?.name,
+        },
+      });
+
       renderToast('URL을 복사했습니다.', { type: 'success' });
     } catch (error) {
+      sendEvent({
+        name: 'share_place_detail',
+        action: 'click',
+        type: 'error',
+        value: {
+          error,
+          placeId: placeDetail?.place_id,
+          placeName: placeDetail?.name,
+        },
+      });
+
       renderToast('URL 복사에 실패했습니다.', { type: 'error' });
     }
-  }, [placeDetail?.place_id]);
+  }, [placeDetail?.place_id, placeDetail?.name]);
 
   const displayDetailInfoText = useCallback(() => {
     if (googleReviewCount < 3) {
@@ -192,6 +225,7 @@ function PlaceDetailWindow({
                       }) => (
                         <ResultCard
                           key={title}
+                          onClickCard={goToExternalLink('go_to_naver_blog')}
                           title={title}
                           description={description}
                           url={link}
@@ -214,6 +248,7 @@ function PlaceDetailWindow({
               <Button
                 isExternalLink
                 href={placeDetail?.url}
+                onClick={() => goToExternalLink('go_to_google_map')(placeDetail?.url)}
                 color="highlight"
                 width="calc(100% - 80px)"
               >

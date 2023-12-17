@@ -1,13 +1,29 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import ResultCard from '.';
 
 describe('ResultCard', () => {
+  const handleClick = jest.fn();
   const generateNextImageUrl = (url: string) => `/_next/image?url=%2F${url}&w=256&q=75`;
+  const url = 'test.com';
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
   const renderResultCard = () => render((
-    <ResultCard url="#" description="description" title="title" thumbnail={given.thumbnail} />
+    <ResultCard url={url} description="description" title="title" thumbnail={given.thumbnail} onClickCard={handleClick} />
   ));
+
+  describe('card를 클릭한다', () => {
+    it('url과 함께 클릭이벤트가 발생한다', () => {
+      renderResultCard();
+
+      fireEvent.click(screen.getByTestId('result_card'));
+
+      expect(handleClick).toHaveBeenCalledWith(url);
+    });
+  });
 
   context('썸네일이 존재하지 않는 경우', () => {
     given('thumbnail', () => undefined);

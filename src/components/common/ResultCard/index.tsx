@@ -9,16 +9,19 @@ type Props = {
   title: string;
   description: string;
   thumbnail?: string;
+  onClickCard: (url: string) => void;
 };
 
 function ResultCard({
-  url, description, title, thumbnail,
+  url, description, title, thumbnail, onClickCard,
 }: Props) {
   return (
     <a
       href={url}
       rel="noopener noreferrer"
+      onClick={() => onClickCard(url)}
       target="_blank"
+      data-testid="result_card"
       className={styles.resultCardWrapper}
     >
       <div className={styles.textWrapper}>
