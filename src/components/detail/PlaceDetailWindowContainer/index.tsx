@@ -3,12 +3,14 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useIsomorphicLayoutEffect, useUnmount } from '@nf-team/react';
 
 import useGetSearchPlace from '@/hooks/queries/useGetSearchPlace';
+import useActivityLog from '@/hooks/useActivityLog';
 import { paramsSerializer } from '@/lib/apis';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 
 import PlaceDetailWindow from '../PlaceDetailWindow';
 
 function PlaceDetailWindowContainer() {
+  const { sendEvent } = useActivityLog();
   const params = useSearchParams();
   const router = useRouter();
   const {
@@ -17,6 +19,11 @@ function PlaceDetailWindowContainer() {
   const { data: placesWithSearchResult, isFetching } = useGetSearchPlace({ placeId });
 
   const onCloseDetailWindow = () => {
+    sendEvent({
+      name: 'close_place_detail_window',
+      action: 'click',
+    });
+
     onClosePlaceDetailWindow();
 
     if (params.has('id')) {

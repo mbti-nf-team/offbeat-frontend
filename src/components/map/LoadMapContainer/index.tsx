@@ -11,6 +11,7 @@ import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowCon
 import useCurrentLocationState from '@/hooks/maps/useCurrentLocationState';
 import useRenderCurrentLocationMarker from '@/hooks/maps/useRenderCurrentLocationMarker';
 import useGetSearchPlaces from '@/hooks/queries/useGetSearchPlaces';
+import useActivityLog from '@/hooks/useActivityLog';
 import { LatLngLiteral } from '@/lib/types/google.maps';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
@@ -31,6 +32,7 @@ type Props = {
 
 function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
   const map = useGoogleMap();
+  const { sendEvent } = useActivityLog();
   const {
     searchKeyword, setSearchForm, lat, lng, radius: searchRadius,
   } = useSearchFormStore(['searchKeyword', 'setSearchForm', 'lat', 'lng', 'radius']);
@@ -57,16 +59,30 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
     keyword: searchKeyword, lat, lng, radius: searchRadius,
   });
 
-  const handleSubmit = useCallback((keyword: string) => {
+  const handleSubmit = useCallback((actionType: 'search_here' | 'input') => (keyword: string) => {
     const zoom = map?.getZoom() || 8;
 
-    setSelectedPlaceId(undefined);
-    setSearchForm({
+    const form = {
       searchKeyword: keyword,
       lat: centerLatitude,
       lng: centerLongitude,
       radius: ZOOM_LEVEL_TO_METER[zoom] || 50000,
+    };
+
+    sendEvent({
+      name: 'search_places',
+      action: 'submit',
+      value: {
+        keyword,
+        latitude: form.lat,
+        longitude: form.lng,
+        radius: form.radius,
+        actionType,
+      },
     });
+
+    setSelectedPlaceId(undefined);
+    setSearchForm(form);
     saveNextKeyword(keyword);
   }, [centerLatitude, centerLongitude, map]);
 
@@ -89,6 +105,14 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
 
   useEffect(() => {
     if (defaultPlaceId && map) {
+      sendEvent({
+        name: 'open_place_detail_window_via_shared_link',
+        action: 'load',
+        value: {
+          placeId: defaultPlaceId,
+        },
+      });
+
       onOpenPlaceDetailWindow({
         placeId: defaultPlaceId,
       });
@@ -144,13 +168,13 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
   return (
     <>
       <SearchInput
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit('input')}
         selectedPlaceId={selectedPlaceId}
         onClearSelectedPlace={() => setSelectedPlaceId(undefined)}
       />
       {searchKeyword && !isCenterChange() && (
         <div className={styles.searchButtonWrapper}>
-          <Button size="small" isFloating onClick={() => handleSubmit(searchKeyword)}>
+          <Button size="small" isFloating onClick={() => handleSubmit('search_here')(searchKeyword)}>
             여기서 검색
           </Button>
         </div>
