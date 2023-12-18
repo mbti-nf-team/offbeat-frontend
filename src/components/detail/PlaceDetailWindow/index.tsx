@@ -174,10 +174,10 @@ function PlaceDetailWindow({
                       <Image
                         width={382}
                         height={382}
-                        quality={100}
                         className={styles.placeImage}
                         src={placeDetail.thumbnail}
                         alt={placeDetail?.name}
+                        priority
                       />
                     </div>
                   )}
