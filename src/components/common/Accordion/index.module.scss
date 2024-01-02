@@ -1,4 +1,4 @@
-@import "/src/styles/main.scss";
+@import "/src/styles/main";
 
 .accordionWrapper {
   border-bottom: 1px solid color("black/default");
@@ -25,21 +25,18 @@
     &::after {
       content: " ";
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      inset: 0;
       overflow: hidden;
       opacity: 0;
     }
 
-    &:not(.zeroResult):active:after {
+    &:not(.zeroResult):active::after {
       background-color: color("black/default");
       opacity: 0.08;
     }
 
     @media (hover: hover) and (pointer: fine) {
-      &:not(.zeroResult):hover:after {
+      &:not(.zeroResult):hover::after {
         background-color: color("black/default");
         opacity: 0.04;
       }

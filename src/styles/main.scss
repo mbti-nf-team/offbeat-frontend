@@ -1,3 +1,5 @@
-@import "./mixin/text.scss";
-@import "./mixin/functions.scss";
-@import "./transition.scss";
+@use 'sass:list';
+@use 'sass:string';
+@import "./mixin/text";
+@import "./mixin/functions";
+@import "./transition";

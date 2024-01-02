@@ -1,4 +1,4 @@
-@import "/src/styles/main.scss";
+@import "/src/styles/main";
 
 .layoutWrapper {
   max-width: 100%;
@@ -39,7 +39,7 @@
     border-right: 1px solid #d2c6c6;
   }
 
-  @media (max-width: 430px) {
+  @media (width <= 430px) {
     width: 100%;
     max-width: initial;
 

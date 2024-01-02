@@ -1,5 +1,5 @@
-@import "./_variables.scss";
-@import "./mixin/text.scss";
+@import "./variables";
+@import "./mixin/text";
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -16,7 +16,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0px;
+  margin: 0;
 }
 
 div,

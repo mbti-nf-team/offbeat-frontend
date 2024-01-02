@@ -1,7 +1,8 @@
-@import "/src/styles/main.scss";
+@import "/src/styles/main";
 
 .emptySearchTerm {
   @include text("title 1/600");
+
   cursor: pointer;
   flex-direction: row;
   display: flex;
@@ -30,11 +31,13 @@
 
   & > strong {
     @include text("title 1/600");
+
     text-align: left;
   }
 
   & > p {
     @include text("title 1/500");
+
     min-width: fit-content;
     margin: 0;
   }
