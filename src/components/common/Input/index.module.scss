@@ -1,4 +1,4 @@
-@import "/src/styles/main.scss";
+@import "/src/styles/main";
 
 .inputWrapper {
   display: flex;
@@ -43,7 +43,7 @@
     }
 
     &.visibleShadow {
-      box-shadow: 0px 4px 0px rgba(19, 17, 24, 0.16);
+      box-shadow: 0 4px 0 rgb(19 17 24 / 16%);
     }
 
     &::placeholder {
@@ -62,10 +62,6 @@
   }
 
   ::selection {
-    background: color("active/secondary");
-  }
-
-  ::-moz-selection {
     background: color("active/secondary");
   }
 }

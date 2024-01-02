@@ -1,6 +1,6 @@
 /* neutral */
 $black: #131118;
-$white: #ffffff;
+$white: #fff;
 $gray: #6c6d73;
 
 /* functional */
@@ -37,6 +37,7 @@ $opacity-002: 0.02;
 $opacity-000: 0;
 
 :root {
+  /* color */
   --black-default: #{rgba($black, $opacity-100)};
   --black-disabled: #{rgba($black, $opacity-048)};
   --black-placeholder: #{rgba($black, $opacity-024)};
@@ -47,7 +48,6 @@ $opacity-000: 0;
   --black-secondary: #{rgba($black, $opacity-040)};
   --black-tertiary: #{rgba($black, $opacity-016)};
   --black-bg: #{rgba($black, $opacity-004)};
-
   --gray-default: #{rgba($gray, $opacity-100)};
   --gray-disabled: #{rgba($gray, $opacity-048)};
   --gray-placeholder: #{rgba($gray, $opacity-024)};
@@ -58,7 +58,6 @@ $opacity-000: 0;
   --gray-secondary: #{rgba($gray, $opacity-040)};
   --gray-tertiary: #{rgba($gray, $opacity-016)};
   --gray-bg: #{rgba($gray, $opacity-004)};
-
   --white-default: #{rgba($white, $opacity-100)};
   --white-disabled: #{rgba($white, $opacity-048)};
   --white-placeholder: #{rgba($white, $opacity-024)};
@@ -69,7 +68,6 @@ $opacity-000: 0;
   --white-secondary: #{rgba($white, $opacity-040)};
   --white-tertiary: #{rgba($white, $opacity-016)};
   --white-bg: #{rgba($white, $opacity-004)};
-
   --highlight-default: #{rgba($highlight, $opacity-100)};
   --highlight-disabled: #{rgba($highlight, $opacity-048)};
   --highlight-placeholder: #{rgba($highlight, $opacity-024)};
@@ -80,7 +78,6 @@ $opacity-000: 0;
   --highlight-secondary: #{rgba($highlight, $opacity-040)};
   --highlight-tertiary: #{rgba($highlight, $opacity-016)};
   --highlight-bg: #{rgba($highlight, $opacity-004)};
-
   --danger-default: #{rgba($danger, $opacity-100)};
   --danger-disabled: #{rgba($danger, $opacity-048)};
   --danger-placeholder: #{rgba($danger, $opacity-024)};
@@ -91,7 +88,6 @@ $opacity-000: 0;
   --danger-secondary: #{rgba($danger, $opacity-040)};
   --danger-tertiary: #{rgba($danger, $opacity-016)};
   --danger-bg: #{rgba($danger, $opacity-004)};
-
   --positive-default: #{rgba($positive, $opacity-100)};
   --positive-disabled: #{rgba($positive, $opacity-048)};
   --positive-placeholder: #{rgba($positive, $opacity-024)};
@@ -102,7 +98,6 @@ $opacity-000: 0;
   --positive-secondary: #{rgba($positive, $opacity-040)};
   --positive-tertiary: #{rgba($positive, $opacity-016)};
   --positive-bg: #{rgba($positive, $opacity-004)};
-
   --done-default: #{rgba($done, $opacity-100)};
   --done-disabled: #{rgba($done, $opacity-048)};
   --done-placeholder: #{rgba($done, $opacity-024)};
@@ -113,7 +108,6 @@ $opacity-000: 0;
   --done-secondary: #{rgba($done, $opacity-040)};
   --done-tertiary: #{rgba($done, $opacity-016)};
   --done-bg: #{rgba($done, $opacity-004)};
-
   --active-default: #{rgba($active, $opacity-100)};
   --active-disabled: #{rgba($active, $opacity-048)};
   --active-placeholder: #{rgba($active, $opacity-024)};
@@ -124,7 +118,6 @@ $opacity-000: 0;
   --active-secondary: #{rgba($active, $opacity-040)};
   --active-tertiary: #{rgba($active, $opacity-016)};
   --active-bg: #{rgba($active, $opacity-004)};
-
   --attention-default: #{rgba($attention, $opacity-100)};
   --attention-disabled: #{rgba($attention, $opacity-048)};
   --attention-placeholder: #{rgba($attention, $opacity-024)};
@@ -135,7 +128,6 @@ $opacity-000: 0;
   --attention-secondary: #{rgba($attention, $opacity-040)};
   --attention-tertiary: #{rgba($attention, $opacity-016)};
   --attention-bg: #{rgba($attention, $opacity-004)};
-
   --relate-default: #{rgba($relate, $opacity-100)};
   --relate-disabled: #{rgba($relate, $opacity-048)};
   --relate-placeholder: #{rgba($relate, $opacity-024)};
@@ -146,9 +138,8 @@ $opacity-000: 0;
   --relate-secondary: #{rgba($relate, $opacity-040)};
   --relate-tertiary: #{rgba($relate, $opacity-016)};
   --relate-bg: #{rgba($relate, $opacity-004)};
-}
 
-:root {
+  /* font */
   --font-weight-bold: bold;
   --font-weight-semibold: 600;
   --font-weight-medium: 500;
@@ -169,9 +160,8 @@ $opacity-000: 0;
   --title-3-line-height: 24px;
   --body-1-font-size: 16px;
   --body-1-line-height: 20px;
-}
 
-:root {
+  /* NOTE - zIndex */
   --toast-z-index: 99;
   --place-detail-window-z-index: 15;
   --search-input-z-index: 10;
@@ -181,12 +171,11 @@ $opacity-000: 0;
   --detail-window-header-z-index: 2;
   --detail-window-title-z-index: 1;
   --detail-window-google-link-button-z-index: 1;
-}
 
-:root {
+  /* rsbs */
   --rsbs-backdrop-bg: transparent;
   --rsbs-bg: #fff;
-  --rsbs-handle-bg: hsla(0, 0%, 0%, 0.14);
+  --rsbs-handle-bg: hsl(0deg 0% 0% / 14%);
   --rsbs-max-w: 430px;
   --rsbs-ml: env(safe-area-inset-left);
   --rsbs-mr: env(safe-area-inset-right);

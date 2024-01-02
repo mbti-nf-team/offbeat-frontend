@@ -1,4 +1,4 @@
-@import "./functions.scss";
+@import "./functions";
 
 @mixin text($text, $color-code: "") {
   $list: str-split($text, "/");
@@ -6,8 +6,8 @@
   $font: "";
 
   @if length($list) == 2 {
-    $font: nth($list, 1);
-    $weight: nth($list, 2);
+    $font: list.nth($list, 1);
+    $weight: list.nth($list, 2);
   }
 
   @if $font == "display" {

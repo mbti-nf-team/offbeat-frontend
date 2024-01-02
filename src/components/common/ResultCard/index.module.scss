@@ -1,4 +1,4 @@
-@import "/src/styles/main.scss";
+@import "/src/styles/main";
 
 .resultCardWrapper {
   position: relative;
@@ -12,36 +12,33 @@
   gap: 24px;
   background-color: color("white/default");
   border: 1px solid color("black/default");
-  box-shadow: 0px 4px 0px rgba(19, 17, 24, 0.1);
+  box-shadow: 0 4px 0 rgb(19 17 24 / 10%);
   border-radius: 12px;
 
   &::after {
     content: " ";
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     overflow: hidden;
     opacity: 0;
     border-radius: 12px;
   }
 
-  &:active:after {
+  &:active::after {
     background-color: color("black/default");
     opacity: 0.08;
   }
 
   @media (hover: hover) and (pointer: fine) {
-    &:hover:after {
+    &:hover::after {
       background-color: color("black/default");
       opacity: 0.04;
     }
   }
 
   &:active {
-    transform: translate(0px, 4px);
-    box-shadow: 0px 4px 0px color("transparent");
+    transform: translate(0, 4px);
+    box-shadow: 0 4px 0 color("transparent");
   }
 
   .textWrapper {
