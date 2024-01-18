@@ -1,10 +1,12 @@
 'use client';
 
-import { memo, PropsWithChildren, useState } from 'react';
+import {
+  memo, PropsWithChildren, useRef, useState,
+} from 'react';
 
 import { useActionKeyEvent } from '@nf-team/react';
 import clsx from 'clsx';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { ChevronRightIcon } from '@/lib/assets/icons';
 import { numberWithComma } from '@/utils';
@@ -18,28 +20,12 @@ type Props = {
   wrapperClassName?: string;
 };
 
-const accordionVariants: Variants = {
-  none: {
-    opacity: 0,
-    transform: 'translateY(-100%)',
-    height: '0px',
-    overflow: 'hidden',
-    transitionEnd: {
-      visibility: 'hidden',
-    },
-  },
-  visible: {
-    opacity: 1,
-    transform: 'translateY(0px)',
-    visibility: 'visible',
-    height: 'auto',
-  },
-};
-
 function Accordion({
   title, counter, counterColor = 'positive', wrapperClassName, children,
 }: PropsWithChildren<Props>) {
+  const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const toggleOpen = () => {
     if (counter) {
       setIsOpen(!isOpen);
@@ -52,12 +38,12 @@ function Accordion({
     <div className={clsx(styles.accordionWrapper, wrapperClassName)}>
       <motion.div
         layout
-        className={clsx(styles.accordionHeader, !counter && styles.zeroResult)}
-        onClick={toggleOpen}
+        ref={ref}
         tabIndex={0}
         role="menuitem"
+        onClick={toggleOpen}
         onKeyDown={onKeyDown}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className={clsx(styles.accordionHeader, !counter && styles.zeroResult)}
       >
         <ChevronRightIcon
           className={clsx(
@@ -66,24 +52,31 @@ function Accordion({
             !counter && styles.zeroResult,
           )}
         />
-        <div className={styles.title}>
+        <div
+          className={styles.title}
+        >
           {title}
         </div>
         <div className={clsx(styles.counter, [styles[counterColor]])}>
           {numberWithComma(counter)}
         </div>
       </motion.div>
-      <AnimatePresence>
-        <motion.div
-          layout
-          animate={isOpen ? 'visible' : 'none'}
-          initial="none"
-          exit={{ height: 0, opacity: 0, visibility: 'hidden' }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          variants={accordionVariants}
-        >
-          {children}
-        </motion.div>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            onAnimationComplete={(definition: { height: 'auto' | number; }) => {
+              if (definition.height === 'auto') {
+                ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
+            animate={{ height: 'auto' }}
+            initial={{ height: 0 }}
+            exit={{ height: 0 }}
+            transition={{ type: 'spring', duration: 0.8, bounce: 0 }}
+          >
+            {children}
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );
