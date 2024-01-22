@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 import { Language } from '@googlemaps/google-maps-services-js';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
@@ -8,17 +8,9 @@ import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import Spinner from '@/components/common/Spinner';
 import useActivityLog from '@/hooks/useActivityLog';
 
-import LoadMapContainer from '../LoadMapContainer';
+import styles from './template.module.scss';
 
-import styles from './index.module.scss';
-
-type Props = {
-  defaultCountryCode?: string;
-  defaultPlaceId?: string;
-  defaultLocation: { lng?: string; lat?: string; }
-};
-
-function MainMap({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
+function Template({ children }: PropsWithChildren) {
   const [libraries] = useState<['places', 'geometry']>(['places', 'geometry']);
   const { sendEvent } = useActivityLog();
 
@@ -81,13 +73,9 @@ function MainMap({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props)
 
       }}
     >
-      <LoadMapContainer
-        defaultCountryCode={defaultCountryCode}
-        defaultPlaceId={defaultPlaceId}
-        defaultLocation={defaultLocation}
-      />
+      {children}
     </GoogleMap>
   );
 }
 
-export default MainMap;
+export default Template;

@@ -3,7 +3,7 @@ import { Metadata, ResolvingMetadata } from 'next';
 import { Language, Status } from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 
-import MainMap from '@/components/map/MainMap';
+import MapContainer from '@/components/map/MapContainer';
 import { paramsSerializer } from '@/lib/apis';
 
 import { getGooglePlaceDetails, getPlacePhotoUrl } from '../api/handler';
@@ -83,7 +83,7 @@ export async function generateMetadata(
 
 function Page({ searchParams }: Props) {
   return (
-    <MainMap
+    <MapContainer
       defaultCountryCode={searchParams?.country}
       defaultPlaceId={searchParams?.id}
       defaultLocation={{
