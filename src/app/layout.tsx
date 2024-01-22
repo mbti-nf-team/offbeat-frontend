@@ -6,7 +6,7 @@ import Script from 'next/script';
 import Layout from '@/components/common/Layout';
 import Toast from '@/components/common/Toast';
 
-import pretendardFont from './fonts';
+import pretendardFont from './_fonts';
 import Providers from './providers';
 
 import 'src/styles/normalize.css';

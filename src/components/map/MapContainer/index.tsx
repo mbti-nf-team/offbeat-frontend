@@ -1,3 +1,5 @@
+'use client';
+
 import {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
@@ -30,7 +32,7 @@ type Props = {
   defaultLocation: { lng?: string; lat?: string; }
 };
 
-function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
+function MapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
   const map = useGoogleMap();
   const { sendEvent } = useActivityLog();
   const {
@@ -201,4 +203,4 @@ function LoadMapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation 
   );
 }
 
-export default LoadMapContainer;
+export default MapContainer;
