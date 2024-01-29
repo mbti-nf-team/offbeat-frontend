@@ -89,22 +89,20 @@
       padding: 16px;
     }
 
-    .header {
-      position: relative;
+
+    .headerButtonWrapper {
+      position: sticky;
+      top: 0;
+      display: inline-block;
       z-index: var(--detail-window-header-z-index);
-      height: 40px;
-      width: 100%;
 
-      .headerContentsWrapper {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        position: fixed;
-        top: 0;
-        padding: 0 16px;
-        max-width: 430px;
-
+      &.closeButtonWrapper {
+        left: 16px;
+      }
+  
+      &.shareButtonWrapper {
+        left: calc(100% - 56px);
+  
         .shareIcon {
           path {
             fill: color("black/tertiary");

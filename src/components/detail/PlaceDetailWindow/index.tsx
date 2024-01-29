@@ -137,28 +137,32 @@ function PlaceDetailWindow({
             onScroll={onScroll}
             className={styles.placeDetailContentsWrapper}
           >
-            <div className={styles.header}>
-              <div className={styles.headerContentsWrapper}>
-                <Button
-                  type="button"
-                  color="ghost"
-                  size="medium"
-                  onClick={onClose}
-                  hasPseudoSelectorStyle={false}
-                  onlyIcon={<CloseIcon />}
-                />
-                <Button
-                  type="button"
-                  color="ghost"
-                  size="medium"
-                  onClick={onClickShare}
-                  hasPseudoSelectorStyle={false}
-                  disabled={isLoading || !placeDetail}
-                  onlyIcon={
-                    <ShareIcon className={clsx((isLoading || !placeDetail) && styles.shareIcon)} />
+            <div
+              className={clsx(styles.headerButtonWrapper, styles.closeButtonWrapper)}
+            >
+              <Button
+                type="button"
+                color="ghost"
+                size="medium"
+                onClick={onClose}
+                hasPseudoSelectorStyle={false}
+                onlyIcon={<CloseIcon />}
+              />
+            </div>
+            <div
+              className={clsx(styles.headerButtonWrapper, styles.shareButtonWrapper)}
+            >
+              <Button
+                type="button"
+                color="ghost"
+                size="medium"
+                onClick={onClickShare}
+                hasPseudoSelectorStyle={false}
+                disabled={isLoading || !placeDetail}
+                onlyIcon={
+                  <ShareIcon className={clsx((isLoading || !placeDetail) && styles.shareIcon)} />
                   }
-                />
-              </div>
+              />
             </div>
             <div
               className={clsx(styles.placeDetailBody, {
