@@ -1,12 +1,11 @@
 'use client';
 
 import {
-  memo, PropsWithChildren, useRef, useState,
+  memo, PropsWithChildren, useEffect, useRef, useState,
 } from 'react';
 
 import { useActionKeyEvent } from '@nf-team/react';
 import clsx from 'clsx';
-import { AnimatePresence, motion } from 'framer-motion';
 
 import { ChevronRightIcon } from '@/lib/assets/icons';
 import { numberWithComma } from '@/utils';
@@ -34,11 +33,15 @@ function Accordion({
 
   const onKeyDown = useActionKeyEvent<HTMLDivElement>(['Enter', 'NumpadEnter'], toggleOpen);
 
+  useEffect(() => {
+    if (isOpen) {
+      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [isOpen]);
+
   return (
-    <div className={clsx(styles.accordionWrapper, wrapperClassName)}>
-      <motion.div
-        layout
-        ref={ref}
+    <div ref={ref} className={clsx(styles.accordionWrapper, wrapperClassName)}>
+      <div
         tabIndex={0}
         role="menuitem"
         onClick={toggleOpen}
@@ -60,24 +63,12 @@ function Accordion({
         <div className={clsx(styles.counter, [styles[counterColor]])}>
           {numberWithComma(counter)}
         </div>
-      </motion.div>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            onAnimationComplete={(definition: { height: 'auto' | number; }) => {
-              if (definition.height === 'auto') {
-                ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            }}
-            animate={{ height: 'auto' }}
-            initial={{ height: 0 }}
-            exit={{ height: 0 }}
-            transition={{ type: 'spring', duration: 0.8, bounce: 0 }}
-          >
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      </div>
+      {isOpen && (
+        <div>
+          {children}
+        </div>
+      )}
     </div>
   );
 }
