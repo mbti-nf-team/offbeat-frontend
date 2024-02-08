@@ -3,7 +3,7 @@ import { Status } from '@googlemaps/google-maps-services-js';
 import FIXTURE_NAVER_SEARCH_BLOG from '@/mocks/fixtures/searchBlog';
 import FIXTURE_SEARCH_PLACE from '@/mocks/fixtures/searchPlace';
 
-import { api, paramsSerializer } from '..';
+import api from '..';
 
 import { NearbySearchPlacesRequest, SearchPlaceResponse, SearchPlacesResponse } from './model';
 import { fetchNearbySearchPlaces, fetchPlaceDetail, fetchSearchPlaces } from '.';
@@ -49,8 +49,7 @@ describe('search API', () => {
           query: keyword,
         },
         url: '/search/places',
-        paramsSerializer,
-        isBFF: true,
+        type: 'bff',
       });
     });
   });
@@ -90,8 +89,7 @@ describe('search API', () => {
         method: 'GET',
         params: requestForm,
         url: '/search/nearby/places',
-        paramsSerializer,
-        isBFF: true,
+        type: 'bff',
       });
     });
   });
@@ -126,8 +124,7 @@ describe('search API', () => {
           'session-token': sessionToken,
         },
         url: `/search/places/${placeId}`,
-        paramsSerializer,
-        isBFF: true,
+        type: 'bff',
       });
     });
   });

@@ -1,4 +1,4 @@
-import { api, paramsSerializer } from '..';
+import api from '..';
 
 import {
   NearbySearchPlacesRequest,
@@ -20,8 +20,7 @@ export const fetchSearchPlaces = async ({
       lng,
       radius,
     },
-    paramsSerializer,
-    isBFF: true,
+    type: 'bff',
   });
 
   return response;
@@ -32,8 +31,7 @@ export const fetchNearbySearchPlaces = async (params: NearbySearchPlacesRequest)
     method: 'GET',
     url: '/search/nearby/places',
     params,
-    paramsSerializer,
-    isBFF: true,
+    type: 'bff',
   });
 
   return response;
@@ -48,8 +46,7 @@ export const fetchPlaceDetail = async ({
     headers: {
       'session-token': sessionToken,
     },
-    paramsSerializer,
-    isBFF: true,
+    type: 'bff',
   });
 
   return response;
