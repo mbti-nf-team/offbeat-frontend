@@ -1,40 +1,62 @@
-import axios from 'axios';
 import qs from 'qs';
 
-import { RequestConfig } from '@/lib/types/api';
+import { FetchRequest, UrlPrefixType } from '../types/api';
+
+export class FetchError extends Error {
+  constructor(
+    response: Response,
+    errorMessage = '',
+  ) {
+    super();
+    this.response = response;
+    this.message = errorMessage;
+  }
+
+  response?: Response;
+}
 
 export const paramsSerializer = <T>(params: T): string => qs.stringify(params, {
   arrayFormat: 'comma',
   indices: false,
 });
 
-export const getUrl = (url: string, isBFF = false) => {
-  if (isBFF) {
+export const getUrl = (url: string, type: UrlPrefixType) => {
+  if (type === 'bff') {
     return `/api${url}`;
+  }
+
+  if (type === 'google') {
+    return `${process.env.GOOGLE_MAP_API_ORIGIN}${url}`;
   }
 
   return `${process.env.NEXT_PUBLIC_API_HOST}${url}`;
 };
 
-export async function api<T>(config: RequestConfig): Promise<T> {
-  const headers: RequestConfig['headers'] = {
-    ...config.headers,
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  };
+async function api<T, K = any>({
+  url, params, config = {}, headers, type = 'public', method = 'GET',
+}: FetchRequest<K>): Promise<T> {
+  const defaultHeader = type === 'public' ? { 'nfteam-api-token': process.env.API_HEADER_TOKEN } : undefined;
+  const googleKey = type === 'google' ? { key: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY } : undefined;
 
-  const isExternal = config.url.indexOf('://') > -1 || config.url.indexOf('//') > -1;
+  const response = await fetch(`${getUrl(url, type)}?${paramsSerializer({
+    ...params,
+    ...googleKey,
+  })}`, {
+    ...config,
+    headers: {
+      ...defaultHeader,
+      ...headers,
+    },
+    method,
+  });
 
-  if (isExternal) {
-    throw new Error('External url is injected');
+  if (!response.ok) {
+    throw new FetchError(response, response.statusText);
   }
 
-  const { data } = await axios({
-    ...config,
-    headers,
-    url: getUrl(config.url, config.isBFF),
-    paramsSerializer,
-  });
+  const data = await response.json() as Promise<T>;
 
   return data;
 }
+
+export default api;

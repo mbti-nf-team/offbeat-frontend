@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Language } from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 
+import { FetchError } from '@/lib/apis';
 import { filteredPlaces } from '@/utils';
 
-import { FetchError } from '../..';
 import { fetchAllSettledSearchNaverBlogs, getGoogleTextSearch } from '../../handler';
 
 export const runtime = 'edge';

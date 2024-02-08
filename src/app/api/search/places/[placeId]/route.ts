@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { Language, PlaceDetailsResponseData } from '@googlemaps/google-maps-services-js';
 
-import { FetchError } from '@/app/api';
 import { fetchNaverSearchBlog, getGooglePlaceDetails, getPlacePhotoUrl } from '@/app/api/handler';
+import { FetchError } from '@/lib/apis';
 import { PlaceDetail } from '@/lib/types/google.maps';
 
 export const runtime = 'edge';

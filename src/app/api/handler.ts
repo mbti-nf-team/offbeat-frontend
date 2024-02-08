@@ -1,6 +1,6 @@
 import { PlaceDetailsResponseData, PlacesNearbyResponseData, TextSearchResponseData } from '@googlemaps/google-maps-services-js';
 
-import { paramsSerializer } from '@/lib/apis';
+import api, { paramsSerializer } from '@/lib/apis';
 
 import {
   NaverSearchBlogResponse,
@@ -8,7 +8,6 @@ import {
   PlaceDetailsRequestParams,
   TextSearchRequestParams,
 } from './model';
-import api from '.';
 
 const BATCH_SIZE = 10;
 const DELAY = 1000;
@@ -65,10 +64,8 @@ export const fetchAllSettledSearchNaverBlogs = async ({
 export const getGoogleTextSearch = async (params: TextSearchRequestParams) => {
   const response = await api<TextSearchResponseData>({
     url: '/place/textsearch/json',
-    urlPrefixType: 'google',
-    config: {
-      method: 'GET',
-    },
+    type: 'google',
+    method: 'GET',
     params,
   });
 
@@ -78,10 +75,8 @@ export const getGoogleTextSearch = async (params: TextSearchRequestParams) => {
 export const getGoogleNearbySearch = async (params: NearbySearchRequestParams) => {
   const response = await api<PlacesNearbyResponseData>({
     url: '/place/nearbysearch/json',
-    urlPrefixType: 'google',
-    config: {
-      method: 'GET',
-    },
+    type: 'google',
+    method: 'GET',
     params,
   });
 
@@ -91,9 +86,9 @@ export const getGoogleNearbySearch = async (params: NearbySearchRequestParams) =
 export const getGooglePlaceDetails = async (params: PlaceDetailsRequestParams) => {
   const response = await api<PlaceDetailsResponseData>({
     url: '/place/details/json',
-    urlPrefixType: 'google',
+    type: 'google',
+    method: 'GET',
     config: {
-      method: 'GET',
       next: {
         revalidate: TEN_MINUTES,
       },

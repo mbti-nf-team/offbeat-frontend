@@ -1,3 +1,5 @@
-export const api = jest.fn();
+const api = jest.fn();
 
 export const paramsSerializer = jest.fn();
+
+export default api;
