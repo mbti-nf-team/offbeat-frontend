@@ -24,7 +24,7 @@ function useRenderCurrentLocationMarker({ lat, lng }: LatLng) {
     const position = new google.maps.LatLng({ lat: latitude, lng: longitude });
 
     currentLocationMarker.setIcon({
-      url: '/images/current-location-marker.png',
+      url: '/assets/images/current-location-marker.png',
       size: new google.maps.Size(32, 32),
       scaledSize: new google.maps.Size(32, 32),
       anchor: new google.maps.Point(16, 32),
