@@ -54,7 +54,7 @@ function SearchCountry({ countries }: Props) {
         <div className={styles.logoWrapper}>
           <motion.img
             alt="logo"
-            src="/offbeat_logo_draft.png"
+            src="/assets/logos/offbeat_logo_draft.png"
             variants={logoVariants}
             initial="blur"
             animate={isFocused ? 'focus' : 'blur'}

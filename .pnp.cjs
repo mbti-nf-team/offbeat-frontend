@@ -81,6 +81,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:29.7.0"],\
           ["jest-plugin-context", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.9.0"],\
           ["jest-transformer-svg", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.0.1"],\
+          ["jwt-decode", "npm:4.0.0"],\
           ["lint-staged", "npm:13.3.0"],\
           ["next", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:14.1.0"],\
           ["qs", "npm:6.11.2"],\
@@ -17164,6 +17165,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["jwt-decode", [\
+      ["npm:4.0.0", {\
+        "packageLocation": "./.yarn/cache/jwt-decode-npm-4.0.0-4cd8e89909-87b569e4a9.zip/node_modules/jwt-decode/",\
+        "packageDependencies": [\
+          ["jwt-decode", "npm:4.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["kdbush", [\
       ["npm:4.0.2", {\
         "packageLocation": "./.yarn/cache/kdbush-npm-4.0.2-e4894ed9f4-ca1f7a106c.zip/node_modules/kdbush/",\
@@ -18824,6 +18834,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:29.7.0"],\
           ["jest-plugin-context", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.9.0"],\
           ["jest-transformer-svg", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.0.1"],\
+          ["jwt-decode", "npm:4.0.0"],\
           ["lint-staged", "npm:13.3.0"],\
           ["next", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:14.1.0"],\
           ["qs", "npm:6.11.2"],\

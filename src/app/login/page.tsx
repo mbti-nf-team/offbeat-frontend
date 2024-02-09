@@ -1,6 +1,12 @@
-function Page() {
+import LoginPage from '@/components/auth/LoginPage';
+
+type Props = {
+  searchParams: { [key: string]: string | undefined; };
+};
+
+async function Page({ searchParams }: Props) {
   return (
-    <div>page</div>
+    <LoginPage code={searchParams?.code} state={searchParams?.state} />
   );
 }
 

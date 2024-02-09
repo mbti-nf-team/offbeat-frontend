@@ -17,12 +17,12 @@ export const metadata = {
     title,
     description,
     url: process.env.NEXT_PUBLIC_ORIGIN,
-    images: ['./sns_share_thumbnail.png'],
+    images: ['./assets/logos/sns_share_thumbnail.png'],
   },
   twitter: {
     description,
     title,
-    images: ['./sns_share_thumbnail.png'],
+    images: ['./assets/logos/sns_share_thumbnail.png'],
   },
 };
 

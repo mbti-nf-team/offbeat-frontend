@@ -22,7 +22,7 @@ function PlaceResultMarker({ place, selectedPlaceId, onClickMarker }: Props) {
 
   const icon = useMemo(() => {
     const size = isSelectedPlace ? new google.maps.Size(34, 40) : new google.maps.Size(22, 26);
-    const url = isSelectedPlace ? '/images/selected-marker.png' : '/images/default-marker.png';
+    const url = isSelectedPlace ? '/assets/images/selected-marker.png' : '/assets/images/default-marker.png';
     const anchor = isSelectedPlace ? new google.maps.Point(17, 40) : new google.maps.Point(11, 26);
 
     return {
