@@ -5,7 +5,7 @@ import { useEffectOnce } from '@nf-team/react';
 import useAuthKakaoTokenMutation from '@/hooks/mutations/useAuthKakaoTokenMutation';
 import useAuthorizeMutation from '@/hooks/mutations/useAuthorizeMutation';
 
-import Button from '../common/Button';
+import Button from '../../common/Button';
 
 type Props = {
   code?: string;

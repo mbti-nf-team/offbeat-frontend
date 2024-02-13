@@ -1,0 +1,57 @@
+@import "/src/styles/main";
+
+.menuWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 8px 24px 80px;
+  height: 100%;
+
+  .loginMenu {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    padding: 8px 0;
+    align-items: center;
+    border: none;
+    background-color: color("white/primary");
+
+    .profile {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+      flex: 1 0 0;
+
+      .name {
+        @include text("title 1/600", "black/default");
+      }
+    }
+
+    .icon {
+      display: flex;
+      padding: 8px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  .contents {
+    display: flex;
+    padding: 64px 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    background-color: color('black/bg');
+  }
+
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4px;
+
+    @include text('body 1/500', 'black/secondary');
+  }
+}
