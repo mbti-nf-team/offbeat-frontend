@@ -70,7 +70,6 @@ function Template({ children }: PropsWithChildren) {
             north: 83.8, south: -57, west: -180, east: 180,
           },
         },
-
       }}
     >
       {children}

@@ -1,4 +1,3 @@
-import { Route } from 'next';
 import { useRouter } from 'next/navigation';
 
 import { useMutation } from '@tanstack/react-query';
@@ -18,7 +17,11 @@ function useAuthKakaoTokenMutation() {
         type: 'success',
       });
 
-      router.replace('/' as Route);
+      const params = sessionStorage.getItem('params');
+
+      router.replace(params ? `/maps?${params}` : '/maps');
+
+      sessionStorage.removeItem('params');
     },
     onError: () => {
       renderToast('로그인에 실패했어요.', {
