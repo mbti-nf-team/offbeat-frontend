@@ -8,6 +8,7 @@ import { Status } from '@googlemaps/google-maps-services-js';
 import { checkEmpty, checkNumber, isEmpty } from '@nf-team/core';
 import { useGoogleMap } from '@react-google-maps/api';
 
+import UserMenuBottomSheet from '@/components/bottomSheet/UserMenu';
 import Button from '@/components/common/Button';
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
 import useCurrentLocationState from '@/hooks/maps/useCurrentLocationState';
@@ -34,6 +35,7 @@ type Props = {
 
 function MapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
   const map = useGoogleMap();
+  const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
   const { sendEvent } = useActivityLog();
   const {
     searchKeyword, setSearchForm, lat, lng, radius: searchRadius,
@@ -170,6 +172,7 @@ function MapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: P
   return (
     <>
       <SearchInput
+        onToggleMenu={() => setIsOpenMenu(!isOpenMenu)}
         onSubmit={handleSubmit('input')}
         selectedPlaceId={selectedPlaceId}
         onClearSelectedPlace={() => setSelectedPlaceId(undefined)}
@@ -198,6 +201,7 @@ function MapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: P
         isFetchingNextPage={isFetchingNextPage}
         setSelectedPlaceId={setSelectedPlaceId}
       />
+      <UserMenuBottomSheet isOpen={isOpenMenu} onClose={() => setIsOpenMenu(false)} />
       <PlaceDetailWindowContainer />
     </>
   );

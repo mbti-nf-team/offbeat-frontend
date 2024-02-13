@@ -17,6 +17,7 @@ InputHTMLAttributes<HTMLInputElement>, HTMLInputElement
   placeholder: string;
   goBack?: () => void;
   onRemove: () => void;
+  onToggleMenu?: () => void;
   showSearchIcon?: boolean;
   wrapperStyle?: CSSProperties;
   isVisibleMenuIcon?: boolean;
@@ -28,6 +29,7 @@ function Input({
   value,
   placeholder,
   onRemove,
+  onToggleMenu,
   wrapperStyle,
   isVisibleMenuIcon,
   showSearchIcon,
@@ -40,7 +42,9 @@ function Input({
         {showSearchIcon ? (
           <SearchIcon className={styles.searchIcon} />
         ) : (
-          <ArrowLeftIcon onClick={goBack} />
+          <button type="button" onClick={goBack} className={styles.iconButton}>
+            <ArrowLeftIcon />
+          </button>
         )}
       </div>
       <input
@@ -56,9 +60,15 @@ function Input({
       />
       <div className={styles.suffixIconWrapper}>
         {value && (
-          <RemoveIcon onClick={onRemove} />
+          <button type="button" onClick={onRemove} className={styles.iconButton}>
+            <RemoveIcon />
+          </button>
         )}
-        {isVisibleMenuIcon && <MenuIcon />}
+        {isVisibleMenuIcon && (
+          <button type="button" onClick={onToggleMenu} className={styles.iconButton}>
+            <MenuIcon />
+          </button>
+        )}
       </div>
     </div>
   );

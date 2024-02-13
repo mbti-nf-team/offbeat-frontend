@@ -10,9 +10,12 @@ type Props = {
   onSubmit: (keyword: string) => void;
   onClearSelectedPlace: () => void;
   selectedPlaceId?: string;
+  onToggleMenu: () => void;
 };
 
-function SearchInput({ onSubmit, onClearSelectedPlace, selectedPlaceId }: Props) {
+function SearchInput({
+  onSubmit, onClearSelectedPlace, selectedPlaceId, onToggleMenu,
+}: Props) {
   const [searchInput, setSearchInput] = useState<string>('');
   const debouncedValue = useDebounce(searchInput, 200);
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -61,6 +64,7 @@ function SearchInput({ onSubmit, onClearSelectedPlace, selectedPlaceId }: Props)
         isVisibleMenuIcon={!isFocused && !searchInput}
         type="text"
         goBack={onClickGoBack}
+        onToggleMenu={onToggleMenu}
         showSearchIcon={!isFocused && !selectedPlaceId}
         onRemove={onRemoveInput}
         placeholder="장소 검색"
