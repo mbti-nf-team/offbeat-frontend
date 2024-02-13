@@ -33,7 +33,7 @@ function LoginPage({ state, code }: Props) {
       ) : (
         <div className={styles.loginWrapper}>
           <h1 className={styles.title}>소셜 계정으로 계속하기</h1>
-          <button type="button" onClick={() => authorizeMutate()} disabled={!!state && !!code} className={styles.button}>
+          <button type="button" onClick={() => authorizeMutate()} className={styles.button}>
             <KakaoLogo />
           </button>
           <div className={styles.info}>여행에서 진짜 로컬 여행지 찾기</div>
