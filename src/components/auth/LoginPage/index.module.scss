@@ -1,0 +1,42 @@
+@import "/src/styles/main";
+
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 24px 80px;
+  gap: 24px;
+
+  .title {
+    @include text('headline 3/600', 'black/default');
+  }
+
+  .button {
+    padding: 12px;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    border-radius: 100px;
+    border: 1px solid color('gray/bg');
+    background-color: #FEE500;
+  }
+
+  .info {
+    @include text('title 3/500', 'black/secondary');
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

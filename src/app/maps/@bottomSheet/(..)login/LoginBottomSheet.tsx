@@ -25,7 +25,6 @@ function LoginBottomSheet({ children }: PropsWithChildren) {
     <BottomSheet
       open={isOpen}
       onDismiss={onDismiss}
-      defaultSnap={({ maxHeight }) => maxHeight / 2}
       blocking={false}
     >
       {children}

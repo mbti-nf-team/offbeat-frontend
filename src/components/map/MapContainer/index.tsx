@@ -4,9 +4,12 @@ import {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
 
+import { useRouter, useSearchParams } from 'next/navigation';
+
 import { Status } from '@googlemaps/google-maps-services-js';
 import { checkEmpty, checkNumber, isEmpty } from '@nf-team/core';
 import { useGoogleMap } from '@react-google-maps/api';
+import QueryString from 'qs';
 
 import UserMenuBottomSheet from '@/components/bottomSheet/UserMenu';
 import Button from '@/components/common/Button';
@@ -15,6 +18,7 @@ import useCurrentLocationState from '@/hooks/maps/useCurrentLocationState';
 import useRenderCurrentLocationMarker from '@/hooks/maps/useRenderCurrentLocationMarker';
 import useGetSearchPlaces from '@/hooks/queries/useGetSearchPlaces';
 import useActivityLog from '@/hooks/useActivityLog';
+import { paramsSerializer } from '@/lib/apis';
 import { LatLngLiteral } from '@/lib/types/google.maps';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
@@ -35,7 +39,8 @@ type Props = {
 
 function MapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
   const map = useGoogleMap();
-  const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const { sendEvent } = useActivityLog();
   const {
     searchKeyword, setSearchForm, lat, lng, radius: searchRadius,
@@ -90,6 +95,23 @@ function MapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: P
     saveNextKeyword(keyword);
   }, [centerLatitude, centerLongitude, map]);
 
+  const onToggleMenu = () => {
+    const params = QueryString.parse(searchParams.toString());
+
+    const { menu, ...rest } = params;
+
+    if (!menu) {
+      router.replace(`/maps?${paramsSerializer({
+        ...params,
+        menu: 'open',
+      })}`);
+
+      return;
+    }
+
+    router.replace(`/maps?${paramsSerializer(rest)}`);
+  };
+
   const isCenterChange = () => {
     const isEqualLat = checkNumber(searchResultCenter.lat).toFixed(3)
       === checkNumber(centerLatitude).toFixed(3);
@@ -124,7 +146,7 @@ function MapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: P
   }, [defaultPlaceId, map]);
 
   useEffect(() => {
-    if (!map) {
+    if (!map || !defaultCountryCode) {
       return;
     }
 
@@ -172,7 +194,7 @@ function MapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: P
   return (
     <>
       <SearchInput
-        onToggleMenu={() => setIsOpenMenu(!isOpenMenu)}
+        onToggleMenu={onToggleMenu}
         onSubmit={handleSubmit('input')}
         selectedPlaceId={selectedPlaceId}
         onClearSelectedPlace={() => setSelectedPlaceId(undefined)}
@@ -201,7 +223,7 @@ function MapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: P
         isFetchingNextPage={isFetchingNextPage}
         setSelectedPlaceId={setSelectedPlaceId}
       />
-      <UserMenuBottomSheet isOpen={isOpenMenu} onClose={() => setIsOpenMenu(false)} />
+      <UserMenuBottomSheet onToggleMenu={onToggleMenu} />
       <PlaceDetailWindowContainer />
     </>
   );

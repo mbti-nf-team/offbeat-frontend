@@ -13819,7 +13819,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:v14.1.1-canary.51":
+"next@npm:14.1.1-canary.51":
   version: 14.1.1-canary.51
   resolution: "next@npm:14.1.1-canary.51"
   dependencies:
@@ -14263,7 +14263,7 @@ __metadata:
     jest-transformer-svg: "npm:^2.0.1"
     jwt-decode: "npm:^4.0.0"
     lint-staged: "npm:^13.1.2"
-    next: "npm:v14.1.1-canary.51"
+    next: "npm:14.1.1-canary.51"
     qs: "npm:^6.11.2"
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"

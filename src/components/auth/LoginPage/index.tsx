@@ -2,10 +2,12 @@
 
 import { useEffectOnce } from '@nf-team/react';
 
+import Spinner from '@/components/common/Spinner';
 import useAuthKakaoTokenMutation from '@/hooks/mutations/useAuthKakaoTokenMutation';
 import useAuthorizeMutation from '@/hooks/mutations/useAuthorizeMutation';
+import { KakaoLogo } from '@/lib/assets/logos';
 
-import Button from '../../common/Button';
+import styles from './index.module.scss';
 
 type Props = {
   code?: string;
@@ -23,13 +25,21 @@ function LoginPage({ state, code }: Props) {
   });
 
   return (
-    <Button
-      onClick={() => authorizeMutate()}
-      type="button"
-      disabled={!!state && !!code}
-    >
-      카카오로 로그인하기
-    </Button>
+    <>
+      {!!state && !!code ? (
+        <div className={styles.loading}>
+          <Spinner color="black" isLoading size="large" />
+        </div>
+      ) : (
+        <div className={styles.loginWrapper}>
+          <h1 className={styles.title}>소셜 계정으로 계속하기</h1>
+          <button type="button" onClick={() => authorizeMutate()} className={styles.button}>
+            <KakaoLogo />
+          </button>
+          <div className={styles.info}>여행에서 진짜 로컬 여행지 찾기</div>
+        </div>
+      )}
+    </>
   );
 }
 
