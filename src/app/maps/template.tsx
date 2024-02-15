@@ -5,10 +5,8 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import { Language } from '@googlemaps/google-maps-services-js';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 
-import Spinner from '@/components/common/Spinner';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 import useActivityLog from '@/hooks/useActivityLog';
-
-import styles from './template.module.scss';
 
 function Template({ children }: PropsWithChildren) {
   const [libraries] = useState<['places', 'geometry']>(['places', 'geometry']);
@@ -47,9 +45,7 @@ function Template({ children }: PropsWithChildren) {
 
   if (!isLoaded) {
     return (
-      <div className={styles.loading}>
-        <Spinner color="black" isLoading size="large" />
-      </div>
+      <LoadingSpinner />
     );
   }
 

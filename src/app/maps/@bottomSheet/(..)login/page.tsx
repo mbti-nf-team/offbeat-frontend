@@ -1,6 +1,6 @@
 import LoginPage from '@/components/auth/LoginPage';
 
-import LoginBottomSheet from './LoginBottomSheet';
+import BottomSheet from './BottomSheet';
 
 type Props = {
   searchParams: { [key: string]: string | undefined; };
@@ -8,9 +8,9 @@ type Props = {
 
 function Page({ searchParams }: Props) {
   return (
-    <LoginBottomSheet>
+    <BottomSheet>
       <LoginPage code={searchParams?.code} state={searchParams?.state} />
-    </LoginBottomSheet>
+    </BottomSheet>
   );
 }
 

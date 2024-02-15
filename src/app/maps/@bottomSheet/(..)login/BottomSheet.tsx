@@ -1,13 +1,13 @@
 'use client';
 
 import { PropsWithChildren, useEffect } from 'react';
-import { BottomSheet } from 'react-spring-bottom-sheet';
+import { BottomSheet as ReactBottomSheet } from 'react-spring-bottom-sheet';
 
 import { useRouter } from 'next/navigation';
 
 import { useBoolean } from '@nf-team/react';
 
-function LoginBottomSheet({ children }: PropsWithChildren) {
+function BottomSheet({ children }: PropsWithChildren) {
   const router = useRouter();
 
   const [isOpen, onOpen, onClose] = useBoolean(false);
@@ -22,14 +22,14 @@ function LoginBottomSheet({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <BottomSheet
+    <ReactBottomSheet
       open={isOpen}
       onDismiss={onDismiss}
       blocking={false}
     >
       {children}
-    </BottomSheet>
+    </ReactBottomSheet>
   );
 }
 
-export default LoginBottomSheet;
+export default BottomSheet;
