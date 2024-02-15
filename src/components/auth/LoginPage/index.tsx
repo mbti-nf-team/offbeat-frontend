@@ -2,7 +2,7 @@
 
 import { useEffectOnce } from '@nf-team/react';
 
-import Spinner from '@/components/common/Spinner';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 import useAuthKakaoTokenMutation from '@/hooks/mutations/useAuthKakaoTokenMutation';
 import useAuthorizeMutation from '@/hooks/mutations/useAuthorizeMutation';
 import { KakaoLogo } from '@/lib/assets/logos';
@@ -27,9 +27,7 @@ function LoginPage({ state, code }: Props) {
   return (
     <>
       {!!state && !!code ? (
-        <div className={styles.loading}>
-          <Spinner color="black" isLoading size="large" />
-        </div>
+        <LoadingSpinner />
       ) : (
         <div className={styles.loginWrapper}>
           <h1 className={styles.title}>소셜 계정으로 계속하기</h1>

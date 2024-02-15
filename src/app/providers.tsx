@@ -2,6 +2,7 @@
 
 import { ReactNode, useState } from 'react';
 
+import { useResizeViewportHeight } from '@nf-team/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function Providers({ children }: { children: ReactNode }) {
@@ -13,6 +14,8 @@ function Providers({ children }: { children: ReactNode }) {
       },
     },
   }));
+
+  useResizeViewportHeight();
 
   return (
     <QueryClientProvider client={queryClient}>
