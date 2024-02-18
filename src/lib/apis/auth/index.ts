@@ -1,6 +1,6 @@
 import api from '..';
 
-import { AuthorizeResponse, TokenResponse } from './model';
+import { AuthorizeResponse, TokenResponse, UserResponse } from './model';
 
 // eslint-disable-next-line import/prefer-default-export
 export const postAuthorize = async () => {
@@ -22,6 +22,27 @@ export const postAuthKakaoToken = async (params: { code: string; state: string; 
     type: 'bff',
     method: 'POST',
     params,
+  });
+
+  return response;
+};
+
+export const getUser = async (params: { accessToken?: string; }) => {
+  if (!params?.accessToken) {
+    return null;
+  }
+
+  const response = await api<UserResponse>({
+    url: '/users/me',
+    type: 'public',
+    method: 'GET',
+    headers: {
+      // TODO - 임시
+      Authorization: `Bearer ${params.accessToken}`,
+    },
+    config: {
+      cache: 'no-store',
+    },
   });
 
   return response;

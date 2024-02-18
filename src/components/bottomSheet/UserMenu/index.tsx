@@ -8,14 +8,16 @@ import QueryString from 'qs';
 import ExternalLink from '@/components/common/ExternalLink';
 import { paramsSerializer } from '@/lib/apis';
 import { ChevronRightIcon } from '@/lib/assets/icons';
+import { User } from '@/lib/types/auth';
 
 import styles from './index.module.scss';
 
 type Props = {
   onToggleMenu: () => void;
+  user: User | null;
 };
 
-function UserMenuBottomSheet({ onToggleMenu }: Props) {
+function UserMenuBottomSheet({ onToggleMenu, user }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isOpenMenu = searchParams.get('menu');
@@ -45,8 +47,18 @@ function UserMenuBottomSheet({ onToggleMenu }: Props) {
       <div className={styles.menuWrapper} role="menu">
         <button type="button" role="menuitem" className={styles.loginMenu} onClick={openLogin}>
           <div className={styles.profile}>
-            <Image src="/assets/images/img_avatar_default.png" alt="profile" width={48} height={48} />
-            <div className={styles.name}>로그인</div>
+            {user?.profile_image_url ? (
+              <Image
+                src={user.profile_image_url}
+                alt={user.email}
+                width={48}
+                height={48}
+                className={styles.image}
+              />
+            ) : (
+              <Image src="/assets/images/img_avatar_default.png" alt="profile" width={48} height={48} />
+            )}
+            <div className={styles.name}>{user ? user.nickname : '로그인'}</div>
           </div>
           <ChevronRightIcon />
         </button>

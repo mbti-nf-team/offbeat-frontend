@@ -1,3 +1,5 @@
+import { User } from '@/lib/types/auth';
+
 export type AuthorizeResponse = {
   redirect_url: string;
 };
@@ -11,3 +13,5 @@ export type TokenRequest = {
   code: string;
   state: string;
 };
+
+export type UserResponse = User;

@@ -1,10 +1,13 @@
 import { Metadata, ResolvingMetadata } from 'next';
+import { cookies } from 'next/headers';
 
 import { Language, Status } from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 
 import MapContainer from '@/components/map/MapContainer';
 import { paramsSerializer } from '@/lib/apis';
+import { getUser } from '@/lib/apis/auth';
+import CookieNames from '@/lib/constants/cookies';
 
 import { getGooglePlaceDetails, getPlacePhotoUrl } from '../api/handler';
 import { metadata } from '../page';
@@ -81,9 +84,15 @@ export async function generateMetadata(
   }
 }
 
-function Page({ searchParams }: Props) {
+async function Page({ searchParams }: Props) {
+  const cookiesStore = cookies();
+  const accessToken = cookiesStore.get(CookieNames.ACCESS_TOKEN);
+
+  const user = await getUser({ accessToken: accessToken?.value });
+
   return (
     <MapContainer
+      user={user}
       defaultCountryCode={searchParams?.country}
       defaultPlaceId={searchParams?.id}
       defaultLocation={{

@@ -37,6 +37,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'search.pstatic.net',
       },
+      {
+        protocol: 'http',
+        hostname: 'k.kakaocdn.net',
+      },
     ],
   },
   webpack: (config) => {
