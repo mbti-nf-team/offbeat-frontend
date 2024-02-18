@@ -26,6 +26,11 @@
       .name {
         @include text("title 1/600", "black/default");
       }
+
+      .image {
+        border-radius: 48px;
+        border: 1px solid color("gray/bg");
+      }
     }
 
     .icon {

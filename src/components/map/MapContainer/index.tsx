@@ -19,6 +19,7 @@ import useRenderCurrentLocationMarker from '@/hooks/maps/useRenderCurrentLocatio
 import useGetSearchPlaces from '@/hooks/queries/useGetSearchPlaces';
 import useActivityLog from '@/hooks/useActivityLog';
 import { paramsSerializer } from '@/lib/apis';
+import { User } from '@/lib/types/auth';
 import { LatLngLiteral } from '@/lib/types/google.maps';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
@@ -34,10 +35,13 @@ import styles from './index.module.scss';
 type Props = {
   defaultCountryCode?: string;
   defaultPlaceId?: string;
-  defaultLocation: { lng?: string; lat?: string; }
+  defaultLocation: { lng?: string; lat?: string; };
+  user: User | null;
 };
 
-function MapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: Props) {
+function MapContainer({
+  defaultCountryCode, defaultPlaceId, defaultLocation, user,
+}: Props) {
   const map = useGoogleMap();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -223,7 +227,7 @@ function MapContainer({ defaultCountryCode, defaultPlaceId, defaultLocation }: P
         isFetchingNextPage={isFetchingNextPage}
         setSelectedPlaceId={setSelectedPlaceId}
       />
-      <UserMenuBottomSheet onToggleMenu={onToggleMenu} />
+      <UserMenuBottomSheet onToggleMenu={onToggleMenu} user={user} />
       <PlaceDetailWindowContainer />
     </>
   );
