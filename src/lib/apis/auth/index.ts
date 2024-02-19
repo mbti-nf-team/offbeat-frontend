@@ -1,8 +1,9 @@
 import api from '..';
 
-import { AuthorizeResponse, TokenResponse, UserResponse } from './model';
+import {
+  AuthorizeResponse, TokenRefreshResponse, TokenResponse, UserResponse,
+} from './model';
 
-// eslint-disable-next-line import/prefer-default-export
 export const postAuthorize = async () => {
   const response = await api<AuthorizeResponse>({
     method: 'POST',
@@ -22,6 +23,19 @@ export const postAuthKakaoToken = async (params: { code: string; state: string; 
     type: 'bff',
     method: 'POST',
     params,
+  });
+
+  return response;
+};
+
+export const postAuthRefresh = async (params: { refreshToken?: string; }) => {
+  const response = await api<TokenRefreshResponse, { refresh_token?: string; }>({
+    url: '/auth/tokens/refresh',
+    type: 'public',
+    method: 'POST',
+    params: {
+      refresh_token: params.refreshToken,
+    },
   });
 
   return response;

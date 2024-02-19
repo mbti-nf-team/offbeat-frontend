@@ -42,6 +42,27 @@
     }
   }
 
+  .logoutButton {
+    border: none;
+    display: flex;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    background-color: color("white/primary");
+    
+    .logoutIcon {
+      width: 12px;
+      height: 12px;
+
+      path {
+        fill: color('gray/primary');
+      }
+    }
+
+    @include text('title 3/600', 'gray/primary');
+  }
+
   .contents {
     display: flex;
     padding: 64px 24px;
