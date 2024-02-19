@@ -9,6 +9,10 @@ export type TokenResponse = {
   refresh_token: string;
 };
 
+export type TokenRefreshResponse = {
+  access_token: string;
+};
+
 export type TokenRequest = {
   code: string;
   state: string;

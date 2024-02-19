@@ -1,7 +1,7 @@
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 // eslint-disable-next-line import/prefer-default-export
-export const isExpired = (token: string) => {
+export const isExpired = (token?: string) => {
   if (!token) {
     return true;
   }
