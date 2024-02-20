@@ -56,6 +56,9 @@ export const getUser = async (params: { accessToken?: string; }) => {
     },
     config: {
       cache: 'no-store',
+      next: {
+        tags: ['users/me'],
+      },
     },
   });
 
