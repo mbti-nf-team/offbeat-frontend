@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 export const ZOOM_LEVEL_TO_METER: Record<number, number> = {
   3: 50000,
   4: 50000,
@@ -19,3 +18,5 @@ export const ZOOM_LEVEL_TO_METER: Record<number, number> = {
   19: 250,
   20: 100,
 } as const;
+
+export const FIVE_MINUTES = 300000;

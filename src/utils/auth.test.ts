@@ -39,7 +39,7 @@ describe('isExpired', () => {
     });
 
     it('false를 반환해야만 한다', () => {
-      const result = isExpired('token');
+      const result = isExpired('token', 500);
 
       expect(result).toBeFalsy();
     });

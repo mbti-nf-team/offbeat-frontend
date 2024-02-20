@@ -4,6 +4,7 @@ import { postAuthRefresh } from './lib/apis/auth';
 import CookieNames from './lib/constants/cookies';
 import HeaderNames from './lib/constants/headers';
 import { isExpired } from './utils/auth';
+import { FIVE_MINUTES } from './utils/constants';
 
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|assets|manifest.webmanifest|sitemap.xml|robots.txt|favicon.ico).*)'],
@@ -11,9 +12,10 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   const refreshToken = request.cookies.get(CookieNames.REFRESH_TOKEN);
+  const accessToken = request.cookies.get(CookieNames.ACCESS_TOKEN);
 
-  if (!refreshToken?.value) {
-    return NextResponse.next();
+  if (!refreshToken?.value || !accessToken?.value) {
+    return NextResponse.next({ request });
   }
 
   if (isExpired(refreshToken?.value)) {
@@ -26,6 +28,12 @@ export async function middleware(request: NextRequest) {
     response.headers.delete(HeaderNames.Authorization);
 
     return response;
+  }
+
+  if (!isExpired(accessToken?.value, FIVE_MINUTES)) {
+    return NextResponse.next({
+      request,
+    });
   }
 
   const responseToken = await postAuthRefresh({ refreshToken: refreshToken.value });
