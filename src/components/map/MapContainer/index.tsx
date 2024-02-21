@@ -11,6 +11,7 @@ import { checkEmpty, checkNumber, isEmpty } from '@nf-team/core';
 import { useGoogleMap } from '@react-google-maps/api';
 import QueryString from 'qs';
 
+import PlaceBottomSheet from '@/components/bottomSheet/PlaceBottomSheet';
 import UserMenuBottomSheet from '@/components/bottomSheet/UserMenu';
 import Button from '@/components/common/Button';
 import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
@@ -26,7 +27,6 @@ import useRecentSearchStore from '@/stores/recentSearch';
 import useSearchFormStore from '@/stores/searchKeyword';
 import { ZOOM_LEVEL_TO_METER } from '@/utils/constants';
 
-import PlaceBottomSheet from '../../bottomSheet/PlaceBottomSheet';
 import PlaceResultMarker from '../PlaceResultMarker';
 import SearchInput from '../SearchInput';
 

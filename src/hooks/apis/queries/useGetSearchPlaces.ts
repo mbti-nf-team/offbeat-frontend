@@ -1,10 +1,9 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { fetchSearchPlaces } from '@/lib/apis/search';
 import { SearchPlacesResponse } from '@/lib/apis/search/model';
 import { LatLngLiteral } from '@/lib/types/google.maps';
-
-import useIntersectionObserver from '../../useIntersectionObserver';
 
 function useGetSearchPlaces({
   keyword, lat, lng, radius,
