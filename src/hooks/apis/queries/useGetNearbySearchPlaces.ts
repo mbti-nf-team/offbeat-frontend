@@ -4,7 +4,7 @@ import { fetchNearbySearchPlaces } from '@/lib/apis/search';
 import { SearchPlacesResponse } from '@/lib/apis/search/model';
 import { LatLngLiteral } from '@/lib/types/google.maps';
 
-import useIntersectionObserver from '../useIntersectionObserver';
+import useIntersectionObserver from '../../useIntersectionObserver';
 
 function useGetNearbySearchPlaces({
   keyword, lat, lng, radius,

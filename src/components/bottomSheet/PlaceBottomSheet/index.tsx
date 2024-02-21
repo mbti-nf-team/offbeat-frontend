@@ -7,12 +7,12 @@ import { useUpdateEffect } from '@nf-team/react';
 
 import Button from '@/components/common/Button';
 import Spinner from '@/components/common/Spinner';
+import CurrentLocationButton from '@/components/map/CurrentLocationButton';
 import { InfiniteRefState } from '@/lib/types';
 import { PlacesWithSearchResult } from '@/lib/types/search';
 import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import { targetFalseThenValue } from '@/utils';
 
-import CurrentLocationButton from '../CurrentLocationButton';
 import PlaceBottomSheetItem from '../PlaceBottomSheetItem';
 
 import styles from './index.module.scss';
