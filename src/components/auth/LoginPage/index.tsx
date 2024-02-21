@@ -3,8 +3,8 @@
 import { useEffectOnce } from '@nf-team/react';
 
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import useAuthKakaoTokenMutation from '@/hooks/mutations/useAuthKakaoTokenMutation';
-import useAuthorizeMutation from '@/hooks/mutations/useAuthorizeMutation';
+import useAuthKakaoTokenMutation from '@/hooks/apis/mutations/useAuthKakaoTokenMutation';
+import useAuthorizeMutation from '@/hooks/apis/mutations/useAuthorizeMutation';
 import { KakaoLogo } from '@/lib/assets/logos';
 
 import styles from './index.module.scss';

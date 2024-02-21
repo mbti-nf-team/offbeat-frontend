@@ -1,23 +1,21 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { fetchSearchPlaces } from '@/lib/apis/search';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import { fetchNearbySearchPlaces } from '@/lib/apis/search';
 import { SearchPlacesResponse } from '@/lib/apis/search/model';
 import { LatLngLiteral } from '@/lib/types/google.maps';
 
-import useIntersectionObserver from '../useIntersectionObserver';
-
-function useGetSearchPlaces({
+function useGetNearbySearchPlaces({
   keyword, lat, lng, radius,
-}: {
-  keyword: string; radius?: number; } & Partial<LatLngLiteral>) {
+}: { keyword?: string; radius: number; } & Partial<LatLngLiteral>) {
   const query = useInfiniteQuery<SearchPlacesResponse>({
-    queryKey: ['searchPlaces', keyword, lat, lng, radius],
-    queryFn: ({ pageParam }) => fetchSearchPlaces({
-      keyword, nextCursor: pageParam as string, lat, lng, radius,
+    queryKey: ['nearbySearchPlaces', keyword, lat, lng, radius],
+    queryFn: ({ pageParam }) => fetchNearbySearchPlaces({
+      keyword, nextCursor: pageParam as string, lat: lat as number, lng: lng as number, radius,
     }),
     getNextPageParam: ({ next_page_token }) => next_page_token,
     initialPageParam: undefined,
-    enabled: !!keyword,
+    enabled: !!lat && !!lng && !!radius,
   });
 
   const { hasNextPage, fetchNextPage } = query;
@@ -38,4 +36,4 @@ function useGetSearchPlaces({
   };
 }
 
-export default useGetSearchPlaces;
+export default useGetNearbySearchPlaces;
