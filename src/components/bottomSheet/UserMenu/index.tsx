@@ -75,7 +75,7 @@ function UserMenuBottomSheet({ onToggleMenu, user }: Props) {
               <Image src="/assets/images/img_avatar_default.png" alt="profile" width={48} height={48} />
               <div className={styles.name}>로그인</div>
             </div>
-            <ChevronRightIcon />
+            <ChevronRightIcon className={styles.icon} />
           </button>
         )}
         <div className={styles.contents}>
