@@ -4,9 +4,10 @@ import { ReactNode, useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 
+import { useGeolocation } from '@nf-team/react';
+
 import Button from '@/components/common/Button';
 import useActivityLog from '@/hooks/useActivityLog';
-import useGeoLocation from '@/hooks/useGeolocation';
 import { paramsSerializer } from '@/lib/apis';
 import useToastStore from '@/stores/toast';
 
@@ -18,7 +19,7 @@ type Props = {
 
 function SearchCountryHeader({ children }: Props) {
   const router = useRouter();
-  const [location, onClick] = useGeoLocation();
+  const [location, onClick] = useGeolocation();
   const { sendEvent } = useActivityLog();
   const { renderToast } = useToastStore(['renderToast']);
 

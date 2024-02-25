@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 
-import { GlobalPortal } from '@nf-team/react';
+import { GlobalPortal, useGeolocation } from '@nf-team/react';
 import { useGoogleMap } from '@react-google-maps/api';
 import clsx from 'clsx';
 
 import Spinner from '@/components/common/Spinner';
 import useRenderCurrentLocationMarker from '@/hooks/maps/useRenderCurrentLocationMarker';
-import useGeoLocation from '@/hooks/useGeolocation';
 import { NavigationIcon } from '@/lib/assets/icons';
 import useToastStore from '@/stores/toast';
 
@@ -19,7 +18,7 @@ type Props = {
 
 function CurrentLocationButton({ placeResultCount, isZeroResult }: Props) {
   const map = useGoogleMap();
-  const [location, onClick] = useGeoLocation();
+  const [location, onClick] = useGeolocation();
   const { renderToast } = useToastStore(['renderToast']);
 
   useRenderCurrentLocationMarker({
