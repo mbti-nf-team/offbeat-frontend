@@ -94,7 +94,6 @@ async function Page({ searchParams }: Props) {
     <MapContainer
       user={user}
       defaultCountryCode={searchParams?.country}
-      defaultPlaceId={searchParams?.id}
       defaultLocation={{
         lat: searchParams?.lat,
         lng: searchParams?.lng,

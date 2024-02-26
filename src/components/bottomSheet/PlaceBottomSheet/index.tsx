@@ -2,6 +2,8 @@ import { useCallback, useRef } from 'react';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 import { defaultSnapProps, SnapPointProps } from 'react-spring-bottom-sheet/dist/types';
 
+import { useRouter } from 'next/navigation';
+
 import { isEmpty } from '@nf-team/core';
 import { useUpdateEffect } from '@nf-team/react';
 
@@ -10,7 +12,6 @@ import Spinner from '@/components/common/Spinner';
 import CurrentLocationButton from '@/components/map/CurrentLocationButton';
 import { InfiniteRefState } from '@/lib/types';
 import { PlacesWithSearchResult } from '@/lib/types/search';
-import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import { targetFalseThenValue } from '@/utils';
 
 import PlaceBottomSheetItem from '../PlaceBottomSheetItem';
@@ -31,18 +32,15 @@ function PlaceBottomSheet({
   places, refState, isSuccess, isFetching, isFetchingNextPage, selectedPlaceId, setSelectedPlaceId,
 }: Props) {
   const sheetRef = useRef<BottomSheetRef>(null);
+  const router = useRouter();
 
   const filteredPlaces = selectedPlaceId
     ? places.filter((place) => place.place_id === selectedPlaceId) : places;
   const isZeroResult = isSuccess && isEmpty(filteredPlaces);
 
-  const {
-    onOpenPlaceDetailWindow, isOpenPlaceDetailWindow,
-  } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow', 'isOpenPlaceDetailWindow']);
-
   const onClickPlaceItem = (placeId: string) => {
     if (filteredPlaces.length === 1) {
-      onOpenPlaceDetailWindow({ placeId });
+      router.push(`/place/${placeId}`);
       return;
     }
 
@@ -94,8 +92,7 @@ function PlaceBottomSheet({
       />
       <BottomSheet
         ref={sheetRef}
-        open={!isOpenPlaceDetailWindow
-          && (isZeroResult || isSuccess || isFetching)}
+        open={isZeroResult || isSuccess || isFetching}
         blocking={false}
         defaultSnap={getDefaultSnap}
         snapPoints={getSnapPoints}

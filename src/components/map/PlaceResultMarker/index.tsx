@@ -2,11 +2,12 @@ import {
   memo, useCallback, useMemo, useState,
 } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import { useUnmount, useUpdateEffect } from '@nf-team/react';
 import { MarkerF } from '@react-google-maps/api';
 
 import { PlaceResult } from '@/lib/types/google.maps';
-import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 
 type Props = {
   place: PlaceResult;
@@ -16,7 +17,7 @@ type Props = {
 
 function PlaceResultMarker({ place, selectedPlaceId, onClickMarker }: Props) {
   const [markerState, setMarker] = useState<google.maps.Marker>();
-  const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow']);
+  const router = useRouter();
 
   const isSelectedPlace = place.place_id === selectedPlaceId;
 
@@ -36,9 +37,7 @@ function PlaceResultMarker({ place, selectedPlaceId, onClickMarker }: Props) {
 
   const handleClickMarker = useCallback(() => {
     if (isSelectedPlace) {
-      onOpenPlaceDetailWindow({
-        placeId: place.place_id,
-      });
+      router.push(`/place/${place.place_id}`);
       return;
     }
 
