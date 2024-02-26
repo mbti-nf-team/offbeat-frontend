@@ -14,7 +14,6 @@ import QueryString from 'qs';
 import PlaceBottomSheet from '@/components/bottomSheet/PlaceBottomSheet';
 import UserMenuBottomSheet from '@/components/bottomSheet/UserMenu';
 import Button from '@/components/common/Button';
-import PlaceDetailWindowContainer from '@/components/detail/PlaceDetailWindowContainer';
 import useGetSearchPlaces from '@/hooks/apis/queries/useGetSearchPlaces';
 import useCurrentLocationState from '@/hooks/maps/useCurrentLocationState';
 import useRenderCurrentLocationMarker from '@/hooks/maps/useRenderCurrentLocationMarker';
@@ -22,7 +21,6 @@ import useActivityLog from '@/hooks/useActivityLog';
 import { paramsSerializer } from '@/lib/apis';
 import { User } from '@/lib/types/auth';
 import { LatLngLiteral } from '@/lib/types/google.maps';
-import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import useRecentSearchStore from '@/stores/recentSearch';
 import useSearchFormStore from '@/stores/searchKeyword';
 import { ZOOM_LEVEL_TO_METER } from '@/utils/constants';
@@ -34,14 +32,11 @@ import styles from './index.module.scss';
 
 type Props = {
   defaultCountryCode?: string;
-  defaultPlaceId?: string;
   defaultLocation: { lng?: string; lat?: string; };
   user: User | null;
 };
 
-function MapContainer({
-  defaultCountryCode, defaultPlaceId, defaultLocation, user,
-}: Props) {
+function MapContainer({ defaultCountryCode, defaultLocation, user }: Props) {
   const map = useGoogleMap();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -50,7 +45,6 @@ function MapContainer({
     searchKeyword, setSearchForm, lat, lng, radius: searchRadius,
   } = useSearchFormStore(['searchKeyword', 'setSearchForm', 'lat', 'lng', 'radius']);
   const { addRecentSearch: saveNextKeyword } = useRecentSearchStore(['addRecentSearch']);
-  const { onOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['onOpenPlaceDetailWindow']);
   const [selectedPlaceId, setSelectedPlaceId] = useState<string>();
   const [searchResultCenter, setSearchResultCenter] = useState<Partial<LatLngLiteral>>({
     lat: undefined,
@@ -134,22 +128,6 @@ function MapContainer({
     .flatMap((page) => page.results), [places]);
 
   useEffect(() => {
-    if (defaultPlaceId && map) {
-      sendEvent({
-        name: 'open_place_detail_window_via_shared_link',
-        action: 'load',
-        value: {
-          placeId: defaultPlaceId,
-        },
-      });
-
-      onOpenPlaceDetailWindow({
-        placeId: defaultPlaceId,
-      });
-    }
-  }, [defaultPlaceId, map]);
-
-  useEffect(() => {
     if (!map || !defaultCountryCode) {
       return;
     }
@@ -228,7 +206,6 @@ function MapContainer({
         setSelectedPlaceId={setSelectedPlaceId}
       />
       <UserMenuBottomSheet onToggleMenu={onToggleMenu} user={user} />
-      <PlaceDetailWindowContainer />
     </>
   );
 }

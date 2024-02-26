@@ -1,14 +1,14 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
 type Props = {
-  bottomSheet: React.ReactNode;
+  modal: ReactNode;
 };
 
-function Layout({ bottomSheet, children }: PropsWithChildren<Props>) {
+function Layout({ modal, children }: PropsWithChildren<Props>) {
   return (
     <>
       {children}
-      {bottomSheet}
+      {modal}
     </>
   );
 }
