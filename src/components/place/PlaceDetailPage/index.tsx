@@ -154,7 +154,7 @@ function PlaceDetailPage({ placeId, onClose }: Props) {
             disabled={isLoading || !placeDetail}
             onlyIcon={
               <ShareIcon className={clsx((isLoading || !placeDetail) && styles.shareIcon)} />
-                  }
+            }
           />
         </div>
         <div
@@ -236,22 +236,22 @@ function PlaceDetailPage({ placeId, onClose }: Props) {
         </div>
       </div>
       {placeDetail?.url && (
-      <motion.div
-        animate={!hide ? 'visible' : 'none'}
-        initial="none"
-        variants={bottomToUpVariants}
-        className={styles.buttonWrapper}
-      >
-        <Button
-          isExternalLink
-          href={placeDetail?.url}
-          onClick={() => goToExternalLink('go_to_google_map')(placeDetail?.url)}
-          color="highlight"
-          width="calc(100% - 80px)"
+        <motion.div
+          animate={!hide ? 'visible' : 'none'}
+          initial="none"
+          variants={bottomToUpVariants}
+          className={styles.buttonWrapper}
         >
-          Google로 이동
-        </Button>
-      </motion.div>
+          <Button
+            isExternalLink
+            href={placeDetail?.url}
+            onClick={() => goToExternalLink('go_to_google_map')(placeDetail?.url)}
+            color="highlight"
+            width="calc(100% - 80px)"
+          >
+            Google로 이동
+          </Button>
+        </motion.div>
       )}
     </>
   );

@@ -4,8 +4,9 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 
+import { useBoolean } from '@nf-team/react';
+
 import PlaceDetailPage from '@/components/place/PlaceDetailPage';
-import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 
 import Modal from './Modal';
 
@@ -17,21 +18,22 @@ type Props = {
 
 function Page({ params }: Props) {
   const router = useRouter();
-  const {
-    onClosePlaceDetailWindow, onOpenPlaceDetailWindow,
-  } = usePlaceDetailWindowStore(['onClosePlaceDetailWindow', 'onOpenPlaceDetailWindow']);
+  const [isOpen, onOpen, onClose] = useBoolean(false);
 
   const onDismiss = () => {
-    onClosePlaceDetailWindow();
-    router.back();
+    onClose();
+
+    setTimeout(() => {
+      router.back();
+    }, 300);
   };
 
   useEffect(() => {
-    onOpenPlaceDetailWindow({ placeId: params?.id });
-  }, [params?.id]);
+    onOpen();
+  }, []);
 
   return (
-    <Modal>
+    <Modal isOpen={isOpen}>
       <PlaceDetailPage placeId={params?.id} onClose={onDismiss} />
     </Modal>
   );

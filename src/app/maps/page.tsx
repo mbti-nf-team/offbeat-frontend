@@ -5,6 +5,7 @@ import { Language, Status } from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 
 import MapContainer from '@/components/map/MapContainer';
+import MapLayout from '@/components/map/MapLayout';
 import { paramsSerializer } from '@/lib/apis';
 import { getUser } from '@/lib/apis/auth';
 import CookieNames from '@/lib/constants/cookies';
@@ -91,14 +92,16 @@ async function Page({ searchParams }: Props) {
   const user = await getUser({ accessToken: accessToken?.value });
 
   return (
-    <MapContainer
-      user={user}
-      defaultCountryCode={searchParams?.country}
-      defaultLocation={{
-        lat: searchParams?.lat,
-        lng: searchParams?.lng,
-      }}
-    />
+    <MapLayout>
+      <MapContainer
+        user={user}
+        defaultCountryCode={searchParams?.country}
+        defaultLocation={{
+          lat: searchParams?.lat,
+          lng: searchParams?.lng,
+        }}
+      />
+    </MapLayout>
   );
 }
 

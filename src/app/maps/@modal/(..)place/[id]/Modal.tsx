@@ -3,36 +3,33 @@
 import { PropsWithChildren } from 'react';
 
 import {
-  DelayRenderComponent, GlobalPortal, useIsomorphicLayoutEffect, useUnmount,
+  DelayRenderComponent, GlobalPortal, useIsomorphicLayoutEffect,
 } from '@nf-team/react';
 import { motion } from 'framer-motion';
 
-import usePlaceDetailWindowStore from '@/stores/placeDetailWindow';
 import { bottomToUpVariants } from '@/styles/framerVariants';
 
 import styles from './modal.module.scss';
 
-function Modal({ children }: PropsWithChildren) {
-  const { isOpenPlaceDetailWindow } = usePlaceDetailWindowStore(['isOpenPlaceDetailWindow']);
+type Props = {
+  isOpen: boolean;
+};
 
+function Modal({ isOpen, children }: PropsWithChildren<Props>) {
   useIsomorphicLayoutEffect(() => {
-    if (isOpenPlaceDetailWindow) {
+    if (isOpen) {
       document.body.style.overflow = '';
       return;
     }
 
     document.body.style.overflow = 'hidden';
-  }, [isOpenPlaceDetailWindow]);
-
-  useUnmount(() => {
-    document.body.style.overflow = '';
-  });
+  }, [isOpen]);
 
   return (
-    <DelayRenderComponent isVisible={isOpenPlaceDetailWindow}>
+    <DelayRenderComponent isVisible={isOpen}>
       <GlobalPortal>
         <motion.div
-          animate={isOpenPlaceDetailWindow ? 'visible' : 'none'}
+          animate={isOpen ? 'visible' : 'none'}
           initial="none"
           variants={bottomToUpVariants}
           className={styles.placeDetailWindowWrapper}
