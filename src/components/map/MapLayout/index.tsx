@@ -8,7 +8,7 @@ import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import useActivityLog from '@/hooks/useActivityLog';
 
-function Template({ children }: PropsWithChildren) {
+function MapLayout({ children }: PropsWithChildren) {
   const [libraries] = useState<['places', 'geometry']>(['places', 'geometry']);
   const { sendEvent } = useActivityLog();
 
@@ -73,4 +73,4 @@ function Template({ children }: PropsWithChildren) {
   );
 }
 
-export default Template;
+export default MapLayout;
