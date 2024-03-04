@@ -41,6 +41,28 @@ export const postAuthRefresh = async (params: { refreshToken?: string; }) => {
   return response;
 };
 
+export const postAuthTokenRevoke = async ({
+  accessToken, refreshToken,
+}: { refreshToken?: string; accessToken?: string; }) => {
+  const response = await api<undefined, { refresh_token?: string; }>({
+    method: 'POST',
+    url: '/auth/tokens/revoke',
+    type: 'public',
+    headers: {
+      // TODO - 임시
+      Authorization: `Bearer ${accessToken}`,
+    },
+    params: {
+      refresh_token: refreshToken,
+    },
+    config: {
+      cache: 'no-store',
+    },
+  });
+
+  return response;
+};
+
 export const getUser = async (params: { accessToken?: string; }) => {
   if (!params?.accessToken) {
     return null;
