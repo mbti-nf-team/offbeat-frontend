@@ -10,6 +10,7 @@ import ExternalLink from '@/components/common/ExternalLink';
 import { paramsSerializer } from '@/lib/apis';
 import { ChevronRightIcon } from '@/lib/assets/icons';
 import { User } from '@/lib/types/auth';
+import useToastStore from '@/stores/toast';
 
 import styles from './index.module.scss';
 
@@ -20,6 +21,7 @@ type Props = {
 
 function UserMenuBottomSheet({ onToggleMenu, user }: Props) {
   const router = useRouter();
+  const { renderToast } = useToastStore(['renderToast']);
   const searchParams = useSearchParams();
   const isOpenMenu = searchParams.get('menu');
 
@@ -34,7 +36,19 @@ function UserMenuBottomSheet({ onToggleMenu, user }: Props) {
 
   const onClose = () => onToggleMenu();
 
-  const onLogout = () => logoutAction();
+  const onLogout = async () => {
+    try {
+      await logoutAction();
+
+      renderToast('로그아웃 되었어요.', {
+        type: 'success',
+      });
+    } catch (error) {
+      renderToast('로그아웃에 실패하였어요.', {
+        type: 'error',
+      });
+    }
+  };
 
   return (
     <BottomSheet
