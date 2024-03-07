@@ -1,5 +1,6 @@
 import { useSearchParams } from 'next/navigation';
 
+import { setSessionStorageItem } from '@nf-team/storage';
 import { useMutation } from '@tanstack/react-query';
 
 import { postAuthorize } from '@/lib/apis/auth';
@@ -10,7 +11,7 @@ function useAuthorizeMutation() {
   const mutation = useMutation<{ redirect_url: string }>({
     mutationFn: () => postAuthorize(),
     onSuccess: ({ redirect_url }) => {
-      sessionStorage.setItem('params', searchParams.toString());
+      setSessionStorageItem('params', searchParams.toString());
       window.location.href = redirect_url;
     },
   });

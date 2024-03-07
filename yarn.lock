@@ -2733,6 +2733,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nf-team/storage@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@nf-team/storage@npm:1.0.0"
+  checksum: 10/2f638e085fd148d44ad197658d03e8a9a741a63b51362c95ec4cf6c12759a0bf12f8e77e140ea507d8838fea7e6b868c8082295ef6ccd4dde65ebe2a9e0073f7
+  languageName: node
+  linkType: hard
+
 "@nf-team/stylelint-config@npm:^1.1.0":
   version: 1.1.0
   resolution: "@nf-team/stylelint-config@npm:1.1.0"
@@ -14213,6 +14220,7 @@ __metadata:
     "@nf-team/core": "npm:^2.0.2"
     "@nf-team/eslint-config": "npm:^2.1.0"
     "@nf-team/react": "npm:^2.5.0"
+    "@nf-team/storage": "npm:^1.0.0"
     "@nf-team/stylelint-config": "npm:^1.1.0"
     "@react-google-maps/api": "npm:^2.19.2"
     "@storybook/addon-essentials": "npm:^7.5.2"

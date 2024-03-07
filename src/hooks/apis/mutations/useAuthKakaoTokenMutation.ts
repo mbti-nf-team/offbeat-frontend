@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
 
+import { getSessionStorageItem, removeSessionStorageItem } from '@nf-team/storage';
 import { useMutation } from '@tanstack/react-query';
 
 import { postAuthKakaoToken } from '@/lib/apis/auth';
@@ -17,11 +18,11 @@ function useAuthKakaoTokenMutation() {
         type: 'success',
       });
 
-      const params = sessionStorage.getItem('params');
+      const params = getSessionStorageItem('params');
 
       router.replace(params ? `/maps?${params}` : '/maps');
 
-      sessionStorage.removeItem('params');
+      removeSessionStorageItem('params');
     },
     onError: () => {
       renderToast('로그인에 실패했어요.', {
