@@ -34,6 +34,7 @@ const RAW_RUNTIME_STATE =
           ["@nf-team/core", "npm:2.0.2"],\
           ["@nf-team/eslint-config", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.1.0"],\
           ["@nf-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.5.0"],\
+          ["@nf-team/storage", "npm:1.0.0"],\
           ["@nf-team/stylelint-config", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:1.1.0"],\
           ["@react-google-maps/api", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.19.2"],\
           ["@storybook/addon-essentials", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:7.5.2"],\
@@ -4514,6 +4515,15 @@ const RAW_RUNTIME_STATE =
           "@types/react",\
           "react-dom",\
           "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@nf-team/storage", [\
+      ["npm:1.0.0", {\
+        "packageLocation": "./.yarn/cache/@nf-team-storage-npm-1.0.0-449b29a27c-2f638e085f.zip/node_modules/@nf-team/storage/",\
+        "packageDependencies": [\
+          ["@nf-team/storage", "npm:1.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -18787,6 +18797,7 @@ const RAW_RUNTIME_STATE =
           ["@nf-team/core", "npm:2.0.2"],\
           ["@nf-team/eslint-config", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.1.0"],\
           ["@nf-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.5.0"],\
+          ["@nf-team/storage", "npm:1.0.0"],\
           ["@nf-team/stylelint-config", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:1.1.0"],\
           ["@react-google-maps/api", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.19.2"],\
           ["@storybook/addon-essentials", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:7.5.2"],\
