@@ -20,7 +20,7 @@ function useAuthKakaoTokenMutation() {
 
       const params = getSessionStorageItem('params');
 
-      router.replace(params ? `/maps?${params}` : '/maps');
+      router.replace(params ? `/maps?${params}&menu=open` : '/maps?menu=open');
 
       removeSessionStorageItem('params');
     },
