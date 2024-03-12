@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -103,7 +103,7 @@ function PlaceDetailPage({ placeId, onClose }: Props) {
     }
   }, [placeDetail?.place_id, placeDetail?.name]);
 
-  const displayDetailInfoText = useCallback(() => {
+  const displayDetailInfoText = useMemo(() => {
     if (googleReviewCount < 3) {
       return '별점이 없어 방문자 비율을 구분하기 어려워요.';
     }
@@ -185,7 +185,7 @@ function PlaceDetailPage({ placeId, onClose }: Props) {
               </div>
             </div>
             <div className={styles.recommendDescription}>
-              {displayDetailInfoText()}
+              {displayDetailInfoText}
             </div>
             <Accordion
               title="구글 리뷰"
