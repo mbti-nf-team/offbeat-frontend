@@ -61,6 +61,12 @@
         }
       }
     }
+
+    .thumbnailWrapper {
+      overflow: hidden;
+      display: flex;
+      border-radius: 100px;
+    }
   }
 
   .koreanReview {
@@ -150,14 +156,5 @@
 
       @include text("body 1/500", "gray/primary");
     }
-  }
-
-  .thumbnail {
-    width: 84px;
-    height: 84px;
-    min-height: 84px;
-    min-width: 84px;
-    background-color: color("gray/tertiary");
-    border-radius: 12px;
   }
 }

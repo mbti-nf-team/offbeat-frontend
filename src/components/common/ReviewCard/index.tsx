@@ -25,7 +25,18 @@ function ReviewCard({
     >
       <div className={styles.authorInfoWrapper}>
         <div className={styles.authorInfo}>
-          <Image className={styles.thumbnail} alt={author} src={profileUrl} width={48} height={48} data-testid="profile" />
+          <div className={styles.thumbnailWrapper}>
+            <Image
+              className={styles.thumbnail}
+              alt={author}
+              src={profileUrl}
+              width={48}
+              height={48}
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMUFpSoBwABOAC9yb3dCAAAAABJRU5ErkJggg=="
+              data-testid="profile"
+            />
+          </div>
           <div className={styles.authorReview}>
             <div className={styles.authorName}>{author}</div>
             <div className={styles.rating}>
