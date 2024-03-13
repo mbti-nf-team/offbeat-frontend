@@ -12,6 +12,7 @@ export interface PlaceResult extends Place {
   name: string;
   thumbnail?: string;
   reviews?: Review[];
+  photoUrls: string[];
 }
 
 export interface PlaceDetail extends PlaceDetailsResponseData {
