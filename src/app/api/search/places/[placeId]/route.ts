@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { Language, PlaceDetailsResponseData } from '@googlemaps/google-maps-services-js';
+import { checkEmpty } from '@nf-team/core';
 
 import { fetchNaverSearchBlog, getGooglePlaceDetails, getPlacePhotoUrl } from '@/app/api/handler';
 import { FetchError } from '@/lib/apis';
@@ -57,7 +58,9 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    const thumbnailPhotoUrl = getPlacePhotoUrl(placeDetails.result.photos?.[0].photo_reference);
+    const placePhotoUrls = checkEmpty(placeDetails.result.photos)
+      .map((photo) => getPlacePhotoUrl(photo.photo_reference))
+      .filter((photoUrl) => !!photoUrl);
 
     const searchBlogPost = await fetchNaverSearchBlog<true>({
       query: placeDetails.result.name, includePost: true,
@@ -67,7 +70,8 @@ export async function GET(request: NextRequest) {
       ...placeDetails,
       result: {
         ...placeDetails.result,
-        thumbnail: thumbnailPhotoUrl,
+        thumbnail: placePhotoUrls[0],
+        photoUrls: placePhotoUrls,
         searchBlogPost,
       },
     }, {

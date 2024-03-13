@@ -2,7 +2,6 @@
 
 import { useCallback, useMemo, useRef } from 'react';
 
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { Language, Status } from '@googlemaps/google-maps-services-js';
@@ -23,6 +22,8 @@ import { CloseIcon, ShareIcon } from '@/lib/assets/icons';
 import { EventName } from '@/lib/types/event';
 import useToastStore from '@/stores/toast';
 import { bottomToUpVariants } from '@/styles/framerVariants';
+
+import PhotoSlider from '../PhotoSlider';
 
 import styles from './index.module.scss';
 
@@ -166,18 +167,10 @@ function PlaceDetailPage({ placeId, onClose }: Props) {
           {!isLoading && placeDetail && (
           <>
             <h1 className={styles.bodyHeader}>{placeDetail?.name}</h1>
-            {placeDetail?.thumbnail && (
-            <div className={styles.placeImageWrapper}>
-              <Image
-                width={382}
-                height={382}
-                className={styles.placeImage}
-                src={placeDetail.thumbnail}
-                alt={placeDetail?.name}
-                priority
-              />
-            </div>
-            )}
+            <PhotoSlider
+              photoUrls={placeDetail.photoUrls}
+              placeName={placeDetail?.name}
+            />
             <div className={styles.ratingWrapper}>
               <StarRating rating={placeDetail?.rating} type="detail" />
               <div className={styles.ratingText}>

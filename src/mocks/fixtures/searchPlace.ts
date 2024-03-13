@@ -25,6 +25,7 @@ const FIXTURE_SEARCH_PLACE: PlaceResult = {
   icon_background_color: '#FF9E67',
   icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
   name: '이치란 캐널시티하카타점',
+  photoUrls: [],
   photos: [
     {
       height: 4032,
