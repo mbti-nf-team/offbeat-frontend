@@ -70,6 +70,10 @@
       left: 16px;
     }
 
+    &.archiveButtonWrapper {
+      left: calc(100% - 96px);
+    }
+
     &.shareButtonWrapper {
       left: calc(100% - 56px);
 
