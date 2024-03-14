@@ -18,7 +18,7 @@ import StarRating from '@/components/common/StarRating';
 import useGetSearchPlace from '@/hooks/apis/queries/useGetSearchPlace';
 import useActivityLog from '@/hooks/useActivityLog';
 import useHideOnScroll from '@/hooks/useHideOnScroll';
-import { CloseIcon, ShareIcon } from '@/lib/assets/icons';
+import { ArchiveOutlineIcon, CloseIcon, ShareIcon } from '@/lib/assets/icons';
 import { EventName } from '@/lib/types/event';
 import useToastStore from '@/stores/toast';
 import { bottomToUpVariants } from '@/styles/framerVariants';
@@ -141,6 +141,18 @@ function PlaceDetailPage({ placeId, onClose }: Props) {
             onClick={onClose}
             hasPseudoSelectorStyle={false}
             onlyIcon={<CloseIcon />}
+          />
+        </div>
+        <div
+          className={clsx(styles.headerButtonWrapper, styles.archiveButtonWrapper)}
+        >
+          <Button
+            type="button"
+            color="ghost"
+            size="medium"
+            hasPseudoSelectorStyle={false}
+            disabled
+            onlyIcon={<ArchiveOutlineIcon />}
           />
         </div>
         <div
