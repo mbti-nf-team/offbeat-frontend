@@ -128,7 +128,7 @@ function MapContainer({ defaultCountryCode, defaultLocation, user }: Props) {
     .flatMap((page) => page.results), [places]);
 
   useEffect(() => {
-    if (!map || !defaultCountryCode) {
+    if (!map) {
       return;
     }
 
