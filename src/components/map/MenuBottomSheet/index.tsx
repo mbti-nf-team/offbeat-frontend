@@ -19,7 +19,7 @@ type Props = {
   user: User | null;
 };
 
-function UserMenuBottomSheet({ onToggleMenu, user }: Props) {
+function MenuBottomSheet({ onToggleMenu, user }: Props) {
   const router = useRouter();
   const { renderToast } = useToastStore(['renderToast']);
   const searchParams = useSearchParams();
@@ -99,10 +99,12 @@ function UserMenuBottomSheet({ onToggleMenu, user }: Props) {
           <ExternalLink href="#">이용약관</ExternalLink>
           •
           <ExternalLink href="#">개인정보 처리방침</ExternalLink>
+          •
+          <ExternalLink href="#">회원탈퇴</ExternalLink>
         </div>
       </div>
     </BottomSheet>
   );
 }
 
-export default UserMenuBottomSheet;
+export default MenuBottomSheet;

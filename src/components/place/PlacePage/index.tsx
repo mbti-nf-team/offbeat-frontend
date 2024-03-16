@@ -2,7 +2,7 @@
 
 import { useIsomorphicLayoutEffect } from '@nf-team/react';
 
-import PlaceDetailPage from '../PlaceDetailPage';
+import PlaceDetail from '../PlaceDetail';
 
 type Props = {
   id?: string;
@@ -19,7 +19,7 @@ function PlacePage({ id }: Props) {
   }, []);
 
   return (
-    <PlaceDetailPage
+    <PlaceDetail
       placeId={id}
       onClose={onCloseDetailWindow}
     />

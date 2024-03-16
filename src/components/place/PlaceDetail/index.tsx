@@ -35,7 +35,7 @@ type Props = {
   onClose: () => void;
 };
 
-function PlaceDetailPage({ placeId, onClose }: Props) {
+function PlaceDetail({ placeId, onClose }: Props) {
   const {
     data: placesWithSearchResult, isFetching: isLoading, isSuccess,
   } = useGetSearchPlace({ placeId });
@@ -262,4 +262,4 @@ function PlaceDetailPage({ placeId, onClose }: Props) {
   );
 }
 
-export default PlaceDetailPage;
+export default PlaceDetail;

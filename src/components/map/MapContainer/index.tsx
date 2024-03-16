@@ -11,9 +11,9 @@ import { checkEmpty, checkNumber, isEmpty } from '@nf-team/core';
 import { useGoogleMap } from '@react-google-maps/api';
 import QueryString from 'qs';
 
-import PlaceBottomSheet from '@/components/bottomSheet/PlaceBottomSheet';
-import UserMenuBottomSheet from '@/components/bottomSheet/UserMenu';
 import Button from '@/components/common/Button';
+import MenuBottomSheet from '@/components/map/MenuBottomSheet';
+import PlaceBottomSheet from '@/components/map/PlaceBottomSheet';
 import useGetSearchPlaces from '@/hooks/apis/queries/useGetSearchPlaces';
 import useCurrentLocationState from '@/hooks/maps/useCurrentLocationState';
 import useRenderCurrentLocationMarker from '@/hooks/maps/useRenderCurrentLocationMarker';
@@ -205,7 +205,7 @@ function MapContainer({ defaultCountryCode, defaultLocation, user }: Props) {
         isFetchingNextPage={isFetchingNextPage}
         setSelectedPlaceId={setSelectedPlaceId}
       />
-      <UserMenuBottomSheet onToggleMenu={onToggleMenu} user={user} />
+      <MenuBottomSheet onToggleMenu={onToggleMenu} user={user} />
     </>
   );
 }

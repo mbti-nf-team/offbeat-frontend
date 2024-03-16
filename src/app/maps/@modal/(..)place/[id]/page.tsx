@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import { useBoolean } from '@nf-team/react';
 
-import PlaceDetailPage from '@/components/place/PlaceDetailPage';
+import PlaceDetail from '@/components/place/PlaceDetail';
 
 import Modal from './Modal';
 
@@ -34,7 +34,7 @@ function Page({ params }: Props) {
 
   return (
     <Modal isOpen={isOpen}>
-      <PlaceDetailPage placeId={params?.id} onClose={onDismiss} />
+      <PlaceDetail placeId={params?.id} onClose={onDismiss} />
     </Modal>
   );
 }
