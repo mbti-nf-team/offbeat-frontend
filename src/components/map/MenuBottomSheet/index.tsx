@@ -12,6 +12,8 @@ import { ChevronRightIcon } from '@/lib/assets/icons';
 import { User } from '@/lib/types/auth';
 import useToastStore from '@/stores/toast';
 
+import SavedPlaces from '../SavedPlaces';
+
 import styles from './index.module.scss';
 
 type Props = {
@@ -63,38 +65,43 @@ function MenuBottomSheet({ onToggleMenu, user }: Props) {
     >
       <div className={styles.menuWrapper} role="menu">
         {user ? (
-          <div className={styles.loginMenu}>
-            <div className={styles.profile}>
-              {user?.profile_image_url ? (
-                <Image
-                  src={user.profile_image_url}
-                  alt={user.email}
-                  width={48}
-                  height={48}
-                  className={styles.image}
-                />
-              ) : (
-                <Image src="/assets/images/img_avatar_default.png" alt="profile" width={48} height={48} />
-              )}
-              <div className={styles.name}>{user.nickname}</div>
+          <>
+            <div className={styles.loginMenu}>
+              <div className={styles.profile}>
+                {user?.profile_image_url ? (
+                  <Image
+                    src={user.profile_image_url}
+                    alt={user.email}
+                    width={48}
+                    height={48}
+                    className={styles.image}
+                  />
+                ) : (
+                  <Image src="/assets/images/img_avatar_default.png" alt="profile" width={48} height={48} />
+                )}
+                <div className={styles.name}>{user.nickname}</div>
+              </div>
+              <button type="button" onClick={onLogout} className={styles.logoutButton}>
+                <div>로그아웃</div>
+                <ChevronRightIcon className={styles.logoutIcon} />
+              </button>
             </div>
-            <button type="button" onClick={onLogout} className={styles.logoutButton}>
-              <div>로그아웃</div>
-              <ChevronRightIcon className={styles.logoutIcon} />
-            </button>
-          </div>
+            <SavedPlaces />
+          </>
         ) : (
-          <button type="button" role="menuitem" className={styles.loginMenu} onClick={openLogin}>
-            <div className={styles.profile}>
-              <Image src="/assets/images/img_avatar_default.png" alt="profile" width={48} height={48} />
-              <div className={styles.name}>로그인</div>
+          <>
+            <button type="button" role="menuitem" className={styles.loginMenu} onClick={openLogin}>
+              <div className={styles.profile}>
+                <Image src="/assets/images/img_avatar_default.png" alt="profile" width={48} height={48} />
+                <div className={styles.name}>로그인</div>
+              </div>
+              <ChevronRightIcon className={styles.icon} />
+            </button>
+            <div className={styles.contents}>
+              some contents..
             </div>
-            <ChevronRightIcon className={styles.icon} />
-          </button>
+          </>
         )}
-        <div className={styles.contents}>
-          some contents..
-        </div>
         <div className={styles.footer}>
           <ExternalLink href="#">이용약관</ExternalLink>
           •
