@@ -10,7 +10,7 @@
 
   .savedPlaceItem {
     width: 100%;
-    padding: 24px;
+    padding: 24px 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -24,7 +24,7 @@
       flex-flow: row nowrap;
       gap: 12px;
       overflow-y: auto;
-      margin-right: -24px;
+      margin-right: -16px;
 
       .photo {
         border-radius: 8px;
