@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
     }
 
     const placePhotoUrls = checkEmpty(placeDetails.result.photos)
-      .map((photo) => getPlacePhotoUrl(photo.photo_reference))
+      .map((photo) => getPlacePhotoUrl(photo.photo_reference, 500))
       .filter((photoUrl) => !!photoUrl);
 
     const searchBlogPost = await fetchNaverSearchBlog<true>({

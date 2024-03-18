@@ -1,10 +1,4 @@
-import Image from 'next/image';
-
-import { checkNumber } from '@nf-team/core';
-
-import Button from '@/components/common/Button';
-import StarRating from '@/components/common/StarRating';
-import { ArchiveSolidIcon } from '@/lib/assets/icons';
+import PlaceItem from '@/components/common/PlaceItem';
 
 import styles from './index.module.scss';
 
@@ -80,31 +74,18 @@ function SavedPlaces() {
       {mockSavedPlaces.map(({
         id, photoUrls, name, rating, user_ratings_total, nation, address, distance,
       }) => (
-        <li key={id} className={styles.savedPlaceItem}>
-          <div className={styles.photos}>
-            {photoUrls.map((photo, index) => (
-              <Image key={photo} src={photo} alt={`${name}-image-${index}`} width={160} height={160} className={styles.photo} />
-            ))}
-          </div>
-          <div className={styles.placeInfoWrapper}>
-            <div className={styles.placeName}>
-              <div>{name}</div>
-              <Button size="small" onlyIcon={<ArchiveSolidIcon />} color="ghost" />
-            </div>
-            <div className={styles.placeRatingWrapper}>
-              <div className={styles.placeRating}>{rating}</div>
-              <StarRating rating={rating} type="list" />
-              <div className={styles.placeUserRatingsTotal}>{`(${checkNumber(user_ratings_total)})`}</div>
-            </div>
-            <div className={styles.addressInfo}>
-              <div className={styles.nation}>{nation}</div>
-              <div>∙</div>
-              <div className={styles.address}>{address}</div>
-              <div>∙</div>
-              <div className={styles.distance}>{distance}</div>
-            </div>
-          </div>
-        </li>
+        <PlaceItem
+          key={id}
+          placeId={id}
+          isSavedPlace
+          photoUrls={photoUrls}
+          address={address}
+          distance={distance}
+          nation={nation}
+          placeName={name}
+          rating={rating}
+          userRatingsTotal={user_ratings_total}
+        />
       ))}
     </ul>
   );
