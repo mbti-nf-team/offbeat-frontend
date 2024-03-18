@@ -17,7 +17,7 @@ function PlaceBottomSheetItem({ place, onClick, wrapperRef }: Props) {
   const { name, user_ratings_total } = place;
   const rating = checkNumber(place.rating);
 
-  const onKeyDown = useActionKeyEvent<HTMLLIElement>(['Enter', 'NumpadEnter'], () => onClick);
+  const onKeyDown = useActionKeyEvent<HTMLLIElement, [string]>(['Enter', 'NumpadEnter'], (_, id) => onClick(id));
 
   return (
     <li
@@ -25,7 +25,7 @@ function PlaceBottomSheetItem({ place, onClick, wrapperRef }: Props) {
       className={styles.placeItem}
       tabIndex={0}
       onClick={() => onClick(place.place_id)}
-      onKeyDown={onKeyDown}
+      onKeyDown={(e) => onKeyDown(e, place.place_id)}
       role="menuitem"
     >
       <div className={styles.placeName}>{name}</div>

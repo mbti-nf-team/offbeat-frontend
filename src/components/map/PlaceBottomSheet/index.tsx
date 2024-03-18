@@ -20,7 +20,7 @@ import styles from './index.module.scss';
 
 type Props = {
   places: PlacesWithSearchResult<false>[];
-  refState: InfiniteRefState<HTMLDivElement>;
+  refState: InfiniteRefState<HTMLUListElement>;
   isSuccess: boolean;
   isFetchingNextPage: boolean;
   isFetching: boolean;
@@ -106,7 +106,7 @@ function PlaceBottomSheet({
             </Button>
           </div>
         ) : (
-          <div className={styles.placeList} ref={refState.wrapperRef}>
+          <ul className={styles.placeList} ref={refState.wrapperRef}>
             {filteredPlaces.map((place, index, array) => (
               <PlaceBottomSheetItem
                 key={place.place_id}
@@ -120,11 +120,11 @@ function PlaceBottomSheet({
               />
             ))}
             {(isFetchingNextPage || isFetching) && (
-            <div className={styles.loadingWrapper}>
-              <Spinner isLoading />
-            </div>
+              <div className={styles.loadingWrapper}>
+                <Spinner isLoading />
+              </div>
             )}
-          </div>
+          </ul>
         )}
       </BottomSheet>
     </>

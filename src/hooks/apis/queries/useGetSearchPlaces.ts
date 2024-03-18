@@ -5,7 +5,7 @@ import { fetchSearchPlaces } from '@/lib/apis/search';
 import { SearchPlacesResponse } from '@/lib/apis/search/model';
 import { LatLngLiteral } from '@/lib/types/google.maps';
 
-function useGetSearchPlaces({
+function useGetSearchPlaces<T = Element>({
   keyword, lat, lng, radius,
 }: {
   keyword: string; radius?: number; } & Partial<LatLngLiteral>) {
@@ -21,7 +21,7 @@ function useGetSearchPlaces({
 
   const { hasNextPage, fetchNextPage } = query;
 
-  const refState = useIntersectionObserver<HTMLDivElement>({
+  const refState = useIntersectionObserver<T>({
     isRoot: true,
     fetchNextPage,
     hasNextPage,

@@ -44,7 +44,10 @@ export async function generateMetadata(
       return defaultMetadata;
     }
 
-    const thumbnailPhotoUrl = getPlacePhotoUrl(placeDetails.result.photos?.[0].photo_reference);
+    const thumbnailPhotoUrl = getPlacePhotoUrl(
+      placeDetails.result.photos?.[0].photo_reference,
+      500,
+    );
 
     const previousParent = await parent;
     const previousImages = checkEmpty(previousParent.openGraph?.images);

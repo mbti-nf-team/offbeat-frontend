@@ -62,7 +62,7 @@ function MapContainer({ defaultCountryCode, defaultLocation, user }: Props) {
     query: {
       data: places, isSuccess, isFetching, isFetchingNextPage,
     }, refState,
-  } = useGetSearchPlaces({
+  } = useGetSearchPlaces<HTMLUListElement>({
     keyword: searchKeyword, lat, lng, radius: searchRadius,
   });
 
