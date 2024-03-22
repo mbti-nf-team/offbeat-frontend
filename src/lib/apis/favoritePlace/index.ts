@@ -1,3 +1,7 @@
+import Cookies from 'js-cookie';
+
+import CookieNames from '@/lib/constants/cookies';
+
 import api from '..';
 
 import { FavoritePlaceRequest, FavoritePlaceResponse, FavoritePlacesResponse } from './model';
@@ -12,13 +16,17 @@ export const getFavoritePlaces = async () => {
   return response;
 };
 
-export const postFavoritePlace = async (params: FavoritePlaceRequest) => {
+export const postFavoritePlace = async (request: FavoritePlaceRequest) => {
   const response = await api<FavoritePlaceResponse>({
     method: 'POST',
     url: '/favorite-places',
     type: 'public',
-    params,
+    headers: {
+      // TODO - 임시
+      Authorization: `Bearer ${Cookies.get(CookieNames.ACCESS_TOKEN)}`,
+    },
     config: {
+      body: JSON.stringify(request),
       cache: 'no-store',
     },
   });

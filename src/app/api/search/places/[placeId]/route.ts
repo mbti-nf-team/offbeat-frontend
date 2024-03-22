@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { Language, PlaceDetailsResponseData } from '@googlemaps/google-maps-services-js';
+import {
+  Language, PlaceDetailsResponseData, PlaceType2,
+} from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 
 import { fetchNaverSearchBlog, getGooglePlaceDetails, getPlacePhotoUrl } from '@/app/api/handler';
@@ -46,7 +48,7 @@ export async function GET(request: NextRequest) {
       language: Language.ko,
       region: 'KR',
       reviews_sort: 'newest',
-      fields: ['geometry', 'name', 'photos', 'place_id', 'rating', 'reviews', 'url', 'user_ratings_total'],
+      fields: ['geometry', 'name', 'photos', 'place_id', 'rating', 'reviews', 'url', 'user_ratings_total', 'address_components'],
       reviews_no_translations: false,
     });
 
@@ -57,6 +59,11 @@ export async function GET(request: NextRequest) {
         statusText: 'not found place name',
       });
     }
+
+    const { address_components, ...placeDetailResult } = placeDetails.result;
+
+    const country = address_components
+      ?.find((address) => address.types.includes(PlaceType2.country));
 
     const placePhotoUrls = checkEmpty(placeDetails.result.photos)
       .map((photo) => getPlacePhotoUrl(photo.photo_reference, 500))
@@ -69,7 +76,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       ...placeDetails,
       result: {
-        ...placeDetails.result,
+        ...placeDetailResult,
+        country,
         thumbnail: placePhotoUrls[0],
         photoUrls: placePhotoUrls,
         searchBlogPost,
