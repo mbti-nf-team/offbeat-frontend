@@ -1,4 +1,5 @@
 import {
+  AddressComponent,
   AddressGeometry, Place, PlaceDetailsResponseData, PlaceReview,
 } from '@googlemaps/google-maps-services-js';
 
@@ -12,6 +13,7 @@ export interface PlaceResult extends Place {
   name: string;
   thumbnail?: string;
   reviews?: Review[];
+  country?: AddressComponent;
   photoUrls: string[];
 }
 

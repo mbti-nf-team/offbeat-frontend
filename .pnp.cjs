@@ -52,6 +52,7 @@ const RAW_RUNTIME_STATE =
           ["@types/google.maps", "npm:3.54.10"],\
           ["@types/jest", "npm:29.5.6"],\
           ["@types/jest-plugin-context", "npm:2.9.6"],\
+          ["@types/js-cookie", "npm:3.0.6"],\
           ["@types/node", "npm:18.0.0"],\
           ["@types/qs", "npm:6.9.9"],\
           ["@types/react", "npm:18.2.33"],\
@@ -82,6 +83,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:29.7.0"],\
           ["jest-plugin-context", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.9.0"],\
           ["jest-transformer-svg", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.0.1"],\
+          ["js-cookie", "npm:3.0.5"],\
           ["jwt-decode", "npm:4.0.0"],\
           ["lint-staged", "npm:13.3.0"],\
           ["next", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:14.1.4"],\
@@ -8166,6 +8168,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/jest-plugin-context", "npm:2.9.6"],\
           ["@types/jest", "npm:29.5.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/js-cookie", [\
+      ["npm:3.0.6", {\
+        "packageLocation": "./.yarn/cache/@types-js-cookie-npm-3.0.6-c9126e5b48-272d551687.zip/node_modules/@types/js-cookie/",\
+        "packageDependencies": [\
+          ["@types/js-cookie", "npm:3.0.6"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16909,6 +16920,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["js-cookie", [\
+      ["npm:3.0.5", {\
+        "packageLocation": "./.yarn/cache/js-cookie-npm-3.0.5-8fc8fcc9b4-366494b163.zip/node_modules/js-cookie/",\
+        "packageDependencies": [\
+          ["js-cookie", "npm:3.0.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["js-tokens", [\
       ["npm:4.0.0", {\
         "packageLocation": "./.yarn/cache/js-tokens-npm-4.0.0-0ac852e9e2-af37d0d913.zip/node_modules/js-tokens/",\
@@ -18815,6 +18835,7 @@ const RAW_RUNTIME_STATE =
           ["@types/google.maps", "npm:3.54.10"],\
           ["@types/jest", "npm:29.5.6"],\
           ["@types/jest-plugin-context", "npm:2.9.6"],\
+          ["@types/js-cookie", "npm:3.0.6"],\
           ["@types/node", "npm:18.0.0"],\
           ["@types/qs", "npm:6.9.9"],\
           ["@types/react", "npm:18.2.33"],\
@@ -18845,6 +18866,7 @@ const RAW_RUNTIME_STATE =
           ["jest-environment-jsdom", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:29.7.0"],\
           ["jest-plugin-context", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.9.0"],\
           ["jest-transformer-svg", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.0.1"],\
+          ["js-cookie", "npm:3.0.5"],\
           ["jwt-decode", "npm:4.0.0"],\
           ["lint-staged", "npm:13.3.0"],\
           ["next", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:14.1.4"],\

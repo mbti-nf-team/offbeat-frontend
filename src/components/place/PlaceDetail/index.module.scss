@@ -70,18 +70,18 @@
       left: 16px;
     }
 
+    .disabledIcon {
+      path {
+        fill: color("black/tertiary");
+      }
+    }
+
     &.archiveButtonWrapper {
       left: calc(100% - 96px);
     }
 
     &.shareButtonWrapper {
       left: calc(100% - 56px);
-
-      .shareIcon {
-        path {
-          fill: color("black/tertiary");
-        }
-      }
     }
   }
 }

@@ -15,6 +15,7 @@ import ResultCard from '@/components/common/ResultCard';
 import ReviewCard from '@/components/common/ReviewCard';
 import Spinner from '@/components/common/Spinner';
 import StarRating from '@/components/common/StarRating';
+import useSaveFavoritePlaceMutation from '@/hooks/apis/mutations/useSaveFavoritePlaceMutation';
 import useGetSearchPlace from '@/hooks/apis/queries/useGetSearchPlace';
 import useActivityLog from '@/hooks/useActivityLog';
 import useHideOnScroll from '@/hooks/useHideOnScroll';
@@ -39,6 +40,7 @@ function PlaceDetail({ placeId, onClose }: Props) {
   const {
     data: placesWithSearchResult, isFetching: isLoading, isSuccess,
   } = useGetSearchPlace({ placeId });
+  const { mutate: saveFavoritePlaceMutate } = useSaveFavoritePlaceMutation();
 
   const placeDetail = placesWithSearchResult?.result;
 
@@ -69,6 +71,24 @@ function PlaceDetail({ placeId, onClose }: Props) {
       url,
     },
   });
+
+  const onClickArchive = () => {
+    if (
+      !placeDetail?.country?.short_name
+      || !placeDetail?.place_id
+      || !placeDetail?.geometry?.location.lat
+      || !placeDetail?.geometry?.location.lng
+    ) {
+      return;
+    }
+
+    saveFavoritePlaceMutate({
+      country_code: placeDetail?.country?.short_name,
+      google_place_id: placeDetail?.place_id,
+      latitude: placeDetail?.geometry?.location.lat,
+      longitude: placeDetail?.geometry?.location.lng,
+    });
+  };
 
   const onClickShare = useCallback(async () => {
     try {
@@ -150,9 +170,14 @@ function PlaceDetail({ placeId, onClose }: Props) {
             type="button"
             color="ghost"
             size="medium"
+            onClick={onClickArchive}
             hasPseudoSelectorStyle={false}
-            disabled
-            onlyIcon={<ArchiveOutlineIcon />}
+            disabled={isVisibleLoading}
+            onlyIcon={(
+              <ArchiveOutlineIcon
+                className={clsx(isVisibleLoading && styles.disabledIcon)}
+              />
+            )}
           />
         </div>
         <div
@@ -164,9 +189,9 @@ function PlaceDetail({ placeId, onClose }: Props) {
             size="medium"
             onClick={onClickShare}
             hasPseudoSelectorStyle={false}
-            disabled={isLoading || !placeDetail}
+            disabled={isVisibleLoading}
             onlyIcon={
-              <ShareIcon className={clsx((isLoading || !placeDetail) && styles.shareIcon)} />
+              <ShareIcon className={clsx(isVisibleLoading && styles.disabledIcon)} />
             }
           />
         </div>
@@ -176,7 +201,7 @@ function PlaceDetail({ placeId, onClose }: Props) {
           })}
         >
           <Spinner isLoading={isVisibleLoading} size="medium" />
-          {!isLoading && placeDetail && (
+          {!isVisibleLoading && (
           <>
             <h1 className={styles.bodyHeader}>{placeDetail?.name}</h1>
             <PhotoSlider
