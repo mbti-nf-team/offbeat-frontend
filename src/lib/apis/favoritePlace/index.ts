@@ -11,6 +11,10 @@ export const getFavoritePlaces = async () => {
     method: 'GET',
     url: '/favorite-places',
     type: 'public',
+    headers: {
+      // TODO - 임시
+      Authorization: `Bearer ${Cookies.get(CookieNames.ACCESS_TOKEN)}`,
+    },
   });
 
   return response;
@@ -39,6 +43,10 @@ export const deleteFavoritePlace = async (id: string) => {
     method: 'DELETE',
     url: `/favorite-places/${id}`,
     type: 'public',
+    headers: {
+      // TODO - 임시
+      Authorization: `Bearer ${Cookies.get(CookieNames.ACCESS_TOKEN)}`,
+    },
     config: {
       cache: 'no-store',
     },
