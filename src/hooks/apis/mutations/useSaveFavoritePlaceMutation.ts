@@ -15,6 +15,11 @@ function useSaveFavoritePlaceMutation() {
         type: 'success',
       });
     },
+    onError: () => {
+      renderToast('장소에 실패했습니다.', {
+        type: 'error',
+      });
+    },
   });
 
   return mutation;

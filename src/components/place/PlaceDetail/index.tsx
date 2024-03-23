@@ -73,20 +73,18 @@ function PlaceDetail({ placeId, onClose }: Props) {
   });
 
   const onClickArchive = () => {
-    if (
-      !placeDetail?.country?.short_name
+    if (!placeDetail?.country?.short_name
       || !placeDetail?.place_id
       || !placeDetail?.geometry?.location.lat
-      || !placeDetail?.geometry?.location.lng
-    ) {
+      || !placeDetail?.geometry?.location.lng) {
       return;
     }
 
     saveFavoritePlaceMutate({
-      country_code: placeDetail?.country?.short_name,
-      google_place_id: placeDetail?.place_id,
-      latitude: placeDetail?.geometry?.location.lat,
-      longitude: placeDetail?.geometry?.location.lng,
+      country_code: placeDetail.country.short_name,
+      google_place_id: placeDetail.place_id,
+      latitude: placeDetail.geometry.location.lat,
+      longitude: placeDetail.geometry.location.lng,
     });
   };
 
