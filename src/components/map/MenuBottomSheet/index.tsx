@@ -86,7 +86,7 @@ function MenuBottomSheet({ onToggleMenu, user }: Props) {
                 <ChevronRightIcon className={styles.logoutIcon} />
               </button>
             </div>
-            <SavedPlaces />
+            <SavedPlaces isMenu />
           </>
         ) : (
           <>
