@@ -1,3 +1,4 @@
+import Button from '@/components/common/Button';
 import PlaceItem from '@/components/common/PlaceItem';
 
 import styles from './index.module.scss';
@@ -68,26 +69,39 @@ const mockSavedPlaces = [
   },
 ];
 
-function SavedPlaces() {
+type Props = {
+  isMenu?: boolean;
+};
+
+function SavedPlaces({ isMenu }: Props) {
   return (
-    <ul className={styles.savedPlacesWrapper}>
-      {mockSavedPlaces.map(({
-        id, photoUrls, name, rating, user_ratings_total, nation, address, distance,
-      }) => (
-        <PlaceItem
-          key={id}
-          placeId={id}
-          isSavedPlace
-          photoUrls={photoUrls}
-          address={address}
-          distance={distance}
-          nation={nation}
-          placeName={name}
-          rating={rating}
-          userRatingsTotal={user_ratings_total}
-        />
-      ))}
-    </ul>
+    <div>
+      <ul className={styles.savedPlacesWrapper}>
+        {mockSavedPlaces.map(({
+          id, photoUrls, name, rating, user_ratings_total, nation, address, distance,
+        }) => (
+          <PlaceItem
+            key={id}
+            placeId={id}
+            isSavedPlace
+            photoUrls={photoUrls}
+            address={address}
+            distance={distance}
+            nation={nation}
+            placeName={name}
+            rating={rating}
+            userRatingsTotal={user_ratings_total}
+          />
+        ))}
+      </ul>
+      {isMenu && (
+        <div className={styles.buttonWrapper}>
+          <Button href="/my/favorite-places" size="small" color="highlight">
+            저장한 장소 더보기
+          </Button>
+        </div>
+      )}
+    </div>
   );
 }
 
