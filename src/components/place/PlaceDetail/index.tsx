@@ -15,11 +15,15 @@ import ResultCard from '@/components/common/ResultCard';
 import ReviewCard from '@/components/common/ReviewCard';
 import Spinner from '@/components/common/Spinner';
 import StarRating from '@/components/common/StarRating';
+import useRemoveFavoritePlaceMutation from '@/hooks/apis/mutations/useRemoveFavoritePlaceMutation';
 import useSaveFavoritePlaceMutation from '@/hooks/apis/mutations/useSaveFavoritePlaceMutation';
+import useGetPlace from '@/hooks/apis/queries/useGetPlace';
 import useGetSearchPlace from '@/hooks/apis/queries/useGetSearchPlace';
 import useActivityLog from '@/hooks/useActivityLog';
 import useHideOnScroll from '@/hooks/useHideOnScroll';
-import { ArchiveOutlineIcon, CloseIcon, ShareIcon } from '@/lib/assets/icons';
+import {
+  ArchiveOutlineIcon, ArchiveSolidIcon, CloseIcon, ShareIcon,
+} from '@/lib/assets/icons';
 import { EventName } from '@/lib/types/event';
 import useToastStore from '@/stores/toast';
 import { bottomToUpVariants } from '@/styles/framerVariants';
@@ -40,7 +44,11 @@ function PlaceDetail({ placeId, onClose }: Props) {
   const {
     data: placesWithSearchResult, isFetching: isLoading, isSuccess,
   } = useGetSearchPlace({ placeId });
+
+  const { data: place } = useGetPlace(placeId);
+
   const { mutate: saveFavoritePlaceMutate } = useSaveFavoritePlaceMutation();
+  const { mutate: removeFavoritePlaceMutate } = useRemoveFavoritePlaceMutation();
 
   const placeDetail = placesWithSearchResult?.result;
 
@@ -77,6 +85,11 @@ function PlaceDetail({ placeId, onClose }: Props) {
       || !placeDetail?.place_id
       || !placeDetail?.geometry?.location.lat
       || !placeDetail?.geometry?.location.lng) {
+      return;
+    }
+
+    if (place?.is_favorite) {
+      removeFavoritePlaceMutate(placeDetail.place_id);
       return;
     }
 
@@ -172,9 +185,17 @@ function PlaceDetail({ placeId, onClose }: Props) {
             hasPseudoSelectorStyle={false}
             disabled={isVisibleLoading}
             onlyIcon={(
-              <ArchiveOutlineIcon
-                className={clsx(isVisibleLoading && styles.disabledIcon)}
-              />
+              <>
+                {place?.is_favorite ? (
+                  <ArchiveSolidIcon
+                    className={clsx(isVisibleLoading && styles.disabledIcon)}
+                  />
+                ) : (
+                  <ArchiveOutlineIcon
+                    className={clsx(isVisibleLoading && styles.disabledIcon)}
+                  />
+                )}
+              </>
             )}
           />
         </div>
