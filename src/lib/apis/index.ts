@@ -46,6 +46,10 @@ async function api<T, K = any>({
     headers: {
       ...defaultHeader,
       ...headers,
+      ...(config?.body ? {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      } : {}),
     },
     method,
   });
