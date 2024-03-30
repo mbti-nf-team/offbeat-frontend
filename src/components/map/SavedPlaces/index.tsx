@@ -74,6 +74,8 @@ type Props = {
 };
 
 function SavedPlaces({ isMenu }: Props) {
+  // const { data: favoritePlaces } = useGetFavoritePlaces();
+
   return (
     <div>
       <ul className={styles.savedPlacesWrapper}>
