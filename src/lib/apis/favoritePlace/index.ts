@@ -9,8 +9,8 @@ import { FavoritePlaceRequest, FavoritePlaceResponse, FavoritePlacesResponse } f
 export const getFavoritePlaces = async () => {
   const response = await api<FavoritePlacesResponse>({
     method: 'GET',
-    url: '/favorite-places',
-    type: 'public',
+    url: '/my/favorite-places',
+    type: 'bff',
     headers: {
       // TODO - 임시
       Authorization: `Bearer ${Cookies.get(CookieNames.ACCESS_TOKEN)}`,
