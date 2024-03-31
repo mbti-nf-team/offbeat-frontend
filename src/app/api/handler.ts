@@ -63,24 +63,21 @@ export const fetchAllSettledSearchNaverBlogs = async ({
   return [...firstResponse, ...secondResponse];
 };
 
-export const fetchAllSettledPlaceDetails = async ({
+export const fetchAllPlaceDetails = async ({
   placeIds,
 }: {
   placeIds: string[];
 }) => {
   const response = await Promise
-    .allSettled([...placeIds.map((placeId) => getGooglePlaceDetails({
+    .all([...placeIds.map((placeId) => getGooglePlaceDetails({
       place_id: placeId,
       language: Language.ko,
       region: 'KR',
-      reviews_sort: 'newest',
-      fields: ['geometry', 'name', 'photos', 'place_id', 'rating', 'reviews', 'url', 'user_ratings_total', 'address_components'],
+      fields: ['name', 'photos', 'rating', 'url', 'user_ratings_total', 'address_components'],
       reviews_no_translations: false,
     }))]);
 
-  const successResponse = response.filter((value) => value.status === 'fulfilled') as PromiseFulfilledResult<PlaceDetailsResponseData>[];
-
-  return successResponse;
+  return response;
 };
 
 export const getGoogleTextSearch = async (params: TextSearchRequestParams) => {

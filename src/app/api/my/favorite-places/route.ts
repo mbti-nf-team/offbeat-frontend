@@ -1,14 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { FetchError } from '@/lib/apis';
+import { checkEmpty } from '@nf-team/core';
+import QueryString from 'qs';
+
+import api, { FetchError } from '@/lib/apis';
+import { FavoritePlacesResponse } from '@/lib/apis/favoritePlace/model';
 import CookieNames from '@/lib/constants/cookies';
+
+import { fetchAllPlaceDetails, getPlacePhotoUrl } from '../../handler';
 
 export const runtime = 'edge';
 
-// const TEN_MINUTES = 600;
+const TEN_MINUTES = 600;
 
 export async function GET(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
+  const { searchParams } = new URL(request.url);
+
+  const params = QueryString.parse(searchParams.toString());
+
   const accessToken = request.cookies.get(CookieNames.ACCESS_TOKEN)?.value;
 
   if (!accessToken) {
@@ -19,47 +29,44 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // const response = await api<FavoritePlacesResponse>({
-    //   url: `${process.env.NEXT_PUBLIC_API_HOST}/favorite-places`,
-    //   method: 'GET',
-    //   headers: {
-    //     Authorization: `Bearer ${accessToken}`,
-    //   },
-    // });
+    const response = await api<FavoritePlacesResponse>({
+      url: '/favorite-places',
+      type: 'public',
+      method: 'GET',
+      params,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
-    // const googleDetails = await fetchAllSettledPlaceDetails({
-    //   placeIds: response.items.map((item) => item.google_place_id),
-    // });
+    const placeIds = response.items.map((item) => item.google_place_id);
 
-    // const { address_components, ...placeDetailResult } = placeDetails.result;
+    const googleDetails = await fetchAllPlaceDetails({ placeIds });
 
-    // const country = address_components
-    //   ?.find((address) => address.types.includes(PlaceType2.country));
+    const favoritePlaces = googleDetails.map((detail, index) => {
+      const placePhotoUrls = checkEmpty(detail.result.photos)
+        .map((photo) => getPlacePhotoUrl(photo.photo_reference, 500))
+        .filter((photoUrl) => !!photoUrl);
 
-    // const placePhotoUrls = checkEmpty(placeDetails.result.photos)
-    //   .map((photo) => getPlacePhotoUrl(photo.photo_reference, 500))
-    //   .filter((photoUrl) => !!photoUrl);
+      const favoritePlace = response.items[index];
 
-    // const searchBlogPost = await fetchNaverSearchBlog<true>({
-    //   query: placeDetails.result.name, includePost: true,
-    // });
+      return {
+        ...detail.result,
+        ...favoritePlace,
+        photoUrls: placePhotoUrls,
+      };
+    });
 
-    // return NextResponse.json({
-    //   ...placeDetails,
-    //   result: {
-    //     ...placeDetailResult,
-    //     country,
-    //     thumbnail: placePhotoUrls[0],
-    //     photoUrls: placePhotoUrls,
-    //     searchBlogPost,
-    //   },
-    // }, {
-    //   headers: {
-    //     'Cache-Control': 'public, s-maxage=1',
-    //     'CDN-Cache-Control': 'public, s-maxage=60',
-    //     'Vercel-CDN-Cache-Control': `public, s-maxage=${TEN_MINUTES}`,
-    //   },
-    // });
+    return NextResponse.json({
+      ...response,
+      items: favoritePlaces,
+    }, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=1',
+        'CDN-Cache-Control': 'public, s-maxage=60',
+        'Vercel-CDN-Cache-Control': `public, s-maxage=${TEN_MINUTES}`,
+      },
+    });
   } catch (error) {
     const fetchError = error as FetchError;
 
