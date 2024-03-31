@@ -1,3 +1,4 @@
+import { Pagination } from '@/lib/types';
 import { FavoritePlace } from '@/lib/types/favoritePlace';
 
 export type FavoritePlacesRequest = Partial<{
@@ -17,9 +18,4 @@ export type FavoritePlaceRequest = {
 
 export type FavoritePlaceResponse = FavoritePlace;
 
-export type FavoritePlacesResponse = {
-  total_count: number;
-  next_cursor: string;
-  limit: number;
-  items: FavoritePlace[];
-};
+export type FavoritePlacesResponse = Pagination<FavoritePlace>;

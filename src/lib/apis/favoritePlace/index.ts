@@ -1,16 +1,32 @@
 import Cookies from 'js-cookie';
 
 import CookieNames from '@/lib/constants/cookies';
+import { Pagination } from '@/lib/types';
+import { FavoritePlaceWithPlaceDetail } from '@/lib/types/favoritePlace';
 
 import api from '..';
 
-import { FavoritePlaceRequest, FavoritePlaceResponse, FavoritePlacesResponse } from './model';
+import { FavoritePlaceRequest, FavoritePlaceResponse, FavoritePlacesRequest } from './model';
 
-export const getFavoritePlaces = async () => {
-  const response = await api<FavoritePlacesResponse>({
+export const getFavoritePlaces = async (request: FavoritePlacesRequest) => {
+  const response = await api<Pagination<FavoritePlaceWithPlaceDetail>>({
     method: 'GET',
     url: '/my/favorite-places',
     type: 'bff',
+    params: request,
+  });
+
+  return response;
+};
+
+export const getFavoritePlacessss = async () => {
+  const response = await api<Pagination<FavoritePlaceWithPlaceDetail>>({
+    method: 'GET',
+    url: '/favorite-places',
+    type: 'public',
+    params: {
+      country_code: 'JP',
+    },
     headers: {
       // TODO - 임시
       Authorization: `Bearer ${Cookies.get(CookieNames.ACCESS_TOKEN)}`,

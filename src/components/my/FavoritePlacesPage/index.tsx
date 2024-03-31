@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/common/Button';
-import SavedPlaces from '@/components/map/SavedPlaces';
+import FavoritePlaces from '@/components/map/FavoritePlaces';
 import { NarrowArrowLeftIcon } from '@/lib/assets/icons';
 
 import styles from './index.module.scss';
@@ -23,7 +23,7 @@ function FavoritePlacesPage() {
           onlyIcon={<NarrowArrowLeftIcon />}
         />
       </header>
-      <SavedPlaces />
+      <FavoritePlaces />
     </>
   );
 }

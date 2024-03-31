@@ -12,7 +12,7 @@ import { ChevronRightIcon } from '@/lib/assets/icons';
 import { User } from '@/lib/types/auth';
 import useToastStore from '@/stores/toast';
 
-import SavedPlaces from '../SavedPlaces';
+import FavoritePlaces from '../FavoritePlaces';
 
 import styles from './index.module.scss';
 
@@ -86,7 +86,7 @@ function MenuBottomSheet({ onToggleMenu, user }: Props) {
                 <ChevronRightIcon className={styles.logoutIcon} />
               </button>
             </div>
-            <SavedPlaces isMenu />
+            <FavoritePlaces isMenu />
           </>
         ) : (
           <>
