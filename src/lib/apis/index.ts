@@ -58,6 +58,10 @@ async function api<T, K = any>({
     throw new FetchError(response, response.statusText);
   }
 
+  if (response.status === 204) {
+    return null as T;
+  }
+
   const data = await response.json() as Promise<T>;
 
   return data;

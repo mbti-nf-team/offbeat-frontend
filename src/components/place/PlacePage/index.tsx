@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { useIsomorphicLayoutEffect } from '@nf-team/react';
 
 import PlaceDetail from '../PlaceDetail';
@@ -9,9 +11,10 @@ type Props = {
 };
 
 function PlacePage({ id }: Props) {
+  const router = useRouter();
+
   const onCloseDetailWindow = () => {
-    // TODO - 추후 정의
-    console.log('clicked close');
+    router.push('/');
   };
 
   useIsomorphicLayoutEffect(() => {

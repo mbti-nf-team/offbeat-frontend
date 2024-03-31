@@ -20,6 +20,10 @@ function useSaveFavoritePlaceMutation() {
         google_place_id: response.google_place_id,
         is_favorite: true,
       });
+
+      queryClient.invalidateQueries({
+        queryKey: ['place', response.google_place_id],
+      });
     },
     onError: () => {
       renderToast('장소에 실패했습니다.', {
