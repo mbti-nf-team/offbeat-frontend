@@ -18,6 +18,10 @@ function useRemoveFavoritePlaceMutation() {
         google_place_id: id,
         is_favorite: false,
       });
+
+      queryClient.invalidateQueries({
+        queryKey: ['place', id],
+      });
     },
     onError: () => {
       renderToast('장소 저장을 해제에 실패했습니다.', {
