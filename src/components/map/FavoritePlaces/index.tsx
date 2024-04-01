@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 import { useSearchParams } from 'next/navigation';
 
 import { checkNumber } from '@nf-team/core';
@@ -15,20 +17,22 @@ type Props = {
 function FavoritePlaces({ isMenu }: Props) {
   const searchParams = useSearchParams();
 
-  const { data: favoritePlaces } = useInfiniteFavoritePlacesQuery({
+  const { data: favoritePlaces, refetch } = useInfiniteFavoritePlacesQuery({
     country_code: searchParams?.get('country') || 'KR',
   });
 
   return (
     <div>
       <ul className={styles.savedPlacesWrapper}>
-        {favoritePlaces?.pages?.map(({ items }) => (
-          <>
+        {favoritePlaces?.pages?.map(({ items }, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Fragment key={index}>
             {items.map(({
-              id, google_place_id, photoUrls, country_code, name, rating, user_ratings_total,
+              google_place_id, photoUrls, country_code, name, rating, user_ratings_total,
             }) => (
               <PlaceItem
-                key={id}
+                key={google_place_id}
+                refetch={refetch}
                 placeId={google_place_id}
                 isSavedPlace
                 photoUrls={photoUrls}
@@ -40,7 +44,7 @@ function FavoritePlaces({ isMenu }: Props) {
                 userRatingsTotal={user_ratings_total}
               />
             ))}
-          </>
+          </Fragment>
         ))}
       </ul>
       {isMenu && checkNumber(favoritePlaces?.pages?.[0].total_count) > 5 && (
