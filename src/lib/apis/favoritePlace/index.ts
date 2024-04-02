@@ -14,22 +14,10 @@ export const getFavoritePlaces = async (request: FavoritePlacesRequest) => {
     url: '/my/favorite-places',
     type: 'bff',
     params: request,
-  });
-
-  return response;
-};
-
-export const getFavoritePlacessss = async () => {
-  const response = await api<Pagination<FavoritePlaceWithPlaceDetail>>({
-    method: 'GET',
-    url: '/favorite-places',
-    type: 'public',
-    params: {
-      country_code: 'JP',
-    },
-    headers: {
-      // TODO - 임시
-      Authorization: `Bearer ${Cookies.get(CookieNames.ACCESS_TOKEN)}`,
+    config: {
+      next: {
+        tags: ['my/favorite-places'],
+      },
     },
   });
 
