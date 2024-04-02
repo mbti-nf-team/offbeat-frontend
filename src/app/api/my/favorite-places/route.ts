@@ -11,8 +11,6 @@ import { fetchAllPlaceDetails, getPlacePhotoUrl } from '../../handler';
 
 export const runtime = 'edge';
 
-const TEN_MINUTES = 600;
-
 export async function GET(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   const { searchParams } = new URL(request.url);
@@ -60,12 +58,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       ...response,
       items: favoritePlaces,
-    }, {
-      headers: {
-        'Cache-Control': 'public, s-maxage=1',
-        'CDN-Cache-Control': 'public, s-maxage=60',
-        'Vercel-CDN-Cache-Control': `public, s-maxage=${TEN_MINUTES}`,
-      },
     });
   } catch (error) {
     const fetchError = error as FetchError;
