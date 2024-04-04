@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { checkNumber } from '@nf-team/core';
 import { useActionKeyEvent } from '@nf-team/react';
 
-import useRemoveFavoritePlaceMutation from '@/hooks/apis/mutations/useRemoveFavoritePlaceMutation';
 import { ArchiveSolidIcon } from '@/lib/assets/icons';
 import { NaverSearchBlog } from '@/lib/types/blog';
 import { numberWithComma } from '@/utils';
@@ -27,21 +26,17 @@ type Props<T> = {
   address: T extends true ? string : undefined;
   distance: T extends true ? string : undefined;
   onClick?: (placeId: string) => void;
+  onRemove: (placeId: string) => void;
   wrapperRef?: ((node?: Element | null | undefined) => void);
-  refetch: () => void;
 };
 
 function PlaceItem<T = boolean>({
   photoUrls, placeName, rating, userRatingsTotal, placeId,
-  searchBlogPost, isSavedPlace, nation, address, distance, onClick, wrapperRef, refetch,
+  searchBlogPost, isSavedPlace, nation, address, distance, onClick, wrapperRef, onRemove,
 }: Props<T>) {
-  const { mutate: removeFavoritePlaceMutate } = useRemoveFavoritePlaceMutation();
   const onKeyDown = useActionKeyEvent<HTMLLIElement, [string]>(['Enter', 'NumpadEnter'], (_, id) => onClick?.(id));
 
-  const removeFavoritePlace = () => {
-    removeFavoritePlaceMutate(placeId);
-    refetch();
-  };
+  const removeFavoritePlace = () => onRemove(placeId);
 
   return (
     <li

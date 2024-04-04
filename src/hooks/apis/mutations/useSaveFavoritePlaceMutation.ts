@@ -22,7 +22,7 @@ function useSaveFavoritePlaceMutation() {
       });
 
       queryClient.invalidateQueries({
-        queryKey: ['place', response.google_place_id],
+        queryKey: ['favoritePlaces'],
       });
     },
     onError: () => {

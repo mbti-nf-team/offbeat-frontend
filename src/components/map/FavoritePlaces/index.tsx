@@ -6,6 +6,7 @@ import { checkNumber } from '@nf-team/core';
 
 import Button from '@/components/common/Button';
 import PlaceItem from '@/components/common/PlaceItem';
+import useRemoveFavoritePlaceMutation from '@/hooks/apis/mutations/useRemoveFavoritePlaceMutation';
 import useInfiniteFavoritePlacesQuery from '@/hooks/apis/queries/useGetFavoritePlaces';
 
 import styles from './index.module.scss';
@@ -17,9 +18,10 @@ type Props = {
 function FavoritePlaces({ isMenu }: Props) {
   const searchParams = useSearchParams();
 
-  const { data: favoritePlaces, refetch } = useInfiniteFavoritePlacesQuery({
+  const { data: favoritePlaces } = useInfiniteFavoritePlacesQuery({
     country_code: searchParams?.get('country') || 'KR',
   });
+  const { mutate: removeFavoritePlaceMutate } = useRemoveFavoritePlaceMutation();
 
   return (
     <div>
@@ -32,7 +34,7 @@ function FavoritePlaces({ isMenu }: Props) {
             }) => (
               <PlaceItem
                 key={google_place_id}
-                refetch={refetch}
+                onRemove={removeFavoritePlaceMutate}
                 placeId={google_place_id}
                 isSavedPlace
                 photoUrls={photoUrls}

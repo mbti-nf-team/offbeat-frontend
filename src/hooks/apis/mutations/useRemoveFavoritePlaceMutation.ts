@@ -20,7 +20,7 @@ function useRemoveFavoritePlaceMutation() {
       });
 
       queryClient.invalidateQueries({
-        queryKey: ['place', id],
+        queryKey: ['favoritePlaces'],
       });
     },
     onError: () => {
