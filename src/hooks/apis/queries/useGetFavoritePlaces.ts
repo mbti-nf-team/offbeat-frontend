@@ -10,7 +10,6 @@ function useInfiniteFavoritePlacesQuery(params: FavoritePlacesRequest) {
     queryKey: ['favoritePlaces', params],
     queryFn: () => getFavoritePlaces(params),
     getNextPageParam: ({ next_cursor }) => next_cursor,
-    enabled: !!params?.country_code,
     initialPageParam: undefined,
   });
 
