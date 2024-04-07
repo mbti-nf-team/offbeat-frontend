@@ -19,7 +19,7 @@ function FavoritePlaces({ isMenu }: Props) {
   const searchParams = useSearchParams();
 
   const { data: favoritePlaces } = useInfiniteFavoritePlacesQuery({
-    country_code: searchParams?.get('country') || 'KR',
+    country_code: searchParams?.get('country') || undefined,
   });
   const { mutate: removeFavoritePlaceMutate } = useRemoveFavoritePlaceMutation();
 

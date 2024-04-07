@@ -1,5 +1,7 @@
 'use client';
 
+import { memo } from 'react';
+
 import Image from 'next/image';
 
 import { checkNumber } from '@nf-team/core';
@@ -81,4 +83,4 @@ function PlaceItem<T = boolean>({
   );
 }
 
-export default PlaceItem;
+export default memo(PlaceItem);
