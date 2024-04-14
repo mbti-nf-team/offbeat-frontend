@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
       place_id: placeId,
       language: Language.ko,
       region: 'KR',
-      reviews_sort: 'newest',
+      reviews_sort: 'most_relevant',
       fields: ['geometry', 'name', 'photos', 'place_id', 'rating', 'reviews', 'url', 'user_ratings_total', 'address_components'],
       reviews_no_translations: false,
     });
