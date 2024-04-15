@@ -8,7 +8,7 @@ import QueryString from 'qs';
 
 import logoutAction from '@/actions/logout';
 import ExternalLink from '@/components/common/ExternalLink';
-import LoadingSpinner from '@/components/common/LoadingSpinner';
+import Spinner from '@/components/common/Spinner';
 import { paramsSerializer } from '@/lib/apis';
 import { ChevronRightIcon } from '@/lib/assets/icons';
 import { User } from '@/lib/types/auth';
@@ -88,7 +88,12 @@ function MenuBottomSheet({ onToggleMenu, user }: Props) {
                 <ChevronRightIcon className={styles.logoutIcon} />
               </button>
             </div>
-            <Suspense fallback={<LoadingSpinner />}>
+            <Suspense fallback={(
+              <div className={styles.spinnerWrapper}>
+                <Spinner color="black" isLoading size="large" />
+              </div>
+            )}
+            >
               <FavoritePlaces isMenu />
             </Suspense>
           </>

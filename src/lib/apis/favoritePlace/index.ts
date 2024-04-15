@@ -14,11 +14,6 @@ export const getFavoritePlaces = async (request: FavoritePlacesRequest) => {
     url: '/my/favorite-places',
     type: 'bff',
     params: request,
-    config: {
-      next: {
-        tags: ['my/favorite-places'],
-      },
-    },
   });
 
   return response;

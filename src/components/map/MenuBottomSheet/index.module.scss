@@ -7,6 +7,13 @@
   padding: 0 0 80px;
   height: 100%;
 
+  .spinnerWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+
   .loginMenu {
     display: flex;
     flex-direction: row;
