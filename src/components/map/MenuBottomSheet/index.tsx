@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import Image from 'next/image';
@@ -8,7 +7,6 @@ import QueryString from 'qs';
 
 import logoutAction from '@/actions/logout';
 import ExternalLink from '@/components/common/ExternalLink';
-import Spinner from '@/components/common/Spinner';
 import { paramsSerializer } from '@/lib/apis';
 import { ChevronRightIcon } from '@/lib/assets/icons';
 import { User } from '@/lib/types/auth';
@@ -88,14 +86,7 @@ function MenuBottomSheet({ onToggleMenu, user }: Props) {
                 <ChevronRightIcon className={styles.logoutIcon} />
               </button>
             </div>
-            <Suspense fallback={(
-              <div className={styles.spinnerWrapper}>
-                <Spinner color="black" isLoading size="large" />
-              </div>
-            )}
-            >
-              <FavoritePlaces isMenu />
-            </Suspense>
+            <FavoritePlaces isMenu />
           </>
         ) : (
           <>

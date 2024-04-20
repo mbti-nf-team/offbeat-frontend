@@ -32,7 +32,7 @@ describe('getUrl', () => {
     it('url 앞에 "/api"가 붙어서 반환해야만 한다', () => {
       const url = getUrl('/path', 'bff');
 
-      expect(url).toBe(`/api${path}`);
+      expect(url).toBe(`${process.env.NEXT_PUBLIC_ORIGIN}/api${path}`);
     });
   });
 
