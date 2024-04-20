@@ -22,7 +22,7 @@ export const paramsSerializer = <T>(params: T): string => qs.stringify(params, {
 
 export const getUrl = (url: string, type: UrlPrefixType) => {
   if (type === 'bff') {
-    return `/api${url}`;
+    return `${process.env.NEXT_PUBLIC_ORIGIN}/api${url}`;
   }
 
   if (type === 'google') {
