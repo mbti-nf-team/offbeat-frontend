@@ -32,7 +32,7 @@ function FavoritePlaces({ isMenu }: Props) {
 
   return (
     <div>
-      <ul className={styles.savedPlacesWrapper}>
+      <div role="list" className={styles.savedPlacesWrapper}>
         {favoritePlaces?.pages?.map(({ items }, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <Fragment key={index}>
@@ -55,7 +55,7 @@ function FavoritePlaces({ isMenu }: Props) {
             ))}
           </Fragment>
         ))}
-      </ul>
+      </div>
       {isMenu && checkNumber(favoritePlaces?.pages?.[0].total_count) > 5 && (
         <div className={styles.buttonWrapper}>
           <Button href="/my/favorite-places" size="small" color="highlight">
