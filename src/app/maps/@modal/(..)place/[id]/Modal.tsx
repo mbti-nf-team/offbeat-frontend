@@ -2,9 +2,7 @@
 
 import { PropsWithChildren } from 'react';
 
-import {
-  DelayRenderComponent, GlobalPortal, useIsomorphicLayoutEffect,
-} from '@nf-team/react';
+import { DelayRenderComponent, GlobalPortal } from '@nf-team/react';
 import { motion } from 'framer-motion';
 
 import { bottomToUpVariants } from '@/styles/framerVariants';
@@ -16,15 +14,6 @@ type Props = {
 };
 
 function Modal({ isOpen, children }: PropsWithChildren<Props>) {
-  useIsomorphicLayoutEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = '';
-      return;
-    }
-
-    document.body.style.overflow = 'hidden';
-  }, [isOpen]);
-
   return (
     <DelayRenderComponent isVisible={isOpen}>
       <GlobalPortal>
