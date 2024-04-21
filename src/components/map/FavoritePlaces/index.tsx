@@ -5,8 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { checkNumber } from '@nf-team/core';
 
 import Button from '@/components/common/Button';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 import PlaceItem from '@/components/common/PlaceItem';
-import Spinner from '@/components/common/Spinner';
 import useRemoveFavoritePlaceMutation from '@/hooks/apis/mutations/useRemoveFavoritePlaceMutation';
 import useInfiniteFavoritePlacesQuery from '@/hooks/apis/queries/useGetFavoritePlaces';
 
@@ -19,13 +19,15 @@ type Props = {
 function FavoritePlaces({ isMenu }: Props) {
   const searchParams = useSearchParams();
 
-  const { data: favoritePlaces, isLoading } = useInfiniteFavoritePlacesQuery({
+  const { data: favoritePlaces, isFetching } = useInfiniteFavoritePlacesQuery({
     country_code: searchParams?.get('country') || undefined,
   });
   const { mutate: removeFavoritePlaceMutate } = useRemoveFavoritePlaceMutation();
 
-  if (isLoading) {
-    return <Spinner color="black" isLoading size="large" />;
+  if (isFetching) {
+    return (
+      <LoadingSpinner className={isMenu ? styles.spinnerWrapper : undefined} />
+    );
   }
 
   return (

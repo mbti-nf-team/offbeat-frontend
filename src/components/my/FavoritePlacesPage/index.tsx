@@ -1,11 +1,8 @@
 'use client';
 
-import { Suspense } from 'react';
-
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/common/Button';
-import LoadingSpinner from '@/components/common/LoadingSpinner';
 import FavoritePlaces from '@/components/map/FavoritePlaces';
 import { NarrowArrowLeftIcon } from '@/lib/assets/icons';
 
@@ -26,9 +23,7 @@ function FavoritePlacesPage() {
           onlyIcon={<NarrowArrowLeftIcon />}
         />
       </header>
-      <Suspense fallback={<LoadingSpinner />}>
-        <FavoritePlaces />
-      </Suspense>
+      <FavoritePlaces />
     </>
   );
 }

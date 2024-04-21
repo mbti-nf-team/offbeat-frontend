@@ -1,5 +1,14 @@
 @import "/src/styles/main";
 
+.spinnerWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  position: initial;
+}
+
 .savedPlacesWrapper {
   margin: 0;
   padding: 0;

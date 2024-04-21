@@ -3,7 +3,7 @@
 import { Route } from 'next';
 import { useRouter } from 'next/navigation';
 
-import { useIsomorphicLayoutEffect } from '@nf-team/react';
+import { useIsomorphicLayoutEffect, useUnmount } from '@nf-team/react';
 
 import PlaceDetail from '../PlaceDetail';
 
@@ -21,6 +21,10 @@ function PlacePage({ id }: Props) {
   useIsomorphicLayoutEffect(() => {
     document.body.style.overflow = 'hidden';
   }, []);
+
+  useUnmount(() => {
+    document.body.style.overflow = '';
+  });
 
   return (
     <PlaceDetail
