@@ -8,7 +8,10 @@ import { FavoritePlaceWithPlaceDetail } from '@/lib/types/favoritePlace';
 function useFavoritePlacesQuery(params: FavoritePlacesRequest) {
   const query = useInfiniteQuery<Pagination<FavoritePlaceWithPlaceDetail>>({
     queryKey: ['favoritePlaces', params],
-    queryFn: () => getFavoritePlaces(params),
+    queryFn: ({ pageParam }) => getFavoritePlaces({
+      ...params,
+      cursor: pageParam as number,
+    }),
     getNextPageParam: ({ next_cursor }) => next_cursor,
     initialPageParam: undefined,
   });

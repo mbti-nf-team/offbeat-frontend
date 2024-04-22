@@ -16,7 +16,7 @@ export interface InfiniteRefState<T> {
 
 export interface Pagination<T> {
   total_count: number;
-  next_cursor: string;
+  next_cursor: number;
   limit: number;
   items: T[];
 }
