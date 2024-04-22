@@ -21,3 +21,12 @@
 .buttonWrapper {
   padding: 16px 24px 0;
 }
+
+.loadingWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 112px;
+  width: 100%;
+}

@@ -3,9 +3,9 @@
 import { memo, MouseEvent } from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { checkNumber } from '@nf-team/core';
+import { useActionKeyEvent } from '@nf-team/react';
 
 import { ArchiveSolidIcon } from '@/lib/assets/icons';
 import { NaverSearchBlog } from '@/lib/types/blog';
@@ -28,13 +28,16 @@ type Props<T> = {
   address: T extends true ? string : undefined;
   distance: T extends true ? string : undefined;
   onRemove: (placeId: string) => void;
+  onClick?: (placeId: string) => void;
   wrapperRef?: ((node?: Element | null | undefined) => void);
 };
 
 function PlaceItem<T = boolean>({
   photoUrls, placeName, rating, userRatingsTotal, placeId,
-  searchBlogPost, isSavedPlace, nation, address, distance, wrapperRef, onRemove,
+  searchBlogPost, isSavedPlace, nation, address, distance, wrapperRef, onRemove, onClick,
 }: Props<T>) {
+  const onKeyDown = useActionKeyEvent<HTMLLIElement, [string]>(['Enter', 'NumpadEnter'], (_, id) => onClick?.(id));
+
   const removeFavoritePlace = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -43,11 +46,13 @@ function PlaceItem<T = boolean>({
   };
 
   return (
-    <Link
+    <li
       ref={wrapperRef}
-      href={`/place/${placeId}`}
-      role="listitem"
+      tabIndex={0}
+      onClick={() => onClick?.(placeId)}
+      onKeyDown={(e) => onKeyDown(e, placeId)}
       className={styles.placeItem}
+      role="menuitem"
     >
       <div className={styles.photos}>
         {photoUrls.map((photo, index) => (
@@ -79,7 +84,7 @@ function PlaceItem<T = boolean>({
           </div>
         )}
       </div>
-    </Link>
+    </li>
   );
 }
 
