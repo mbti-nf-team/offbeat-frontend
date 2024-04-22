@@ -35,6 +35,9 @@ export async function GET(request: NextRequest) {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+      config: {
+        cache: 'no-store',
+      },
     });
 
     const placeIds = response.items.map((item) => item.google_place_id);
