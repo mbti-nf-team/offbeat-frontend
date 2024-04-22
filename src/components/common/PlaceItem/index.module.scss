@@ -23,12 +23,23 @@
     overflow-y: auto;
     margin-right: -16px;
 
+    &.onlyOnePhotoWrapper {
+      overflow-y: hidden;
+      margin-right: 0;
+      width: 100%;
+    }
+
     .photo {
       border-radius: 8px;
       min-width: 160px;
       min-height: 160px;
+      object-fit: cover;
 
-      &:last-of-type {
+      &.onlyOnePhoto {
+        width: 100%;
+      }
+
+      &:not(.onlyOnePhoto):last-of-type {
         margin-right: 16px;
       }
     }

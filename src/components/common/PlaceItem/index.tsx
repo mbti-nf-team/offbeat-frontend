@@ -4,8 +4,9 @@ import { memo, MouseEvent } from 'react';
 
 import Image from 'next/image';
 
-import { checkNumber } from '@nf-team/core';
+import { checkEmpty, checkNumber } from '@nf-team/core';
 import { useActionKeyEvent } from '@nf-team/react';
+import clsx from 'clsx';
 
 import { ArchiveSolidIcon } from '@/lib/assets/icons';
 import { NaverSearchBlog } from '@/lib/types/blog';
@@ -20,14 +21,14 @@ type Props<T> = {
   placeId: string;
   photoUrls: string[];
   placeName: string;
-  rating: number;
+  rating?: number;
   userRatingsTotal?: number;
-  searchBlogPost?: T extends true ? PromiseSettledResult<NaverSearchBlog<true>> : undefined;
+  searchBlogPost?: T extends false ? PromiseSettledResult<NaverSearchBlog<false>> : null;
   isSavedPlace?: T;
-  nation: T extends true ? string : undefined;
-  address: T extends true ? string : undefined;
-  distance: T extends true ? string : undefined;
-  onRemove: (placeId: string) => void;
+  nation?: T extends true ? string : undefined;
+  address?: T extends true ? string : undefined;
+  distance?: T extends true ? string : undefined;
+  onRemove?: T extends true ? (placeId: string) => void : undefined;
   onClick?: (placeId: string) => void;
   wrapperRef?: ((node?: Element | null | undefined) => void);
 };
@@ -42,7 +43,7 @@ function PlaceItem<T = boolean>({
     e.preventDefault();
     e.stopPropagation();
 
-    onRemove(placeId);
+    onRemove?.(placeId);
   };
 
   return (
@@ -54,11 +55,13 @@ function PlaceItem<T = boolean>({
       className={styles.placeItem}
       role="menuitem"
     >
-      <div className={styles.photos}>
-        {photoUrls.map((photo, index) => (
-          <Image key={photo} src={photo} alt={`${placeName}-image-${index}`} width={160} height={160} className={styles.photo} />
-        ))}
-      </div>
+      {!!checkEmpty(photoUrls).length && (
+        <div className={clsx(styles.photos, photoUrls.length === 1 && styles.onlyOnePhotoWrapper)}>
+          {photoUrls.map((photo, index) => (
+            <Image key={photo} src={photo} alt={`${placeName}-image-${index}`} width={160} height={160} className={clsx(styles.photo, photoUrls.length === 1 && styles.onlyOnePhoto)} />
+          ))}
+        </div>
+      )}
       <div className={styles.placeInfoWrapper}>
         <div className={styles.placeName}>
           <div>{placeName}</div>
@@ -67,7 +70,7 @@ function PlaceItem<T = boolean>({
           )}
         </div>
         <div className={styles.placeRatingWrapper}>
-          <div className={styles.placeRating}>{rating}</div>
+          <div className={styles.placeRating}>{checkNumber(rating)}</div>
           <StarRating rating={checkNumber(rating)} type="list" />
           <div className={styles.placeUserRatingsTotal}>{`(${checkNumber(userRatingsTotal)})`}</div>
         </div>
