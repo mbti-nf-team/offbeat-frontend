@@ -6,7 +6,7 @@ import { checkEmpty } from '@nf-team/core';
 import { FetchError } from '@/lib/apis';
 import { filteredPlaces } from '@/utils';
 
-import { fetchAllSettledSearchNaverBlogs, getGoogleTextSearch } from '../../handler';
+import { fetchAllSettledSearchNaverBlogs, getGoogleTextSearch, getPlacePhotoUrl } from '../../handler';
 
 export const runtime = 'edge';
 
@@ -45,6 +45,9 @@ export async function GET(request: NextRequest) {
 
     const response = placesResult.map((place, index) => ({
       ...place,
+      photoUrls: checkEmpty(place.photos)
+        .map((photo) => getPlacePhotoUrl(photo.photo_reference, 500))
+        .filter((photoUrl) => !!photoUrl),
       searchBlogPost: searchBlogPosts[index],
     }));
 

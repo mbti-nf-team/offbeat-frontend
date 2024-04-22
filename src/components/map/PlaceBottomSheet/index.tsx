@@ -8,13 +8,12 @@ import { isEmpty } from '@nf-team/core';
 import { useUpdateEffect } from '@nf-team/react';
 
 import Button from '@/components/common/Button';
+import PlaceItem from '@/components/common/PlaceItem';
 import Spinner from '@/components/common/Spinner';
 import CurrentLocationButton from '@/components/map/CurrentLocationButton';
 import { InfiniteRefState } from '@/lib/types';
 import { PlacesWithSearchResult } from '@/lib/types/search';
 import { targetFalseThenValue } from '@/utils';
-
-import PlaceBottomSheetItem from '../PlaceBottomSheetItem';
 
 import styles from './index.module.scss';
 
@@ -27,6 +26,9 @@ type Props = {
   selectedPlaceId?: string;
   setSelectedPlaceId: (placeId: string) => void;
 };
+
+const DEFAULT_SNAP_POINT = 350;
+const ZERO_RESULT_SNAP_POINT = 168;
 
 function PlaceBottomSheet({
   places, refState, isSuccess, isFetching, isFetchingNextPage, selectedPlaceId, setSelectedPlaceId,
@@ -49,11 +51,11 @@ function PlaceBottomSheet({
 
   const getDefaultSnap = useCallback(({ maxHeight }: defaultSnapProps) => {
     if (filteredPlaces.length === 1) {
-      return 148;
+      return DEFAULT_SNAP_POINT;
     }
 
     if (isZeroResult) {
-      return 168;
+      return ZERO_RESULT_SNAP_POINT;
     }
 
     return maxHeight / 2;
@@ -61,23 +63,23 @@ function PlaceBottomSheet({
 
   const getSnapPoints = useCallback(({ maxHeight }: SnapPointProps) => {
     if (filteredPlaces.length === 1) {
-      return [148];
+      return [DEFAULT_SNAP_POINT];
     }
 
     if (isZeroResult) {
-      return [168];
+      return [ZERO_RESULT_SNAP_POINT];
     }
 
     return [
       maxHeight - maxHeight / 8,
       maxHeight / 2,
-      148,
+      DEFAULT_SNAP_POINT,
     ];
   }, [isZeroResult, filteredPlaces.length]);
 
   useUpdateEffect(() => {
     if (filteredPlaces.length === 1) {
-      sheetRef.current?.snapTo(148);
+      sheetRef.current?.snapTo(320);
       return;
     }
 
@@ -108,14 +110,20 @@ function PlaceBottomSheet({
         ) : (
           <ul className={styles.placeList} ref={refState.wrapperRef}>
             {filteredPlaces.map((place, index, array) => (
-              <PlaceBottomSheetItem
+              <PlaceItem
                 key={place.place_id}
                 wrapperRef={
                   targetFalseThenValue(
                     !(array.length - 1 === index && !selectedPlaceId),
                   )(refState.lastItemRef)
                 }
-                place={place}
+                placeId={place.place_id}
+                photoUrls={place.photoUrls}
+                placeName={place.name}
+                rating={place.rating}
+                userRatingsTotal={place.user_ratings_total}
+                isSavedPlace={false}
+                searchBlogPost={place.searchBlogPost}
                 onClick={onClickPlaceItem}
               />
             ))}
