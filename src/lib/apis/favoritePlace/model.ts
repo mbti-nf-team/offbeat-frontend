@@ -2,7 +2,7 @@ import { Pagination } from '@/lib/types';
 import { FavoritePlace } from '@/lib/types/favoritePlace';
 
 export type FavoritePlacesRequest = Partial<{
-  next_cursor: string;
+  cursor: number;
   limit: number;
   country_code: string;
   latitude: number;

@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { checkNumber } from '@nf-team/core';
 
 import Button from '@/components/common/Button';
-import LoadingSpinner from '@/components/common/LoadingSpinner';
 import PlaceItem from '@/components/common/PlaceItem';
 import Spinner from '@/components/common/Spinner';
 import useRemoveFavoritePlaceMutation from '@/hooks/apis/mutations/useRemoveFavoritePlaceMutation';
@@ -34,6 +33,8 @@ function FavoritePlaces({ isMenu }: Props) {
   });
   const { mutate: removeFavoritePlaceMutate } = useRemoveFavoritePlaceMutation();
 
+  const favoritePlaceCount = checkNumber(favoritePlaces?.pages?.[0].total_count);
+
   const onClickPlaceItem = useCallback((placeId: string) => {
     router.push(`/place/${placeId}`);
   }, []);
@@ -47,12 +48,6 @@ function FavoritePlaces({ isMenu }: Props) {
       triggerOnce: true,
     },
   });
-
-  if (isFetching) {
-    return (
-      <LoadingSpinner className={isMenu ? styles.spinnerWrapper : undefined} />
-    );
-  }
 
   return (
     <div>
@@ -74,19 +69,19 @@ function FavoritePlaces({ isMenu }: Props) {
             onClick={onClickPlaceItem}
             wrapperRef={
               targetFalseThenValue(
-                !(array.length - 1 === index),
+                !(array.length - 1 === index && !isMenu),
               )(refState.lastItemRef)
             }
             userRatingsTotal={user_ratings_total}
           />
         ))}
       </ul>
-      {isFetchingNextPage && (
+      {(!isMenu && (isFetchingNextPage || isFetching)) && (
         <div className={styles.loadingWrapper}>
-          <Spinner isLoading />
+          <Spinner isLoading size={isMenu ? 'medium' : 'large'} />
         </div>
       )}
-      {isMenu && checkNumber(favoritePlaces?.pages?.[0].total_count) > 5 && (
+      {isMenu && favoritePlaceCount > 5 && (
         <div className={styles.buttonWrapper}>
           <Button href="/my/favorite-places" size="small" color="highlight">
             저장한 장소 더보기
