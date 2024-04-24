@@ -1,14 +1,9 @@
-'use client';
+import { cookies } from 'next/headers';
 
-import { useEffect } from 'react';
+import { getUser } from '@/lib/apis/auth';
+import CookieNames from '@/lib/constants/cookies';
 
-import { useRouter } from 'next/navigation';
-
-import { useBoolean } from '@nf-team/react';
-
-import PlaceDetail from '@/components/place/PlaceDetail';
-
-import Modal from './Modal';
+import PlacePage from './_components/PlacePage';
 
 type Props = {
   params: {
@@ -16,26 +11,14 @@ type Props = {
   };
 };
 
-function Page({ params }: Props) {
-  const router = useRouter();
-  const [isOpen, onOpen, onClose] = useBoolean(false);
+async function Page({ params }: Props) {
+  const cookiesStore = cookies();
+  const accessToken = cookiesStore.get(CookieNames.ACCESS_TOKEN);
 
-  const onDismiss = () => {
-    onClose();
-
-    setTimeout(() => {
-      router.back();
-    }, 300);
-  };
-
-  useEffect(() => {
-    onOpen();
-  }, []);
+  const user = await getUser({ accessToken: accessToken?.value });
 
   return (
-    <Modal isOpen={isOpen}>
-      <PlaceDetail placeId={params?.id} onClose={onDismiss} />
-    </Modal>
+    <PlacePage placeId={params?.id} user={user} />
   );
 }
 

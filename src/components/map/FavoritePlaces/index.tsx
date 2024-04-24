@@ -76,7 +76,7 @@ function FavoritePlaces({ isMenu }: Props) {
           />
         ))}
       </ul>
-      {(!isMenu && (isFetchingNextPage || isFetching)) && (
+      {(isFetchingNextPage || isFetching) && (
         <div className={styles.loadingWrapper}>
           <Spinner isLoading size={isMenu ? 'medium' : 'large'} />
         </div>
