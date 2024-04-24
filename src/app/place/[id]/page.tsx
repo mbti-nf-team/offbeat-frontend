@@ -1,4 +1,5 @@
 import { Metadata, ResolvingMetadata } from 'next';
+import { cookies } from 'next/headers';
 
 import { Language, Status } from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
@@ -6,6 +7,8 @@ import { checkEmpty } from '@nf-team/core';
 import { getGooglePlaceDetails, getPlacePhotoUrl } from '@/app/api/handler';
 import { metadata } from '@/app/page';
 import PlacePage from '@/components/place/PlacePage';
+import { getUser } from '@/lib/apis/auth';
+import CookieNames from '@/lib/constants/cookies';
 
 type Props = {
   params: {
@@ -81,8 +84,13 @@ export async function generateMetadata(
   }
 }
 
-function Page({ params }: Props) {
-  return <PlacePage id={params?.id} />;
+async function Page({ params }: Props) {
+  const cookiesStore = cookies();
+  const accessToken = cookiesStore.get(CookieNames.ACCESS_TOKEN);
+
+  const user = await getUser({ accessToken: accessToken?.value });
+
+  return <PlacePage placeId={params?.id} user={user} />;
 }
 
 export default Page;

@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useRef } from 'react';
 
-import { notFound } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 
 import { Language, Status } from '@googlemaps/google-maps-services-js';
 import { checkEmpty, checkNumber } from '@nf-team/core';
@@ -24,6 +24,7 @@ import useHideOnScroll from '@/hooks/useHideOnScroll';
 import {
   ArchiveOutlineIcon, ArchiveSolidIcon, CloseIcon, ShareIcon,
 } from '@/lib/assets/icons';
+import { User } from '@/lib/types/auth';
 import { EventName } from '@/lib/types/event';
 import useToastStore from '@/stores/toast';
 import { bottomToUpVariants } from '@/styles/framerVariants';
@@ -38,9 +39,11 @@ const GOOGLE_MAX_REVIEW_COUNT = 4;
 type Props = {
   placeId?: string;
   onClose: () => void;
+  user: User | null;
 };
 
-function PlaceDetail({ placeId, onClose }: Props) {
+function PlaceDetail({ placeId, onClose, user }: Props) {
+  const router = useRouter();
   const {
     data: placesWithSearchResult, isFetching: isLoading, isSuccess,
   } = useGetSearchPlace({ placeId });
@@ -81,6 +84,11 @@ function PlaceDetail({ placeId, onClose }: Props) {
   });
 
   const onClickArchive = () => {
+    if (!user) {
+      router.push('/login');
+      return;
+    }
+
     if (!placeDetail?.country?.short_name
       || !placeDetail?.place_id
       || !placeDetail?.geometry?.location.lat

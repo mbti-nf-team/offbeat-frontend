@@ -5,13 +5,16 @@ import { useRouter } from 'next/navigation';
 
 import { useIsomorphicLayoutEffect, useUnmount } from '@nf-team/react';
 
+import { User } from '@/lib/types/auth';
+
 import PlaceDetail from '../PlaceDetail';
 
 type Props = {
-  id?: string;
+  placeId?: string;
+  user: User | null;
 };
 
-function PlacePage({ id }: Props) {
+function PlacePage({ placeId, user }: Props) {
   const router = useRouter();
 
   const onCloseDetailWindow = () => {
@@ -28,7 +31,8 @@ function PlacePage({ id }: Props) {
 
   return (
     <PlaceDetail
-      placeId={id}
+      user={user}
+      placeId={placeId}
       onClose={onCloseDetailWindow}
     />
   );
