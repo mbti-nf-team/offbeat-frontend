@@ -39,6 +39,8 @@ function PlaceItem<T = boolean>({
 }: Props<T>) {
   const onKeyDown = useActionKeyEvent<HTMLLIElement, [string]>(['Enter', 'NumpadEnter'], (_, id) => onClick?.(id));
 
+  const isOnePhoto = checkEmpty(photoUrls).length === 1;
+
   const removeFavoritePlace = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -56,9 +58,18 @@ function PlaceItem<T = boolean>({
       role="menuitem"
     >
       {!!checkEmpty(photoUrls).length && (
-        <div className={clsx(styles.photos, photoUrls.length === 1 && styles.onlyOnePhotoWrapper)}>
+        <div className={clsx(styles.photos, isOnePhoto && styles.onlyOnePhotoWrapper)}>
           {photoUrls.map((photo, index) => (
-            <Image key={photo} src={photo} alt={`${placeName}-image-${index}`} width={160} height={160} className={clsx(styles.photo, photoUrls.length === 1 && styles.onlyOnePhoto)} />
+            <Image
+              key={photo}
+              src={photo}
+              alt={`${placeName}-image-${index}`}
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: isOnePhoto ? '100%' : '160px', height: '160px' }}
+              className={clsx(styles.photo, isOnePhoto && styles.onlyOnePhoto)}
+            />
           ))}
         </div>
       )}

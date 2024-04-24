@@ -27,7 +27,7 @@ type Props = {
   setSelectedPlaceId: (placeId: string) => void;
 };
 
-const DEFAULT_SNAP_POINT = 350;
+const DEFAULT_SNAP_POINT = 340;
 const ZERO_RESULT_SNAP_POINT = 168;
 
 function PlaceBottomSheet({
@@ -74,12 +74,13 @@ function PlaceBottomSheet({
       maxHeight - maxHeight / 8,
       maxHeight / 2,
       DEFAULT_SNAP_POINT,
+      168,
     ];
   }, [isZeroResult, filteredPlaces.length]);
 
   useUpdateEffect(() => {
     if (filteredPlaces.length === 1) {
-      sheetRef.current?.snapTo(320);
+      sheetRef.current?.snapTo(DEFAULT_SNAP_POINT);
       return;
     }
 
