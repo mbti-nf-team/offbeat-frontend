@@ -35,10 +35,6 @@
       min-height: 160px;
       object-fit: cover;
 
-      &.onlyOnePhoto {
-        width: 100%;
-      }
-
       &:not(.onlyOnePhoto):last-of-type {
         margin-right: 16px;
       }
