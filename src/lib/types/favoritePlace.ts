@@ -1,4 +1,4 @@
-import { AddressComponent, PlacePhoto } from '@googlemaps/google-maps-services-js';
+import { PlacePhoto } from '@googlemaps/google-maps-services-js';
 
 export interface FavoritePlace {
   id: number;
@@ -12,9 +12,14 @@ export interface FavoritePlace {
 export interface FavoritePlaceWithPlaceDetail extends FavoritePlace {
   name: string;
   photos: PlacePhoto[];
-  address_components: AddressComponent[];
+  formatted_address: string;
   user_ratings_total: number;
   url: string;
   rating: number;
   photoUrls: string[];
+  country: {
+    code: string;
+    koreanName: string;
+    englishName: string;
+  } | undefined;
 }

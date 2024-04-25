@@ -25,7 +25,7 @@ type Props<T> = {
   userRatingsTotal?: number;
   searchBlogPost?: T extends false ? PromiseSettledResult<NaverSearchBlog<false>> : null;
   isSavedPlace?: T;
-  nation?: T extends true ? string : undefined;
+  country?: T extends true ? string : undefined;
   address?: T extends true ? string : undefined;
   distance?: T extends true ? string : undefined;
   onRemove?: T extends true ? (placeId: string) => void : undefined;
@@ -35,7 +35,7 @@ type Props<T> = {
 
 function PlaceItem<T = boolean>({
   photoUrls, placeName, rating, userRatingsTotal, placeId,
-  searchBlogPost, isSavedPlace, nation, address, distance, wrapperRef, onRemove, onClick,
+  searchBlogPost, isSavedPlace, country, address, distance, wrapperRef, onRemove, onClick,
 }: Props<T>) {
   const onKeyDown = useActionKeyEvent<HTMLLIElement, [string]>(['Enter', 'NumpadEnter'], (_, id) => onClick?.(id));
 
@@ -90,9 +90,9 @@ function PlaceItem<T = boolean>({
         )}
         {isSavedPlace && (
           <div className={styles.addressInfo}>
-            <div className={styles.nation}>{nation}</div>
+            <div className={styles.country}>{country}</div>
             <div>∙</div>
-            <div className={styles.address}>{address}</div>
+            <div className={styles.address}>{address?.replaceAll(`${country}`, '')}</div>
             <div>∙</div>
             <div className={styles.distance}>{distance}</div>
           </div>
