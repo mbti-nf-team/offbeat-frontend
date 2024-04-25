@@ -53,7 +53,8 @@ function FavoritePlaces({ isMenu }: Props) {
     <div>
       <ul ref={refState.wrapperRef} className={styles.savedPlacesWrapper}>
         {favoritePlaces?.pages.flatMap((page) => page.items)?.map(({
-          google_place_id, photoUrls, country_code, name, rating, user_ratings_total,
+          google_place_id, photoUrls, name, rating,
+          user_ratings_total, country, country_code, formatted_address,
         }, index, array) => (
           <PlaceItem
             key={google_place_id}
@@ -61,9 +62,9 @@ function FavoritePlaces({ isMenu }: Props) {
             placeId={google_place_id}
             isSavedPlace
             photoUrls={photoUrls}
-            address="address"
+            address={formatted_address}
             distance="distance"
-            nation={country_code}
+            country={country?.koreanName || country_code}
             placeName={name}
             rating={rating}
             onClick={onClickPlaceItem}

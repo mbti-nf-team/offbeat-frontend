@@ -5,6 +5,7 @@ import QueryString from 'qs';
 
 import api, { FetchError } from '@/lib/apis';
 import { FavoritePlacesResponse } from '@/lib/apis/favoritePlace/model';
+import ISO_3166_COUNTRY_CODES from '@/lib/assets/data/iso3166CountryCodes';
 import CookieNames from '@/lib/constants/cookies';
 
 import { fetchAllPlaceDetails, getPlacePhotoUrl } from '../../handler';
@@ -51,10 +52,15 @@ export async function GET(request: NextRequest) {
 
       const favoritePlace = response.items[index];
 
+      const country = ISO_3166_COUNTRY_CODES.find((
+        targetCountry,
+      ) => targetCountry.code === favoritePlace.country_code);
+
       return {
         ...detail.result,
         ...favoritePlace,
         photoUrls: placePhotoUrls,
+        country,
       };
     });
 

@@ -73,7 +73,7 @@ export const fetchAllPlaceDetails = async ({
       place_id: placeId,
       language: Language.ko,
       region: 'KR',
-      fields: ['name', 'photos', 'rating', 'url', 'user_ratings_total', 'address_components'],
+      fields: ['name', 'photos', 'rating', 'user_ratings_total', 'formatted_address'],
       reviews_no_translations: false,
     }))]);
 
