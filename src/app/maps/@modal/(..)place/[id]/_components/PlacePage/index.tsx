@@ -4,7 +4,9 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { DelayRenderComponent, GlobalPortal, useBoolean } from '@nf-team/react';
+import {
+  DelayRenderComponent, GlobalPortal, useBoolean, useIsomorphicLayoutEffect, useUnmount,
+} from '@nf-team/react';
 import { motion } from 'framer-motion';
 
 import PlaceDetail from '@/components/place/PlaceDetail';
@@ -30,6 +32,14 @@ function PlacePage({ placeId, user }: Props) {
     }, 300);
   };
 
+  useIsomorphicLayoutEffect(() => {
+    document.body.style.overflow = '';
+  }, []);
+
+  useUnmount(() => {
+    document.body.style.overflow = 'hidden';
+  });
+
   useEffect(() => {
     onOpen();
   }, []);
@@ -44,7 +54,7 @@ function PlacePage({ placeId, user }: Props) {
           variants={bottomToUpVariants}
           className={styles.placeDetailWindowWrapper}
         >
-          <PlaceDetail placeId={placeId} onClose={onDismiss} user={user} />
+          <PlaceDetail isModal placeId={placeId} onClose={onDismiss} user={user} />
         </motion.div>
       </GlobalPortal>
     </DelayRenderComponent>
