@@ -40,9 +40,12 @@ type Props = {
   placeId?: string;
   onClose: () => void;
   user: User | null;
+  isModal?: boolean;
 };
 
-function PlaceDetail({ placeId, onClose, user }: Props) {
+function PlaceDetail({
+  placeId, onClose, user, isModal,
+}: Props) {
   const router = useRouter();
   const {
     data: placesWithSearchResult, isFetching: isLoading, isSuccess,
@@ -64,7 +67,7 @@ function PlaceDetail({ placeId, onClose, user }: Props) {
 
   const { renderToast } = useToastStore(['renderToast']);
   const { hide, onScroll } = useHideOnScroll({
-    rootRef: placeDetailWindowRef, disabled: false,
+    rootRef: isModal ? placeDetailWindowRef : undefined, disabled: false,
   });
 
   const isVisibleLoading = isLoading || !placeDetail;
