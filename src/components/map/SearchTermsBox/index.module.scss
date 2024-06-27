@@ -1,4 +1,4 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .searchTermsBlock {
   position: fixed;
@@ -7,7 +7,7 @@
   max-width: 430px;
   margin: 0 auto;
   height: 100%;
-  background-color: color("white/default");
+  background-color: color('white/default');
   z-index: var(--search-terms-box-z-index);
   overflow-y: auto;
   word-break: break-all;

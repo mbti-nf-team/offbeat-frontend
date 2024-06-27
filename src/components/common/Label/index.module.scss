@@ -1,4 +1,4 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .labelWrapper {
   display: flex;
@@ -19,7 +19,7 @@
 }
 
 .medium {
-  @include text("headline 3/600");
+  @include text('headline 3/600');
 
   min-width: 140px;
   width: fit-content;
@@ -40,7 +40,7 @@
 }
 
 .small {
-  @include text("title 2/600");
+  @include text('title 2/600');
 
   min-width: 117px;
   width: fit-content;
@@ -61,75 +61,75 @@
 }
 
 .default {
-  color: color("black/default");
+  color: color('black/default');
 }
 
 .reverse {
-  background-color: color("black/primary");
+  background-color: color('black/primary');
 }
 
 .default-done {
-  background-color: color("done/default");
+  background-color: color('done/default');
 }
 
 .default-positive {
-  background-color: color("positive/default");
+  background-color: color('positive/default');
 }
 
 .default-danger {
-  background-color: color("danger/default");
+  background-color: color('danger/default');
 }
 
 .default-attention {
-  background-color: color("attention/default");
+  background-color: color('attention/default');
 }
 
 .default-active {
-  background-color: color("active/default");
+  background-color: color('active/default');
 }
 
 .default-relate {
-  background-color: color("relate/default");
+  background-color: color('relate/default');
 }
 
 .default-highlight {
-  background-color: color("highlight/default");
+  background-color: color('highlight/default');
 }
 
 .reverse-done {
-  color: color("done/default");
+  color: color('done/default');
 }
 
 .reverse-positive {
-  color: color("positive/default");
+  color: color('positive/default');
 }
 
 .reverse-danger {
-  color: color("danger/default");
+  color: color('danger/default');
 }
 
 .reverse-attention {
-  color: color("attention/default");
+  color: color('attention/default');
 }
 
 .reverse-active {
-  color: color("active/default");
+  color: color('active/default');
 }
 
 .reverse-relate {
-  color: color("relate/default");
+  color: color('relate/default');
 }
 
 .reverse-highlight {
-  color: color("highlight/default");
+  color: color('highlight/default');
 }
 
 .default-small {
-  border: 1.5px solid color("black/default");
+  border: 1.5px solid color('black/default');
 }
 
 .default-medium {
-  border: 2px solid color("black/default");
+  border: 2px solid color('black/default');
 }
 
 .button {
@@ -137,10 +137,10 @@
 
   @media (hover: hover) and (pointer: fine) {
     &:not(:disabled)::after {
-      content: " ";
+      content: ' ';
       position: absolute;
       inset: 0;
-      background-color: color("black/default");
+      background-color: color('black/default');
       opacity: 0;
       transition: opacity 0.1s ease-in-out;
     }

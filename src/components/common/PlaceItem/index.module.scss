@@ -1,4 +1,4 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .placeItem {
   width: 100%;
@@ -13,7 +13,7 @@
   }
 
   .searchTotal {
-    @include text("title 3/500", "black/secondary");
+    @include text('title 3/500', 'black/secondary');
   }
 
   .photos {
@@ -79,7 +79,8 @@
 
       @include text('title 3/500', 'black/secondary');
 
-      .country, .distance {
+      .country,
+      .distance {
         min-width: fit-content;
       }
 

@@ -1,4 +1,4 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .layoutWrapper {
   max-width: 100%;
@@ -15,13 +15,13 @@
   max-width: 430px;
   min-height: calc(var(--vh, 1vh) * 100);
   position: relative;
-  background-color: color("white/default");
+  background-color: color('white/default');
   margin: 0 auto;
   padding: 0;
 
   &::before {
     z-index: 100;
-    content: " ";
+    content: ' ';
     position: absolute;
     left: 0;
     top: 0;
@@ -31,7 +31,7 @@
 
   &::after {
     z-index: 100;
-    content: " ";
+    content: ' ';
     position: absolute;
     right: 0;
     top: 0;

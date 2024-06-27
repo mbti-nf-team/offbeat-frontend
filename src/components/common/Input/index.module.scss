@@ -1,4 +1,4 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .inputWrapper {
   display: flex;
@@ -24,10 +24,10 @@
   }
 
   .input {
-    @include text("headline 3/500", "black/default");
+    @include text('headline 3/500', 'black/default');
 
     letter-spacing: -0.012em;
-    background: color("white/default");
+    background: color('white/default');
     outline: none;
     width: 100%;
     height: 56px;
@@ -35,7 +35,7 @@
     flex-direction: row;
     align-items: center;
     padding: 12px 60px;
-    border: 2px solid color("black/default");
+    border: 2px solid color('black/default');
     border-radius: 56px;
 
     &.blur {
@@ -47,25 +47,24 @@
     }
 
     &::placeholder {
-      color: color("black/placeholder");
+      color: color('black/placeholder');
     }
 
     &:focus {
-      caret-color: color("active/default");
+      caret-color: color('active/default');
     }
   }
 
   &:focus-within {
     & div > svg.searchIcon > path {
-      fill: color("active/default");
+      fill: color('active/default');
     }
   }
 
   ::selection {
-    background: color("active/secondary");
+    background: color('active/secondary');
   }
 }
-
 
 .iconButton {
   display: flex;

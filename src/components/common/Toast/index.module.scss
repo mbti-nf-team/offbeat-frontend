@@ -1,4 +1,4 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .toastContainer {
   position: fixed;
@@ -16,7 +16,7 @@
 }
 
 .toastMessage {
-  @include text("title 2/600", "white/default");
+  @include text('title 2/600', 'white/default');
 
   padding: 3px 12px;
   max-width: 350px;
@@ -28,8 +28,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: color("black/primary");
-  border: 2px solid color("black/tertiary");
+  background-color: color('black/primary');
+  border: 2px solid color('black/tertiary');
   box-shadow: 0 4px 0 rgb(19 17 24 / 10%);
   border-radius: 48px;
   padding: 8px;
