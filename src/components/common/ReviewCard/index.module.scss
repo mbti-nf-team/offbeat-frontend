@@ -1,4 +1,4 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .reviewCardWrapper {
   position: relative;
@@ -8,11 +8,11 @@
   gap: 16px;
 
   &.separator {
-    border-bottom: 1px solid color("black/tertiary");
+    border-bottom: 1px solid color('black/tertiary');
   }
 
   .review {
-    @include text("title 3/500", "black/default");
+    @include text('title 3/500', 'black/default');
   }
 
   .authorInfoWrapper {
@@ -38,7 +38,7 @@
         flex: 1 0 0;
 
         .authorName {
-          @include text("title 3/600");
+          @include text('title 3/600');
         }
 
         .rating {
@@ -56,7 +56,7 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
 
-            @include text("body 1/500", "gray/default");
+            @include text('body 1/500', 'gray/default');
           }
         }
       }
@@ -76,13 +76,13 @@
     align-items: center;
     width: max-content;
     border-radius: 16px;
-    border: 1px solid color("black/default");
-    background-color: color("highlight/default");
+    border: 1px solid color('black/default');
+    background-color: color('highlight/default');
     text-align: center;
     min-width: fit-content;
     user-select: none;
 
-    @include text("body 1/600");
+    @include text('body 1/600');
   }
 }
 
@@ -96,13 +96,13 @@
   align-items: flex-start;
   padding: 16px;
   gap: 24px;
-  background-color: color("white/default");
-  border: 1px solid color("black/default");
+  background-color: color('white/default');
+  border: 1px solid color('black/default');
   box-shadow: 0 4px 0 rgb(19 17 24 / 10%);
   border-radius: 12px;
 
   &::after {
-    content: " ";
+    content: ' ';
     position: absolute;
     inset: 0;
     overflow: hidden;
@@ -111,20 +111,20 @@
   }
 
   &:active::after {
-    background-color: color("black/default");
+    background-color: color('black/default');
     opacity: 0.08;
   }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover::after {
-      background-color: color("black/default");
+      background-color: color('black/default');
       opacity: 0.04;
     }
   }
 
   &:active {
     transform: translate(0, 4px);
-    box-shadow: 0 4px 0 color("transparent");
+    box-shadow: 0 4px 0 color('transparent');
   }
 
   .textWrapper {
@@ -142,7 +142,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
 
-      @include text("body 1/600", "black/default");
+      @include text('body 1/600', 'black/default');
     }
 
     .description {
@@ -154,7 +154,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
 
-      @include text("body 1/500", "gray/primary");
+      @include text('body 1/500', 'gray/primary');
     }
   }
 }

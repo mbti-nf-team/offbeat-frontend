@@ -1,16 +1,16 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .countryListWrapper {
   user-select: none;
   list-style: none;
-  background-color: color("white/default");
+  background-color: color('white/default');
   margin: 0;
   padding: 0;
 
   .countryItemTitle {
-    @include text("headline 3/600", "black/default");
+    @include text('headline 3/600', 'black/default');
 
-    background-color: color("white/default");
+    background-color: color('white/default');
     position: sticky;
     top: 180px;
     display: flex;
@@ -30,11 +30,11 @@
 
   .countryItemWrapper {
     li:first-of-type {
-      border-top: 1px solid color("black/default");
+      border-top: 1px solid color('black/default');
     }
 
     li:last-of-type {
-      border-bottom: 1px solid color("transparent");
+      border-bottom: 1px solid color('transparent');
     }
   }
 }

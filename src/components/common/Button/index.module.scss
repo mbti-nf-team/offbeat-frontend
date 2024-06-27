@@ -1,12 +1,15 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .buttonWrapper {
   position: relative;
   transform: translate(0, 0);
   user-select: none;
   overflow: hidden;
-  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out,
-    border-color 0.1s ease-in-out, opacity 0.1s ease-in-out;
+  transition:
+    color 0.1s ease-in-out,
+    background-color 0.1s ease-in-out,
+    border-color 0.1s ease-in-out,
+    opacity 0.1s ease-in-out;
   white-space: nowrap;
   display: flex;
   flex-direction: row;
@@ -14,12 +17,12 @@
   justify-content: center;
   text-align: center;
   gap: 8px;
-  color: color("black/default");
-  border: 2px solid color("black/default");
+  color: color('black/default');
+  border: 2px solid color('black/default');
   border-radius: 100px;
 
   &::after {
-    content: " ";
+    content: ' ';
     position: absolute;
     inset: -2px;
     border-radius: 100px;
@@ -31,16 +34,16 @@
 
   &:not(:disabled, .disabled).floating:active {
     transform: translate(0, 4px);
-    box-shadow: 0 4px 0 color("transparent");
+    box-shadow: 0 4px 0 color('transparent');
   }
 
   &:not(:disabled, .disabled).hasPseudoSelectorStyle:active::after {
-    background-color: color("black/default");
+    background-color: color('black/default');
     opacity: 0.08;
   }
 
   &:disabled::after {
-    background-color: color("white/default");
+    background-color: color('white/default');
     opacity: 0.48;
   }
 
@@ -50,7 +53,7 @@
 
   @media (hover: hover) and (pointer: fine) {
     &:not(:disabled, .disabled).hasPseudoSelectorStyle:hover::after {
-      background-color: color("black/default");
+      background-color: color('black/default');
       opacity: 0.04;
     }
   }
@@ -93,21 +96,21 @@
 }
 
 .floating {
-  box-shadow: 0 4px 0 color("black/shadow");
+  box-shadow: 0 4px 0 color('black/shadow');
 }
 
 :not(.hasIcon).medium {
   height: 56px;
   padding: 4px 24px;
 
-  @include text("headline 2/600");
+  @include text('headline 2/600');
 }
 
 :not(.hasIcon).small {
   height: 40px;
   padding: 0 24px;
 
-  @include text("title 2/600");
+  @include text('title 2/600');
 }
 
 .ghost {
@@ -115,29 +118,29 @@
 }
 
 .highlight {
-  background-color: color("highlight/default");
+  background-color: color('highlight/default');
 }
 
 .danger {
-  background-color: color("danger/default");
+  background-color: color('danger/default');
 }
 
 .positive {
-  background-color: color("positive/default");
+  background-color: color('positive/default');
 }
 
 .done {
-  background-color: color("done/default");
+  background-color: color('done/default');
 }
 
 .active {
-  background-color: color("active/default");
+  background-color: color('active/default');
 }
 
 .attention {
-  background-color: color("attention/default");
+  background-color: color('attention/default');
 }
 
 .relate {
-  background-color: color("relate/default");
+  background-color: color('relate/default');
 }

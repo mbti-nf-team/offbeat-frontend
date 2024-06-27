@@ -1,7 +1,7 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .accordionWrapper {
-  border-bottom: 1px solid color("black/default");
+  border-bottom: 1px solid color('black/default');
   overflow: hidden;
 
   .accordionHeader {
@@ -15,14 +15,14 @@
     cursor: pointer;
     align-items: center;
     width: 100%;
-    background-color: color("white/default");
+    background-color: color('white/default');
 
     &.zeroResult {
       cursor: not-allowed;
     }
 
     &::after {
-      content: " ";
+      content: ' ';
       position: absolute;
       inset: 0;
       overflow: hidden;
@@ -30,13 +30,13 @@
     }
 
     &:not(.zeroResult):active::after {
-      background-color: color("black/default");
+      background-color: color('black/default');
       opacity: 0.08;
     }
 
     @media (hover: hover) and (pointer: fine) {
       &:not(.zeroResult):hover::after {
-        background-color: color("black/default");
+        background-color: color('black/default');
         opacity: 0.04;
       }
     }
@@ -44,7 +44,7 @@
     .title {
       width: 100%;
 
-      @include text("headline 3/700", "black/default");
+      @include text('headline 3/700', 'black/default');
     }
 
     .counter {
@@ -57,15 +57,15 @@
       width: max-content;
       height: 28px;
 
-      @include text("title 3/700", "white/default");
+      @include text('title 3/700', 'white/default');
     }
 
     .positive {
-      background-color: color("positive/default");
+      background-color: color('positive/default');
     }
 
     .danger {
-      background-color: color("danger/default");
+      background-color: color('danger/default');
     }
 
     .chevronIcon {
@@ -80,7 +80,7 @@
       }
 
       &.zeroResult > path {
-        fill: color("black/tertiary");
+        fill: color('black/tertiary');
       }
     }
   }

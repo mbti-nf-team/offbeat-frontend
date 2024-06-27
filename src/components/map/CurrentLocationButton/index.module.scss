@@ -1,4 +1,4 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .currentLocationButtonWrapper {
   width: 100%;
@@ -17,8 +17,8 @@
     align-items: center;
     cursor: pointer;
     border-radius: 100px;
-    border: 2px solid color("black/default");
-    background-color: color("white/default");
+    border: 2px solid color('black/default');
+    background-color: color('white/default');
     box-shadow: 0 4px 0 0 rgb(19 17 24 / 10%);
 
     &.loading {
@@ -26,7 +26,7 @@
     }
 
     &:not(:disabled)::after {
-      content: " ";
+      content: ' ';
       position: absolute;
       inset: 0;
       opacity: 0;
@@ -36,13 +36,13 @@
 
     @media (hover: hover) and (pointer: fine) {
       &:not(:disabled):hover::after {
-        background-color: color("black/default");
+        background-color: color('black/default');
         opacity: 0.04;
       }
     }
 
     &:not(:disabled):active::after {
-      background-color: color("black/default");
+      background-color: color('black/default');
       opacity: 0.08;
     }
   }

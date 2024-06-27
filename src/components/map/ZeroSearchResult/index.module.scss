@@ -1,14 +1,14 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .emptySearchTerm {
-  @include text("title 1/600");
+  @include text('title 1/600');
 
   cursor: pointer;
   flex-direction: row;
   display: flex;
-  border-top: 1px solid color("black/default");
+  border-top: 1px solid color('black/default');
   padding: 14px 0;
-  background-color: color("white/default");
+  background-color: color('white/default');
   border: none;
   align-items: center;
   gap: 12px;
@@ -17,26 +17,26 @@
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      background-color: color("black/hover");
+      background-color: color('black/hover');
     }
   }
 
   &:focus {
-    background-color: color("highlight/tertiary");
+    background-color: color('highlight/tertiary');
   }
 
   &:active {
-    background-color: color("black/active");
+    background-color: color('black/active');
   }
 
   & > strong {
-    @include text("title 1/600");
+    @include text('title 1/600');
 
     text-align: left;
   }
 
   & > p {
-    @include text("title 1/500");
+    @include text('title 1/500');
 
     min-width: fit-content;
     margin: 0;

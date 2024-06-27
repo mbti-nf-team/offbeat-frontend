@@ -1,4 +1,4 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .searchTerm {
   cursor: pointer;
@@ -9,32 +9,32 @@
   width: 100%;
   padding: 14px 0;
   gap: 4px;
-  background-color: color("white/default");
-  border-top: 1px solid color("black/default");
+  background-color: color('white/default');
+  border-top: 1px solid color('black/default');
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      background-color: color("black/hover");
+      background-color: color('black/hover');
     }
   }
 
   &:focus {
-    background-color: color("highlight/tertiary");
+    background-color: color('highlight/tertiary');
   }
 
   &:active {
-    background-color: color("black/active");
+    background-color: color('black/active');
   }
 
   & > div:first-of-type {
     text-align: left;
 
-    @include text("title 1/600", "black/default");
+    @include text('title 1/600', 'black/default');
   }
 
   & > div:last-of-type {
     text-align: left;
 
-    @include text("title 3/500", "black/secondary");
+    @include text('title 3/500', 'black/secondary');
   }
 }

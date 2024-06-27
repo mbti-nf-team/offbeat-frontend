@@ -1,4 +1,4 @@
-@import "/src/styles/main";
+@import '/src/styles/main';
 
 .loader {
   display: inline-flex;
@@ -31,11 +31,9 @@
 }
 
 .black {
-  border-color: color("black/default") color("black/tertiary")
-    color("black/tertiary") color("black/default");
+  border-color: color('black/default') color('black/tertiary') color('black/tertiary') color('black/default');
 }
 
 .white {
-  border-color: color("white/default") color("white/tertiary")
-    color("white/tertiary") color("white/default");
+  border-color: color('white/default') color('white/tertiary') color('white/tertiary') color('white/default');
 }
