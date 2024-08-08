@@ -54,3 +54,4 @@ cypress/log
 
 # storybook
 storybook-static
+build-storybook.log
