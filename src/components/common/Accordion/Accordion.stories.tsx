@@ -20,10 +20,30 @@ const meta: Meta<typeof Accordion> = {
   args: {
     children: (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <ResultCard url="#" title="title" description="description" onClickCard={onClick} />
-        <ResultCard url="#" title="title" description="description" onClickCard={onClick} />
-        <ResultCard url="#" title="title" description="description" onClickCard={onClick} />
-        <ResultCard url="#" title="title" description="description" onClickCard={onClick} />
+        <ResultCard
+          url="#"
+          title="title"
+          description="description"
+          onClickCard={onClick}
+        />
+        <ResultCard
+          url="#"
+          title="title"
+          description="description"
+          onClickCard={onClick}
+        />
+        <ResultCard
+          url="#"
+          title="title"
+          description="description"
+          onClickCard={onClick}
+        />
+        <ResultCard
+          url="#"
+          title="title"
+          description="description"
+          onClickCard={onClick}
+        />
       </div>
     ),
     counter: 9999,

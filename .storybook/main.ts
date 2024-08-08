@@ -1,6 +1,10 @@
-import path from "path";
+import path, { dirname, join } from "path";
 
 import type { StorybookConfig } from "@storybook/nextjs";
+
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, "package.json")));
+}
 
 const config: StorybookConfig = {
   staticDirs: ['../public'],
@@ -11,26 +15,16 @@ const config: StorybookConfig = {
     "../src/stories/**/*.stories.@(js|jsx|ts|tsx)"
   ],
   addons: [
-    path.dirname(
-      require.resolve(path.join("@storybook/addon-links", "package.json"))
-    ),
-    path.dirname(
-      require.resolve(path.join("@storybook/addon-essentials", "package.json"))
-    ),
-    path.dirname(
-      require.resolve(
-        path.join("@storybook/addon-interactions", "package.json")
-      )
-    ),
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-interactions"),
+    getAbsolutePath("@chromatic-com/storybook"),
   ],
   framework: {
-    name: '@storybook/nextjs',
+    name: getAbsolutePath("@storybook/nextjs"),
     options: {
       nextConfigPath: path.resolve(__dirname, '../next.config.js'),
     },
-  },
-  docs: {
-    autodocs: "tag",
   },
   webpackFinal: async (config) => {
     const imageRule = config.module?.rules?.find((rule) => {
@@ -62,6 +56,10 @@ const config: StorybookConfig = {
 
     return config;
   },
+  typescript: {
+    check: true,
+    reactDocgen: "react-docgen-typescript"
+  }
 };
 
 export default config;
