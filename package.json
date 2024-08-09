@@ -114,5 +114,5 @@
     "util": "^0.12.5",
     "webpack": "^5.80.0"
   },
-  "packageManager": "yarn@4.2.2"
+  "packageManager": "yarn@4.4.0"
 }
