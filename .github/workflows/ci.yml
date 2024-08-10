@@ -169,6 +169,7 @@ jobs:
 
   job_publish_storybook_chromatic:
     name: Chromatic Publish
+    needs: [job_install_dependencies]
     runs-on: ubuntu-latest
     steps:
       - name: Check out current commit (${{ github.sha }})
