@@ -8,9 +8,11 @@ on:
 
 env:
   CACHED_DEPENDENCY_PATHS: |
-    ${{ github.workspace }}/.yarn/cache
-    ${{ github.workspace }}/.yarn/unplugged
-    ${{ github.workspace }}/.pnp.*
+    .yarn/cache
+    .yarn/unplugged
+    .yarn/build-state.yml
+    .yarn/install-state.gz
+    .pnp.*
   CACHED_BUILD_PATHS: ${{ github.workspace }}/.next
   DEFAULT_NODE_VERSION: "v20.12.2"
   DEFAULT_YARN_VERSION: "4.4.0"
@@ -46,9 +48,11 @@ jobs:
         id: cache_dependencies
         with:
           path: |
-            ${{ env.CACHED_DEPENDENCY_PATHS }}
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            ${{ env.CACHED_DEPENDENCY_PATHS }}
           key: ${{ steps.compute_lockfile_hash.outputs.hash }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       - name: Install dependencies
         if: steps.cache_dependencies.outputs.cache-hit != 'true'
@@ -181,6 +185,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.DEFAULT_NODE_VERSION }}
+
+      - name: Check dependency cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ needs.job_install_dependencies.outputs.yarn_cache_dir_path }}
+          key: ${{ needs.job_install_dependencies.outputs.dependency_cache_key }}
 
       - name: Publish Project to Chromatic
         uses: chromaui/action@latest
