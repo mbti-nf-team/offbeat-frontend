@@ -2,7 +2,6 @@
 
 import { PropsWithChildren, useEffect, useState } from 'react';
 
-import { Language } from '@googlemaps/google-maps-services-js';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 
 import LoadingSpinner from '@/components/common/LoadingSpinner';
@@ -16,7 +15,7 @@ function MapLayout({ children }: PropsWithChildren) {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
     libraries,
     region: 'KR',
-    language: Language.ko,
+    language: 'ko',
   });
 
   useEffect(() => {

@@ -6,7 +6,6 @@ import {
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { Status } from '@googlemaps/google-maps-services-js';
 import { checkEmpty, checkNumber, isEmpty } from '@nf-team/core';
 import { useGoogleMap } from '@react-google-maps/api';
 import QueryString from 'qs';
@@ -124,7 +123,7 @@ function MapContainer({ defaultCountryCode, defaultLocation, user }: Props) {
   };
 
   const placesWithSearchResult = useMemo(() => checkEmpty(places?.pages)
-    .filter((page) => !!page.results?.length && page.status === Status.OK)
+    .filter((page) => !!page.results?.length && page.status === 'OK')
     .flatMap((page) => page.results), [places]);
 
   useEffect(() => {

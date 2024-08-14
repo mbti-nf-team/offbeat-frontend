@@ -1,6 +1,5 @@
-import { Language, PlaceType1 } from '@googlemaps/google-maps-services-js';
-
 import { NaverSearchBlog } from '@/lib/types/blog';
+import { Language } from '@/lib/types/google.maps';
 
 export type TextSearchRequestParams = {
   query: string;
@@ -12,7 +11,6 @@ export type TextSearchRequestParams = {
   pagetoken?: string;
   region?: string;
   radius?: string;
-  type?: PlaceType1;
 };
 
 export type NearbySearchRequestParams = {
@@ -25,7 +23,6 @@ export type NearbySearchRequestParams = {
   pagetoken?: string;
   region?: string;
   rankBy?: 'prominence' | 'distance';
-  type?: PlaceType1;
 };
 
 export type PlaceDetailsRequestParams = {

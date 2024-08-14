@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { Language } from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 
 import { FetchError } from '@/lib/apis';
@@ -31,12 +30,14 @@ export async function GET(request: NextRequest) {
   try {
     const places = await getGoogleTextSearch({
       query,
-      language: Language.ko,
+      language: 'ko',
       opennow: false,
       radius: radius ?? undefined,
       pagetoken: nextCursor ?? undefined,
       location: (lat && lng) ? [lat, lng] : undefined,
     });
+
+    console.log('places', places);
 
     const placesResult = filteredPlaces(checkEmpty(places?.results));
     const placeName = placesResult.filter((place) => !!place?.name).map((place) => place.name);

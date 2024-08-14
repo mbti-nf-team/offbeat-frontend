@@ -4,7 +4,6 @@ import { useCallback, useMemo, useRef } from 'react';
 
 import { notFound, useRouter } from 'next/navigation';
 
-import { Language, Status } from '@googlemaps/google-maps-services-js';
 import { checkEmpty, checkNumber } from '@nf-team/core';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
@@ -58,7 +57,7 @@ function PlaceDetail({
 
   const placeDetail = placesWithSearchResult?.result;
 
-  if ((isSuccess && placesWithSearchResult.status !== Status.OK)) {
+  if ((isSuccess && placesWithSearchResult.status !== 'OK')) {
     notFound();
   }
 
@@ -75,7 +74,7 @@ function PlaceDetail({
   const googleReviewCount = checkNumber(placeDetail?.reviews?.length);
   const koreanReviewCount = checkEmpty(placeDetail?.reviews).filter(({
     language, original_language,
-  }) => (original_language ? original_language === Language.ko : language === Language.ko)).length;
+  }) => (original_language ? original_language === 'ko' : language === 'ko')).length;
   const blogCount = checkNumber(placeDetail?.searchBlogPost?.total_count);
 
   const goToExternalLink = (eventName: EventName) => (url?: string) => sendEvent({
@@ -94,8 +93,8 @@ function PlaceDetail({
 
     if (!placeDetail?.country?.short_name
       || !placeDetail?.place_id
-      || !placeDetail?.geometry?.location.lat
-      || !placeDetail?.geometry?.location.lng) {
+      || !placeDetail?.geometry?.location?.lat
+      || !placeDetail?.geometry?.location?.lng) {
       return;
     }
 
@@ -107,8 +106,8 @@ function PlaceDetail({
     saveFavoritePlaceMutate({
       country_code: placeDetail.country.short_name,
       google_place_id: placeDetail.place_id,
-      latitude: placeDetail.geometry.location.lat,
-      longitude: placeDetail.geometry.location.lng,
+      latitude: placeDetail.geometry.location.lat(),
+      longitude: placeDetail.geometry.location.lng(),
     });
   };
 
@@ -259,8 +258,8 @@ function PlaceDetail({
                     key={review.time}
                     author={review.author_name}
                     isKoreanReview={review?.original_language
-                      ? review.original_language === Language.ko
-                      : review.language === Language.ko}
+                      ? review.original_language === 'ko'
+                      : review.language === 'ko'}
                     profileUrl={review.profile_photo_url}
                     rating={review.rating}
                     review={review.text}

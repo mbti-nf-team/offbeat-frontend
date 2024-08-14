@@ -1,8 +1,5 @@
-import {
-  Language, PlaceDetailsResponseData, PlacesNearbyResponseData, TextSearchResponseData,
-} from '@googlemaps/google-maps-services-js';
-
 import api, { paramsSerializer } from '@/lib/apis';
+import { PlaceDetailsResponseData, PlacesNearbyResponseData, TextSearchResponseData } from '@/lib/types/google.maps';
 
 import {
   NaverSearchBlogResponse,
@@ -71,7 +68,7 @@ export const fetchAllPlaceDetails = async ({
   const response = await Promise
     .all([...placeIds.map((placeId) => getGooglePlaceDetails({
       place_id: placeId,
-      language: Language.ko,
+      language: 'ko',
       region: 'KR',
       fields: ['name', 'photos', 'rating', 'user_ratings_total', 'formatted_address'],
       reviews_no_translations: false,

@@ -1,25 +1,10 @@
-import { AddressType } from '@googlemaps/google-maps-services-js';
-
-import { PlaceResult } from '@/lib/types/google.maps';
+import { PlaceResult, PlaceType1, PlaceType2 } from '@/lib/types/google.maps';
 
 const FIXTURE_SEARCH_PLACE: PlaceResult = {
-  business_status: 'OPERATIONAL',
   formatted_address: '일본 〒812-0018 Fukuoka, Hakata Ward, Sumiyoshi, 1 Chome−2−22 キャナルシティ博多ノースビル B1F',
   geometry: {
-    location: {
-      lat: 33.5907815,
-      lng: 130.4107453,
-    },
-    viewport: {
-      northeast: {
-        lat: 33.59204967989272,
-        lng: 130.4118268798927,
-      },
-      southwest: {
-        lat: 33.58935002010728,
-        lng: 130.4091272201073,
-      },
-    },
+    location: undefined,
+    viewport: undefined,
   },
   icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png',
   icon_background_color: '#FF9E67',
@@ -32,6 +17,7 @@ const FIXTURE_SEARCH_PLACE: PlaceResult = {
       html_attributions: [
         '<a href="https://maps.google.com/maps/contrib/101607458349991007724">林宗漢</a>',
       ],
+      getUrl: jest.fn(),
       photo_reference: 'AcJnMuE7VjwmQqrJAibDyW8Qn34f3bFKVfwesDrPqpkYHkcVFLFAKGrCwtLiF7y4HuaMUc_sqtLOArmOB3gtB8yVNr-iZXzelSPiiEhL9g_Aw-AxLM_HYwyq8nt6NKLc8QJGf8gCDswyRUJYYo_pWpzWR0-GYNE1VJuckf71LAgVwLqXDE7h',
       width: 3024,
     },
@@ -44,11 +30,11 @@ const FIXTURE_SEARCH_PLACE: PlaceResult = {
   price_level: 2,
   rating: 4,
   types: [
-    AddressType.meal_takeaway,
-    AddressType.restaurant,
-    AddressType.food,
-    AddressType.point_of_interest,
-    AddressType.establishment,
+    PlaceType1.meal_takeaway,
+    PlaceType1.restaurant,
+    PlaceType2.food,
+    PlaceType2.point_of_interest,
+    PlaceType2.establishment,
   ],
   user_ratings_total: 1639,
 };

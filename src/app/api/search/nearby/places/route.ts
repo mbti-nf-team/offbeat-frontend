@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { Language } from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 
 import { fetchAllSettledSearchNaverBlogs, getGoogleNearbySearch } from '@/app/api/handler';
@@ -30,7 +29,7 @@ export async function GET(request: NextRequest) {
   try {
     const places = await getGoogleNearbySearch({
       keyword: keyword ?? undefined,
-      language: Language.ko,
+      language: 'ko',
       radius,
       pagetoken: nextCursor ?? undefined,
       location: [lat, lng],

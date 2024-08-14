@@ -1,7 +1,6 @@
 import { Metadata, ResolvingMetadata } from 'next';
 import { cookies } from 'next/headers';
 
-import { Language, Status } from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 
 import { getGooglePlaceDetails, getPlacePhotoUrl } from '@/app/api/handler';
@@ -38,12 +37,12 @@ export async function generateMetadata(
   try {
     const placeDetails = await getGooglePlaceDetails({
       place_id: params.id,
-      language: Language.ko,
+      language: 'ko',
       region: 'KR',
       fields: ['photos', 'name', 'place_id'],
     });
 
-    if (placeDetails.status !== Status.OK || !placeDetails?.result) {
+    if (placeDetails.status !== 'OK' || !placeDetails?.result) {
       return defaultMetadata;
     }
 
