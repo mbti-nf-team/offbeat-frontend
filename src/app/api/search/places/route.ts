@@ -37,8 +37,6 @@ export async function GET(request: NextRequest) {
       location: (lat && lng) ? [lat, lng] : undefined,
     });
 
-    console.log('places', places);
-
     const placesResult = filteredPlaces(checkEmpty(places?.results));
     const placeName = placesResult.filter((place) => !!place?.name).map((place) => place.name);
 
