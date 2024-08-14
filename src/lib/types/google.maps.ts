@@ -14,8 +14,12 @@ interface PlaceResultResponse extends google.maps.places.PlaceResult {
   photos: PlacePhoto[];
 }
 
+interface PlaceGeometry extends google.maps.places.PlaceGeometry {
+  location: google.maps.LatLng;
+}
+
 export interface PlaceResult extends PlaceResultResponse {
-  geometry: google.maps.places.PlaceGeometry;
+  geometry: PlaceGeometry;
   place_id: string;
   name: string;
   thumbnail?: string;

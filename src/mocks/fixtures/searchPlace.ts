@@ -3,7 +3,10 @@ import { PlaceResult, PlaceType1, PlaceType2 } from '@/lib/types/google.maps';
 const FIXTURE_SEARCH_PLACE: PlaceResult = {
   formatted_address: '일본 〒812-0018 Fukuoka, Hakata Ward, Sumiyoshi, 1 Chome−2−22 キャナルシティ博多ノースビル B1F',
   geometry: {
-    location: undefined,
+    location: {
+      lat: () => 33.590691,
+      lng: () => 130.420847,
+    } as google.maps.LatLng,
     viewport: undefined,
   },
   icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png',
