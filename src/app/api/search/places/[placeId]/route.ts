@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import {
-  Language, PlaceDetailsResponseData, PlaceType2,
-} from '@googlemaps/google-maps-services-js';
 import { checkEmpty } from '@nf-team/core';
 
 import { fetchNaverSearchBlog, getGooglePlaceDetails, getPlacePhotoUrl } from '@/app/api/handler';
 import { FetchError } from '@/lib/apis';
-import { PlaceDetail } from '@/lib/types/google.maps';
+import { PlaceDetail, PlaceDetailsResponseData, PlaceType2 } from '@/lib/types/google.maps';
 
 export const runtime = 'edge';
 
@@ -45,7 +42,7 @@ export async function GET(request: NextRequest) {
   try {
     const placeDetails = await getGooglePlaceDetails({
       place_id: placeId,
-      language: Language.ko,
+      language: 'ko',
       region: 'KR',
       reviews_sort: 'most_relevant',
       fields: ['geometry', 'name', 'photos', 'place_id', 'rating', 'reviews', 'url', 'user_ratings_total', 'address_components'],

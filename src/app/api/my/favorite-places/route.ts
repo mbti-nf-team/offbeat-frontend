@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
 
     const favoritePlaces = googleDetails.map((detail, index) => {
       const placePhotoUrls = checkEmpty(detail.result.photos)
-        .map((photo) => getPlacePhotoUrl(photo.photo_reference, 500))
+        .map((photo) => getPlacePhotoUrl(photo.getUrl(), 500))
         .filter((photoUrl) => !!photoUrl);
 
       const favoritePlace = response.items[index];

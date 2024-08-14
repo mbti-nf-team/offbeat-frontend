@@ -1,5 +1,3 @@
-import { PlacePhoto } from '@googlemaps/google-maps-services-js';
-
 export interface FavoritePlace {
   id: number;
   google_place_id: string;
@@ -11,7 +9,7 @@ export interface FavoritePlace {
 
 export interface FavoritePlaceWithPlaceDetail extends FavoritePlace {
   name: string;
-  photos: PlacePhoto[];
+  photos: google.maps.places.PlacePhoto[];
   formatted_address: string;
   user_ratings_total: number;
   url: string;

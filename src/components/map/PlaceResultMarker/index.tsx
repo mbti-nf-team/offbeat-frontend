@@ -58,7 +58,7 @@ function PlaceResultMarker({ place, selectedPlaceId, onClickMarker }: Props) {
       onClick={handleClickMarker}
       zIndex={1}
       title={place.name}
-      position={place.geometry?.location}
+      position={place.geometry.location}
     />
   );
 }

@@ -2063,19 +2063,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@googlemaps/google-maps-services-js@npm:^3.3.42":
-  version: 3.3.42
-  resolution: "@googlemaps/google-maps-services-js@npm:3.3.42"
-  dependencies:
-    "@googlemaps/url-signature": "npm:^1.0.4"
-    agentkeepalive: "npm:^4.1.0"
-    axios: "npm:^1.5.1"
-    query-string: "npm:<8.x"
-    retry-axios: "npm:<3.x"
-  checksum: 10/599a81885c45f789f35af021521c0c4d4929fbf40ad5e8dd2f2f880ce48483e60209889b50adf1640df78c76f351b47a456289d5b648b4177d9fed710fd2ef67
-  languageName: node
-  linkType: hard
-
 "@googlemaps/js-api-loader@npm:1.16.2":
   version: 1.16.2
   resolution: "@googlemaps/js-api-loader@npm:1.16.2"
@@ -2092,15 +2079,6 @@ __metadata:
     fast-deep-equal: "npm:^3.1.3"
     supercluster: "npm:^8.0.1"
   checksum: 10/63bca130a52c12a8bfd5c61e90d55a6a7f150d38a2450b92cb484089fb608e1d4862b29c742abaa75e1bf89c953605fce0b037ed1e1b66e99e11c67938b9395a
-  languageName: node
-  linkType: hard
-
-"@googlemaps/url-signature@npm:^1.0.4":
-  version: 1.0.29
-  resolution: "@googlemaps/url-signature@npm:1.0.29"
-  dependencies:
-    crypto-js: "npm:^4.1.1"
-  checksum: 10/f4d090a130201ad6a7d6c35c0cd5b8f9f64259408d7cbb387eaabab37975d7473dce2782d15e28b9bfc71b476beeed1920df6dee915e5515f20b13eb1057a7d6
   languageName: node
   linkType: hard
 
@@ -4181,10 +4159,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/google.maps@npm:^3.55.8":
-  version: 3.55.8
-  resolution: "@types/google.maps@npm:3.55.8"
-  checksum: 10/403cb9c6533729f33020d49a5b9fd2817fe6797532a98a58c90bca1f93a855b942a0e266d631adbe4b555b43b26861dc8d53da1828d261773bcbb063225aab61
+"@types/google.maps@npm:^3.55.12":
+  version: 3.55.12
+  resolution: "@types/google.maps@npm:3.55.12"
+  checksum: 10/08a76e67b2435b38aaedbe7dddbe95198c27ee340032908e440ce2eb6baaa556acd2940784dfd9c93f125c37c14b091ec0b8ec8365c6d5eedc1b9eb01b4ea3c5
   languageName: node
   linkType: hard
 
@@ -5097,7 +5075,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"agentkeepalive@npm:^4.1.0, agentkeepalive@npm:^4.2.1":
+"agentkeepalive@npm:^4.2.1":
   version: 4.5.0
   resolution: "agentkeepalive@npm:4.5.0"
   dependencies:
@@ -5617,17 +5595,6 @@ __metadata:
     follow-redirects: "npm:^1.14.9"
     form-data: "npm:^4.0.0"
   checksum: 10/2efaf18dd0805f7bc772882bc86f004abd92d51007b54c5081f74db0d08ce3593e2c010261896d25a14318eeaa2e966fd825e34f810e8a3339dc64b9d177cf70
-  languageName: node
-  linkType: hard
-
-"axios@npm:^1.5.1":
-  version: 1.5.1
-  resolution: "axios@npm:1.5.1"
-  dependencies:
-    follow-redirects: "npm:^1.15.0"
-    form-data: "npm:^4.0.0"
-    proxy-from-env: "npm:^1.1.0"
-  checksum: 10/67633db5867c789a6edb6e5229884501bef89584a6718220c243fd5a64de4ea7dcdfdf4f8368a672d582db78aaa9f8d7b619d39403b669f451e1242bbd4c7ee2
   languageName: node
   linkType: hard
 
@@ -6953,13 +6920,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"crypto-js@npm:^4.1.1":
-  version: 4.2.0
-  resolution: "crypto-js@npm:4.2.0"
-  checksum: 10/c7bcc56a6e01c3c397e95aa4a74e4241321f04677f9a618a8f48a63b5781617248afb9adb0629824792e7ec20ca0d4241a49b6b2938ae6f973ec4efc5c53c924
-  languageName: node
-  linkType: hard
-
 "crypto-random-string@npm:^4.0.0":
   version: 4.0.0
   resolution: "crypto-random-string@npm:4.0.0"
@@ -7295,13 +7255,6 @@ __metadata:
   version: 10.4.3
   resolution: "decimal.js@npm:10.4.3"
   checksum: 10/de663a7bc4d368e3877db95fcd5c87b965569b58d16cdc4258c063d231ca7118748738df17cd638f7e9dd0be8e34cec08d7234b20f1f2a756a52fc5a38b188d0
-  languageName: node
-  linkType: hard
-
-"decode-uri-component@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "decode-uri-component@npm:0.2.2"
-  checksum: 10/17a0e5fa400bf9ea84432226e252aa7b5e72793e16bf80b907c99b46a799aeacc139ec20ea57121e50c7bd875a1a4365928f884e92abf02e21a5a13790a0f33e
   languageName: node
   linkType: hard
 
@@ -8920,13 +8873,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"filter-obj@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "filter-obj@npm:1.1.0"
-  checksum: 10/9d681939eec2b4b129cb4f307b7e93d954a0657421d4e5357d86093b26d3f4f570909ed43717dcfd62428b3cf8cddd9841b35f9d40d12ac62cfabaa677942593
-  languageName: node
-  linkType: hard
-
 "filter-obj@npm:^2.0.2":
   version: 2.0.2
   resolution: "filter-obj@npm:2.0.2"
@@ -9054,7 +9000,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.14.9, follow-redirects@npm:^1.15.0":
+"follow-redirects@npm:^1.14.9":
   version: 1.15.3
   resolution: "follow-redirects@npm:1.15.3"
   peerDependenciesMeta:
@@ -12857,7 +12803,6 @@ __metadata:
     "@chromatic-com/storybook": "npm:^1"
     "@commitlint/cli": "npm:^17.4.3"
     "@commitlint/config-conventional": "npm:^17.4.3"
-    "@googlemaps/google-maps-services-js": "npm:^3.3.42"
     "@next/eslint-plugin-next": "npm:^14.2.3"
     "@nf-team/core": "npm:^2.0.3"
     "@nf-team/eslint-config": "npm:^3.1.0"
@@ -12877,7 +12822,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.4.5"
     "@testing-library/react": "npm:^14.0.0"
     "@types/babel__core": "npm:^7"
-    "@types/google.maps": "npm:^3.55.8"
+    "@types/google.maps": "npm:^3.55.12"
     "@types/jest": "npm:^29.5.5"
     "@types/jest-plugin-context": "npm:^2.9.5"
     "@types/js-cookie": "npm:^3.0.6"
@@ -13683,13 +13628,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"proxy-from-env@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "proxy-from-env@npm:1.1.0"
-  checksum: 10/f0bb4a87cfd18f77bc2fba23ae49c3b378fb35143af16cc478171c623eebe181678f09439707ad80081d340d1593cd54a33a0113f3ccb3f4bc9451488780ee23
-  languageName: node
-  linkType: hard
-
 "ps-tree@npm:1.2.0":
   version: 1.2.0
   resolution: "ps-tree@npm:1.2.0"
@@ -13777,18 +13715,6 @@ __metadata:
   dependencies:
     side-channel: "npm:^1.0.4"
   checksum: 10/8887a53f63180e0e0291deafef581e550bc3656f2453adc8d3ca34b49c04354d31079962f7faf90ab8f5fd6e3d70ee6645042b27814a757a3a5d5708ae3f58e0
-  languageName: node
-  linkType: hard
-
-"query-string@npm:<8.x":
-  version: 7.1.3
-  resolution: "query-string@npm:7.1.3"
-  dependencies:
-    decode-uri-component: "npm:^0.2.2"
-    filter-obj: "npm:^1.1.0"
-    split-on-first: "npm:^1.0.0"
-    strict-uri-encode: "npm:^2.0.0"
-  checksum: 10/3b6f2c167e76ca4094c5f1a9eb276efcbb9ebfd8b1a28c413f3c4e4e7d6428c8187bf46c8cbc9f92a229369dd0015de10a7fd712c8cee98d5d84c2ac6140357e
   languageName: node
   linkType: hard
 
@@ -14515,15 +14441,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"retry-axios@npm:<3.x":
-  version: 2.6.0
-  resolution: "retry-axios@npm:2.6.0"
-  peerDependencies:
-    axios: "*"
-  checksum: 10/694244257ca7b8b8f7934f681936d79cd49c3d3085e91ef9ab3d714fd9ba3e641af37ebc90d6bb102312a072a3b17967b1318634b38c0333d0242ec1978de81d
-  languageName: node
-  linkType: hard
-
 "retry@npm:^0.12.0":
   version: 0.12.0
   resolution: "retry@npm:0.12.0"
@@ -15177,13 +15094,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"split-on-first@npm:^1.0.0":
-  version: 1.1.0
-  resolution: "split-on-first@npm:1.1.0"
-  checksum: 10/16ff85b54ddcf17f9147210a4022529b343edbcbea4ce977c8f30e38408b8d6e0f25f92cd35b86a524d4797f455e29ab89eb8db787f3c10708e0b47ebf528d30
-  languageName: node
-  linkType: hard
-
 "split2@npm:^3.0.0, split2@npm:^3.2.2":
   version: 3.2.2
   resolution: "split2@npm:3.2.2"
@@ -15383,13 +15293,6 @@ __metadata:
     fast-fifo: "npm:^1.1.0"
     queue-tick: "npm:^1.0.1"
   checksum: 10/5c5143d832b4d4c2cba09d3e77dcc099f62bfc44bffac38e7b196cdd7f17dcd46bc2012c614fad934c0d706712c2e9455e485435810504cf748906b2f1746837
-  languageName: node
-  linkType: hard
-
-"strict-uri-encode@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "strict-uri-encode@npm:2.0.0"
-  checksum: 10/eaac4cf978b6fbd480f1092cab8b233c9b949bcabfc9b598dd79a758f7243c28765ef7639c876fa72940dac687181b35486ea01ff7df3e65ce3848c64822c581
   languageName: node
   linkType: hard
 

@@ -1,7 +1,5 @@
-import { PlaceDetailsResponseData, TextSearchResponseData } from '@googlemaps/google-maps-services-js';
-
 import { NaverSearchBlog } from './blog';
-import { PlaceResult } from './google.maps';
+import { PlaceDetailsResponseData, PlaceResult, TextSearchResponseData } from './google.maps';
 
 export interface PlacesWithSearchResult<T = false> extends PlaceResult {
   searchBlogPost: T extends true ? NaverSearchBlog<T> | null

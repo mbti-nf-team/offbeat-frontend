@@ -1,5 +1,3 @@
-import { Status } from '@googlemaps/google-maps-services-js';
-
 import FIXTURE_NAVER_SEARCH_BLOG from '@/mocks/fixtures/searchBlog';
 import FIXTURE_SEARCH_PLACE from '@/mocks/fixtures/searchPlace';
 
@@ -20,7 +18,7 @@ describe('search API', () => {
     const mockResponse: SearchPlacesResponse = {
       error_message: '',
       html_attributions: [],
-      status: Status.OK,
+      status: 'OK',
       results: [{
         ...FIXTURE_SEARCH_PLACE,
         searchBlogPost: {
@@ -64,7 +62,7 @@ describe('search API', () => {
     const mockResponse: SearchPlacesResponse = {
       error_message: '',
       html_attributions: [],
-      status: Status.OK,
+      status: 'OK',
       results: [{
         ...FIXTURE_SEARCH_PLACE,
         searchBlogPost: {
@@ -100,7 +98,7 @@ describe('search API', () => {
     const mockResponse: SearchPlaceResponse = {
       error_message: '',
       html_attributions: [],
-      status: Status.OK,
+      status: 'OK',
       result: {
         ...FIXTURE_SEARCH_PLACE,
         searchBlogPost: FIXTURE_NAVER_SEARCH_BLOG,
