@@ -1,4 +1,6 @@
-import { codeToFlag, numberWithComma, targetFalseThenValue } from '@/utils';
+import {
+  codeToFlag, getSettledValue, numberWithComma, targetFalseThenValue,
+} from '@/utils';
 
 describe('codeToFlag', () => {
   it('flag 이모지 유니코드로 변경되어야만 한다.', () => {
@@ -60,6 +62,47 @@ describe('targetFalseThenValue', () => {
       const result = targetFalseThenValue(true)(value);
 
       expect(result).toBeUndefined();
+    });
+  });
+});
+
+describe('getSettledValue', () => {
+  const defaultValue = 'default';
+
+  context('fulfilled 상태인 경우', () => {
+    it('성공한 결과값이 반환되어야만 한다', async () => {
+      const result = await Promise.allSettled([Promise.resolve('success')]);
+      const settledValue = getSettledValue(result[0], defaultValue);
+
+      expect(settledValue).toBe('success');
+    });
+  });
+
+  context('rejected 상태인 경우', () => {
+    it('default value가 반환되어야만 한다', async () => {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      const result = await Promise.allSettled([Promise.reject('error')]);
+      const settledValue = getSettledValue(result[0], defaultValue);
+
+      expect(settledValue).toBe(defaultValue);
+    });
+  });
+
+  context('결과 값이 null인 경우', () => {
+    it('default value가 반환되어야만 한다', () => {
+      const result = null;
+      const settledValue = getSettledValue(result, defaultValue);
+
+      expect(settledValue).toBe(defaultValue);
+    });
+  });
+
+  context('결과 값이 undefined인 경우', () => {
+    it('default value가 반환되어야만 한다', () => {
+      const result = undefined;
+      const settledValue = getSettledValue(result, defaultValue);
+
+      expect(settledValue).toBe(defaultValue);
     });
   });
 });

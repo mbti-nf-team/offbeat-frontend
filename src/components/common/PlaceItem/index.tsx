@@ -10,7 +10,7 @@ import clsx from 'clsx';
 
 import { ArchiveSolidIcon } from '@/lib/assets/icons';
 import { NaverSearchBlog } from '@/lib/types/blog';
-import { numberWithComma } from '@/utils';
+import { getSettledValue, numberWithComma } from '@/utils';
 
 import Button from '../Button';
 import StarRating from '../StarRating';
@@ -47,6 +47,8 @@ function PlaceItem<T = boolean>({
 
     onRemove?.(placeId);
   };
+
+  const settledSearchBlogPost = getSettledValue(searchBlogPost);
 
   return (
     <li
@@ -85,8 +87,8 @@ function PlaceItem<T = boolean>({
           <StarRating rating={checkNumber(rating)} type="list" />
           <div className={styles.placeUserRatingsTotal}>{`(${checkNumber(userRatingsTotal)})`}</div>
         </div>
-        {searchBlogPost?.status === 'fulfilled' && (
-          <div className={styles.searchTotal}>{`네이버 검색결과 ${numberWithComma(checkNumber(searchBlogPost?.value?.total_count))}개`}</div>
+        {!!settledSearchBlogPost && (
+          <div className={styles.searchTotal}>{`네이버 검색결과 ${numberWithComma(checkNumber(settledSearchBlogPost?.total_count))}개`}</div>
         )}
         {isSavedPlace && (
           <div className={styles.addressInfo}>
