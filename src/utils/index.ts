@@ -30,3 +30,10 @@ export function numberWithComma(
 export const targetFalseThenValue = (
   target?: boolean,
 ) => <T>(value: T): undefined | T => (target ? undefined : value);
+
+export function getSettledValue<T>(
+  result?: PromiseSettledResult<T> | null,
+  defaultValue?: T,
+): T | undefined {
+  return result?.status === 'fulfilled' ? result.value : defaultValue;
+}
