@@ -1,20 +1,20 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 import { useResizeViewportHeight } from '@nf-team/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-function Providers({ children }: { children: ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-        refetchOnWindowFocus: false,
-      },
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
     },
-  }));
+  },
+});
 
+function Providers({ children }: { children: ReactNode }) {
   useResizeViewportHeight();
 
   return (
