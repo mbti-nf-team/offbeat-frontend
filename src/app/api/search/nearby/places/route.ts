@@ -52,12 +52,16 @@ export async function GET(request: NextRequest) {
       status: 200,
     });
   } catch (error) {
-    const fetchError = error as FetchError;
+    if (error instanceof FetchError) {
+      return NextResponse.json(null, {
+        status: error.status,
+        statusText: error.message,
+      });
+    }
 
     return NextResponse.json(null, {
-      status: fetchError.response?.status,
-      statusText: fetchError.response?.statusText,
-      headers: fetchError.response?.headers,
+      status: 500,
+      statusText: 'internal server error',
     });
   }
 }

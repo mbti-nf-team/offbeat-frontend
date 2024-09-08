@@ -12,7 +12,7 @@ type Method =
 
 export type UrlPrefixType = 'public' | 'google' | 'bff';
 
-export interface FetchRequest<T = any> {
+export interface FetchRequest<T = unknown> {
   url: string;
   params?: T;
   method?: Method;

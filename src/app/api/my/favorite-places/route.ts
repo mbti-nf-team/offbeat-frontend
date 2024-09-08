@@ -69,12 +69,16 @@ export async function GET(request: NextRequest) {
       items: favoritePlaces,
     });
   } catch (error) {
-    const fetchError = error as FetchError;
+    if (error instanceof FetchError) {
+      return NextResponse.json(null, {
+        status: error.status,
+        statusText: error.message,
+      });
+    }
 
     return NextResponse.json(null, {
-      status: fetchError.response?.status || 500,
-      statusText: fetchError.response?.statusText || fetchError.message,
-      headers: fetchError.response?.headers,
+      status: 500,
+      statusText: 'Internal Server Error',
     });
   }
 }
