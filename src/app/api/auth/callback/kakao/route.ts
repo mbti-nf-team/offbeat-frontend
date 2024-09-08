@@ -48,12 +48,17 @@ export async function POST(request: NextRequest) {
     });
 
     return response;
-  } catch (error: any) {
-    const errorResponse = error as FetchError;
+  } catch (error) {
+    if (error instanceof FetchError) {
+      return NextResponse.json(null, {
+        status: error.status,
+        statusText: error.message,
+      });
+    }
 
     return NextResponse.json(null, {
-      status: errorResponse.response?.status,
-      statusText: errorResponse.message,
+      status: 500,
+      statusText: 'Internal Server Error',
     });
   }
 }
