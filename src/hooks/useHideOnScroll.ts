@@ -2,7 +2,7 @@ import {
   RefObject, useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 
-import { checkNumber } from '@nf-team/core';
+import { getNumberOrDefault } from '@nf-team/core';
 import { useThrottleCallback } from '@nf-team/react';
 
 const DELAY_WHEN_LOAD = 300;
@@ -21,14 +21,14 @@ const useHideOnScroll = ({ rootRef, delay = 100, disabled }: UseHideOnScroll) =>
   const getScrollState = useCallback(() => {
     if (rootRef?.current) {
       return {
-        scrollTop: checkNumber(rootRef.current?.scrollTop),
+        scrollTop: getNumberOrDefault(rootRef.current?.scrollTop),
         scrollHeight: rootRef.current.scrollHeight,
         clientHeight: rootRef.current.clientHeight,
       };
     }
 
     return {
-      scrollTop: checkNumber(document.scrollingElement?.scrollTop),
+      scrollTop: getNumberOrDefault(document.scrollingElement?.scrollTop),
       scrollHeight: document.documentElement.scrollHeight,
       clientHeight: document.documentElement.clientHeight,
     };

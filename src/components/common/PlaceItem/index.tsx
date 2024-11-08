@@ -4,7 +4,7 @@ import { memo, MouseEvent } from 'react';
 
 import Image from 'next/image';
 
-import { checkEmpty, checkNumber } from '@nf-team/core';
+import { ensureArray, getNumberOrDefault, isEmpty } from '@nf-team/core';
 import { useActionKeyEvent } from '@nf-team/react';
 import clsx from 'clsx';
 
@@ -39,7 +39,7 @@ function PlaceItem<T = boolean>({
 }: Props<T>) {
   const onKeyDown = useActionKeyEvent<HTMLLIElement, [string]>(['Enter', 'NumpadEnter'], (_, id) => onClick?.(id));
 
-  const isOnePhoto = checkEmpty(photoUrls).length === 1;
+  const isOnePhoto = ensureArray(photoUrls).length === 1;
 
   const removeFavoritePlace = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -59,7 +59,7 @@ function PlaceItem<T = boolean>({
       className={styles.placeItem}
       role="menuitem"
     >
-      {!!checkEmpty(photoUrls).length && (
+      {!isEmpty(photoUrls) && (
         <div className={clsx(styles.photos, isOnePhoto && styles.onlyOnePhotoWrapper)}>
           {photoUrls.map((photo, index) => (
             <Image
@@ -83,12 +83,12 @@ function PlaceItem<T = boolean>({
           )}
         </div>
         <div className={styles.placeRatingWrapper}>
-          <div className={styles.placeRating}>{checkNumber(rating)}</div>
-          <StarRating rating={checkNumber(rating)} type="list" />
-          <div className={styles.placeUserRatingsTotal}>{`(${checkNumber(userRatingsTotal)})`}</div>
+          <div className={styles.placeRating}>{getNumberOrDefault(rating)}</div>
+          <StarRating rating={getNumberOrDefault(rating)} type="list" />
+          <div className={styles.placeUserRatingsTotal}>{`(${getNumberOrDefault(userRatingsTotal)})`}</div>
         </div>
         {!!settledSearchBlogPost && (
-          <div className={styles.searchTotal}>{`네이버 검색결과 ${numberWithComma(checkNumber(settledSearchBlogPost?.total_count))}개`}</div>
+          <div className={styles.searchTotal}>{`네이버 검색결과 ${numberWithComma(getNumberOrDefault(settledSearchBlogPost?.total_count))}개`}</div>
         )}
         {isSavedPlace && (
           <div className={styles.addressInfo}>

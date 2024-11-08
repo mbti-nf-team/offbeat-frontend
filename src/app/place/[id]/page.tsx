@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from 'next';
 import { cookies } from 'next/headers';
 
-import { checkEmpty } from '@nf-team/core';
+import { ensureArray } from '@nf-team/core';
 
 import { getGooglePlaceDetails, getPlacePhotoUrl } from '@/app/api/handler';
 import { metadata } from '@/app/page';
@@ -52,7 +52,7 @@ export async function generateMetadata(
     );
 
     const previousParent = await parent;
-    const previousImages = checkEmpty(previousParent.openGraph?.images);
+    const previousImages = ensureArray(previousParent.openGraph?.images);
     const images = thumbnailPhotoUrl ? [
       {
         url: thumbnailPhotoUrl,

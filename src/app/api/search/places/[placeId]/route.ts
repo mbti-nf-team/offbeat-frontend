@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { checkEmpty } from '@nf-team/core';
+import { ensureArray } from '@nf-team/core';
 
 import { fetchNaverSearchBlog, getGooglePlaceDetails, getPlacePhotoUrl } from '@/app/api/handler';
 import { FetchError } from '@/lib/apis';
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
     const country = address_components
       ?.find((address) => address.types.includes(PlaceType2.country));
 
-    const placePhotoUrls = checkEmpty(placeDetails.result.photos)
+    const placePhotoUrls = ensureArray(placeDetails.result.photos)
       .map((photo) => getPlacePhotoUrl(photo.photo_reference, 500))
       .filter((photoUrl) => !!photoUrl);
 

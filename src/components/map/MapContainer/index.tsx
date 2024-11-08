@@ -6,7 +6,7 @@ import {
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { checkEmpty, checkNumber, isEmpty } from '@nf-team/core';
+import { ensureArray, getNumberOrDefault, isEmpty } from '@nf-team/core';
 import { useGoogleMap } from '@react-google-maps/api';
 import QueryString from 'qs';
 
@@ -110,10 +110,10 @@ function MapContainer({ defaultCountryCode, defaultLocation, user }: Props) {
   };
 
   const isCenterChange = () => {
-    const isEqualLat = checkNumber(searchResultCenter.lat).toFixed(3)
-      === checkNumber(centerLatitude).toFixed(3);
-    const isEqualLng = checkNumber(searchResultCenter.lng).toFixed(3)
-      === checkNumber(centerLongitude).toFixed(3);
+    const isEqualLat = getNumberOrDefault(searchResultCenter.lat).toFixed(3)
+      === getNumberOrDefault(centerLatitude).toFixed(3);
+    const isEqualLng = getNumberOrDefault(searchResultCenter.lng).toFixed(3)
+      === getNumberOrDefault(centerLongitude).toFixed(3);
 
     if (isEqualLat && isEqualLng) {
       return true;
@@ -122,7 +122,7 @@ function MapContainer({ defaultCountryCode, defaultLocation, user }: Props) {
     return false;
   };
 
-  const placesWithSearchResult = useMemo(() => checkEmpty(places?.pages)
+  const placesWithSearchResult = useMemo(() => ensureArray(places?.pages)
     .filter((page) => !!page.results?.length && page.status === 'OK')
     .flatMap((page) => page.results), [places]);
 

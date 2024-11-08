@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { checkNumber } from '@nf-team/core';
+import { getNumberOrDefault } from '@nf-team/core';
 
 import Button from '@/components/common/Button';
 import PlaceItem from '@/components/common/PlaceItem';
@@ -33,7 +33,7 @@ function FavoritePlaces({ isMenu }: Props) {
   });
   const { mutate: removeFavoritePlaceMutate } = useRemoveFavoritePlaceMutation();
 
-  const favoritePlaceCount = checkNumber(favoritePlaces?.pages?.[0].total_count);
+  const favoritePlaceCount = getNumberOrDefault(favoritePlaces?.pages?.[0].total_count);
 
   const onClickPlaceItem = useCallback((placeId: string) => {
     router.push(`/place/${placeId}`);
