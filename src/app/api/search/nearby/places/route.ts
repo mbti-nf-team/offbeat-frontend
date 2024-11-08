@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { checkEmpty } from '@nf-team/core';
+import { ensureArray } from '@nf-team/core';
 
 import { fetchAllSettledSearchNaverBlogs, getGoogleNearbySearch } from '@/app/api/handler';
 import { FetchError } from '@/lib/apis';
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
       location: [lat, lng],
     });
 
-    const placesResult = filteredPlaces(checkEmpty(places?.results));
+    const placesResult = filteredPlaces(ensureArray(places?.results));
     const placeName = placesResult.filter((place) => !!place?.name).map((place) => place.name);
 
     const searchBlogPosts = await fetchAllSettledSearchNaverBlogs({ placeName });

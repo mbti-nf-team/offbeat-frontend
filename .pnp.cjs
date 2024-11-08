@@ -31,7 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@commitlint/cli", "npm:17.8.1"],\
           ["@commitlint/config-conventional", "npm:17.8.1"],\
           ["@next/eslint-plugin-next", "npm:14.2.13"],\
-          ["@nf-team/core", "npm:2.0.3"],\
+          ["@nf-team/core", "npm:3.0.1"],\
           ["@nf-team/eslint-config", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:3.3.0"],\
           ["@nf-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.6.0"],\
           ["@nf-team/storage", "npm:1.0.1"],\
@@ -4336,10 +4336,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@nf-team/core", [\
-      ["npm:2.0.3", {\
-        "packageLocation": "./.yarn/cache/@nf-team-core-npm-2.0.3-529577cd43-36c3bed764.zip/node_modules/@nf-team/core/",\
+      ["npm:3.0.1", {\
+        "packageLocation": "./.yarn/cache/@nf-team-core-npm-3.0.1-20c4cddc8a-16f0912284.zip/node_modules/@nf-team/core/",\
         "packageDependencies": [\
-          ["@nf-team/core", "npm:2.0.3"]\
+          ["@nf-team/core", "npm:3.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16669,7 +16669,7 @@ const RAW_RUNTIME_STATE =
           ["@commitlint/cli", "npm:17.8.1"],\
           ["@commitlint/config-conventional", "npm:17.8.1"],\
           ["@next/eslint-plugin-next", "npm:14.2.13"],\
-          ["@nf-team/core", "npm:2.0.3"],\
+          ["@nf-team/core", "npm:3.0.1"],\
           ["@nf-team/eslint-config", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:3.3.0"],\
           ["@nf-team/react", "virtual:e150514bd54e49453645b649d34785934ca8ee0d8d1b97d927fefcfad113b6cfb2743de5a3e60d87e6736690832351f19852f8ead68a73ba54254d666d6243a6#npm:2.6.0"],\
           ["@nf-team/storage", "npm:1.0.1"],\

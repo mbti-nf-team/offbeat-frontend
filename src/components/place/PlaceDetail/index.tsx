@@ -4,7 +4,7 @@ import { useCallback, useMemo, useRef } from 'react';
 
 import { notFound, useRouter } from 'next/navigation';
 
-import { checkEmpty, checkNumber } from '@nf-team/core';
+import { ensureArray, getNumberOrDefault } from '@nf-team/core';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 
@@ -71,11 +71,11 @@ function PlaceDetail({
 
   const isVisibleLoading = isLoading || !placeDetail;
 
-  const googleReviewCount = checkNumber(placeDetail?.reviews?.length);
-  const koreanReviewCount = checkEmpty(placeDetail?.reviews).filter(({
+  const googleReviewCount = getNumberOrDefault(placeDetail?.reviews?.length);
+  const koreanReviewCount = ensureArray(placeDetail?.reviews).filter(({
     language, original_language,
   }) => (original_language ? original_language === 'ko' : language === 'ko')).length;
-  const blogCount = checkNumber(placeDetail?.searchBlogPost?.total_count);
+  const blogCount = getNumberOrDefault(placeDetail?.searchBlogPost?.total_count);
 
   const goToExternalLink = (eventName: EventName) => (url?: string) => sendEvent({
     name: eventName,
@@ -240,7 +240,7 @@ function PlaceDetail({
             <div className={styles.ratingWrapper}>
               <StarRating rating={placeDetail?.rating} type="detail" />
               <div className={styles.ratingText}>
-                {placeDetail?.rating ? checkNumber(placeDetail?.rating).toFixed(1) : '별점 없음'}
+                {placeDetail?.rating ? getNumberOrDefault(placeDetail?.rating).toFixed(1) : '별점 없음'}
               </div>
             </div>
             <div className={styles.recommendDescription}>
@@ -272,11 +272,11 @@ function PlaceDetail({
             <Accordion
               title="네이버 검색결과"
               counterColor={blogCount ? 'danger' : 'positive'}
-              counter={checkNumber(placeDetail?.searchBlogPost?.total_count)}
+              counter={getNumberOrDefault(placeDetail?.searchBlogPost?.total_count)}
               wrapperClassName={styles.reviewAccordionWrapper}
             >
               <div className={styles.resultWrapper}>
-                {checkEmpty(placeDetail?.searchBlogPost?.posts).map(({
+                {ensureArray(placeDetail?.searchBlogPost?.posts).map(({
                   title, description, link, thumbnail,
                 }) => (
                   <ResultCard

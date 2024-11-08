@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { checkNumber, generateArrayOfNumber } from '@nf-team/core';
+import { createNumberArray, getNumberOrDefault } from '@nf-team/core';
 import clsx from 'clsx';
 
 import {
@@ -20,7 +20,7 @@ type Props = {
 function StarRating({
   rating, maxRating = 5, type, className, size = 'large',
 }: Props) {
-  const numberRating = checkNumber(rating);
+  const numberRating = getNumberOrDefault(rating);
   const fillStarCount = Math.floor(numberRating);
 
   const detailClassName = clsx({
@@ -58,11 +58,11 @@ function StarRating({
 
   return (
     <div className={clsx(styles.starRatingWrapper, className)}>
-      {generateArrayOfNumber(fillStarCount).map((key) => (
+      {createNumberArray(fillStarCount).map((key) => (
         <FillStar key={key} className={detailClassName} />
       ))}
       {fillStarCount < maxRating && extraStar}
-      {generateArrayOfNumber(maxRating - (fillStarCount + 1)).map((key) => (
+      {createNumberArray(maxRating - (fillStarCount + 1)).map((key) => (
         <EmptyStar key={key} className={detailClassName} />
       ))}
     </div>

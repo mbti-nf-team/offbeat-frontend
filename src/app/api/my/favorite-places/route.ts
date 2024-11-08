@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { checkEmpty } from '@nf-team/core';
+import { ensureArray } from '@nf-team/core';
 import QueryString from 'qs';
 
 import api, { FetchError } from '@/lib/apis';
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
     const googleDetails = await fetchAllPlaceDetails({ placeIds });
 
     const favoritePlaces = googleDetails.map((detail, index) => {
-      const placePhotoUrls = checkEmpty(detail.result.photos)
+      const placePhotoUrls = ensureArray(detail.result.photos)
         .map((photo) => getPlacePhotoUrl(photo.getUrl(), 500))
         .filter((photoUrl) => !!photoUrl);
 

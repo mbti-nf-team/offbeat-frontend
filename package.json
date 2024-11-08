@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/mbti-nf-team/unnamed-k-place-frontend#readme",
   "dependencies": {
-    "@nf-team/core": "^2.0.3",
+    "@nf-team/core": "^3.0.1",
     "@nf-team/react": "^2.6.0",
     "@nf-team/storage": "^1.0.1",
     "@react-google-maps/api": "^2.19.3",

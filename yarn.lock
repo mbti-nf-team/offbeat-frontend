@@ -2678,10 +2678,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nf-team/core@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "@nf-team/core@npm:2.0.3"
-  checksum: 10/36c3bed76489faf4e48092e8172ddcc29e38abde910503142a6d00d032ebf468a5bd97a2b017d9fbd37f480e53250c9ee4883dab98e1b8f7c1cef537b7c903e2
+"@nf-team/core@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@nf-team/core@npm:3.0.1"
+  checksum: 10/16f0912284bebaf66245d0a4050f02ad97f7dfaa22be7d25b92dd79af5247caae3fe7651ed76aee4add835a4362209572a33c1a56d0a2aaa6031543fd0e71992
   languageName: node
   linkType: hard
 
@@ -12284,7 +12284,7 @@ __metadata:
     "@commitlint/cli": "npm:^17.4.3"
     "@commitlint/config-conventional": "npm:^17.4.3"
     "@next/eslint-plugin-next": "npm:^14.2.13"
-    "@nf-team/core": "npm:^2.0.3"
+    "@nf-team/core": "npm:^3.0.1"
     "@nf-team/eslint-config": "npm:^3.3.0"
     "@nf-team/react": "npm:^2.6.0"
     "@nf-team/storage": "npm:^1.0.1"
