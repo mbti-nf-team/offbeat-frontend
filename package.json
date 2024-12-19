@@ -38,11 +38,11 @@
     "@react-google-maps/api": "^2.19.3",
     "@tanstack/react-query": "^5.35.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.1.9",
     "inko": "^1.1.1",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
-    "next": "^14.2.13",
+    "motion": "^11.15.0",
+    "next": "^14.2.21",
     "qs": "^6.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -50,13 +50,14 @@
     "react-intersection-observer": "^9.5.2",
     "react-spring-bottom-sheet": "3.5.0-alpha.0",
     "sharp": "^0.33.5",
-    "zustand": "^4.5.2"
+    "use-sync-external-store": "^1.4.0",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^2.0.2",
     "@commitlint/cli": "^17.4.3",
     "@commitlint/config-conventional": "^17.4.3",
-    "@next/eslint-plugin-next": "^14.2.13",
+    "@next/eslint-plugin-next": "^14.2.21",
     "@nf-team/eslint-config": "^3.3.0",
     "@nf-team/stylelint-config": "^1.1.1",
     "@storybook/addon-essentials": "^8.3.3",
@@ -82,7 +83,7 @@
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
     "cypress": "^12.1.0",
-    "eslint": "8.56.0",
+    "eslint": "8.57.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.29.1",
@@ -109,5 +110,5 @@
     "typescript": "^5.2.2",
     "webpack": "^5.95.0"
   },
-  "packageManager": "yarn@4.5.0"
+  "packageManager": "yarn@4.5.3"
 }

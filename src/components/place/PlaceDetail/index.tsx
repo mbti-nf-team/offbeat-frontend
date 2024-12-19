@@ -6,7 +6,7 @@ import { notFound, useRouter } from 'next/navigation';
 
 import { ensureArray, getNumberOrDefault } from '@nf-team/core';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 import Accordion from '@/components/common/Accordion';
 import Button from '@/components/common/Button';

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants } from 'motion/react';
 
 import Input from '@/components/common/Input';
 import { Country } from '@/lib/types/country';

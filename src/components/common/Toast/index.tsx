@@ -4,7 +4,7 @@ import {
   useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 
-import { AnimationDefinition, motion } from 'framer-motion';
+import { AnimationDefinition, motion } from 'motion/react';
 
 import { ErrorCircleIcon, SuccessCircleIcon } from '@/lib/assets/icons';
 import useToastStore from '@/stores/toast';
