@@ -14,8 +14,8 @@ env:
     .yarn/install-state.gz
     .pnp.*
   CACHED_BUILD_PATHS: ${{ github.workspace }}/.next
-  DEFAULT_NODE_VERSION: "v20.12.2"
-  DEFAULT_YARN_VERSION: "4.4.0"
+  DEFAULT_NODE_VERSION: "v20.18.0"
+  DEFAULT_YARN_VERSION: "4.5.3"
 
 jobs:
   job_install_dependencies:
