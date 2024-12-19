@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { isEmpty } from '@nf-team/core';
 import {
   AnimatePresence, motion, Variants, wrap,
-} from 'framer-motion';
+} from 'motion/react';
 
 import Button from '@/components/common/Button';
 import { NarrowArrowLeftIcon, NarrowArrowRightIcon } from '@/lib/assets/icons';

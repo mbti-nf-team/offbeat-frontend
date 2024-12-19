@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import {
   DelayRenderComponent, GlobalPortal, useBoolean, useIsomorphicLayoutEffect, useUnmount,
 } from '@nf-team/react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 import PlaceDetail from '@/components/place/PlaceDetail';
 import { User } from '@/lib/types/auth';
