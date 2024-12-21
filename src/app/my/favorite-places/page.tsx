@@ -4,8 +4,8 @@ import { redirect } from 'next/navigation';
 import FavoritePlacesPage from '@/components/my/FavoritePlacesPage';
 import CookieNames from '@/lib/constants/cookies';
 
-function Page() {
-  const cookiesStore = cookies();
+async function Page() {
+  const cookiesStore = await cookies();
   const accessToken = cookiesStore.get(CookieNames.ACCESS_TOKEN);
 
   if (!accessToken?.value) {

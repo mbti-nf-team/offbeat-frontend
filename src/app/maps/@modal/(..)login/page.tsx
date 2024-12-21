@@ -3,13 +3,15 @@ import LoginPage from '@/components/auth/LoginPage';
 import BottomSheet from './BottomSheet';
 
 type Props = {
-  searchParams: { [key: string]: string | undefined; };
+  searchParams: Promise<{ [key: string]: string | undefined; }>;
 };
 
-function Page({ searchParams }: Props) {
+async function Page({ searchParams }: Props) {
+  const params = await searchParams;
+
   return (
     <BottomSheet>
-      <LoginPage code={searchParams?.code} state={searchParams?.state} />
+      <LoginPage code={params?.code} state={params?.state} />
     </BottomSheet>
   );
 }

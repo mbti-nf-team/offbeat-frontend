@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 import { IntersectionOptions, useInView } from 'react-intersection-observer';
 
 import { InfiniteRefState } from '@/lib/types';
@@ -32,7 +32,7 @@ function useIntersectionObserver<T = Element>({
 
   return {
     lastItemRef: ref,
-    wrapperRef: checkRoot(wrapperRef),
+    wrapperRef: checkRoot(wrapperRef) as unknown as RefObject<T>,
   };
 }
 

@@ -9,7 +9,7 @@ import CookieNames from '@/lib/constants/cookies';
 import { metadata as defaultMetadata } from '../page';
 
 type Props = {
-  searchParams: { [key: string]: string | undefined; };
+  searchParams: Promise<{ [key: string]: string | undefined; }>;
 };
 
 export const metadata: Metadata = {
@@ -21,7 +21,8 @@ export const metadata: Metadata = {
 };
 
 async function Page({ searchParams }: Props) {
-  const cookiesStore = cookies();
+  const cookiesStore = await cookies();
+  const resolvedParams = await searchParams;
   const accessToken = cookiesStore.get(CookieNames.ACCESS_TOKEN);
 
   const user = await getUser({ accessToken: accessToken?.value });
@@ -30,10 +31,10 @@ async function Page({ searchParams }: Props) {
     <MapLayout>
       <MapContainer
         user={user}
-        defaultCountryCode={searchParams?.country}
+        defaultCountryCode={resolvedParams?.country}
         defaultLocation={{
-          lat: searchParams?.lat,
-          lng: searchParams?.lng,
+          lat: resolvedParams?.lat,
+          lng: resolvedParams?.lng,
         }}
       />
     </MapLayout>

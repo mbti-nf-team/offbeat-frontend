@@ -1,12 +1,14 @@
 import LoginPage from '@/components/auth/LoginPage';
 
 type Props = {
-  searchParams: { [key: string]: string | undefined; };
+  searchParams: Promise<{ [key: string]: string | undefined; }>;
 };
 
 async function Page({ searchParams }: Props) {
+  const params = await searchParams;
+
   return (
-    <LoginPage code={searchParams?.code} state={searchParams?.state} />
+    <LoginPage code={params?.code} state={params?.state} />
   );
 }
 
