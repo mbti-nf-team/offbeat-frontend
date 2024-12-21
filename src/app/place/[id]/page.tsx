@@ -10,15 +10,16 @@ import { getUser } from '@/lib/apis/auth';
 import CookieNames from '@/lib/constants/cookies';
 
 type Props = {
-  params: {
+  params: Promise<{
     id?: string;
-  };
+  }>;
 };
 
 export async function generateMetadata(
-  { params }: Props,
+  props: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  const params = await props.params;
   const description = '이 장소는 ✌️진짜✌️ 로컬 여행지일까? 확인해보세요!';
   const defaultUrl = `${process.env.NEXT_PUBLIC_ORIGIN}/place/${params.id}`;
 
@@ -83,9 +84,10 @@ export async function generateMetadata(
   }
 }
 
-async function Page({ params }: Props) {
-  const cookiesStore = cookies();
+async function Page(props: Props) {
+  const cookiesStore = await cookies();
   const accessToken = cookiesStore.get(CookieNames.ACCESS_TOKEN);
+  const params = await props?.params;
 
   const user = await getUser({ accessToken: accessToken?.value });
 

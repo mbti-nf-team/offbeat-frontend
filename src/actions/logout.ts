@@ -7,7 +7,7 @@ import { postAuthTokenRevoke } from '@/lib/apis/auth';
 import CookieNames from '@/lib/constants/cookies';
 
 const logoutAction = async () => {
-  const cookiesStore = cookies();
+  const cookiesStore = await cookies();
 
   const refreshToken = cookiesStore.get(CookieNames.REFRESH_TOKEN);
   const accessToken = cookiesStore.get(CookieNames.ACCESS_TOKEN);

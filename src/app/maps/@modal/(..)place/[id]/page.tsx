@@ -6,19 +6,20 @@ import CookieNames from '@/lib/constants/cookies';
 import PlacePage from './_components/PlacePage';
 
 type Props = {
-  params: {
+  params: Promise<{
     id?: string;
-  };
+  }>;
 };
 
 async function Page({ params }: Props) {
-  const cookiesStore = cookies();
+  const cookiesStore = await cookies();
+  const resolvedParams = await params;
   const accessToken = cookiesStore.get(CookieNames.ACCESS_TOKEN);
 
   const user = await getUser({ accessToken: accessToken?.value });
 
   return (
-    <PlacePage placeId={params?.id} user={user} />
+    <PlacePage placeId={resolvedParams?.id} user={user} />
   );
 }
 
